@@ -63,3 +63,15 @@ These accounts are:
 
 These users are created within the initialise function found within the `JominiEngine/server/JominiEngine/Server.cs` script.
 Additional uses may be created within this file if needed.
+
+# Troubleshooting
+
+## Client
+
+Imports are being flagged as incorrect in code editor:
+- In the Unity editor navigate to Window > Package Manager
+- Press the refresh button at the bottom.
+- If persists on specific imports, find them in the package manager and update them manually there.
+- This problem is due to a disconnect between what Unity believes is imported and what the code editor has access to.
+
+## Server
