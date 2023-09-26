@@ -1,0 +1,2 @@
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\Unity.Mathematics.Editor.csprojAssemblyReference.cache
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\Unity.Mathematics.Editor.csproj.CoreCompileInputs.cache

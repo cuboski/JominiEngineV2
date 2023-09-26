@@ -1,0 +1,2 @@
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\UnityEngine.TestRunner.csprojAssemblyReference.cache
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\UnityEngine.TestRunner.csproj.CoreCompileInputs.cache

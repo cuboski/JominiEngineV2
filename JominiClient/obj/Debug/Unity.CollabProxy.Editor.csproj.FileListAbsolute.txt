@@ -1,0 +1,2 @@
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\Unity.CollabProxy.Editor.csprojAssemblyReference.cache
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\Unity.CollabProxy.Editor.csproj.CoreCompileInputs.cache
