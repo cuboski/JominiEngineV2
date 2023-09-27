@@ -3,9 +3,14 @@
 This repository contains the development progress of the JominiEngine.
 JominiEngine is a game engine which aims to support historical massively multiplayer online (MMO) games. The current implementation of the JominiEngine is focused on a period of history known as The Hundred Year War however a focus on scability and extensibility aims to support different time periods and systems.
 
-Additional Information on JominiEngine:
-Additional Information on The Hundred Years Wargame:
-Additional Information
+Additional Information on JominiEngine: https://www.macs.hw.ac.uk/~hwloidl/Projects/JominiEngine/
+
+Additional Information on The Hundred Years Wargame: https://www.macs.hw.ac.uk/~hwloidl/hundredyearswar.com/hywdocs/1-HYW_Ga.htm
+
+Additional Information:
+- Plain Text Rules: http://www.hundredyearswar.com/downloads/hywdoc.txt
+- Help Understanding Time Period: http://www.hundredyearswar.com/Books/History/1_help_c.htm
+- http://hundredyearswar.com/playhyw/documents/QuickStart.asp
 
 # Repository Map
 
