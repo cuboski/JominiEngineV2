@@ -30,7 +30,7 @@ public class Controller : MonoBehaviour {
 
     public enum SceneName {
         FiefDetails, LogIn, MainMenu, Map, ViewArmy, ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, ChangeCharactersList, ViewJournalEntries,
-        AssignBailiff, ViewCharacters, ArmiesInFief, ViewSiege
+        AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief, ViewSiege
     }
 //
     public static ProtoClient protoClient;
@@ -211,6 +211,18 @@ public class Controller : MonoBehaviour {
             MessageFields = new string[] { charID }
         };
         Debug.Log("Try assign bailiff with character: " + request.MessageFields[0]);
+        client.net.Send(request);
+        return GetActionReply(Actions.AppointBailiff, client);
+    }
+
+    public static ProtoMessage AssignOverlord(string charID, string fiefID, TextTestClient client)
+    {
+        ProtoMessage request = new ProtoMessage {
+            ActionType = Actions.AssignOverlord,
+            Message = fiefID,
+            MessageFields = new string[] { charID }
+        };
+        Debug.Log("Try assign overlord with character: " + request.MessageFields[0]);
         client.net.Send(request);
         return GetActionReply(Actions.AppointBailiff, client);
     }

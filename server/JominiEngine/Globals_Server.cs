@@ -11,7 +11,7 @@ namespace JominiEngine
     /// enum representing all valid actions in the gane
     /// </summary>
     public enum Actions {
-        Update = 0, LogIn, UseChar, GetPlayers, ViewChar, ViewArmy, GetNPCList, HireNPC, FireNPC, TravelTo, MoveCharacter, ViewFief, ViewMyFiefs, AppointBailiff, RemoveBailiff, BarCharacters, BarNationalities, UnbarCharacters, UnbarNationalities, GrantFiefTitle, AdjustExpenditure, TransferFunds,
+        Update = 0, LogIn, UseChar, GetPlayers, ViewChar, ViewArmy, GetNPCList, HireNPC, FireNPC, TravelTo, MoveCharacter, ViewFief, ViewMyFiefs, AppointBailiff, RemoveBailiff, AssignOverlord, BarCharacters, BarNationalities, UnbarCharacters, UnbarNationalities, GrantFiefTitle, AdjustExpenditure, TransferFunds,
         TransferFundsToPlayer, EnterExitKeep, ListCharsInMeetingPlace, TakeThisRoute, Camp, AddRemoveEntourage, ProposeMarriage, AcceptRejectProposal, RejectProposal, AppointHeir, TryForChild, RecruitTroops, MaintainArmy, AppointLeader, DropOffTroops,
         ListDetachments, ListArmies, PickUpTroops, PillageFief, BesiegeFief, AdjustCombatValues, ExamineArmiesInFief, Attack, ViewJournalEntries, ViewJournalEntry, SiegeRoundReduction, SiegeRoundStorm, SiegeRoundNegotiate, SiegeList, ViewSiege, EndSiege, DisbandArmy, SpyFief, SpyCharacter, SpyArmy, Kidnap, ViewCaptives, ViewCaptive, RansomCaptive, ReleaseCaptive, ExecuteCaptive, RespondRansom, SeasonUpdate,
         GetTravelCost, GetAvailableTravelDirections, LoadScenario, ViewWorldMap, GetProvince

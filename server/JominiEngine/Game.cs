@@ -1730,6 +1730,54 @@ namespace JominiEngine {
         }
 
         /// <summary>
+        ///     Processes a client request to appoint a new bailiff to a fief
+        /// </summary>
+        /// <param name="fiefID">The ID of the fief to appoint a bailiff to</param>
+        /// <param name="charID">The ID of the character which will become the new bailiff</param>
+        /// <param name="client">The client who sent the request</param>
+        /// <returns>Result of request</returns>
+        public static ProtoMessage AssignOverlord(string fiefID, string charID, Client client)
+        {
+            // Fief
+            DisplayMessages fiefErr, charErr;
+            var f = Utility_Methods.GetFief(fiefID, out fiefErr);
+            // Character to become bailiff
+            var c = Utility_Methods.GetCharacter(charID, out charErr);
+            if (c == null)
+            {
+                Console.WriteLine($"Cant get character |{charID}| during ownership transfer!");
+                return new ProtoMessage(charErr);
+            }
+            if (f == null)
+            {
+                Console.WriteLine("Cant get fief during ownership transfer!");
+                return new ProtoMessage(fiefErr);
+            }
+
+            // Ensure character owns fief and character, or is admin
+            if (
+                PermissionManager.isAuthorized(PermissionManager.ownsCharNotCapturedOrAdmin, client.myPlayerCharacter, c) &&
+                PermissionManager.isAuthorized(PermissionManager.ownsFiefOrAdmin, client.myPlayerCharacter, f))
+            {
+                // Check character can become bailiff
+                ProtoMessage error = null;
+                if (c.ChecksBeforeGranting(client.myPlayerCharacter, "overlord", false, out error))
+                {
+                    // set bailiff, return fief
+                    f.ChangeOwnership(c.GetPlayerCharacter(), out error, "civil");
+                    var fiefToView = new ProtoFief(f);
+                    fiefToView.ResponseType = DisplayMessages.Success;
+                    fiefToView.includeAll(f);
+                    return fiefToView;
+                }
+                // error message returned from ChecksBeforeGranting
+                return error;
+            }
+            // User unauthorised
+            return new ProtoMessage(DisplayMessages.ErrorGenericUnauthorised);
+        }
+
+        /// <summary>
         ///     Process a client request to bar a number of characters from the fief
         /// </summary>
         /// <param name="fiefID">ID of fief</param>

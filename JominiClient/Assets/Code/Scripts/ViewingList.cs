@@ -58,6 +58,10 @@ public class ViewingList : Controller
                     GoToScene(SceneName.AssignBailiff);
                 break;
             }
+            case "AssignOverlord": {
+                    GoToScene(SceneName.AssignOverlord);
+                break;
+            }
             case "SwitchCharacter": {
                     GoToScene(SceneName.ChangeCharactersList);
                     break;

@@ -522,6 +522,20 @@ namespace ProtoMessageClient
         }
 
         /// <summary>
+        /// Assign a new overlord to a fief
+        /// </summary>
+        /// <param name="charID"> The would-be overlord </param>
+        /// <param name="fiefID"> The fief which is transferring ownership </param>
+        public void AssignOverlord(string charID, string fiefID)
+        {
+            ProtoMessage newOverlord = new ProtoMessage();
+            newOverlord.ActionType = Actions.AssignOverlord;
+            newOverlord.Message = fiefID;
+            newOverlord.MessageFields = new string[] { charID };
+            net.Send(newOverlord);
+        }
+
+        /// <summary>
         /// Transfers funds to or from the home fief
         /// </summary>
         /// <param name="amount">Amount to transfer</param>

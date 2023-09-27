@@ -69,6 +69,7 @@ public class ViewFief : Controller
         btnViewArmies.interactable = false;
         btnListCharsInMeetingPlace.interactable = false;
         btnTransferFunds.interactable = false;
+        btnTransferOwnership.interactable = false;
 
         txtTaxRate.interactable = false;
         txtOfficials.interactable = false;
@@ -104,6 +105,7 @@ public class ViewFief : Controller
             btnAdjustExpenditure.interactable = true;
             txtTransferFunds.interactable = true;
             btnTransferFunds.interactable = true;
+            btnTransferOwnership.interactable = true;
             btnPillageFief.gameObject.SetActive(false);
             btnSpyFief.gameObject.SetActive(false);
             btnSiegeFief.gameObject.SetActive(false);
@@ -114,7 +116,6 @@ public class ViewFief : Controller
             else {
                 btnRemoveBailiff.interactable = true;
             }
-
         }
 
         if(protoClient.activeChar.location.Equals(fiefToViewID)) {
@@ -156,6 +157,16 @@ public class ViewFief : Controller
     */ 
     public void BtnTransferOwnership() {
         Debug.Log("Testing Ownership Transfer");
+
+        // chars to view, male 14+
+        ProtoGenericArray<ProtoCharacterOverview> possibleOverlords = GetNPCList("Family Employ", tclient);
+        //foreach(ProtoCharacterOverview character in possibleBailiffs.fields) {
+
+        //}
+        characterList = possibleOverlords;
+        viewingListSelectAction = "AssignOverlord";
+
+        GoToScene(SceneName.ViewingList);
     }
 
     private void BtnSiegeFief()
