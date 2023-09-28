@@ -76,8 +76,14 @@ namespace JominiEngine
         private void initialise(bool createAccountForAllPCs = true)
         {
             lastServerUpdate = DateTime.Now;
+
+            // general user test accounts
             LogInManager.StoreNewUser("acc1", "pass1");
             LogInManager.StoreNewUser("acc2", "pass2");
+
+            // test account for the religion system
+            LogInManager.StoreNewUser("faithTest", "faithtest");
+
             NetPeerConfiguration config = new NetPeerConfiguration(app_identifier);
             config.LocalAddress = NetUtility.Resolve(host_name);
             config.MaximumConnections = max_connections;
@@ -111,10 +117,17 @@ namespace JominiEngine
             Globals_Server.server = server;
             Globals_Server.logEvent("Server started- host: " + host_name + ", port: " + port + ", appID: " +
                                     app_identifier + ", max connections: " + max_connections);
-            Client client = new Client("acc1", "Char_47");
+
+            // test accounts character assign
+            Client client = new Client("acc1", "Char_47");      // King Richard I
             Globals_Server.Clients.Add("acc1", client);
             Client client2 = new Client("acc2", "Char_126");
             Globals_Server.Clients.Add("acc2", client2);
+
+            // Faith Test Account
+            Client clientArchbishop = new Client("faithTest", "Char_300");
+            Globals_Server.Clients.Add("faithTest", clientArchbishop);
+
             String dir = Directory.GetCurrentDirectory();
             //dir = dir.Remove(dir.IndexOf("RepairHist_mmo"));
             String path;

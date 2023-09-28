@@ -220,6 +220,10 @@ namespace JominiEngine
             List<string> siegeKeyList = new List<string>();
             List<string> terrKeyList = new List<string>();
 
+            // religion collections
+            List<string> religionList = new List<string>();
+            List<string> sectList = new List<string>();
+
             // dictionaries for temporary storage of objects
             Dictionary<string, Fief_Serialised> fiefMasterList = new Dictionary<string, Fief_Serialised>();
             Dictionary<string, PlayerCharacter_Serialised> pcMasterList = new Dictionary<string, PlayerCharacter_Serialised>();
@@ -235,6 +239,9 @@ namespace JominiEngine
             Dictionary<byte, Rank> rankMasterList = new Dictionary<byte, Rank>();
             Dictionary<byte, Position_Serialised> positionMasterList = new Dictionary<byte, Position_Serialised>();
             Dictionary<string, Terrain> terrainMasterList = new Dictionary<string, Terrain>();
+
+            // dictionaries for the religion system
+            //Dictionary<string, Religion> religionMasterList = new Dictionary<string, Religion>();
 
             try
             {
