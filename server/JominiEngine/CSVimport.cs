@@ -241,7 +241,8 @@ namespace JominiEngine
             Dictionary<string, Terrain> terrainMasterList = new Dictionary<string, Terrain>();
 
             // dictionaries for the religion system
-            //Dictionary<string, Religion> religionMasterList = new Dictionary<string, Religion>();
+            Dictionary<string, Religion> religionMasterList = new Dictionary<string, Religion>();
+            Dictionary<string, Sect> sectMasterList = new Dictionary<string, Sect>();
 
             try
             {
@@ -474,6 +475,31 @@ namespace JominiEngine
                         thisBaseLang = CSVimport.ImportFromCSV_BaseLanguage(lineParts, lineNum);
 
                         if (thisBaseLang != null)
+                        {
+                            // add object to masterList
+                            baseLanguageMasterList.Add(thisBaseLang.id, thisBaseLang);
+
+                            // add key to keylist
+                            baseLangKeyList.Add(thisBaseLang.id);
+                        }
+                        else
+                        {
+                            inputFileError = true;
+                            //TODO error handling
+                            /*
+                            if (Globals_Client.showDebugMessages)
+                            {
+                                MessageBox.Show("Unable to create BaseLanguage object: " + lineParts[1]);
+                            }*/
+                        }
+                    }
+
+                    else if (lineParts[0].Equals("religion"))
+                    {
+                        Religion thisRel = null;
+                        thisRel = CSVimport.ImportFromCSV_BaseLanguage(lineParts, lineNum);
+
+                        if (thisRel != null)
                         {
                             // add object to masterList
                             baseLanguageMasterList.Add(thisBaseLang.id, thisBaseLang);
