@@ -82,7 +82,7 @@ namespace JominiEngine
             LogInManager.StoreNewUser("acc2", "pass2");
 
             // test account for the religion system
-            LogInManager.StoreNewUser("faithTest", "faithtest");
+            //LogInManager.StoreNewUser("faithTest", "faithtest");
 
             NetPeerConfiguration config = new NetPeerConfiguration(app_identifier);
             config.LocalAddress = NetUtility.Resolve(host_name);
@@ -125,8 +125,8 @@ namespace JominiEngine
             Globals_Server.Clients.Add("acc2", client2);
 
             // Faith Test Account
-            Client clientArchbishop = new Client("faithTest", "Char_300");
-            Globals_Server.Clients.Add("faithTest", clientArchbishop);
+            //Client clientArchbishop = new Client("faithTest", "Char_300");
+            //Globals_Server.Clients.Add("faithTest", clientArchbishop);
 
             String dir = Directory.GetCurrentDirectory();
             //dir = dir.Remove(dir.IndexOf("RepairHist_mmo"));

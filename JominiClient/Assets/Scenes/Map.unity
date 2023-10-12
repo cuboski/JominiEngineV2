@@ -2501,5 +2501,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3540302179038385670, guid: 885e7c324c0391242a981b484871488a,
+        type: 3}
+      propertyPath: m_Text
+      value: My Fiefs
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 885e7c324c0391242a981b484871488a, type: 3}

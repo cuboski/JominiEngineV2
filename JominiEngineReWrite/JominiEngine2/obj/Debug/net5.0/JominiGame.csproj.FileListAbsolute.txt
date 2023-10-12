@@ -3,3 +3,8 @@ C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiEngineReWrite\JominiEngine2\obj\Deb
 C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiEngineReWrite\JominiEngine2\obj\Debug\net5.0\JominiGame.AssemblyInfoInputs.cache
 C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiEngineReWrite\JominiEngine2\obj\Debug\net5.0\JominiGame.AssemblyInfo.cs
 C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiEngineReWrite\JominiEngine2\obj\Debug\net5.0\JominiGame.csproj.CoreCompileInputs.cache
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiEngine2\obj\Debug\net5.0\JominiGame.csproj.AssemblyReference.cache
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiEngine2\obj\Debug\net5.0\JominiGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiEngine2\obj\Debug\net5.0\JominiGame.AssemblyInfoInputs.cache
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiEngine2\obj\Debug\net5.0\JominiGame.AssemblyInfo.cs
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiEngine2\obj\Debug\net5.0\JominiGame.csproj.CoreCompileInputs.cache

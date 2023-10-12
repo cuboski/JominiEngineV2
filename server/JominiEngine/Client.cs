@@ -86,6 +86,8 @@ namespace JominiEngine
             // set username associated with client
             this.username = user;
 
+            Console.WriteLine(pcID);
+
             // get playercharacter from master list of player characers
             myPlayerCharacter = Globals_Game.pcMasterList[pcID];
 

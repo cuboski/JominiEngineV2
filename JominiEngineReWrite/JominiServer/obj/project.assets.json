@@ -5,10 +5,14 @@
       "Lidgren.Network/1.0.2": {
         "type": "package",
         "compile": {
-          "lib/net451/Lidgren.Network.dll": {}
+          "lib/net451/Lidgren.Network.dll": {
+            "related": ".pdb"
+          }
         },
         "runtime": {
-          "lib/net451/Lidgren.Network.dll": {}
+          "lib/net451/Lidgren.Network.dll": {
+            "related": ".pdb"
+          }
         }
       },
       "protobuf-net/3.0.101": {
@@ -17,34 +21,58 @@
           "protobuf-net.Core": "3.0.101"
         },
         "compile": {
-          "lib/net5.0/protobuf-net.dll": {}
+          "lib/net5.0/protobuf-net.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net5.0/protobuf-net.dll": {}
+          "lib/net5.0/protobuf-net.dll": {
+            "related": ".xml"
+          }
         }
       },
       "protobuf-net.Core/3.0.101": {
         "type": "package",
         "compile": {
-          "lib/net5.0/protobuf-net.Core.dll": {}
+          "lib/net5.0/protobuf-net.Core.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net5.0/protobuf-net.Core.dll": {}
+          "lib/net5.0/protobuf-net.Core.dll": {
+            "related": ".xml"
+          }
         }
       },
       "QuickGraph/3.6.61119.7": {
         "type": "package",
         "compile": {
-          "lib/net4/QuickGraph.Data.dll": {},
-          "lib/net4/QuickGraph.Graphviz.dll": {},
-          "lib/net4/QuickGraph.Serialization.dll": {},
-          "lib/net4/QuickGraph.dll": {}
+          "lib/net4/QuickGraph.Data.dll": {
+            "related": ".XML"
+          },
+          "lib/net4/QuickGraph.Graphviz.dll": {
+            "related": ".XML"
+          },
+          "lib/net4/QuickGraph.Serialization.dll": {
+            "related": ".XML"
+          },
+          "lib/net4/QuickGraph.dll": {
+            "related": ".Data.XML;.Graphviz.XML;.Serialization.XML;.XML"
+          }
         },
         "runtime": {
-          "lib/net4/QuickGraph.Data.dll": {},
-          "lib/net4/QuickGraph.Graphviz.dll": {},
-          "lib/net4/QuickGraph.Serialization.dll": {},
-          "lib/net4/QuickGraph.dll": {}
+          "lib/net4/QuickGraph.Data.dll": {
+            "related": ".XML"
+          },
+          "lib/net4/QuickGraph.Graphviz.dll": {
+            "related": ".XML"
+          },
+          "lib/net4/QuickGraph.Serialization.dll": {
+            "related": ".XML"
+          },
+          "lib/net4/QuickGraph.dll": {
+            "related": ".Data.XML;.Graphviz.XML;.Serialization.XML;.XML"
+          }
         }
       },
       "JominiGame/1.0.0": {
@@ -163,11 +191,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kyle\\Desktop\\sz42_Jomini-main\\JominiEngineReWrite\\JominiServer\\JominiServer.csproj",
+      "projectUniqueName": "C:\\Users\\Kyle\\Desktop\\JominiEngine\\JominiEngineReWrite\\JominiServer\\JominiServer.csproj",
       "projectName": "JominiServer",
-      "projectPath": "C:\\Users\\Kyle\\Desktop\\sz42_Jomini-main\\JominiEngineReWrite\\JominiServer\\JominiServer.csproj",
+      "projectPath": "C:\\Users\\Kyle\\Desktop\\JominiEngine\\JominiEngineReWrite\\JominiServer\\JominiServer.csproj",
       "packagesPath": "C:\\Users\\Kyle\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kyle\\Desktop\\sz42_Jomini-main\\JominiEngineReWrite\\JominiServer\\obj\\",
+      "outputPath": "C:\\Users\\Kyle\\Desktop\\JominiEngine\\JominiEngineReWrite\\JominiServer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kyle\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -184,8 +212,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Kyle\\Desktop\\sz42_Jomini-main\\JominiEngineReWrite\\JominiEngine2\\JominiGame.csproj": {
-              "projectPath": "C:\\Users\\Kyle\\Desktop\\sz42_Jomini-main\\JominiEngineReWrite\\JominiEngine2\\JominiGame.csproj"
+            "C:\\Users\\Kyle\\Desktop\\JominiEngine\\JominiEngineReWrite\\JominiEngine2\\JominiGame.csproj": {
+              "projectPath": "C:\\Users\\Kyle\\Desktop\\JominiEngine\\JominiEngineReWrite\\JominiEngine2\\JominiGame.csproj"
             }
           }
         }
@@ -215,16 +243,35 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.17, 5.0.17]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -233,7 +280,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Lidgren.Network 1.0.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'Lidgren.Network 1.0.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "Lidgren.Network",
       "targetGraphs": [
         "net5.0"
@@ -243,7 +290,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'QuickGraph 3.6.61119.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'QuickGraph 3.6.61119.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "QuickGraph",
       "targetGraphs": [
         "net5.0"

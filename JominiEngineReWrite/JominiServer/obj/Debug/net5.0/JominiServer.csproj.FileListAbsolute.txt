@@ -3,3 +3,8 @@ C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiEngineReWrite\JominiServer\obj\Debu
 C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiEngineReWrite\JominiServer\obj\Debug\net5.0\JominiServer.AssemblyInfoInputs.cache
 C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiEngineReWrite\JominiServer\obj\Debug\net5.0\JominiServer.AssemblyInfo.cs
 C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiEngineReWrite\JominiServer\obj\Debug\net5.0\JominiServer.csproj.CoreCompileInputs.cache
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiServer\obj\Debug\net5.0\JominiServer.csproj.AssemblyReference.cache
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiServer\obj\Debug\net5.0\JominiServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiServer\obj\Debug\net5.0\JominiServer.AssemblyInfoInputs.cache
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiServer\obj\Debug\net5.0\JominiServer.AssemblyInfo.cs
+C:\Users\Kyle\Desktop\JominiEngine\JominiEngineReWrite\JominiServer\obj\Debug\net5.0\JominiServer.csproj.CoreCompileInputs.cache
