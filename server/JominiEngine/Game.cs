@@ -40,7 +40,7 @@ namespace JominiEngine {
                 }
                 path = Path.Combine(dir, "CSVs");
             }
-            var gameObjects = Path.Combine(path, "gameObjectsFaithTest.csv");
+            var gameObjects = Path.Combine(path, "gameObjects.csv");
             var mapData = Path.Combine(path, "map.csv");
             if (!File.Exists(gameObjects) && !File.Exists(mapData)) {
                 Console.WriteLine("wrong dir");

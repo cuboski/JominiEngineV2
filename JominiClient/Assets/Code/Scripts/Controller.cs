@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour {
     public static ProtoSiegeDisplay sc;
     public static ProtoGenericArray<ProtoSiegeOverview> sl;
 
-    public static string ipAddress = "";
+    public static string ipAddress = "192.168.1.245";
 
     public enum SceneName {
         FiefDetails, LogIn, MainMenu, Map, ViewArmy, ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, ChangeCharactersList, ViewJournalEntries,
