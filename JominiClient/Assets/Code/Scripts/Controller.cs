@@ -887,6 +887,16 @@ public class Controller : MonoBehaviour {
         return reply;
     }
 
+    public static ProtoMessage TestButton(TextTestClient client) {
+        Debug.Log("Test Button Pressed");
+
+        ProtoMessage msg = new ProtoMessage();
+        msg.ActionType = Actions.TestAction;
+        client.net.Send(msg);
+        var reply = GetActionReply(Actions.TestAction, client);
+        return reply;
+    }
+
 
     private static void GenerateColourList() {
         int i;

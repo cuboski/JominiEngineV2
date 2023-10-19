@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class NavigationUI : Controller
 {
+    // test button that actions can be routed to before further integrated
+    [SerializeField] private Button btnTest;
+
     [SerializeField] private Button btnMap;
     [SerializeField] private Button btnViewEntourage;
     [SerializeField] private Button btnViewLeader;
@@ -27,6 +30,8 @@ public class NavigationUI : Controller
     // Start is called before the first frame update
     public void Start()
     {
+        btnTest.onClick.AddListener(BtnTest);
+
         btnMap.onClick.AddListener(BtnMap);
         btnViewEntourage.onClick.AddListener(BtnViewEntourage);
         btnViewLeader.onClick.AddListener(BtnViewLeader);
@@ -39,6 +44,14 @@ public class NavigationUI : Controller
 
         string season = SeasonToString(protoClient.Season);
         lblGameDate.text = season + "\n" + protoClient.Year.ToString();
+    }
+
+    // This function returns true for a test communication
+    private void BtnTest() {
+        ProtoMessage reply = TestButton(tclient);
+        if(reply.ResponseType == DisplayMessages.Success) {
+            Debug.Log("Test Return Success");
+        }
     }
 
     public void BtnShowEvent(string message)

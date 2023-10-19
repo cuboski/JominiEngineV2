@@ -3219,6 +3219,13 @@ namespace JominiEngine {
             return response;
         }
 
+        public static ProtoMessage TestButton()
+        {
+            Console.WriteLine("Test Button Pressed in Client");
+
+            return new ProtoMessage(DisplayMessages.Success);
+        }
+
         /// <summary>
         /// Translates a message from a client into an action to be carried out
         /// </summary>
@@ -3608,6 +3615,10 @@ namespace JominiEngine {
                             return GetTravelCost(msgIn.Message, msgIn.MessageFields[0], _client);
                         else
                             return GetTravelCost(msgIn.Message, msgIn.MessageFields[0], _client, msgIn.MessageFields[1]);
+                    }
+                case Actions.TestAction:
+                    {
+                        return TestButton();
                     }
                 default: {
                         return null;
