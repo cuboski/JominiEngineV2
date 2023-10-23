@@ -1,4 +1,4 @@
-﻿
+
 using UnityEngine;
 using UnityEngine.UI;
 using Lidgren.Network;
@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Collections;
 
 public class Controller : MonoBehaviour { 
-
     ////Other value
     public static TextTestClient tclient;
     public static ProtoFief mf;
@@ -872,6 +871,7 @@ public class Controller : MonoBehaviour {
         protoMessage.ActionType = Actions.GrantFiefTitle;
         protoMessage.Message = charID;
         protoMessage.MessageFields = new string[] { "days" };
+        Debug.Log(protoMessage.MessageFields);
         client.net.Send(protoMessage);
         var reply = GetActionReply(Actions.GrantFiefTitle, client);
         return reply;
@@ -890,10 +890,17 @@ public class Controller : MonoBehaviour {
     public static ProtoMessage TestButton(TextTestClient client) {
         Debug.Log("Test Button Pressed");
 
-        ProtoMessage msg = new ProtoMessage();
-        msg.ActionType = Actions.TestAction;
+        ProtoFactionRequest msg = new ProtoFactionRequest();
+        msg.Message = "test";
+        //     msg.ActionType = Actions.CreateFactionRequest;
+        //     msg.factionName = "test faction";
+        //     msg.factionLeader = protoClient.activeChar.charID;
+        //     msg.factionTax = 100;
         client.net.Send(msg);
         var reply = GetActionReply(Actions.TestAction, client);
+
+        //Debug.Log("Response from server");
+        //Debug.Log(reply);
         return reply;
     }
 

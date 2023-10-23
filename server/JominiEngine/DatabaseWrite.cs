@@ -7,6 +7,8 @@ using RiakClient;
 using RiakClient.Models;
 using ProtoBuf;
 using Newtonsoft.Json.Serialization;
+using ProtoMessageClient;
+
 namespace JominiEngine
 {
     public static class DatabaseWrite
@@ -1071,6 +1073,25 @@ namespace JominiEngine
             }
 
             return putSiegeResult.IsSuccess;
+        }
+
+        /// <summary>
+        /// Writes a new faction request to the database
+        /// </summary>
+        /// <param name="gameID"> The game bucket to write this request to </param>
+        /// <param name="fr"> The faction request to write </param>
+        /// <returns> bool indicating if the request was successful </returns>
+        public static bool DatabaseWrite_FactionReq(string gameID, FactionRequest fr)
+        {
+            var rFactionReq = new RiakObject(gameID, fr.factionReqID, fr);
+            var factReqRes = Globals_Server.rClient.Put(rFactionReq);
+
+            if (!factReqRes.IsSuccess)
+            {
+                Globals_Server.logError("Write failed: Faction Request " + rFactionReq.Key + " to bucket " + rFactionReq.Bucket);
+            }
+
+            return factReqRes.IsSuccess;
         }
 
         /// <summary>

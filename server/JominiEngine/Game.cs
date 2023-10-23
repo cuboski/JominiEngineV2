@@ -3226,6 +3226,15 @@ namespace JominiEngine {
             return new ProtoMessage(DisplayMessages.Success);
         }
 
+        public static ProtoMessage CreateFactionRequest(string factionName,string factionID, string factionBaseID, string factionLeader, double factionTax)
+        {
+            string[] members = { factionLeader };
+
+            ProtoFactionRequest request = new ProtoFactionRequest(factionName, factionID, factionBaseID, factionLeader, members, factionTax);
+            request.ResponseType = DisplayMessages.Success;
+            return request;
+        }
+
         /// <summary>
         /// Translates a message from a client into an action to be carried out
         /// </summary>
@@ -3618,7 +3627,14 @@ namespace JominiEngine {
                     }
                 case Actions.TestAction:
                     {
+                        Console.WriteLine("Message Recieved From Client");
+                        Console.WriteLine(msgIn.Message);
                         return TestButton();
+                    }
+                case Actions.CreateFactionRequest:
+                    {
+                        //var newFactionReq = (msgIn as ProtoFactionRequest);
+                        return TestButton();// CreateFactionRequest(newFactionReq.factionName, newFactionReq.factionID, newFactionReq.factionBaseID, newFactionReq.factionLeader, newFactionReq.factionTax);
                     }
                 default: {
                         return null;

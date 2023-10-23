@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using QuickGraph;
+using RiakClient.Models;
 
 namespace JominiEngine
 {
@@ -889,6 +890,31 @@ namespace JominiEngine
             }
 
             return mySiege;
+        }
+
+        /// <summary>
+        /// Reads a Siege object from the database
+        /// </summary>
+        /// <returns>Siege object</returns>
+        /// <param name="gameID">Game for which Siege to be retrieved</param>
+        /// <param name="siegeID">ID of Siege to be retrieved</param>
+        public static FactionRequest DatabaseRead_FactionReq(string gameID, string factReqID)
+        {
+            var factReqResult = Globals_Server.rClient.Get(gameID, factReqID);
+            FactionRequest factionReq = new FactionRequest();
+
+            if (factReqResult.IsSuccess)
+            {
+                // extract Army object
+                factionReq = factReqResult.Value.GetObject<FactionRequest>();
+            }
+            else
+            {
+                string toDisplay = "InitialDBload: Unable to retrieve faction request: " + factReqID;
+                Globals_Server.logError(toDisplay);
+            }
+
+            return factionReq;
         }
 
         /// <summary>

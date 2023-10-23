@@ -1860,4 +1860,65 @@ namespace ProtoMessageClient {
         }
     }
 
+    /// <summary>
+    /// Class for sending faction details
+    /// </summary>
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoFaction : ProtoMessage
+    {
+        public string factionName;
+        public string factionID;
+        public string factionBaseID;
+        public string factionLeader;
+        public string[] factionMembers;
+        public double factionTax;
+        public double factionFortune;
+
+        public ProtoFaction() : base()
+        {
+
+        }
+
+        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader, string[] factionMembers, double factionTax, double factionFortune)
+        {
+            this.factionName = factionName;
+            this.factionID = factionID;
+            this.factionBaseID = factionBaseID;
+            this.factionLeader = factionLeader;
+            this.factionMembers = factionMembers;
+            this.factionTax = factionTax;
+            this.factionFortune = factionFortune;
+        }
+    }
+
+    /// <summary>
+    /// Class for sending faction request details
+    /// </summary>
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoFactionRequest : ProtoMessage
+    {
+        public string factionName;
+        public string factionID;
+        public string factionBaseID;
+        public string factionLeader;
+        public string[] factionFounders;
+        public double factionTax;
+
+        public ProtoFactionRequest() : base()
+        {
+            this.ActionType = Actions.CreateFactionRequest;
+        }
+
+        public ProtoFactionRequest(string factionName, string factionID, string factionBaseID, string factionLeader, string[] factionFounders, double factionTax)
+        {
+            this.ActionType = Actions.CreateFactionRequest;
+            this.factionName = factionName;
+            this.factionID = factionID;
+            this.factionBaseID = factionBaseID;
+            this.factionLeader = factionLeader;
+            this.factionFounders = factionFounders;
+            this.factionTax = factionTax;
+        }
+    }
+
 }
