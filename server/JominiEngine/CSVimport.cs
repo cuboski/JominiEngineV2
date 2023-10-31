@@ -241,8 +241,8 @@ namespace JominiEngine
             Dictionary<string, Terrain> terrainMasterList = new Dictionary<string, Terrain>();
 
             // dictionaries for the religion system
-            Dictionary<string, Religion> religionMasterList = new Dictionary<string, Religion>();
-            Dictionary<string, Sect> sectMasterList = new Dictionary<string, Sect>();
+            //Dictionary<string, Religion> religionMasterList = new Dictionary<string, Religion>();
+            //Dictionary<string, Sect> sectMasterList = new Dictionary<string, Sect>();
 
             try
             {
@@ -496,30 +496,30 @@ namespace JominiEngine
                         }
                     }
 
-                    else if (lineParts[0].Equals("religion"))
-                    {
-                        Religion thisRel = null;
-                        thisRel = null;
+                    //else if (lineParts[0].Equals("religion"))
+                    //{
+                    //    Religion thisRel = null;
+                    //    thisRel = null;
 
-                        if (thisRel != null)
-                        {
-                            // add object to masterList
-                            religionMasterList.Add(thisRel.id, thisRel);
+                    //    if (thisRel != null)
+                    //    {
+                    //        // add object to masterList
+                    //        religionMasterList.Add(thisRel.id, thisRel);
 
-                            // add key to keylist
-                            //religionKeyList.Add(thisRel.id);
-                        }
-                        else
-                        {
-                            inputFileError = true;
-                            //TODO error handling
-                            /*
-                            if (Globals_Client.showDebugMessages)
-                            {
-                                MessageBox.Show("Unable to create BaseLanguage object: " + lineParts[1]);
-                            }*/
-                        }
-                    }
+                    //        // add key to keylist
+                    //        //religionKeyList.Add(thisRel.id);
+                    //    }
+                    //    else
+                    //    {
+                    //        inputFileError = true;
+                    //        //TODO error handling
+                    //        /*
+                    //        if (Globals_Client.showDebugMessages)
+                    //        {
+                    //            MessageBox.Show("Unable to create BaseLanguage object: " + lineParts[1]);
+                    //        }*/
+                    //    }
+                    //}
 
                     else if (lineParts[0].Equals("nationality"))
                     {
@@ -2596,83 +2596,83 @@ namespace JominiEngine
         /// <returns>Religion object</returns>
         /// <param name="relData">string[] holding source data</param>
         /// <param name="lineNum">Line number in source file</param>
-        public static Religion ImportFromCSV_Religion(string[] relData, int lineNum)
-        {
-            Religion thisRel = null;
+        //public static Religion ImportFromCSV_Religion(string[] relData, int lineNum)
+        //{
+        //    Religion thisRel = null;
 
-            try
-            {
-                if (relData.Length != 3)
-                {
-                    throw new InvalidDataException("Incorrect number of data parts for Religion object.");
-                }
+        //    try
+        //    {
+        //        if (relData.Length != 3)
+        //        {
+        //            throw new InvalidDataException("Incorrect number of data parts for Religion object.");
+        //        }
 
-                // create BaseLanguage object
-                thisRel = new Religion(relData[1], relData[2]);
-            }
-            // catch exception that could result from incorrect conversion of string to numeric 
-            catch (FormatException fe)
-            {
-                // create and add sysAdmin JournalEntry
-                JournalEntry importErrorEntry = Utility_Methods.CreateSysAdminJentry();
-                if (importErrorEntry != null)
-                {
-                    importErrorEntry.entryDetails.Message = "Line " + lineNum + ": " + fe.Message;
-                    Globals_Game.AddPastEvent(importErrorEntry);
-                }
-                Globals_Server.logError("Line " + lineNum + ": " + fe.Message);
-            }
-            // catch exception that could be thrown by several checks in the Fief constructor
-            catch (ArgumentOutOfRangeException aoore)
-            {
-                // create and add sysAdmin JournalEntry
-                JournalEntry importErrorEntry = Utility_Methods.CreateSysAdminJentry();
-                if (importErrorEntry != null)
-                {
-                    importErrorEntry.entryDetails.Message = "Line " + lineNum + ": " + aoore.Message;
-                    Globals_Game.AddPastEvent(importErrorEntry);
-                }
-                Globals_Server.logError("Line " + lineNum + ": " + aoore.Message);
-            }
-            // catch exception that could be thrown by several checks in the Fief constructor
-            catch (InvalidDataException ide)
-            {
-                // create and add sysAdmin JournalEntry
-                JournalEntry importErrorEntry = Utility_Methods.CreateSysAdminJentry();
-                if (importErrorEntry != null)
-                {
-                    importErrorEntry.entryDetails.Message = "Line " + lineNum + ": " + ide.Message;
-                    Globals_Game.AddPastEvent(importErrorEntry);
-                }
-                Globals_Server.logError("Line " + lineNum + ": " + ide.Message);
-            }
-            // catch exception that could result from incorrect numeric values
-            catch (OverflowException oe)
-            {
-                // create and add sysAdmin JournalEntry
-                JournalEntry importErrorEntry = Utility_Methods.CreateSysAdminJentry();
-                if (importErrorEntry != null)
-                {
-                    importErrorEntry.entryDetails.Message = "Line " + lineNum + ": " + oe.Message;
-                    Globals_Game.AddPastEvent(importErrorEntry);
-                }
-                Globals_Server.logError("Line " + lineNum + ": " + oe.Message);
-            }
+        //        // create BaseLanguage object
+        //        thisRel = new Religion(relData[1], relData[2]);
+        //    }
+        //    // catch exception that could result from incorrect conversion of string to numeric 
+        //    catch (FormatException fe)
+        //    {
+        //        // create and add sysAdmin JournalEntry
+        //        JournalEntry importErrorEntry = Utility_Methods.CreateSysAdminJentry();
+        //        if (importErrorEntry != null)
+        //        {
+        //            importErrorEntry.entryDetails.Message = "Line " + lineNum + ": " + fe.Message;
+        //            Globals_Game.AddPastEvent(importErrorEntry);
+        //        }
+        //        Globals_Server.logError("Line " + lineNum + ": " + fe.Message);
+        //    }
+        //    // catch exception that could be thrown by several checks in the Fief constructor
+        //    catch (ArgumentOutOfRangeException aoore)
+        //    {
+        //        // create and add sysAdmin JournalEntry
+        //        JournalEntry importErrorEntry = Utility_Methods.CreateSysAdminJentry();
+        //        if (importErrorEntry != null)
+        //        {
+        //            importErrorEntry.entryDetails.Message = "Line " + lineNum + ": " + aoore.Message;
+        //            Globals_Game.AddPastEvent(importErrorEntry);
+        //        }
+        //        Globals_Server.logError("Line " + lineNum + ": " + aoore.Message);
+        //    }
+        //    // catch exception that could be thrown by several checks in the Fief constructor
+        //    catch (InvalidDataException ide)
+        //    {
+        //        // create and add sysAdmin JournalEntry
+        //        JournalEntry importErrorEntry = Utility_Methods.CreateSysAdminJentry();
+        //        if (importErrorEntry != null)
+        //        {
+        //            importErrorEntry.entryDetails.Message = "Line " + lineNum + ": " + ide.Message;
+        //            Globals_Game.AddPastEvent(importErrorEntry);
+        //        }
+        //        Globals_Server.logError("Line " + lineNum + ": " + ide.Message);
+        //    }
+        //    // catch exception that could result from incorrect numeric values
+        //    catch (OverflowException oe)
+        //    {
+        //        // create and add sysAdmin JournalEntry
+        //        JournalEntry importErrorEntry = Utility_Methods.CreateSysAdminJentry();
+        //        if (importErrorEntry != null)
+        //        {
+        //            importErrorEntry.entryDetails.Message = "Line " + lineNum + ": " + oe.Message;
+        //            Globals_Game.AddPastEvent(importErrorEntry);
+        //        }
+        //        Globals_Server.logError("Line " + lineNum + ": " + oe.Message);
+        //    }
 
-            return thisRel;
-        }
+        //    return thisRel;
+        //}
 
-        /// <summary>
-        /// Creates a Sect object using data in a string array
-        /// </summary>
-        /// <returns>Sect object</returns>
-        /// <param name="sectData">string[] holding source data</param>
-        /// <param name="lineNum">Line number in source file</param>
-        public static Sect ImportFromCSV_Sect(string[] sectData, int lineNum)
-        {
-            // To Do
-            return null;
-        }
+        ///// <summary>
+        ///// Creates a Sect object using data in a string array
+        ///// </summary>
+        ///// <returns>Sect object</returns>
+        ///// <param name="sectData">string[] holding source data</param>
+        ///// <param name="lineNum">Line number in source file</param>
+        //public static Sect ImportFromCSV_Sect(string[] sectData, int lineNum)
+        //{
+        //    // To Do
+        //    return null;
+        //}
 
         /// <summary>
         /// Creates a Rank object using data in a string array

@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour {
     public static ProtoSiegeDisplay sc;
     public static ProtoGenericArray<ProtoSiegeOverview> sl;
 
-    public static string ipAddress = "";
+    public static string ipAddress = "192.168.1.245";
 
     public enum SceneName {
         FiefDetails, LogIn, MainMenu, Map, ViewArmy, ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, ChangeCharactersList, ViewJournalEntries,
@@ -884,6 +884,16 @@ public class Controller : MonoBehaviour {
         msg.Message = pID;
         client.net.Send(msg);
         var reply = GetActionReply(Actions.GetProvince, client);
+        return reply;
+    }
+
+    public static ProtoMessage TestButton(TextTestClient client) {
+        Debug.Log("Test Button Pressed");
+
+        ProtoMessage msg = new ProtoMessage();
+        msg.ActionType = Actions.TestAction;
+        client.net.Send(msg);
+        var reply = GetActionReply(Actions.TestAction, client);
         return reply;
     }
 
