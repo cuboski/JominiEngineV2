@@ -30,7 +30,7 @@ public class NavigationUI : Controller
     // Start is called before the first frame update
     public void Start()
     {
-        btnTest.onClick.AddListener(BtnTest);
+        // btnTest.onClick.AddListener(BtnTest);
 
         btnMap.onClick.AddListener(BtnMap);
         btnViewEntourage.onClick.AddListener(BtnViewEntourage);
