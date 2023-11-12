@@ -23,10 +23,12 @@ namespace JominiEngine {
         /// </summary>
         public Game() {
             Globals_Game.game = this;
+
             // initialise game objects
             // This path handling should ensure that the correct path will be found in Linux, Windows or debug mode
             var dir = Directory.GetCurrentDirectory();
             string path;
+
             // if the program is being run in debug mode, this will obtain the correct directory
             if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) {
                 if (dir.Contains("bin")) {
@@ -40,11 +42,14 @@ namespace JominiEngine {
                 }
                 path = Path.Combine(dir, "CSVs");
             }
+
+            // point towards the game objects and map data
             var gameObjects = Path.Combine(path, "gameObjects.csv");
             var mapData = Path.Combine(path, "map.csv");
             if (!File.Exists(gameObjects) && !File.Exists(mapData)) {
                 Console.WriteLine("wrong dir");
             }
+
             InitGameObjects("testBucket", gameObjects, mapData,
                 start: 1194, king1: "Char_47", king2: "Char_40", herald1: "Char_1", sysAdmin: null);
         }
@@ -3226,12 +3231,16 @@ namespace JominiEngine {
             return new ProtoMessage(DisplayMessages.Success);
         }
 
-        public static ProtoMessage CreateFactionRequest(string factionName,string factionID, string factionBaseID, string factionLeader, double factionTax)
+        public static ProtoMessage CreateFactionRequest(string factionName, string factionLeader, double factionTax)
         {
+            Console.WriteLine("new faction request");
+            Console.WriteLine(factionName);
+            Console.WriteLine(factionLeader);
+            Console.WriteLine(factionTax);
+
             string[] members = { factionLeader };
 
-            ProtoFactionRequest request = new ProtoFactionRequest(factionName, factionID, factionBaseID, factionLeader, members, factionTax);
-            request.ResponseType = DisplayMessages.Success;
+            ProtoFactionRequest request = new ProtoFactionRequest(factionName, "000", "000", factionLeader, members, factionTax);
             return request;
         }
 
@@ -3633,8 +3642,8 @@ namespace JominiEngine {
                     }
                 case Actions.CreateFactionRequest:
                     {
-                        //var newFactionReq = (msgIn as ProtoFactionRequest);
-                        return TestButton();// CreateFactionRequest(newFactionReq.factionName, newFactionReq.factionID, newFactionReq.factionBaseID, newFactionReq.factionLeader, newFactionReq.factionTax);
+                        var newFactionReq = (msgIn as ProtoFactionRequest);
+                        return CreateFactionRequest(newFactionReq.factionName, newFactionReq.factionLeader, newFactionReq.factionTax);
                     }
                 default: {
                         return null;

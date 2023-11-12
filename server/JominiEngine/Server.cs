@@ -370,10 +370,12 @@ namespace JominiEngine
         {
             Contract.Requires(m != null&&conn!=null);
             NetOutgoingMessage msg = server.CreateMessage();
+
             MemoryStream ms = new MemoryStream();
             Console.WriteLine($"\n\nSerilaize: {m.ActionType}. Msg: {m.Message}\n\n");
             Serializer.SerializeWithLengthPrefix(ms, m, PrefixStyle.Fixed32);
             msg.Write(ms.GetBuffer());
+
             if (alg != null)
             {
                 msg.Encrypt(alg);

@@ -49,10 +49,7 @@ public class NavigationUI : Controller
     // This function returns true for a test communication
     private void BtnTest() {
         Debug.Log("test button pressed");
-        ProtoMessage reply = TestButton(tclient);
-        if(reply.ResponseType == DisplayMessages.Success) {
-            Debug.Log("Test Return Success");
-        }
+        GoToScene(SceneName.CreateFaction);
     }
 
     public void BtnShowEvent(string message)

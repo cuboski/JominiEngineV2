@@ -64,7 +64,9 @@ namespace JominiEngine {
     [ProtoInclude(34, typeof(ProtoCombatValues))]
     [ProtoInclude(37, typeof(ProtoWorldMap))]
     [ProtoInclude(38, typeof(ProtoProvince))]
-    [ProtoInclude(39, typeof(ProtoGameEvent))]
+    [ProtoInclude(39, typeof(ProtoFaction))]
+    [ProtoInclude(40, typeof(ProtoFactionRequest))]
+    [ProtoInclude(41, typeof(ProtoGameEvent))]
 
 
     [ProtoContract, Serializable]

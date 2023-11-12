@@ -3471,6 +3471,13 @@ namespace ProtoMessageClient
             return response;
         }
 
+        public static ProtoMessage TestButton()
+        {
+            Console.WriteLine("Test Button Pressed in Client");
+
+            return new ProtoMessage(DisplayMessages.Success);
+        }
+
         /// <summary>
         /// Translates a message from a client into an action to be carried out
         /// </summary>
@@ -3941,6 +3948,19 @@ namespace ProtoMessageClient
                 case Actions.ViewWorldMap: {
                     return ViewWorldMap();
                 }
+                case Actions.TestAction:
+                    {
+                        Console.WriteLine("Message Recieved From Client");
+                        Console.WriteLine(msgIn.Message);
+                        return TestButton();
+                    }
+                case Actions.CreateFactionRequest:
+                    {
+                        var success = new ProtoMessage();
+                        success.ResponseType = DisplayMessages.Success;
+                        //var newFactionReq = (msgIn as ProtoFactionRequest);
+                        return success;//CreateFactionRequest(newFactionReq.factionName, newFactionReq.factionLeader, newFactionReq.factionTax);
+                    }
                 default:
                 {
                     return null;

@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour {
     public static string ipAddress = "192.168.1.245";
 
     public enum SceneName {
-        FiefDetails, LogIn, MainMenu, Map, ViewArmy, ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, ChangeCharactersList, ViewJournalEntries,
+        CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, ChangeCharactersList, ViewJournalEntries,
         AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief, ViewSiege
     }
 //
@@ -126,6 +126,7 @@ public class Controller : MonoBehaviour {
         yield return new WaitForSeconds(t);
     }
 
+
     public static ProtoMessage GetActionReply(Actions action, TextTestClient client)
     {
         bool receivedActionReply = false;
@@ -133,38 +134,53 @@ public class Controller : MonoBehaviour {
         ProtoMessage reply;
         ProtoMessage actionReply = null;
 
-        if(action == Actions.LogIn) {
+        if (action == Actions.LogIn)
+        {
             receivedUpdateReply = true;
         }
 
-        do {
+        do
+        {
             reply = client.CheckForProtobufMessage();
-            if(reply == null) { // wait time expired.
+            if (reply == null)
+            { // wait time expired.
+                Debug.Log("no reply");
+
                 globalString = "You have been disconnected.";
                 tclient.LogOut();
                 GoToScene(SceneName.LogIn);
                 return null;
             }
 
-            if(reply.ActionType == action) {
+            if (reply.ActionType == action)
+            {
+                Debug.Log("action reply");
                 actionReply = reply;
                 receivedActionReply = true;
             }
-            else if(reply.ActionType == Actions.Update) {
-                if(reply.ResponseType == DisplayMessages.ErrorGenericMessageInvalid) {
+            else if (reply.ActionType == Actions.Update)
+            {
+                Debug.Log("update reply");
+                if (reply.ResponseType == DisplayMessages.ErrorGenericMessageInvalid)
+                {
+                    Debug.Log("error reply");
                     actionReply = reply; // When the server found something wrong with the action.
                     receivedActionReply = true;
                 }
-                else if(reply.ResponseType == DisplayMessages.Success) {
+                else if (reply.ResponseType == DisplayMessages.Success)
+                {
+                    Debug.Log("success reply");
                     protoClient = (ProtoClient)reply;
                     receivedUpdateReply = true;
                 }
             }
-            else {
+            else
+            {
+                Debug.Log("other error reply");
                 Debug.Log("Mismatching action found: " + reply.ActionType.ToString() + " /w " + reply.ResponseType.ToString());
             }
 
-        } while(!receivedActionReply || !receivedUpdateReply);
+        } while (!receivedActionReply || !receivedUpdateReply);
 
 
         return actionReply;
@@ -887,21 +903,30 @@ public class Controller : MonoBehaviour {
         return reply;
     }
 
+    public static ProtoMessage CreateFaction(string[] factDetails, TextTestClient client)
+    {
+        ProtoFactionRequest msg = new ProtoFactionRequest();
+            msg.Message = "Faction Create Req";
+            msg.ActionType = Actions.CreateFactionRequest;
+            msg.factionName = factDetails[0];
+            msg.factionLeader = protoClient.activeChar.charID;
+            msg.factionTax = System.Convert.ToDouble(factDetails[2]);
+
+        client.net.Send(msg);
+        var reply = GetActionReply(Actions.CreateFactionRequest, client);
+
+        Debug.Log("We got a message!");
+        Debug.Log(reply.Message);
+
+        return reply;
+    }
+
     public static ProtoMessage TestButton(TextTestClient client) {
         Debug.Log("Test Button Pressed");
 
-        ProtoFactionRequest msg = new ProtoFactionRequest();
-        msg.Message = "test";
-        //     msg.ActionType = Actions.CreateFactionRequest;
-        //     msg.factionName = "test faction";
-        //     msg.factionLeader = protoClient.activeChar.charID;
-        //     msg.factionTax = 100;
-        client.net.Send(msg);
-        var reply = GetActionReply(Actions.TestAction, client);
-
         //Debug.Log("Response from server");
         //Debug.Log(reply);
-        return reply;
+        return new ProtoMessage();
     }
 
 
