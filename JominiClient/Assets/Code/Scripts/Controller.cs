@@ -29,7 +29,7 @@ public class Controller : MonoBehaviour {
 
     public enum SceneName {
         CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, ChangeCharactersList, ViewJournalEntries,
-        AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief, ViewSiege
+        AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief, ViewSiege, FactionRequestList
     }
 //
     public static ProtoClient protoClient;

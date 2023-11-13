@@ -3231,17 +3231,50 @@ namespace JominiEngine {
             return new ProtoMessage(DisplayMessages.Success);
         }
 
+        /// <summary>
+        /// Creates a new faction request within the server environment
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="factionLeader"></param>
+        /// <param name="factionTax"></param>
+        /// <returns>
+        ///  A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
+        /// </returns>
         public static ProtoMessage CreateFactionRequest(string factionName, string factionLeader, double factionTax)
         {
-            Console.WriteLine("new faction request");
-            Console.WriteLine(factionName);
-            Console.WriteLine(factionLeader);
-            Console.WriteLine(factionTax);
+            // create new faction object
+            FactionRequest newFactionReq = new FactionRequest(factionName,
+                    factionLeader,
+                    "test",
+                    factionTax);
 
-            string[] members = { factionLeader };
+            // add the leader as the first member to sign charter
+            newFactionReq.signFactionCharter(factionLeader);
 
-            ProtoFactionRequest request = new ProtoFactionRequest(factionName, "000", "000", factionLeader, members, factionTax);
-            return request;
+            // add to the dictionary then report a success
+            Globals_Game.factionReqMasterList.Add(factionName, newFactionReq);
+            var success = new ProtoMessage();
+            success.ResponseType = DisplayMessages.Success;
+            return success;
+        }
+
+        /// <summary>
+        /// Process a new member signing a faction request
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="newMember"></param>
+        /// <returns>
+        ///     A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
+        /// </returns>
+        public static ProtoMessage SignFactionCharter(string factionName, string newMember)
+        {
+            // get faction request and sign member
+            Globals_Game.factionReqMasterList.TryGetValue(factionName, out FactionRequest factionReq);
+            factionReq.signFactionCharter(newMember);
+
+            var success = new ProtoMessage();
+            success.ResponseType = DisplayMessages.Success;
+            return success;
         }
 
         /// <summary>

@@ -74,5 +74,10 @@ namespace JominiEngine
             this.foundingLocation = foundingLocation;
             this.proposedTax = proposedTax;
         }
+
+        public void signFactionCharter(string newMember)
+        {
+            members.Add(newMember);
+        }
     }
 }

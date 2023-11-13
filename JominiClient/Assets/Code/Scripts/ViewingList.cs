@@ -21,7 +21,8 @@ public class ViewingList : Controller
         Army,
         Character,
         Fief,
-        Journal
+        Journal,
+        Faction
     }
 
     private ListType listType;
@@ -84,6 +85,10 @@ public class ViewingList : Controller
             }
             case "Journal": {
                 GoToScene(SceneName.ViewJournalEntries);
+                break;
+            }
+            case "FactionRequest": {
+                GoToScene(SceneName.FactionRequestList);
                 break;
             }
             default: {

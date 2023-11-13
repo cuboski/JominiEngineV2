@@ -49,7 +49,6 @@ public class NavigationUI : Controller
     // This function returns true for a test communication
     private void BtnTest() {
         Debug.Log("test button pressed");
-        GoToScene(SceneName.CreateFaction);
     }
 
     public void BtnShowEvent(string message)
