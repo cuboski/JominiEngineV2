@@ -30,7 +30,7 @@ public class ViewFactionRequest : Controller
 
     private void BtnViewMembers()
     {
-        viewingListSelectAction = "ListChars";
+        viewingListSelectAction = ViewingList.FactionMembers;
         GoToScene(SceneName.ViewingList);
     }
 

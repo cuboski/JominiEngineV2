@@ -60,7 +60,7 @@ public class NavigationUI : Controller
     private void BtnEndSeason() {
         ProtoMessage reply = SeasonUpdate(tclient);
         if(reply.ResponseType == DisplayMessages.Success) {
-            viewingListSelectAction = "Journal";
+            viewingListSelectAction = ViewingList.Journal;
             GoToScene(SceneName.ViewingList);
         }
     }
@@ -75,7 +75,7 @@ public class NavigationUI : Controller
     }
 
     private void BtnSwitchCharacter() {
-        viewingListSelectAction = "SwitchCharacter";
+        viewingListSelectAction = ViewingList.SwitchCharacter;
         GoToScene(SceneName.ViewingList);
     }
 
@@ -86,13 +86,13 @@ public class NavigationUI : Controller
 
         //}
         characterList = entourageList;
-        viewingListSelectAction = "Entourage";
+        viewingListSelectAction = ViewingList.Entourage;
 
         GoToScene(SceneName.ViewingList);
     }
 
     private void BtnViewJournal() {
-        viewingListSelectAction = "Journal";
+        viewingListSelectAction = ViewingList.Journal;
         GoToScene(SceneName.ViewingList);
     }
 
@@ -102,12 +102,12 @@ public class NavigationUI : Controller
     }
 
     private void BtnViewMyArmies() {
-        viewingListSelectAction = "YourArmies";
+        viewingListSelectAction = ViewingList.YourArmies;
         GoToScene(SceneName.ViewingList);
     }
 
     private void BtnViewMyFiefs() {
-        viewingListSelectAction = "MyFiefs";
+        viewingListSelectAction = ViewingList.MyFiefs;
         GoToScene(SceneName.ViewingList);
     }
 

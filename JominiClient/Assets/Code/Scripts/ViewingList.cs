@@ -36,38 +36,41 @@ public class ViewingList : Controller
 
     new void Initialise() {
         switch(viewingListSelectAction) {
-            case "ArmiesInFief":
+            case ViewingList.ArmiesInFief:
                 {
                     GoToScene(SceneName.ArmiesInFief);
                     break;
             }
-            case "YourArmies":
+            case ViewingList.YourArmies:
                 {
                     GoToScene(SceneName.ViewArmiesList);
                     break;
             }
-            case "Entourage": {
+            case ViewingList.Entourage: {
                 lblPageTitle.text = "Your Current Entourage";
                 listType = ListType.Character;
                 break;
             }
-            case "ListChars": {
+            // ListChars and FactionMembers point to same scene, the difference is important for displaying data
+            case ViewingList.ListChars:
+            case ViewingList.FactionMembers:
+                {
                     GoToScene(SceneName.ViewCharacters);
                 break;
             }
-            case "AssignBailiff": {
+            case ViewingList.AssignBailiff: {
                     GoToScene(SceneName.AssignBailiff);
                 break;
             }
-            case "AssignOverlord": {
+            case ViewingList.AssignOverlord: {
                     GoToScene(SceneName.AssignOverlord);
                 break;
             }
-            case "SwitchCharacter": {
+            case ViewingList.SwitchCharacter: {
                     GoToScene(SceneName.ChangeCharactersList);
                     break;
             }
-            case "TransferFundsToFief": {
+            case ViewingList.TransferFundsToFief: {
                 lblPageTitle.text = "Transfer Money to Fief";
                 listType = ListType.Fief;
                 ProtoMessage reply = ViewMyFiefs(tclient);
@@ -79,15 +82,15 @@ public class ViewingList : Controller
                 }
                 break;
             }
-            case "MyFiefs": {
+            case ViewingList.MyFiefs: {
                 GoToScene(SceneName.ViewMyFiefsList);
                 break;
             }
-            case "Journal": {
+            case ViewingList.Journal: {
                 GoToScene(SceneName.ViewJournalEntries);
                 break;
             }
-            case "FactionRequest": {
+            case ViewingList.FactionRequest: {
                 GoToScene(SceneName.FactionRequestList);
                 break;
             }

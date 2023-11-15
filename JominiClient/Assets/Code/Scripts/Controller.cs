@@ -29,13 +29,16 @@ public class Controller : MonoBehaviour {
     public static string ipAddress = "192.168.1.245";
 
     public enum SceneName {
-        CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, ViewCharacter, 
-        ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, ChangeCharactersList, ViewJournalEntries,
-        AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief, ViewSiege, FactionRequestList, ViewFactionRequest
+        CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, 
+        ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, 
+        ChangeCharactersList, ViewJournalEntries, AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief,
+        ViewSiege, FactionRequestList, ViewFactionRequest
     }
 
     public enum ViewingList {
-        ArmiesInFief, YourArmies, Entourage, ListChars, AssignBailiff
+        ArmiesInFief, YourArmies, Entourage, ListChars, AssignBailiff, AssignOverlord,
+        SwitchCharacter, TransferFundsToFief, MyFiefs, Journal, FactionRequest, FactionMembers
+
     }
 //
     public static ProtoClient protoClient;
@@ -52,7 +55,7 @@ public class Controller : MonoBehaviour {
     public static ProtoGenericArray<ProtoCharacterOverview> characterList;
     public static ProtoGenericArray<ProtoFief> fiefList;
     public static ProtoGenericArray<ProtoJournalEntry> journalList;
-    public static string viewingListSelectAction;
+    public static ViewingList viewingListSelectAction;
     public static string globalString;
     public static int globalInt;
     public static string userMessageOnSceneLoad;
