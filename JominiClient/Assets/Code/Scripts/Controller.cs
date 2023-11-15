@@ -983,6 +983,19 @@ public class Controller : MonoBehaviour {
         return GetActionReply(Actions.SignFactionCharter, tclient);
     }
 
+    public static ProtoMessage ListFactionMembers(string factionName)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"{protoClient.activeChar.charID} requesting list of {factionName}'s members",
+            ActionType = Actions.ListFactionMembers,
+            MessageFields = new string[] { factionName }
+        };
+        tclient.net.Send (request);
+
+        return GetActionReply(Actions.ListFactionMembers, tclient);
+    }
+
     public static ProtoMessage TestButton(TextTestClient client) {
         Debug.Log("Test Button Pressed");
 

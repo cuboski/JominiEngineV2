@@ -11,10 +11,32 @@ public class ViewCharacters : Controller
     // Start is called before the first frame update
     void Start()
     {
+        ProtoMessage reply;
 
-        lblPageTitle.text = "Persons present in the " + globalString + " of " + fiefNames[fiefToViewID];
+        // Decide between the location list or the list of faction members
+        switch (viewingListSelectAction)
+        {
+            case ViewingList.ListChars:
+                {
+                    lblPageTitle.text = "Persons present in the " + globalString + " of " + fiefNames[fiefToViewID];
 
-        ProtoMessage reply = ListCharsInMeetingPlace(globalString, protoClient.activeChar.charID, tclient);
+                    reply = ListCharsInMeetingPlace(globalString, protoClient.activeChar.charID, tclient);
+                    break;
+                }
+            case ViewingList.FactionMembers:
+                {
+                    lblPageTitle.text = "Members of " + factionToView;
+
+                    reply = ListFactionMembers(factionToView);
+                    break;
+                }
+            default:
+                {
+                    reply = null;
+                    break;  
+                }
+        }
+        
         if (reply.ResponseType == DisplayMessages.Success)
         {
             characterList = (ProtoGenericArray<ProtoCharacterOverview>)reply;
