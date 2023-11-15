@@ -3274,13 +3274,24 @@ namespace JominiEngine {
             {
                 Globals_Game.factionReqMasterList.TryGetValue(factionName, out FactionRequest factionReq);
 
-                factionReq.signFactionCharter(newMember);
+                if(!factionReq.members.Contains(newMember))
+                {
+                    // player is not already in the faction
+                    factionReq.signFactionCharter(newMember);
 
-                var success = new ProtoMessage();
-                success.ResponseType = DisplayMessages.Success;
-                return success;
+                    var success = new ProtoMessage();
+                    success.ResponseType = DisplayMessages.Success;
+                    return success;
+                } else
+                {
+                    // player already in the faction
+                    var failure = new ProtoMessage();
+                    failure.ResponseType = DisplayMessages.ErrorGenericCharacterUnidentified;
+                    return failure;
+                }
             } catch (Exception e)
             {
+                // some other error
                 var result = new ProtoMessage();
                 result.ResponseType = DisplayMessages.Error;
                 return result;

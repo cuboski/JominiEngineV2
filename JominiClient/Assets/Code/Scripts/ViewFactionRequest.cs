@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class ViewFactionRequest : Controller
     [SerializeField] private Button btnSignCharter;
 
     [SerializeField] private Text lblPageTitle;
+    [SerializeField] private Text lblMessageForUser;
 
     private ProtoFactionRequest viewedFaction;
 
@@ -34,8 +36,25 @@ public class ViewFactionRequest : Controller
         GoToScene(SceneName.ViewingList);
     }
 
+    /// <summary>
+    /// Attempts to add a player character to a faction
+    /// </summary>
     private void BtnSignCharter()
     {
-        SignFactionCharter(viewedFaction.factionName);
+        ProtoMessage result = SignFactionCharter(viewedFaction.factionName);
+        
+        // character is already in the faction
+        if (result.ResponseType == DisplayMessages.ErrorGenericCharacterUnidentified)
+            DisplayMessage($"{protoClient.activeChar.firstName} {protoClient.activeChar.familyName} " +
+                $"is already a member of {viewedFaction.factionName}");
+        // character successfully applied
+        else
+            DisplayMessage($"{protoClient.activeChar.firstName} {protoClient.activeChar.familyName}'s " +
+                $"request to join {viewedFaction.factionName} has been sent");
+    }
+
+    private void DisplayMessage(string message)
+    {
+        lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
     }
 }
