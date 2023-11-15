@@ -71,6 +71,7 @@
     <Compile Include="Assets\Code\Scripts\ViewingLists\YourCharacters.cs" />
     <Compile Include="Assets\Code\Scripts\MapManager.cs" />
     <Compile Include="Assets\Code\Scripts\ViewingLists\YourArmies.cs" />
+    <Compile Include="Assets\Code\Scripts\ViewFactionRequest.cs" />
     <Compile Include="Assets\Code\Scripts\ViewArmy.cs" />
     <Compile Include="Assets\Code\Scripts\ViewJournalEntry.cs" />
     <Compile Include="Assets\Code\Scripts\ViewingLists\JournalEntries.cs" />

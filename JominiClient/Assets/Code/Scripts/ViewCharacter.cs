@@ -275,7 +275,7 @@ public class ViewCharacter : Controller
 
     public void BtnViewFactionRequests()
     {
-        viewingListSelectAction = "FactionRequests";
+        viewingListSelectAction = "FactionRequest";
         GoToScene(SceneName.ViewingList);
     }
 

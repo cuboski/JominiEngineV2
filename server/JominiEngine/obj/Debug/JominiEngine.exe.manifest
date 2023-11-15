@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JominiEngine.exe" size="433664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JominiEngine.exe" size="434688">
       <assemblyIdentity name="JominiEngine" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hobgWh8JaiuHkqESmeq90Z53z7mROQqQFOYUFc8XKn0=</dsig:DigestValue>
+        <dsig:DigestValue>Zn9IHkVKhuNCtmAZ2oL7TE6q51o8NawXVLGWbFMeGtA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -109,7 +109,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bELmx+A+FwMJB8V8D9mIWkJpwbQ+znwovTWc+8DgItY=</dsig:DigestValue>
+        <dsig:DigestValue>ZwQC69+VAh7b7dBg1SBglzsLQymu4wk73mzuSk81ENw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

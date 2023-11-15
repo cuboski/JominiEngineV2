@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
@@ -3240,19 +3241,19 @@ namespace JominiEngine {
         /// <returns>
         ///  A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
         /// </returns>
-        public static ProtoMessage CreateFactionRequest(string factionName, string factionLeader, double factionTax)
+        public static ProtoMessage CreateFactionRequest(ProtoFactionRequest newFaction)
         {
             // create new faction object
-            FactionRequest newFactionReq = new FactionRequest(factionName,
-                    factionLeader,
-                    "test",
-                    factionTax);
+            FactionRequest newFactionReq = new FactionRequest(newFaction.factionName,
+                    newFaction.factionLeader,
+                    newFaction.factionBaseID,
+                    newFaction.factionTax);
 
             // add the leader as the first member to sign charter
-            newFactionReq.signFactionCharter(factionLeader);
+            newFactionReq.signFactionCharter(newFaction.factionLeader);
 
             // add to the dictionary then report a success
-            Globals_Game.factionReqMasterList.Add(factionName, newFactionReq);
+            Globals_Game.factionReqMasterList.Add(newFaction.factionName, newFactionReq);
             var success = new ProtoMessage();
             success.ResponseType = DisplayMessages.Success;
             return success;
@@ -3269,12 +3270,63 @@ namespace JominiEngine {
         public static ProtoMessage SignFactionCharter(string factionName, string newMember)
         {
             // get faction request and sign member
-            Globals_Game.factionReqMasterList.TryGetValue(factionName, out FactionRequest factionReq);
-            factionReq.signFactionCharter(newMember);
+            try
+            {
+                Globals_Game.factionReqMasterList.TryGetValue(factionName, out FactionRequest factionReq);
 
-            var success = new ProtoMessage();
-            success.ResponseType = DisplayMessages.Success;
-            return success;
+                factionReq.signFactionCharter(newMember);
+
+                var success = new ProtoMessage();
+                success.ResponseType = DisplayMessages.Success;
+                return success;
+            } catch (Exception e)
+            {
+                var result = new ProtoMessage();
+                result.ResponseType = DisplayMessages.Error;
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// This function returns a list of the current faction requests that are public as a protomessage
+        /// to the requesting client
+        /// </summary>
+        public static ProtoMessage ViewFactionRequestList()
+        {
+            var factionRequests = new List<ProtoFactionRequest>();
+
+            foreach(FactionRequest factionReq in Globals_Game.factionReqMasterList.Values)
+            {
+                factionRequests.Add(new ProtoFactionRequest(
+                    factionReq.factionName,
+                    factionReq.factionReqID,
+                    factionReq.foundingLocation,
+                    factionReq.leader,
+                    factionReq.members.ToArray(),
+                    factionReq.proposedTax
+                    ));
+            }
+
+            ProtoGenericArray<ProtoFactionRequest> result = new ProtoGenericArray<ProtoFactionRequest>();
+            result.fields = factionRequests.ToArray();
+            result.ResponseType = DisplayMessages.Success;
+            result.Message = "ViewFactionReqList";
+            Console.WriteLine("GET ALL FACTION REQUESTS ----------");
+            return result;
+        }
+
+        public static ProtoMessage GetFactionRequest(string factionToGet)
+        {
+            FactionRequest factionReq = Globals_Game.factionReqMasterList[factionToGet];
+
+            return new ProtoFactionRequest(
+                        factionReq.factionName,
+                        factionReq.factionReqID,
+                        factionReq.foundingLocation,
+                        factionReq.leader,
+                        factionReq.members.ToArray(),
+                        factionReq.proposedTax
+                    );
         }
 
         /// <summary>
@@ -3676,7 +3728,19 @@ namespace JominiEngine {
                 case Actions.CreateFactionRequest:
                     {
                         var newFactionReq = (msgIn as ProtoFactionRequest);
-                        return CreateFactionRequest(newFactionReq.factionName, newFactionReq.factionLeader, newFactionReq.factionTax);
+                        return CreateFactionRequest(newFactionReq);
+                    }
+                case Actions.ViewFactionRequestList:
+                    {
+                        return ViewFactionRequestList();
+                    }
+                case Actions.GetFactionRequest:
+                    {
+                        return GetFactionRequest(msgIn.Message);
+                    }
+                case Actions.SignFactionCharter:
+                    {
+                        return SignFactionCharter(msgIn.MessageFields[1], msgIn.MessageFields[2]);
                     }
                 default: {
                         return null;

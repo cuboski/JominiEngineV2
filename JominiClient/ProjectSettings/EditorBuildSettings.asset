@@ -62,4 +62,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ViewingLists/FactionRequestList.unity
     guid: 608d3ffb9fa3e7b4cbf45e1419d67e55
+  - enabled: 1
+    path: Assets/Scenes/ViewFactionRequest.unity
+    guid: d21d0cc2fcb1b4f4ab51ef25aaea1853
   m_configObjects: {}

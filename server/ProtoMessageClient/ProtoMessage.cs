@@ -67,6 +67,8 @@ namespace ProtoMessageClient {
     [ProtoInclude(39, typeof(ProtoFaction))]
     [ProtoInclude(40, typeof(ProtoFactionRequest))]
     [ProtoInclude(41, typeof(ProtoGameEvent))]
+    [ProtoInclude(42, typeof(ProtoGenericArray<ProtoFactionRequest>))]
+    [ProtoInclude(43, typeof(ProtoGenericArray<ProtoFaction>))]
 
 
     [ProtoContract, Serializable]
