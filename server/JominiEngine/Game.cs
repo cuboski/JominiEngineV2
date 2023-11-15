@@ -3330,6 +3330,32 @@ namespace JominiEngine {
         }
 
         /// <summary>
+        /// Returns a protomessage containing a list of members for a given faction
+        /// </summary>
+        /// <param name="faction"></param>
+        /// <returns></returns>
+        public static ProtoMessage ListFactionMembers(string faction)
+        {
+            var members = new List<ProtoCharacterOverview>();
+            DisplayMessages charErr;
+
+            // get each character in the factions overview
+            foreach (string member in Globals_Game.factionReqMasterList[faction].members)
+            {
+                members.Add(
+                     new ProtoCharacterOverview(Utility_Methods.GetCharacter(member, out charErr))
+                    );
+            }
+
+            // wrap in a generic array protomessage
+            ProtoGenericArray<ProtoCharacterOverview> reply = new ProtoGenericArray<ProtoCharacterOverview>();
+            reply.fields = members.ToArray();
+            reply.ResponseType = DisplayMessages.Success;
+
+            return reply;
+        }
+
+        /// <summary>
         /// Translates a message from a client into an action to be carried out
         /// </summary>
         /// <param name="msgIn">The client's request. Cannot be null</param>
@@ -3741,6 +3767,10 @@ namespace JominiEngine {
                 case Actions.SignFactionCharter:
                     {
                         return SignFactionCharter(msgIn.MessageFields[1], msgIn.MessageFields[2]);
+                    }
+                case Actions.ListFactionMembers:
+                    {
+                        return ListFactionMembers(msgIn.MessageFields[1]);
                     }
                 default: {
                         return null;
