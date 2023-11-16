@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using RiakClient;
 
 namespace JominiEngine
 {
@@ -66,24 +67,24 @@ namespace JominiEngine
 #endif
         }
 
-        /// <summary>
-        /// Set up the game, run the TestRun (both for encrypted and unencrypted messages) and end
-        /// </summary>
+        // <summary>
+        // Set up the game, run the TestRun(both for encrypted and unencrypted messages) and end
+        // </summary>
         public static void Main()
         {
             // create a file and write the server updates into it for future reference
             var encryptString = "_encrypted_";
             string datePatern = "MM_dd_H_mm";
-            logFilePath = "TestRun_NoSessions"+encryptString + DateTime.Now.ToString(datePatern) + ".txt";
+            logFilePath = "TestRun_NoSessions" + encryptString + DateTime.Now.ToString(datePatern) + ".txt";
             Console.WriteLine("Program launch");
-            Globals_Server.LogFile = new System.IO.StreamWriter(logFilePath); 
+            Globals_Server.LogFile = new System.IO.StreamWriter(logFilePath);
 
             // set up the game
             InitialiseGameState();
             SetUpForDemo();
             //TestRun(true);                
         }
-        
+
         /// <summary>
         /// Run through a sequence of actions, recording the time taken and memory consumption
         /// </summary>
@@ -174,17 +175,17 @@ namespace JominiEngine
         //        using (Globals_Server.LogFile = new System.IO.StreamWriter("LogFile.txt"))
         //        {
 
-        //            //Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig","app.config");
-        //            //Globals_Server.rClient = Globals_Server.rCluster.CreateClient();
+        //           Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig", "../../app.config");
+        //            Globals_Server.rClient = Globals_Server.rCluster.CreateClient();
         //            Globals_Server.LogFile.AutoFlush = true;
         //            Globals_Server.logEvent("Server start");
 
         //            Game game = new Game();
         //            SetUpForDemo();
-        //            /*
-        //            //DatabaseWrite.DatabaseWriteAll ("testBucket");
+                    
+        //            DatabaseWrite.DatabaseWriteAll ("testBucket");
 
-        //            /*if (Globals_Server.rClient.Ping ().IsSuccess) {
+        //            if (Globals_Server.rClient.Ping ().IsSuccess) {
         //                Console.WriteLine ("Database connection successful");
         //                string gameID = "testBucket";
         //                foreach (string trait in Globals_Game.traitKeys) {
@@ -193,7 +194,7 @@ namespace JominiEngine
 
         //                // Test can read from database
         //                var newClient = Globals_Server.rCluster.CreateClient();
-        //                RiakObject newObj = new RiakObject (gameID, "superawesome3", Globals_Game.traitKeys.ToArray ());
+        //                RiakClient.Models.RiakObject newObj = new RiakClient.Models.RiakObject (gameID, "superawesome3", Globals_Game.traitKeys.ToArray ());
         //                newClient.Put (newObj);
         //                Thread.Sleep (5000);
         //                var testRead =newClient.Get (gameID, "superawesome3");
@@ -202,10 +203,10 @@ namespace JominiEngine
         //                } else {
         //                    Console.WriteLine ("Got traitkeys:");
         //                }
-        //                //DatabaseRead.DatabaseReadAll (gameID);
+        //                DatabaseRead.DatabaseReadAll (gameID);
         //            } else {
         //                Console.WriteLine ("Could not connect to database :( ");
-        //            } */
+        //            } 
 
         //            //testCaptives();
 
@@ -227,27 +228,21 @@ namespace JominiEngine
         //            if (s != null && s.Equals("exit"))
         //            {
         //                Globals_Server.logEvent("Server exits");
-        //                server.isListening = false;
         //                Globals_Server.server.Shutdown("Server exits");
         //            }
 
-        //            //testArmy();
-        //            //testSpying();
-        //            /*
-        //                    while (true)
-        //                    {
+        //            while (true)
+        //            {
 
-        //                        if (s != null && s.Equals("exit"))
-        //                        {
-        //                            Globals_Server.logEvent("Server exits");
-        //                            server.isListening = false;
-        //                            Globals_Server.server.Shutdown("Server exits");
-        //                            break;
-        //                        }
+        //                if (s != null && s.Equals("exit"))
+        //                {
+        //                    Globals_Server.logEvent("Server exits");
+        //                    Globals_Server.server.Shutdown("Server exits");
+        //                    break;
+        //                }
 
-        //                    }
+        //            }
 
-        //                    * */
         //            Globals_Server.LogFile.Close();
 
         //        }

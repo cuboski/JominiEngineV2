@@ -458,9 +458,18 @@ namespace JominiEngine
 			}
 		}
         public static bool DatabaseWrite_Test(string gameID) {
-			if (!Globals_Server.rClient.Ping ().IsSuccess) {
-				Console.WriteLine ("NOW PING FAILS");
-			}
+            var pingResult = Globals_Server.rClient.Ping();
+
+            if (pingResult.IsSuccess)
+            {
+                Console.Write("Pong");
+            }
+            else
+            {
+                Console.WriteLine("Are you sure Riak is running?");
+                Console.WriteLine("{0}: {1}", pingResult.ResultCode, pingResult.ErrorMessage);
+            }
+
 			Console.WriteLine ("Writing test to : " + gameID);
 			var o = new RiakObject (gameID, "test",new TestObject("hello","world"));
 			RiakResult result = Globals_Server.rClient.Put (o);
