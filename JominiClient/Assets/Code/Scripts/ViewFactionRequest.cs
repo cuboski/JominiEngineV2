@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,29 +11,58 @@ public class ViewFactionRequest : Controller
 {
     [SerializeField] private Button btnViewMembers;
     [SerializeField] private Button btnSignCharter;
+    [SerializeField] private Button btnJoinRequests;
 
     [SerializeField] private Text lblPageTitle;
     [SerializeField] private Text lblMessageForUser;
 
     private ProtoFactionRequest viewedFaction;
 
+    private bool isLeader;
+    private bool isMember;
+
     // Start is called before the first frame update
     public void Start()
     {
+        viewedFaction = (ProtoFactionRequest)GetFactionRequest(factionToView);
+
+        CheckMembership();
+
         btnViewMembers.onClick.AddListener(BtnViewMembers);
         btnSignCharter.onClick.AddListener(BtnSignCharter);
-
-        btnViewMembers.interactable = true;
-        btnSignCharter.interactable = true;
-
-        viewedFaction = (ProtoFactionRequest) GetFactionRequest(factionToView);
+        btnJoinRequests.onClick.AddListener(BtnJoinRequests);
 
         lblPageTitle.text = viewedFaction.factionName;
+    }
+
+    private void CheckMembership()
+    {
+        string thisChar = protoClient.playerChar.charID;
+
+        isLeader = (thisChar == viewedFaction.factionLeader);
+        isMember = isLeader;
+
+        // search for membership in the faction members collection
+        if (!isLeader) { 
+            ProtoGenericArray<ProtoCharacterOverview> members = (ProtoGenericArray<ProtoCharacterOverview>)ListFactionMembers(factionToView);
+            foreach (ProtoCharacterOverview member in members.fields)
+                isMember = (thisChar == member.charID);
+        }
+
+        btnJoinRequests.gameObject.SetActive(isLeader);
+        btnSignCharter.gameObject.SetActive(!isMember);
+        btnViewMembers.gameObject.SetActive(isMember);
     }
 
     private void BtnViewMembers()
     {
         viewingListSelectAction = ViewingList.FactionMembers;
+        GoToScene(SceneName.ViewingList);
+    }
+
+    private void BtnJoinRequests()
+    {
+        viewingListSelectAction = ViewingList.FactionJoinRequests;
         GoToScene(SceneName.ViewingList);
     }
 

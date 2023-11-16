@@ -21,7 +21,7 @@ namespace JominiEngine
         SiegeRoundStorm, SiegeRoundNegotiate, SiegeList, ViewSiege, EndSiege, DisbandArmy, SpyFief, SpyCharacter, SpyArmy,
         Kidnap, ViewCaptives, ViewCaptive, RansomCaptive, ReleaseCaptive, ExecuteCaptive, RespondRansom, SeasonUpdate,
         GetTravelCost, GetAvailableTravelDirections, LoadScenario, ViewWorldMap, GetProvince, TestAction, CreateFactionRequest, 
-        ViewFactionRequestList, GetFactionRequest, ReturnTime, SignFactionCharter, ListFactionMembers
+        ViewFactionRequestList, GetFactionRequest, ReturnTime, SignFactionCharter, ListFactionMembers, ChangeFactionRank
     }
     /// <summary>
     /// enum representing all strings that may be sent to a client,

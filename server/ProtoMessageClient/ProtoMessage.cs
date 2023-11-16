@@ -69,6 +69,7 @@ namespace ProtoMessageClient {
     [ProtoInclude(41, typeof(ProtoGameEvent))]
     [ProtoInclude(42, typeof(ProtoGenericArray<ProtoFactionRequest>))]
     [ProtoInclude(43, typeof(ProtoGenericArray<ProtoFaction>))]
+    [ProtoInclude(44, typeof(ProtoGenericDictionary<ProtoCharacterOverview, string>))]
 
 
     [ProtoContract, Serializable]
@@ -1901,27 +1902,44 @@ namespace ProtoMessageClient {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     public class ProtoFactionRequest : ProtoMessage
     {
-        public string factionName;
-        public string factionID;
-        public string factionBaseID;
-        public string factionLeader;
-        public string[] factionFounders;
-        public double factionTax;
+        public string factionName { get; set; }
+        public string factionID { get; set; }
+        public string factionBaseID { get; set; }
+        public string factionLeader { get; set; }
+        public KeyValuePair<string, string>[] factionFounders { get; set; }
+        public double factionTax { get; set; }
 
         public ProtoFactionRequest() : base()
         {
-            this.ActionType = Actions.CreateFactionRequest;
+
         }
 
-        public ProtoFactionRequest(string factionName, string factionID, string factionBaseID, string factionLeader, string[] factionFounders, double factionTax)
+        public ProtoFactionRequest(string factionName, string factionID, string factionBaseID, string factionLeader,
+            KeyValuePair<string, string>[] factionFounders, double factionTax)
         {
-            this.ActionType = Actions.CreateFactionRequest;
             this.factionName = factionName;
             this.factionID = factionID;
             this.factionBaseID = factionBaseID;
             this.factionLeader = factionLeader;
             this.factionFounders = factionFounders;
             this.factionTax = factionTax;
+        }
+    }
+
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoGenericDictionary<K, V> : ProtoMessage
+    {
+        public KeyValuePair<K, V>[] fields { get; set; }
+
+        public ProtoGenericDictionary()
+            : base()
+        {
+
+        }
+
+        public ProtoGenericDictionary(KeyValuePair<K, V>[] p)
+        {
+            this.fields = p;
         }
     }
 

@@ -51,15 +51,16 @@ namespace JominiEngine
     /// </summary>
     public class FactionRequest
     {
+        public enum factionRank
+        {
+            Leader, Member, Prospect
+        }
+
         public string factionReqID { get; set; }
         public string leader { get; set; }
-
         public string factionName { get; set; }
-
-        public List<string> members = new List<string>();
-
+        public Dictionary<string, string> members = new Dictionary<string, string>();
         public string foundingLocation { get; set; }
-
         public Double proposedTax { get; set; }
 
         public FactionRequest()
@@ -75,9 +76,9 @@ namespace JominiEngine
             this.proposedTax = proposedTax;
         }
 
-        public void signFactionCharter(string newMember)
+        public void signFactionCharter(string newMember, string rank)
         {
-            members.Add(newMember);
+            members.Add(newMember, rank);
         }
     }
 }

@@ -69,6 +69,7 @@ namespace JominiEngine {
     [ProtoInclude(41, typeof(ProtoGameEvent))]
     [ProtoInclude(42, typeof(ProtoGenericArray<ProtoFactionRequest>))]
     [ProtoInclude(43, typeof(ProtoGenericArray<ProtoFaction>))]
+    [ProtoInclude(44, typeof(ProtoGenericDictionary<ProtoCharacterOverview, string>))]
 
 
     [ProtoContract, Serializable]
@@ -1912,7 +1913,7 @@ namespace JominiEngine {
         public string factionID { get; set; }
         public string factionBaseID { get; set; }
         public string factionLeader { get; set; }
-        public string[] factionFounders { get; set; }
+        public KeyValuePair<string, string>[] factionFounders { get; set; }
         public double factionTax { get; set; }
 
         public ProtoFactionRequest() : base()
@@ -1920,7 +1921,8 @@ namespace JominiEngine {
 
         }
 
-        public ProtoFactionRequest(string factionName, string factionID, string factionBaseID, string factionLeader, string[] factionFounders, double factionTax)
+        public ProtoFactionRequest(string factionName, string factionID, string factionBaseID, string factionLeader, 
+            KeyValuePair<string, string>[] factionFounders, double factionTax)
         {
             this.factionName = factionName;
             this.factionID = factionID;
@@ -1931,4 +1933,20 @@ namespace JominiEngine {
         }
     }
 
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoGenericDictionary<K,V> : ProtoMessage
+    {
+        public KeyValuePair<K,V>[] fields { get; set; }
+
+        public ProtoGenericDictionary()
+            : base()
+        {
+
+        }
+
+        public ProtoGenericDictionary(KeyValuePair<K, V>[] p)
+        {
+            this.fields = p;
+        }
+    }
 }

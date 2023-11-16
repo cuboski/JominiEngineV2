@@ -54,6 +54,7 @@ public class ViewingList : Controller
             // ListChars and FactionMembers point to same scene, the difference is important for displaying data
             case ViewingList.ListChars:
             case ViewingList.FactionMembers:
+            case ViewingList.FactionJoinRequests:
                 {
                     GoToScene(SceneName.ViewCharacters);
                 break;

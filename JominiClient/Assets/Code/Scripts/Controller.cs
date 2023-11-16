@@ -37,8 +37,8 @@ public class Controller : MonoBehaviour {
 
     public enum ViewingList {
         ArmiesInFief, YourArmies, Entourage, ListChars, AssignBailiff, AssignOverlord,
-        SwitchCharacter, TransferFundsToFief, MyFiefs, Journal, FactionRequest, FactionMembers
-
+        SwitchCharacter, TransferFundsToFief, MyFiefs, Journal, FactionRequest, FactionMembers,
+        FactionJoinRequests
     }
 //
     public static ProtoClient protoClient;
@@ -985,15 +985,35 @@ public class Controller : MonoBehaviour {
 
     public static ProtoMessage ListFactionMembers(string factionName)
     {
+        string rankToFind;
+
+        if (viewingListSelectAction == ViewingList.FactionJoinRequests)
+            rankToFind = "Prospect";
+        else
+            rankToFind = "Member";
+
         ProtoMessage request = new ProtoMessage
         {
             Message = $"{protoClient.activeChar.charID} requesting list of {factionName}'s members",
             ActionType = Actions.ListFactionMembers,
-            MessageFields = new string[] { factionName }
+            MessageFields = new string[] { factionName, rankToFind}
         };
         tclient.net.Send (request);
-
+         
         return GetActionReply(Actions.ListFactionMembers, tclient);
+    }
+
+    public static ProtoMessage ChangeFactionRank(string factionName, string member, string rank)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"Updating {member}'s rank in {factionName} to {rank}",
+            ActionType = Actions.ChangeFactionRank,
+            MessageFields = new string[] { factionName, member, rank }
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.ChangeFactionRank, tclient);
     }
 
     public static ProtoMessage TestButton(TextTestClient client) {

@@ -3250,7 +3250,7 @@ namespace JominiEngine {
                     newFaction.factionTax);
 
             // add the leader as the first member to sign charter
-            newFactionReq.signFactionCharter(newFaction.factionLeader);
+            newFactionReq.signFactionCharter(newFaction.factionLeader, "Leader");
 
             // add to the dictionary then report a success
             Globals_Game.factionReqMasterList.Add(newFaction.factionName, newFactionReq);
@@ -3274,10 +3274,10 @@ namespace JominiEngine {
             {
                 Globals_Game.factionReqMasterList.TryGetValue(factionName, out FactionRequest factionReq);
 
-                if(!factionReq.members.Contains(newMember))
+                if(!factionReq.members.ContainsKey(newMember))
                 {
                     // player is not already in the faction
-                    factionReq.signFactionCharter(newMember);
+                    factionReq.signFactionCharter(newMember, "Prospect");
 
                     var success = new ProtoMessage();
                     success.ResponseType = DisplayMessages.Success;
@@ -3345,24 +3345,39 @@ namespace JominiEngine {
         /// </summary>
         /// <param name="faction"></param>
         /// <returns></returns>
-        public static ProtoMessage ListFactionMembers(string faction)
+        public static ProtoMessage ListFactionMembers(string faction, string rank)
         {
             var members = new List<ProtoCharacterOverview>();
             DisplayMessages charErr;
 
-            // get each character in the factions overview
-            foreach (string member in Globals_Game.factionReqMasterList[faction].members)
+            foreach (KeyValuePair<string, string> member in Globals_Game.factionReqMasterList[faction].members)
             {
-                members.Add(
-                     new ProtoCharacterOverview(Utility_Methods.GetCharacter(member, out charErr))
-                    );
+                string memberRank = member.Value.ToString();
+                if (memberRank == "Leader" && rank == "Member")
+                {
+                    members.Add(new ProtoCharacterOverview(Utility_Methods.GetCharacter(member.Key, out charErr)));
+                }
+                else if (memberRank == rank)
+                {
+                    members.Add(new ProtoCharacterOverview(Utility_Methods.GetCharacter(member.Key, out charErr)));
+                }
             }
 
-            // wrap in a generic array protomessage
             ProtoGenericArray<ProtoCharacterOverview> reply = new ProtoGenericArray<ProtoCharacterOverview>();
-            reply.fields = members.ToArray();
             reply.ResponseType = DisplayMessages.Success;
+            reply.fields = members.ToArray();
+            return reply;
+        }
 
+        public static ProtoMessage ChangeFactionRank(string factionName, string factionMember, string factionRank)
+        {
+            Dictionary<string, string> members = Globals_Game.factionReqMasterList[factionName].members;
+
+            members.Remove(factionMember);
+            members.Add(factionMember, factionRank);
+
+            ProtoMessage reply = new ProtoMessage();
+            reply.ResponseType = DisplayMessages.Success;
             return reply;
         }
 
@@ -3781,7 +3796,11 @@ namespace JominiEngine {
                     }
                 case Actions.ListFactionMembers:
                     {
-                        return ListFactionMembers(msgIn.MessageFields[1]);
+                        return ListFactionMembers(msgIn.MessageFields[1], msgIn.MessageFields[2]);
+                    }
+                case Actions.ChangeFactionRank:
+                    {
+                        return ChangeFactionRank(msgIn.MessageFields[1], msgIn.MessageFields[2], msgIn.MessageFields[3]);
                     }
                 default: {
                         return null;
