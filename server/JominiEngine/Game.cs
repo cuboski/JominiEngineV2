@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
@@ -23,10 +24,12 @@ namespace JominiEngine {
         /// </summary>
         public Game() {
             Globals_Game.game = this;
+
             // initialise game objects
             // This path handling should ensure that the correct path will be found in Linux, Windows or debug mode
             var dir = Directory.GetCurrentDirectory();
             string path;
+
             // if the program is being run in debug mode, this will obtain the correct directory
             if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) {
                 if (dir.Contains("bin")) {
@@ -40,11 +43,14 @@ namespace JominiEngine {
                 }
                 path = Path.Combine(dir, "CSVs");
             }
+
+            // point towards the game objects and map data
             var gameObjects = Path.Combine(path, "gameObjects.csv");
             var mapData = Path.Combine(path, "map.csv");
             if (!File.Exists(gameObjects) && !File.Exists(mapData)) {
                 Console.WriteLine("wrong dir");
             }
+
             InitGameObjects("testBucket", gameObjects, mapData,
                 start: 1194, king1: "Char_47", king2: "Char_40", herald1: "Char_1", sysAdmin: null);
         }
@@ -3227,6 +3233,155 @@ namespace JominiEngine {
         }
 
         /// <summary>
+        /// Creates a new faction request within the server environment
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="factionLeader"></param>
+        /// <param name="factionTax"></param>
+        /// <returns>
+        ///  A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
+        /// </returns>
+        public static ProtoMessage CreateFactionRequest(ProtoFactionRequest newFaction)
+        {
+            // create new faction object
+            FactionRequest newFactionReq = new FactionRequest(newFaction.factionName,
+                    newFaction.factionLeader,
+                    newFaction.factionBaseID,
+                    newFaction.factionTax);
+
+            // add the leader as the first member to sign charter
+            newFactionReq.signFactionCharter(newFaction.factionLeader, "Leader");
+
+            // add to the dictionary then report a success
+            Globals_Game.factionReqMasterList.Add(newFaction.factionName, newFactionReq);
+            var success = new ProtoMessage();
+            success.ResponseType = DisplayMessages.Success;
+            return success;
+        }
+
+        /// <summary>
+        /// Process a new member signing a faction request
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="newMember"></param>
+        /// <returns>
+        ///     A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
+        /// </returns>
+        public static ProtoMessage SignFactionCharter(string factionName, string newMember)
+        {
+            // get faction request and sign member
+            try
+            {
+                Globals_Game.factionReqMasterList.TryGetValue(factionName, out FactionRequest factionReq);
+
+                if(!factionReq.members.ContainsKey(newMember))
+                {
+                    // player is not already in the faction
+                    factionReq.signFactionCharter(newMember, "Prospect");
+
+                    var success = new ProtoMessage();
+                    success.ResponseType = DisplayMessages.Success;
+                    return success;
+                } else
+                {
+                    // player already in the faction
+                    var failure = new ProtoMessage();
+                    failure.ResponseType = DisplayMessages.ErrorGenericCharacterUnidentified;
+                    return failure;
+                }
+            } catch (Exception e)
+            {
+                // some other error
+                var result = new ProtoMessage();
+                result.ResponseType = DisplayMessages.Error;
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// This function returns a list of the current faction requests that are public as a protomessage
+        /// to the requesting client
+        /// </summary>
+        public static ProtoMessage ViewFactionRequestList()
+        {
+            var factionRequests = new List<ProtoFactionRequest>();
+
+            foreach(FactionRequest factionReq in Globals_Game.factionReqMasterList.Values)
+            {
+                factionRequests.Add(new ProtoFactionRequest(
+                    factionReq.factionName,
+                    factionReq.factionReqID,
+                    factionReq.foundingLocation,
+                    factionReq.leader,
+                    factionReq.members.ToArray(),
+                    factionReq.proposedTax
+                    ));
+            }
+
+            ProtoGenericArray<ProtoFactionRequest> result = new ProtoGenericArray<ProtoFactionRequest>();
+            result.fields = factionRequests.ToArray();
+            result.ResponseType = DisplayMessages.Success;
+            result.Message = "ViewFactionReqList";
+            Console.WriteLine("GET ALL FACTION REQUESTS ----------");
+            return result;
+        }
+
+        public static ProtoMessage GetFactionRequest(string factionToGet)
+        {
+            FactionRequest factionReq = Globals_Game.factionReqMasterList[factionToGet];
+
+            return new ProtoFactionRequest(
+                        factionReq.factionName,
+                        factionReq.factionReqID,
+                        factionReq.foundingLocation,
+                        factionReq.leader,
+                        factionReq.members.ToArray(),
+                        factionReq.proposedTax
+                    );
+        }
+
+        /// <summary>
+        /// Returns a protomessage containing a list of members for a given faction
+        /// </summary>
+        /// <param name="faction"></param>
+        /// <returns></returns>
+        public static ProtoMessage ListFactionMembers(string faction, string rank)
+        {
+            var members = new List<ProtoCharacterOverview>();
+            DisplayMessages charErr;
+
+            foreach (KeyValuePair<string, string> member in Globals_Game.factionReqMasterList[faction].members)
+            {
+                string memberRank = member.Value.ToString();
+                if (memberRank == "Leader" && rank == "Member")
+                {
+                    members.Add(new ProtoCharacterOverview(Utility_Methods.GetCharacter(member.Key, out charErr)));
+                }
+                else if (memberRank == rank)
+                {
+                    members.Add(new ProtoCharacterOverview(Utility_Methods.GetCharacter(member.Key, out charErr)));
+                }
+            }
+
+            ProtoGenericArray<ProtoCharacterOverview> reply = new ProtoGenericArray<ProtoCharacterOverview>();
+            reply.ResponseType = DisplayMessages.Success;
+            reply.fields = members.ToArray();
+            return reply;
+        }
+
+        public static ProtoMessage ChangeFactionRank(string factionName, string factionMember, string factionRank)
+        {
+            Dictionary<string, string> members = Globals_Game.factionReqMasterList[factionName].members;
+
+            members.Remove(factionMember);
+            members.Add(factionMember, factionRank);
+
+            ProtoMessage reply = new ProtoMessage();
+            reply.ResponseType = DisplayMessages.Success;
+            return reply;
+        }
+
+        /// <summary>
         /// Translates a message from a client into an action to be carried out
         /// </summary>
         /// <param name="msgIn">The client's request. Cannot be null</param>
@@ -3618,7 +3773,34 @@ namespace JominiEngine {
                     }
                 case Actions.TestAction:
                     {
+                        Console.WriteLine("Message Recieved From Client");
+                        Console.WriteLine(msgIn.Message);
                         return TestButton();
+                    }
+                case Actions.CreateFactionRequest:
+                    {
+                        var newFactionReq = (msgIn as ProtoFactionRequest);
+                        return CreateFactionRequest(newFactionReq);
+                    }
+                case Actions.ViewFactionRequestList:
+                    {
+                        return ViewFactionRequestList();
+                    }
+                case Actions.GetFactionRequest:
+                    {
+                        return GetFactionRequest(msgIn.Message);
+                    }
+                case Actions.SignFactionCharter:
+                    {
+                        return SignFactionCharter(msgIn.MessageFields[1], msgIn.MessageFields[2]);
+                    }
+                case Actions.ListFactionMembers:
+                    {
+                        return ListFactionMembers(msgIn.MessageFields[1], msgIn.MessageFields[2]);
+                    }
+                case Actions.ChangeFactionRank:
+                    {
+                        return ChangeFactionRank(msgIn.MessageFields[1], msgIn.MessageFields[2], msgIn.MessageFields[3]);
                     }
                 default: {
                         return null;

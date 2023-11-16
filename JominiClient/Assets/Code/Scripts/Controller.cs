@@ -1,4 +1,4 @@
-﻿
+
 using UnityEngine;
 using UnityEngine.UI;
 using Lidgren.Network;
@@ -10,9 +10,9 @@ using System.Threading;
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEditor.PackageManager;
 
 public class Controller : MonoBehaviour { 
-
     ////Other value
     public static TextTestClient tclient;
     public static ProtoFief mf;
@@ -29,8 +29,16 @@ public class Controller : MonoBehaviour {
     public static string ipAddress = "192.168.1.245";
 
     public enum SceneName {
-        FiefDetails, LogIn, MainMenu, Map, ViewArmy, ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, ChangeCharactersList, ViewJournalEntries,
-        AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief, ViewSiege
+        CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, 
+        ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, 
+        ChangeCharactersList, ViewJournalEntries, AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief,
+        ViewSiege, FactionRequestList, ViewFactionRequest
+    }
+
+    public enum ViewingList {
+        ArmiesInFief, YourArmies, Entourage, ListChars, AssignBailiff, AssignOverlord,
+        SwitchCharacter, TransferFundsToFief, MyFiefs, Journal, FactionRequest, FactionMembers,
+        FactionJoinRequests
     }
 //
     public static ProtoClient protoClient;
@@ -40,16 +48,19 @@ public class Controller : MonoBehaviour {
     //public static ProtoCharacter currentlyViewedCharacter;
     public static string characterToViewID;
     //public static ProtoArmy currentlyViewedArmy;
+    public static string factionToView;
     public static string armyToViewID;
     public static uint journalEntryToViewID;
     public static ProtoGenericArray<ProtoArmyOverview> armyList;
     public static ProtoGenericArray<ProtoCharacterOverview> characterList;
     public static ProtoGenericArray<ProtoFief> fiefList;
     public static ProtoGenericArray<ProtoJournalEntry> journalList;
-    public static string viewingListSelectAction;
+    public static ViewingList viewingListSelectAction;
     public static string globalString;
     public static int globalInt;
     public static string userMessageOnSceneLoad;
+
+    public static bool viewFiefAssign;
 
     public static Dictionary<string, string> fiefNames = new Dictionary<string, string>();
     public static Dictionary<string, string> fiefOwners = new Dictionary<string, string>();
@@ -127,6 +138,7 @@ public class Controller : MonoBehaviour {
         yield return new WaitForSeconds(t);
     }
 
+
     public static ProtoMessage GetActionReply(Actions action, TextTestClient client)
     {
         bool receivedActionReply = false;
@@ -134,38 +146,53 @@ public class Controller : MonoBehaviour {
         ProtoMessage reply;
         ProtoMessage actionReply = null;
 
-        if(action == Actions.LogIn) {
+        if (action == Actions.LogIn)
+        {
             receivedUpdateReply = true;
         }
 
-        do {
+        do
+        {
             reply = client.CheckForProtobufMessage();
-            if(reply == null) { // wait time expired.
+            if (reply == null)
+            { // wait time expired.
+                Debug.Log("no reply");
+
                 globalString = "You have been disconnected.";
                 tclient.LogOut();
                 GoToScene(SceneName.LogIn);
                 return null;
             }
 
-            if(reply.ActionType == action) {
+            if (reply.ActionType == action)
+            {
+                Debug.Log("action reply");
                 actionReply = reply;
                 receivedActionReply = true;
             }
-            else if(reply.ActionType == Actions.Update) {
-                if(reply.ResponseType == DisplayMessages.ErrorGenericMessageInvalid) {
+            else if (reply.ActionType == Actions.Update)
+            {
+                Debug.Log("update reply");
+                if (reply.ResponseType == DisplayMessages.ErrorGenericMessageInvalid)
+                {
+                    Debug.Log("error reply");
                     actionReply = reply; // When the server found something wrong with the action.
                     receivedActionReply = true;
                 }
-                else if(reply.ResponseType == DisplayMessages.Success) {
+                else if (reply.ResponseType == DisplayMessages.Success)
+                {
+                    Debug.Log("success reply");
                     protoClient = (ProtoClient)reply;
                     receivedUpdateReply = true;
                 }
             }
-            else {
+            else
+            {
+                Debug.Log("other error reply");
                 Debug.Log("Mismatching action found: " + reply.ActionType.ToString() + " /w " + reply.ResponseType.ToString());
             }
 
-        } while(!receivedActionReply || !receivedUpdateReply);
+        } while (!receivedActionReply || !receivedUpdateReply);
 
 
         return actionReply;
@@ -856,6 +883,24 @@ public class Controller : MonoBehaviour {
         return reply;
     }
 
+    public static ProtoMessage Camp(string charID, byte days, TextTestClient client)
+    {
+        ProtoMessage protoMessage = new ProtoMessage();
+        protoMessage.ActionType = Actions.GrantFiefTitle;
+        protoMessage.Message = charID;
+        protoMessage.MessageFields = new string[] { "days" };
+        Debug.Log(protoMessage.MessageFields);
+        client.net.Send(protoMessage);
+        var reply = GetActionReply(Actions.GrantFiefTitle, client);
+        return reply;
+    }
+
+    /*
+     * 
+     * FIEF AND PROVINCE
+     * 
+     */
+
     public static ProtoMessage EnterExitKeep(string charID, TextTestClient client)
     {
         ProtoMessage protoMessage = new ProtoMessage();
@@ -863,17 +908,6 @@ public class Controller : MonoBehaviour {
         protoMessage.Message = charID;
         client.net.Send(protoMessage);
         var reply = GetActionReply(Actions.EnterExitKeep, client);
-        return reply;
-    }
-
-    public static ProtoMessage Camp(string charID, byte days, TextTestClient client)
-    {
-        ProtoMessage protoMessage = new ProtoMessage();
-        protoMessage.ActionType = Actions.GrantFiefTitle;
-        protoMessage.Message = charID;
-        protoMessage.MessageFields = new string[] { "days" };
-        client.net.Send(protoMessage);
-        var reply = GetActionReply(Actions.GrantFiefTitle, client);
         return reply;
     }
 
@@ -887,14 +921,113 @@ public class Controller : MonoBehaviour {
         return reply;
     }
 
+    /*
+     * 
+     * FACTION FUNCTIONS
+     * 
+     */
+
+    public static ProtoMessage CreateFaction(string[] factDetails, TextTestClient client)
+    {
+        ProtoFactionRequest msg = new ProtoFactionRequest();
+            msg.Message = "Faction Create Req";
+            msg.ActionType = Actions.CreateFactionRequest;
+            msg.factionName = factDetails[0];
+            msg.factionLeader = protoClient.activeChar.charID;
+            msg.factionTax = System.Convert.ToDouble(factDetails[2]);
+            msg.factionBaseID = factDetails[3];
+
+        client.net.Send(msg);
+        var reply = GetActionReply(Actions.CreateFactionRequest, client);
+
+        Debug.Log("We got a message!");
+        Debug.Log(reply.Message);
+
+        return reply;
+    }
+
+    public static ProtoMessage GetFactionRequestList()
+    {
+        Debug.Log("Getting Faction Request List");
+
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = "GetFactionRequestList",
+            ActionType = Actions.ViewFactionRequestList
+        };
+        tclient.net.Send(request);
+        return GetActionReply(Actions.ViewFactionRequestList, tclient);
+    }
+
+    public static ProtoMessage GetFactionRequest(string factionRequest)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = factionRequest,
+            ActionType = Actions.GetFactionRequest
+        };
+        tclient.net.Send(request);
+        return GetActionReply(Actions.GetFactionRequest, tclient);
+    }
+
+    public static ProtoMessage SignFactionCharter(string factionName)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"{protoClient.activeChar.charID} signing {factionName}'s charter",
+            ActionType = Actions.SignFactionCharter,
+            MessageFields = new string[] {factionName, protoClient.activeChar.charID}
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.SignFactionCharter, tclient);
+    }
+
+    public static ProtoMessage ListFactionMembers(string factionName)
+    {
+        string rankToFind;
+
+        if (viewingListSelectAction == ViewingList.FactionJoinRequests)
+            rankToFind = "Prospect";
+        else
+            rankToFind = "Member";
+
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"{protoClient.activeChar.charID} requesting list of {factionName}'s members",
+            ActionType = Actions.ListFactionMembers,
+            MessageFields = new string[] { factionName, rankToFind}
+        };
+        tclient.net.Send (request);
+         
+        return GetActionReply(Actions.ListFactionMembers, tclient);
+    }
+
+    public static ProtoMessage ChangeFactionRank(string factionName, string member, string rank)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"Updating {member}'s rank in {factionName} to {rank}",
+            ActionType = Actions.ChangeFactionRank,
+            MessageFields = new string[] { factionName, member, rank }
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.ChangeFactionRank, tclient);
+    }
+
     public static ProtoMessage TestButton(TextTestClient client) {
         Debug.Log("Test Button Pressed");
 
-        ProtoMessage msg = new ProtoMessage();
-        msg.ActionType = Actions.TestAction;
-        client.net.Send(msg);
-        var reply = GetActionReply(Actions.TestAction, client);
-        return reply;
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = "test",
+            ActionType = Actions.ReturnTime
+        };
+
+        //Debug.Log("Response from server");
+        //Debug.Log(reply);
+        return new ProtoMessage();
     }
 
 

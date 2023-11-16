@@ -11,10 +11,31 @@ public class ViewCharacters : Controller
     // Start is called before the first frame update
     void Start()
     {
+        ProtoMessage reply;
 
-        lblPageTitle.text = "Persons present in the " + globalString + " of " + fiefNames[fiefToViewID];
+        // Decide between the location list or the list of faction members
+        switch (viewingListSelectAction)
+        {
+            case ViewingList.ListChars:
+                {
+                    lblPageTitle.text = "Persons present in the " + globalString + " of " + fiefNames[fiefToViewID];
 
-        ProtoMessage reply = ListCharsInMeetingPlace(globalString, protoClient.activeChar.charID, tclient);
+                    reply = ListCharsInMeetingPlace(globalString, protoClient.activeChar.charID, tclient);
+                    break;
+                }
+            case ViewingList.FactionJoinRequests:
+            case ViewingList.FactionMembers:
+                {
+                    reply = ListFactionMembers(factionToView);
+                    break;
+                }
+            default:
+                {
+                    reply = null;
+                    break;  
+                }
+        }
+        
         if (reply.ResponseType == DisplayMessages.Success)
         {
             characterList = (ProtoGenericArray<ProtoCharacterOverview>)reply;
@@ -35,7 +56,16 @@ public class ViewCharacters : Controller
                     UIElement.transform.GetChild(3).GetComponent<TMPro.TMP_Text>().SetText(location);
                     UIElement.transform.localScale = Vector3.one;
 
-                    UIElement.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => { BtnSwitchCharacter(character.charID); });
+                    if (viewingListSelectAction == ViewingList.FactionJoinRequests)
+                    {
+                        Transform btnContainer = UIElement.transform.GetChild(4);
+                        btnContainer.GetChild(0).GetComponent<TMPro.TMP_Text>().SetText("Approve");
+                        btnContainer.GetComponent<Button>().onClick.AddListener(() => { BtnApproveProspect(character.charID); });
+                    }
+                    else
+                    {
+                        UIElement.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => { BtnSwitchCharacter(character.charID); });
+                    }
                     Debug.Log($"{character.charName} {character.charID}");
 
                 }
@@ -55,5 +85,10 @@ public class ViewCharacters : Controller
     {
         characterToViewID = charID;
         GoToScene(SceneName.ViewCharacter);
+    }
+
+    private void BtnApproveProspect(string charID)
+    {
+        ChangeFactionRank(factionToView, charID, "Member");
     }
 }

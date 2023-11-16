@@ -64,7 +64,12 @@ namespace JominiEngine {
     [ProtoInclude(34, typeof(ProtoCombatValues))]
     [ProtoInclude(37, typeof(ProtoWorldMap))]
     [ProtoInclude(38, typeof(ProtoProvince))]
-    [ProtoInclude(39, typeof(ProtoGameEvent))]
+    [ProtoInclude(39, typeof(ProtoFaction))]
+    [ProtoInclude(40, typeof(ProtoFactionRequest))]
+    [ProtoInclude(41, typeof(ProtoGameEvent))]
+    [ProtoInclude(42, typeof(ProtoGenericArray<ProtoFactionRequest>))]
+    [ProtoInclude(43, typeof(ProtoGenericArray<ProtoFaction>))]
+    [ProtoInclude(44, typeof(ProtoGenericDictionary<ProtoCharacterOverview, string>))]
 
 
     [ProtoContract, Serializable]
@@ -1861,4 +1866,87 @@ namespace JominiEngine {
         }
     }
 
+    /// <summary>
+    /// Class for sending faction details
+    /// </summary>
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoFaction : ProtoMessage
+    {
+        public string factionName { get; set; }
+
+        public string factionID { get; set; }
+
+        public string factionBaseID { get; set; }
+
+        public string factionLeader { get; set; }
+
+        public string[] factionMembers { get; set; }
+
+        public double factionTax { get; set; }
+
+        public double factionFortune { get; set; }
+
+        public ProtoFaction() : base()
+        {
+
+        }
+
+        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader, string[] factionMembers, double factionTax, double factionFortune)
+        {
+            this.factionName = factionName;
+            this.factionID = factionID;
+            this.factionBaseID = factionBaseID;
+            this.factionLeader = factionLeader;
+            this.factionMembers = factionMembers;
+            this.factionTax = factionTax;
+            this.factionFortune = factionFortune;
+        }
+    }
+
+    /// <summary>
+    /// Class for sending faction request details
+    /// </summary>
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoFactionRequest : ProtoMessage
+    {
+        public string factionName { get; set; }
+        public string factionID { get; set; }
+        public string factionBaseID { get; set; }
+        public string factionLeader { get; set; }
+        public KeyValuePair<string, string>[] factionFounders { get; set; }
+        public double factionTax { get; set; }
+
+        public ProtoFactionRequest() : base()
+        {
+
+        }
+
+        public ProtoFactionRequest(string factionName, string factionID, string factionBaseID, string factionLeader, 
+            KeyValuePair<string, string>[] factionFounders, double factionTax)
+        {
+            this.factionName = factionName;
+            this.factionID = factionID;
+            this.factionBaseID = factionBaseID;
+            this.factionLeader = factionLeader;
+            this.factionFounders = factionFounders;
+            this.factionTax = factionTax;
+        }
+    }
+
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoGenericDictionary<K,V> : ProtoMessage
+    {
+        public KeyValuePair<K,V>[] fields { get; set; }
+
+        public ProtoGenericDictionary()
+            : base()
+        {
+
+        }
+
+        public ProtoGenericDictionary(KeyValuePair<K, V>[] p)
+        {
+            this.fields = p;
+        }
+    }
 }

@@ -164,7 +164,7 @@ public class ViewFief : Controller
 
         //}
         characterList = possibleOverlords;
-        viewingListSelectAction = "AssignOverlord";
+        viewingListSelectAction = ViewingList.AssignOverlord;
 
         GoToScene(SceneName.ViewingList);
     }
@@ -345,7 +345,7 @@ public class ViewFief : Controller
 
     private void BtnListCharsInMeetingPlace() {
         globalString = ddMeetingPlaceType.options[ddMeetingPlaceType.value].text.ToLower();
-        viewingListSelectAction = "ListChars";
+        viewingListSelectAction = ViewingList.ListChars;
         GoToScene(SceneName.ViewingList);
     }
 
@@ -380,7 +380,7 @@ public class ViewFief : Controller
             DisplayMessageToUser("The treasury does not have that amount of money to transfer!");
         }
         else {
-            viewingListSelectAction = "TransferFundsToFief";
+            viewingListSelectAction = ViewingList.TransferFundsToFief;
             globalInt = funds;
             GoToScene(SceneName.ViewingList);
         }
@@ -408,7 +408,7 @@ public class ViewFief : Controller
     }
 
     private void BtnViewArmies() {
-        viewingListSelectAction = "ArmiesInFief";
+        viewingListSelectAction = ViewingList.ArmiesInFief;
         GoToScene(SceneName.ViewingList);
     }
 
@@ -419,7 +419,7 @@ public class ViewFief : Controller
 
         //}
         characterList = possibleBailiffs;
-        viewingListSelectAction = "AssignBailiff";
+        viewingListSelectAction = ViewingList.AssignBailiff;
 
         GoToScene(SceneName.ViewingList);
     }

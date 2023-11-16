@@ -98,7 +98,7 @@ namespace JominiEngine
             server = new NetServer(config);
             ctSource = new CancellationTokenSource();
             server.Start();
-
+            
             try {
                 for(int i = 0; i < 3; i++) {
                     if(server.UPnP.ForwardPort(port, "Designated Listening Port")) {
@@ -127,7 +127,7 @@ namespace JominiEngine
             // Faith Test Account
             //Client clientArchbishop = new Client("faithTest", "Char_300");
             //Globals_Server.Clients.Add("faithTest", clientArchbishop);
-
+            
             String dir = Directory.GetCurrentDirectory();
             //dir = dir.Remove(dir.IndexOf("RepairHist_mmo"));
             String path;
@@ -370,10 +370,12 @@ namespace JominiEngine
         {
             Contract.Requires(m != null&&conn!=null);
             NetOutgoingMessage msg = server.CreateMessage();
+
             MemoryStream ms = new MemoryStream();
             Console.WriteLine($"\n\nSerilaize: {m.ActionType}. Msg: {m.Message}\n\n");
             Serializer.SerializeWithLengthPrefix(ms, m, PrefixStyle.Fixed32);
             msg.Write(ms.GetBuffer());
+
             if (alg != null)
             {
                 msg.Encrypt(alg);
@@ -500,6 +502,7 @@ namespace JominiEngine
                 if (!alreadyExist) {
                     string clientUsername = pcID + "_username";
                     string clientPassword = pcID + "_password";
+                    Console.WriteLine(clientUsername + " " + clientPassword);
                     LogInManager.StoreNewUser(clientUsername, clientPassword);
                     Client client = new Client(clientUsername, pcID);
                     Globals_Server.Clients.Add(clientUsername, client);

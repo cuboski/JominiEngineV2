@@ -28,6 +28,10 @@ public class ViewCharacter : Controller
     public Button btnTryForChild;
     public Button btnAcceptProposal;
 
+    public Button btnViewFactionReq;
+    public Button btnViewFactionList;
+    public Button btnCreateFaction;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -45,6 +49,11 @@ public class ViewCharacter : Controller
         btnFireNPC.interactable = false;
         btnAddToEntourage.interactable = false;
         btnRemoveFromEntourage.interactable = false;
+
+        // faction buttons
+        btnViewFactionReq.interactable = true;
+        btnViewFactionList.interactable = true;
+        btnCreateFaction.interactable = true;
 
         ProtoMessage reply = GetCharacterDetails(characterToViewID, tclient);
         if(reply.ResponseType == DisplayMessages.Success) {
@@ -259,6 +268,16 @@ public class ViewCharacter : Controller
         }
     }
 
+    public void BtnCreateFaction()
+    {
+        GoToScene(SceneName.CreateFaction);
+    }
+
+    public void BtnViewFactionRequests()
+    {
+        viewingListSelectAction = ViewingList.FactionRequest;
+        GoToScene(SceneName.ViewingList);
+    }
 
     public void BtnAcceptProposal()
     {
