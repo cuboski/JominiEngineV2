@@ -66,6 +66,7 @@ public class FactionMember : Controller
             case "approve":
                 {
                     ChangeFactionRank(factionToView, charID, "Member");
+                    ReloadScene();
                     break;
                 }
             case "view":
@@ -77,6 +78,7 @@ public class FactionMember : Controller
             case "remove":
                 {
                     ChangeFactionRank(factionToView, charID, "");
+                    ReloadScene();
                     break;
                 }
         }

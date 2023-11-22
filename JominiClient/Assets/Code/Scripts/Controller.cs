@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEditor.PackageManager;
+using static Controller;
 
 public class Controller : MonoBehaviour { 
     ////Other value
@@ -94,6 +95,13 @@ public class Controller : MonoBehaviour {
         GenerateColourList();
         string reas;
         //Login("helen", "potato", out reas);
+    }
+
+    public static void ReloadScene()
+    {
+        string thisScene = SceneManager.GetActiveScene().name;
+        
+        SceneManager.LoadScene(thisScene);
     }
 
     public static void GoToScene(SceneName sceneName) {
