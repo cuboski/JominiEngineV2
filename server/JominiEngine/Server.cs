@@ -80,6 +80,9 @@ namespace JominiEngine
             // general user test accounts
             LogInManager.StoreNewUser("acc1", "pass1");
             LogInManager.StoreNewUser("acc2", "pass2");
+            LogInManager.StoreNewUser("acc3", "pass3");
+            LogInManager.StoreNewUser("acc4", "pass4");
+            LogInManager.StoreNewUser("acc5", "pass5");
 
             // test account for the religion system
             //LogInManager.StoreNewUser("faithTest", "faithtest");
@@ -121,13 +124,20 @@ namespace JominiEngine
             // test accounts character assign
             Client client = new Client("acc1", "Char_47");      // King Richard I
             Globals_Server.Clients.Add("acc1", client);
-            Client client2 = new Client("acc2", "Char_126");
+            Client client2 = new Client("acc2", "Char_126");    // Eustace De Vescy
             Globals_Server.Clients.Add("acc2", client2);
+            Client client3 = new Client("acc3", "Char_219");    // William Malet
+            Globals_Server.Clients.Add("acc3", client3);
+            Client client4 = new Client("acc4", "Char_244");    // Beatrice de Beauchamp
+            Globals_Server.Clients.Add("acc4", client4);
+            Client client5 = new Client("acc5", "Char_96");     // Manly de Courtenay
+            Globals_Server.Clients.Add("acc5", client5);
+
 
             // Faith Test Account
             //Client clientArchbishop = new Client("faithTest", "Char_300");
             //Globals_Server.Clients.Add("faithTest", clientArchbishop);
-            
+
             String dir = Directory.GetCurrentDirectory();
             //dir = dir.Remove(dir.IndexOf("RepairHist_mmo"));
             String path;

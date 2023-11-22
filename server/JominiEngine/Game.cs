@@ -3374,7 +3374,9 @@ namespace JominiEngine {
             Dictionary<string, string> members = Globals_Game.factionReqMasterList[factionName].members;
 
             members.Remove(factionMember);
-            members.Add(factionMember, factionRank);
+
+            if(factionRank != "")
+                members.Add(factionMember, factionRank);
 
             ProtoMessage reply = new ProtoMessage();
             reply.ResponseType = DisplayMessages.Success;
