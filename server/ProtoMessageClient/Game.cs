@@ -3954,7 +3954,7 @@ namespace ProtoMessageClient
                         Console.WriteLine(msgIn.Message);
                         return TestButton();
                     }
-                case Actions.CreateFactionRequest:
+                case Actions.CreateFaction:
                     {
                         var success = new ProtoMessage();
                         success.ResponseType = DisplayMessages.Success;

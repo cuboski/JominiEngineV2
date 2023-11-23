@@ -15,8 +15,9 @@ public class ViewFactionRequest : Controller
 
     [SerializeField] private Text lblPageTitle;
     [SerializeField] private Text lblMessageForUser;
+    [SerializeField] private Text lblStatureBonus;
 
-    private ProtoFactionRequest viewedFaction;
+    private ProtoFaction viewedFaction;
 
     private bool isLeader;
     private bool isMember;
@@ -24,7 +25,7 @@ public class ViewFactionRequest : Controller
     // Start is called before the first frame update
     public void Start()
     {
-        viewedFaction = (ProtoFactionRequest)GetFactionRequest(factionToView);
+        viewedFaction = (ProtoFaction)GetFactionRequest(factionToView);
 
         CheckMembership();
 
@@ -86,5 +87,18 @@ public class ViewFactionRequest : Controller
     private void DisplayMessage(string message)
     {
         lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
+    }
+
+    /// <summary>
+    /// Gets the current stature of the faction
+    /// </summary>
+    /// 
+    private void GetStatureBonus()
+    {
+        float bonus = 0;
+
+        // get the bonus from server
+
+        lblStatureBonus.text = "Faction Stature Bonus: " + bonus;
     }
 }

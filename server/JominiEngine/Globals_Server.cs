@@ -20,9 +20,10 @@ namespace JominiEngine
         AdjustCombatValues, ExamineArmiesInFief, Attack, ViewJournalEntries, ViewJournalEntry, SiegeRoundReduction, 
         SiegeRoundStorm, SiegeRoundNegotiate, SiegeList, ViewSiege, EndSiege, DisbandArmy, SpyFief, SpyCharacter, SpyArmy,
         Kidnap, ViewCaptives, ViewCaptive, RansomCaptive, ReleaseCaptive, ExecuteCaptive, RespondRansom, SeasonUpdate,
-        GetTravelCost, GetAvailableTravelDirections, LoadScenario, ViewWorldMap, GetProvince, TestAction, CreateFactionRequest, 
-        ViewFactionRequestList, GetFactionRequest, ReturnTime, SignFactionCharter, ListFactionMembers, ChangeFactionRank
+        GetTravelCost, GetAvailableTravelDirections, LoadScenario, ViewWorldMap, GetProvince, TestAction, CreateFaction, 
+        ViewFactionList, GetFaction, ReturnTime, SignFactionCharter, ListFactionMembers, ChangeFactionRank
     }
+
     /// <summary>
     /// enum representing all strings that may be sent to a client,
     ///  mapped to string from enum on client side

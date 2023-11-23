@@ -65,11 +65,9 @@ namespace ProtoMessageClient {
     [ProtoInclude(37, typeof(ProtoWorldMap))]
     [ProtoInclude(38, typeof(ProtoProvince))]
     [ProtoInclude(39, typeof(ProtoFaction))]
-    [ProtoInclude(40, typeof(ProtoFactionRequest))]
-    [ProtoInclude(41, typeof(ProtoGameEvent))]
-    [ProtoInclude(42, typeof(ProtoGenericArray<ProtoFactionRequest>))]
-    [ProtoInclude(43, typeof(ProtoGenericArray<ProtoFaction>))]
-    [ProtoInclude(44, typeof(ProtoGenericDictionary<ProtoCharacterOverview, string>))]
+    [ProtoInclude(40, typeof(ProtoGameEvent))]
+    [ProtoInclude(41, typeof(ProtoGenericArray<ProtoFaction>))]
+    [ProtoInclude(42, typeof(ProtoGenericDictionary<ProtoCharacterOverview, string>))]
 
 
     [ProtoContract, Serializable]
@@ -1866,62 +1864,31 @@ namespace ProtoMessageClient {
     }
 
     /// <summary>
-    /// Class for sending faction details
+    /// Class for sending faction request details
     /// </summary>
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     public class ProtoFaction : ProtoMessage
     {
-        public string factionName;
-        public string factionID;
-        public string factionBaseID;
-        public string factionLeader;
-        public string[] factionMembers;
-        public double factionTax;
-        public double factionFortune;
+        public string factionName { get; set; }
+        public string factionID { get; set; }
+        public string factionBaseID { get; set; }
+        public string factionLeader { get; set; }
+        public KeyValuePair<string, string>[] factionMembers { get; set; }
+        public double factionTax { get; set; }
 
         public ProtoFaction() : base()
         {
 
         }
 
-        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader, string[] factionMembers, double factionTax, double factionFortune)
+        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader,
+            KeyValuePair<string, string>[] factionMembers, double factionTax)
         {
             this.factionName = factionName;
             this.factionID = factionID;
             this.factionBaseID = factionBaseID;
             this.factionLeader = factionLeader;
             this.factionMembers = factionMembers;
-            this.factionTax = factionTax;
-            this.factionFortune = factionFortune;
-        }
-    }
-
-    /// <summary>
-    /// Class for sending faction request details
-    /// </summary>
-    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
-    public class ProtoFactionRequest : ProtoMessage
-    {
-        public string factionName { get; set; }
-        public string factionID { get; set; }
-        public string factionBaseID { get; set; }
-        public string factionLeader { get; set; }
-        public KeyValuePair<string, string>[] factionFounders { get; set; }
-        public double factionTax { get; set; }
-
-        public ProtoFactionRequest() : base()
-        {
-
-        }
-
-        public ProtoFactionRequest(string factionName, string factionID, string factionBaseID, string factionLeader,
-            KeyValuePair<string, string>[] factionFounders, double factionTax)
-        {
-            this.factionName = factionName;
-            this.factionID = factionID;
-            this.factionBaseID = factionBaseID;
-            this.factionLeader = factionLeader;
-            this.factionFounders = factionFounders;
             this.factionTax = factionTax;
         }
     }

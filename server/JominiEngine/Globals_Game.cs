@@ -182,14 +182,6 @@ namespace JominiEngine
         /// </summary>
         public static List<string> factionKeys = new List<string>();
         /// <summary>
-        /// Holds all faction objects
-        /// </summary>
-        public static Dictionary<string, FactionRequest> factionReqMasterList = new Dictionary<string, FactionRequest>();
-        /// <summary>
-        /// Holds keys for position objects (used when retrieving from database)
-        /// </summary>
-        public static List<string> factionReqKeys = new List<string>();
-        /// <summary>
         /// Holds Character_Serialised objects with existing goTo queues (used during load from database)
         /// </summary>
         public static List<Character_Serialised> goToList = new List<Character_Serialised>();

@@ -155,6 +155,7 @@ namespace ProtoMessageClient
                         case NetIncomingMessageType.WarningMessage:
                             Globals_Server.logError("Recieved warning message: " + im.ReadString());
                             break;
+                            break;
                         case NetIncomingMessageType.VerboseDebugMessage:
                         case NetIncomingMessageType.Data:
                         {

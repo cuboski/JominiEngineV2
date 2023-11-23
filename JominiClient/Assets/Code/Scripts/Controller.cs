@@ -937,16 +937,16 @@ public class Controller : MonoBehaviour {
 
     public static ProtoMessage CreateFaction(string[] factDetails, TextTestClient client)
     {
-        ProtoFactionRequest msg = new ProtoFactionRequest();
-            msg.Message = "Faction Create Req";
-            msg.ActionType = Actions.CreateFactionRequest;
+        ProtoFaction msg = new ProtoFaction();
+            msg.Message = "Faction Create Request";
+            msg.ActionType = Actions.CreateFaction;
             msg.factionName = factDetails[0];
             msg.factionLeader = protoClient.activeChar.charID;
             msg.factionTax = System.Convert.ToDouble(factDetails[2]);
             msg.factionBaseID = factDetails[3];
 
         client.net.Send(msg);
-        var reply = GetActionReply(Actions.CreateFactionRequest, client);
+        var reply = GetActionReply(Actions.CreateFaction, client);
 
         Debug.Log("We got a message!");
         Debug.Log(reply.Message);
@@ -961,10 +961,10 @@ public class Controller : MonoBehaviour {
         ProtoMessage request = new ProtoMessage
         {
             Message = "GetFactionRequestList",
-            ActionType = Actions.ViewFactionRequestList
+            ActionType = Actions.ViewFactionList
         };
         tclient.net.Send(request);
-        return GetActionReply(Actions.ViewFactionRequestList, tclient);
+        return GetActionReply(Actions.ViewFactionList, tclient);
     }
 
     public static ProtoMessage GetFactionRequest(string factionRequest)
@@ -972,10 +972,10 @@ public class Controller : MonoBehaviour {
         ProtoMessage request = new ProtoMessage
         {
             Message = factionRequest,
-            ActionType = Actions.GetFactionRequest
+            ActionType = Actions.GetFaction
         };
         tclient.net.Send(request);
-        return GetActionReply(Actions.GetFactionRequest, tclient);
+        return GetActionReply(Actions.GetFaction, tclient);
     }
 
     public static ProtoMessage SignFactionCharter(string factionName)

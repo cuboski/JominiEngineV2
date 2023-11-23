@@ -20,21 +20,21 @@ public class ViewFactionRequestList : Controller
 
         if (reply.ResponseType == DisplayMessages.Success)
         {
-            ProtoGenericArray<ProtoFactionRequest>  factionReqList = (ProtoGenericArray<ProtoFactionRequest>)reply;
-            if (factionReqList.fields != null)
+            ProtoGenericArray<ProtoFaction> factionList = (ProtoGenericArray<ProtoFaction>)reply;
+            if (factionList.fields != null)
             {
-                foreach (ProtoFactionRequest factionReq in factionReqList.fields)
+                foreach (ProtoFaction faction in factionList.fields)
                 {
                     GameObject UIElement = Instantiate(prefab);
                     UIElement.transform.SetParent(CanvasParent);
-                    UIElement.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().SetText(factionReq.factionName);
-                    UIElement.transform.GetChild(1).GetComponent<TMPro.TMP_Text>().SetText(factionReq.factionLeader);
-                    UIElement.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().SetText(factionReq.factionFounders.Length.ToString());
-                    UIElement.transform.GetChild(3).GetComponent<TMPro.TMP_Text>().SetText(factionReq.factionTax.ToString());
-                    UIElement.transform.GetChild(4).GetComponent<TMPro.TMP_Text>().SetText(factionReq.factionBaseID);
+                    UIElement.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().SetText(faction.factionName);
+                    UIElement.transform.GetChild(1).GetComponent<TMPro.TMP_Text>().SetText(faction.factionLeader);
+                    UIElement.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().SetText(faction.factionMembers.Length.ToString());
+                    UIElement.transform.GetChild(3).GetComponent<TMPro.TMP_Text>().SetText(faction.factionTax.ToString());
+                    UIElement.transform.GetChild(4).GetComponent<TMPro.TMP_Text>().SetText(faction.factionBaseID);
                     UIElement.transform.localScale = Vector3.one;
 
-                    UIElement.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => {BtnGoToFactioReq(factionReq.factionName);});
+                    UIElement.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => {BtnGoToFactioReq(faction.factionName);});
                 }
             }
 

@@ -3241,10 +3241,10 @@ namespace JominiEngine {
         /// <returns>
         ///  A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
         /// </returns>
-        public static ProtoMessage CreateFactionRequest(ProtoFactionRequest newFaction)
+        public static ProtoMessage CreateFactionRequest(ProtoFaction newFaction)
         {
             // create new faction object
-            FactionRequest newFactionReq = new FactionRequest(newFaction.factionName,
+            Faction newFactionReq = new Faction(newFaction.factionName,
                     newFaction.factionLeader,
                     newFaction.factionBaseID,
                     newFaction.factionTax);
@@ -3253,7 +3253,7 @@ namespace JominiEngine {
             newFactionReq.signFactionCharter(newFaction.factionLeader, "Leader");
 
             // add to the dictionary then report a success
-            Globals_Game.factionReqMasterList.Add(newFaction.factionName, newFactionReq);
+            Globals_Game.factionMasterList.Add(newFaction.factionName, newFactionReq);
             var success = new ProtoMessage();
             success.ResponseType = DisplayMessages.Success;
             return success;
@@ -3272,7 +3272,7 @@ namespace JominiEngine {
             // get faction request and sign member
             try
             {
-                Globals_Game.factionReqMasterList.TryGetValue(factionName, out FactionRequest factionReq);
+                Globals_Game.factionMasterList.TryGetValue(factionName, out Faction factionReq);
 
                 if(!factionReq.members.ContainsKey(newMember))
                 {
@@ -3304,11 +3304,11 @@ namespace JominiEngine {
         /// </summary>
         public static ProtoMessage ViewFactionRequestList()
         {
-            var factionRequests = new List<ProtoFactionRequest>();
+            var factionRequests = new List<ProtoFaction>();
 
-            foreach(FactionRequest factionReq in Globals_Game.factionReqMasterList.Values)
+            foreach(Faction factionReq in Globals_Game.factionMasterList.Values)
             {
-                factionRequests.Add(new ProtoFactionRequest(
+                factionRequests.Add(new ProtoFaction(
                     factionReq.factionName,
                     factionReq.factionReqID,
                     factionReq.foundingLocation,
@@ -3318,7 +3318,7 @@ namespace JominiEngine {
                     ));
             }
 
-            ProtoGenericArray<ProtoFactionRequest> result = new ProtoGenericArray<ProtoFactionRequest>();
+            ProtoGenericArray<ProtoFaction> result = new ProtoGenericArray<ProtoFaction>();
             result.fields = factionRequests.ToArray();
             result.ResponseType = DisplayMessages.Success;
             result.Message = "ViewFactionReqList";
@@ -3328,9 +3328,9 @@ namespace JominiEngine {
 
         public static ProtoMessage GetFactionRequest(string factionToGet)
         {
-            FactionRequest factionReq = Globals_Game.factionReqMasterList[factionToGet];
+            Faction factionReq = Globals_Game.factionMasterList[factionToGet];
 
-            return new ProtoFactionRequest(
+            return new ProtoFaction(
                         factionReq.factionName,
                         factionReq.factionReqID,
                         factionReq.foundingLocation,
@@ -3350,7 +3350,7 @@ namespace JominiEngine {
             var members = new List<ProtoCharacterOverview>();
             DisplayMessages charErr;
 
-            foreach (KeyValuePair<string, string> member in Globals_Game.factionReqMasterList[faction].members)
+            foreach (KeyValuePair<string, string> member in Globals_Game.factionMasterList[faction].members)
             {
                 string memberRank = member.Value.ToString();
                 if (memberRank == "Leader" && rank == "Member")
@@ -3371,7 +3371,7 @@ namespace JominiEngine {
 
         public static ProtoMessage ChangeFactionRank(string factionName, string factionMember, string factionRank)
         {
-            Dictionary<string, string> members = Globals_Game.factionReqMasterList[factionName].members;
+            Dictionary<string, string> members = Globals_Game.factionMasterList[factionName].members;
 
             members.Remove(factionMember);
 
@@ -3779,16 +3779,16 @@ namespace JominiEngine {
                         Console.WriteLine(msgIn.Message);
                         return TestButton();
                     }
-                case Actions.CreateFactionRequest:
+                case Actions.CreateFaction:
                     {
-                        var newFactionReq = (msgIn as ProtoFactionRequest);
+                        var newFactionReq = (msgIn as ProtoFaction);
                         return CreateFactionRequest(newFactionReq);
                     }
-                case Actions.ViewFactionRequestList:
+                case Actions.ViewFactionList:
                     {
                         return ViewFactionRequestList();
                     }
-                case Actions.GetFactionRequest:
+                case Actions.GetFaction:
                     {
                         return GetFactionRequest(msgIn.Message);
                     }

@@ -898,15 +898,15 @@ namespace JominiEngine
         /// <returns>Siege object</returns>
         /// <param name="gameID">Game for which Siege to be retrieved</param>
         /// <param name="siegeID">ID of Siege to be retrieved</param>
-        public static FactionRequest DatabaseRead_FactionReq(string gameID, string factReqID)
+        public static Faction DatabaseRead_Faction(string gameID, string factReqID)
         {
             var factReqResult = Globals_Server.rClient.Get(gameID, factReqID);
-            FactionRequest factionReq = new FactionRequest();
+            Faction factionReq = new Faction();
 
             if (factReqResult.IsSuccess)
             {
                 // extract Army object
-                factionReq = factReqResult.Value.GetObject<FactionRequest>();
+                factionReq = factReqResult.Value.GetObject<Faction>();
             }
             else
             {
