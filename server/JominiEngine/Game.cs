@@ -3408,6 +3408,10 @@ namespace JominiEngine {
                 for(int i = 0; i < faction.highestStature.Length; i++) 
                     if (factionMember == faction.highestStature[i])
                         faction.highestStature[i] = null;
+
+                // also need to remove their faction stature bonus
+                DisplayMessages err;
+                Utility_Methods.GetCharacter(factionMember, out err).statureModifier -= faction.statureBonus;
             }
 
             // return result

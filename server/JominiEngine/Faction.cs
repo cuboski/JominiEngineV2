@@ -42,6 +42,10 @@ namespace JominiEngine
             alliedFiefs.Add(foundingLocation);
 
             CalculateStatureBonus();
+
+            // apply base modifier to leader
+            DisplayMessages err;
+            Utility_Methods.GetCharacter(leader, out err).statureModifier += statureBonus;
         }
 
         // Signs the new faction member as a prospect
@@ -85,7 +89,7 @@ namespace JominiEngine
                 highestStature[tmp] = newMember;
                 CalculateStatureBonus();
             }
-                
+
             PrintHighestStature();
         }
 
@@ -95,6 +99,9 @@ namespace JominiEngine
         /// </summary>
         private void CalculateStatureBonus()
         {
+            // record previous bonus
+            double prevBonus = statureBonus;
+
             /*
              * calculate the stature ranking bonus.
              * This is calculated from the highest statures taking the average and weighting between 0 and 6
@@ -109,7 +116,9 @@ namespace JominiEngine
                     rankingsBonus /= 2;
                     continue;
                 }
-                rankingsBonus += GetMemberStature(member);
+
+                // important to remove the current statureBonus to get the value prior
+                rankingsBonus += GetMemberStature(member) - statureBonus;
             }
                 
             rankingsBonus /= highestStature.Length;
@@ -125,6 +134,19 @@ namespace JominiEngine
             Console.WriteLine($"Ranking Bonus: {fiefBonus}");
 
             statureBonus = Math.Round((rankingsBonus + fiefBonus), 2);
+
+            UpdateMemberStatures(prevBonus);
+        }
+
+        private void UpdateMemberStatures(double prevBonus)
+        {
+            double newBonus = statureBonus - prevBonus;
+
+            DisplayMessages err;
+            foreach(string member in members.Keys) {
+                Character thisMember = Utility_Methods.GetCharacter(member, out err);
+                thisMember.statureModifier += newBonus; 
+            }
         }
 
         private void PrintHighestStature()
