@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,11 @@ namespace JominiEngine
         public string leader { get; set; }
         public string factionName { get; set; }
         public Dictionary<string, string> members = new Dictionary<string, string>();
+        public string[] highestStature = new string[5];
         public string foundingLocation { get; set; }
+        public List<string> alliedFiefs = new List<string>();
         public Double proposedTax { get; set; }
+        public double statureBonus = 0;
 
         public Faction()
         {
@@ -34,11 +38,112 @@ namespace JominiEngine
             this.leader = leader;
             this.foundingLocation = foundingLocation;
             this.proposedTax = proposedTax;
+            highestStature[0] = leader;
+            alliedFiefs.Add(foundingLocation);
+
+            CalculateStatureBonus();
         }
 
+        // Signs the new faction member as a prospect
         public void signFactionCharter(string newMember, string rank)
         {
             members.Add(newMember, rank);
+        }
+
+        /// <summary>
+        /// This function checks if a members stature value is within the top rankings
+        /// </summary>
+        /// <param name="newMember"></param>
+        public void CheckStatureRank(string newMember)
+        {
+            double newStature = GetMemberStature(newMember);
+            int tmp = -1;
+            double tmpStature = 10;
+
+            // check the members stature ranking against the already established high rankers
+            for (int i = 0; i < highestStature.Length; i++)
+            {
+                // if there is a lack of high rank characters, new member is automatically granted place
+                if (highestStature[i] == null)
+                {
+                    highestStature[i] = newMember;
+                    break;
+                }
+                    
+                double thisStature = GetMemberStature(highestStature[i]);
+                if (newStature >= thisStature && tmpStature > thisStature)
+                {
+                   // record current lowest stature holder
+                   tmp = i;
+                   tmpStature = thisStature;
+                }
+            }
+
+            // stature ranking has changed, replace
+            if (tmp != -1)
+            {
+                highestStature[tmp] = newMember;
+                CalculateStatureBonus();
+            }
+                
+            PrintHighestStature();
+        }
+
+        /// <summary>
+        /// Calculate how much of a stature bonus should be granted to faction members.
+        /// This is a number between 0 and 2
+        /// </summary>
+        private void CalculateStatureBonus()
+        {
+            /*
+             * calculate the stature ranking bonus.
+             * This is calculated from the highest statures taking the average and weighting between 0 and 6
+             */
+            double rankingsBonus = 0;
+            foreach (string member in highestStature)
+            {
+                // if the faction is still small enough to lack high ranks, penalise the bonus
+                // this is to incentivise players to recruit
+                if(member == null)
+                {
+                    rankingsBonus /= 2;
+                    continue;
+                }
+                rankingsBonus += GetMemberStature(member);
+            }
+                
+            rankingsBonus /= highestStature.Length;
+            rankingsBonus /= 6;
+
+            Console.WriteLine($"Ranking Bonus: {rankingsBonus}");
+
+            /*
+             * calculate the fief bonus
+             * This is calculated by the amount of fiefs the faction owns
+             */
+            double fiefBonus = alliedFiefs.Count() / Globals_Game.fiefMasterList.Count;
+            Console.WriteLine($"Ranking Bonus: {fiefBonus}");
+
+            statureBonus = Math.Round((rankingsBonus + fiefBonus), 2);
+        }
+
+        private void PrintHighestStature()
+        {
+            Console.WriteLine("New Stature Ranks:");
+            foreach (string member in highestStature)
+            {
+                if (member == null)
+                    continue;
+
+                Console.WriteLine($"{member}: {GetMemberStature(member)}");
+            }
+        }
+
+        private double GetMemberStature(string member)
+        {
+            DisplayMessages err;
+
+            return Utility_Methods.GetCharacter(member, out err).statureModifier;
         }
     }
 }

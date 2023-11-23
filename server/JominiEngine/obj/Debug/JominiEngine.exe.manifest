@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JominiEngine.exe" size="434688">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JominiEngine.exe" size="436224">
       <assemblyIdentity name="JominiEngine" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>1YBlNHvyUXjhRVwzN09zcCBCbKvRiKXJB4NZdJ659ng=</dsig:DigestValue>
+        <dsig:DigestValue>UZjfbXlLm/b00AfahKpJqkqD5lQ+6NnGnlrfg3u97XE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -102,14 +102,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProtoMessageClient.dll" size="432640">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProtoMessageClient.dll" size="433152">
       <assemblyIdentity name="ProtoMessageClient" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>YZHZwyBioPbMk4Kwe+u0Mgn6aLkENshOIzIQTkLsB8U=</dsig:DigestValue>
+        <dsig:DigestValue>k5WC7hkmu9la+DB+OHR/KZcK193CrActBX46zYAA71Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

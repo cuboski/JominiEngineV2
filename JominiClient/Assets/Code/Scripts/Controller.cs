@@ -1024,17 +1024,21 @@ public class Controller : MonoBehaviour {
         return GetActionReply(Actions.ChangeFactionRank, tclient);
     }
 
-    public static ProtoMessage TestButton(TextTestClient client) {
+    public static ProtoMessage TestButton() {
         Debug.Log("Test Button Pressed");
 
         ProtoMessage request = new ProtoMessage
         {
-            Message = "test",
-            ActionType = Actions.ReturnTime
+            Message = protoClient.activeChar.charID,
+            ActionType = Actions.TestAction
         };
 
-        //Debug.Log("Response from server");
-        //Debug.Log(reply);
+        tclient.net.Send(request);
+
+        ProtoMessage result = GetActionReply(Actions.TestAction, tclient);
+
+        Debug.Log(result.Message);
+
         return new ProtoMessage();
     }
 

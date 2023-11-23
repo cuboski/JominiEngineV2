@@ -1874,6 +1874,9 @@ namespace ProtoMessageClient {
         public string factionBaseID { get; set; }
         public string factionLeader { get; set; }
         public KeyValuePair<string, string>[] factionMembers { get; set; }
+        public string[] alliedFiefs { get; set; }
+        public string[] highestStature { get; set; }
+        public double statureBonus { get; set; }
         public double factionTax { get; set; }
 
         public ProtoFaction() : base()
@@ -1882,7 +1885,7 @@ namespace ProtoMessageClient {
         }
 
         public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader,
-            KeyValuePair<string, string>[] factionMembers, double factionTax)
+            KeyValuePair<string, string>[] factionMembers, double factionTax, string[] alliedFiefs, double statureBonus)
         {
             this.factionName = factionName;
             this.factionID = factionID;
@@ -1890,6 +1893,8 @@ namespace ProtoMessageClient {
             this.factionLeader = factionLeader;
             this.factionMembers = factionMembers;
             this.factionTax = factionTax;
+            this.alliedFiefs = alliedFiefs;
+            this.statureBonus = statureBonus;
         }
     }
 

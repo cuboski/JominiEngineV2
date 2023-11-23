@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class ViewFactionRequest : Controller
 {
@@ -34,6 +35,8 @@ public class ViewFactionRequest : Controller
         btnJoinRequests.onClick.AddListener(BtnJoinRequests);
 
         lblPageTitle.text = viewedFaction.factionName;
+        lblStatureBonus.text = "Faction Stature Bonus: " + viewedFaction.statureBonus;
+
     }
 
     private void CheckMembership()
@@ -44,7 +47,7 @@ public class ViewFactionRequest : Controller
         isMember = isLeader;
 
         // search for membership in the faction members collection
-        if (!isLeader) { 
+        if (!isLeader) {
             ProtoGenericArray<ProtoCharacterOverview> members = (ProtoGenericArray<ProtoCharacterOverview>)ListFactionMembers(factionToView);
             foreach (ProtoCharacterOverview member in members.fields)
                 isMember = (thisChar == member.charID);
@@ -73,7 +76,7 @@ public class ViewFactionRequest : Controller
     private void BtnSignCharter()
     {
         ProtoMessage result = SignFactionCharter(viewedFaction.factionName);
-        
+
         // character is already in the faction
         if (result.ResponseType == DisplayMessages.ErrorGenericCharacterUnidentified)
             DisplayMessage($"{protoClient.activeChar.firstName} {protoClient.activeChar.familyName} " +
@@ -87,18 +90,5 @@ public class ViewFactionRequest : Controller
     private void DisplayMessage(string message)
     {
         lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
-    }
-
-    /// <summary>
-    /// Gets the current stature of the faction
-    /// </summary>
-    /// 
-    private void GetStatureBonus()
-    {
-        float bonus = 0;
-
-        // get the bonus from server
-
-        lblStatureBonus.text = "Faction Stature Bonus: " + bonus;
     }
 }

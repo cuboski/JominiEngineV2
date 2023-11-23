@@ -1,10 +1,12 @@
-skill,skill_1,Command,effStart,battle,0.4,siege,0.4,npcHire,0.2,effEnd
-skill,skill_2,Chivalry,effStart,famExpense,0.2,fiefExpense,0.1,fiefLoy,0.1,npcHire,0.1,siege,0.1,effEnd
-skill,skill_3,Abrasiveness,effStart,battle,0.15,death,0.05,fiefExpense,-0.05,famExpense,0.05,time,0.05,siege,-0.1,effEnd
-skill,skill_4,Accountancy,effStart,time,0.1,fiefExpense,-0.2,famExpense,-0.02,fiefLoy,-0.05,effEnd
-skill,skill_5,Stupidity,effStart,battle,-0.4,death,0.05,fiefExpense,0.02,famExpense,0.2,fiefLoy,-0.1,npcHire,-0.1,time,-0.1,siege,-0.4,effEnd
-skill,skill_6,Robust,effStart,virility,0.2,npcHire,0.05,fiefLoy,0.05,death,-0.2,effEnd
-skill,skill_7,Pious,effStart,virility,-0.2,npcHire,0.01,fiefLoy,0.01,time,-0.1,effEnd
+trait,trait_1,Command,effStart,battle,0.4,siege,0.4,npcHire,0.2,effEnd
+trait,trait_2,Chivalry,effStart,famExpense,0.2,fiefExpense,0.1,fiefLoy,0.1,npcHire,0.1,siege,0.1,effEnd
+trait,trait_3,Abrasiveness,effStart,battle,0.15,death,0.05,fiefExpense,-0.05,famExpense,0.05,time,0.05,siege,-0.1,effEnd
+trait,trait_4,Accountancy,effStart,time,0.1,fiefExpense,-0.2,famExpense,-0.02,fiefLoy,-0.05,effEnd
+trait,trait_5,Stupidity,effStart,battle,-0.4,death,0.05,fiefExpense,0.02,famExpense,0.2,fiefLoy,-0.1,npcHire,-0.1,time,-0.1,siege,-0.4,stealth,-0.4,effEnd
+trait,trait_6,Robust,effStart,virility,0.2,npcHire,0.05,fiefLoy,0.05,death,-0.2,effEnd
+trait,trait_7,Pious,effStart,virility,-0.2,npcHire,0.01,fiefLoy,0.01,time,-0.1,effEnd
+trait,trait_8,Paranoia,effStart,virility,-0.3,perception,0.4,fiefLoy,-0.05,effEnd
+trait,trait_9,Cunning,effStart,perception,0.1,stealth,0.3,effEnd
 nationality,Oth,Other
 nationality,Eng,English
 nationality,Fr,French
@@ -330,16 +332,16 @@ pc,Char_21,Reginald,de Mohun,1183,,true,Eng,true,7.00,5.00,lang_C2,90,0,1.00,6.0
 pc,Char_32,William,de Warenne,1158,,true,Eng,true,7.00,7.00,lang_C2,90,0,8.00,5.00,true,false,Char_32,Char_554,,,,false,500,ENF05,ENF05,ENF05,,
 pc,Char_45,Henry,de Bohun,1171,,true,Eng,true,5.00,5.00,lang_C2,90,0,7.00,3.66,true,false,Char_45,,,,,false,500,ESY01,ESY01,ESY01,,
 pc,Char_46,Hugh de Puiset,Bishop Durham,1125,,true,Eng,true,6.00,6.00,lang_C2,90,0,7.00,3.66,true,false,Char_46,,,,,false,5000,EDU01,EDU01,EDU01,,
-pc,Char_47,King Richard I,Plantaganet,1157,,true,Eng,true,9.00,1.00,lang_C2,90,0,9.00,8.00,true,false,Char_47,Char_589,,,,false,5000,ELN01,ELN01,ELN01,,
+pc,Char_47,King Richard I,Plantaganet,1157,,true,Eng,true,9.00,1.00,lang_C2,90,5.7,9.00,8.00,true,false,Char_47,Char_589,,,,false,5000,ELN01,ELN01,ELN01,,
 pc,Char_91,Gilbert,de Ghent,1180,,true,Eng,true,6.00,5.00,lang_C2,90,0,1.00,5.00,true,false,Char_91,,,,,false,500,ELC01,ELC01,ELC01,,
 pc,Char_92,Manly,Percy,1134,,true,Eng,true,5.00,7.00,lang_C2,90,0,6.00,4.66,true,false,Char_92,,,,,false,5000,EYS14,EYS14,EYS14,,
 pc,Char_93,Robert,Beaumont,1169,,true,Eng,true,5.00,3.00,lang_C2,90,0,8.00,6.33,true,false,Char_93,,,,,false,5000,EDR04,EDR04,EDR04,,
-pc,Char_96,Manly,de Courtenay,1135,,true,Eng,true,5.00,2.00,lang_C2,90,0,7.00,6.66,true,false,Char_96,Char_331,,,,false,5000,EDV05,EDV05,EDV05,,
+pc,Char_96,Manly,de Courtenay,1135,,true,Eng,true,5.00,2.00,lang_C2,90,4.2,7.00,6.66,true,false,Char_96,Char_331,,,,false,5000,EDV05,EDV05,EDV05,,
 pc,Char_97,Manly,de Gloucester,1166,,true,Eng,true,5.00,7.00,lang_C2,90,0,9.00,2.33,true,false,Char_97,,,,,false,5000,EGL06,EGL06,EGL06,,
 pc,Char_101,William,de Salisbury,1154,,true,Eng,true,5.00,5.00,lang_C2,90,0,5.00,4.00,true,false,Char_101,Char_463,,,,false,5000,ESY02,ESY02,ESY02,,
 pc,Char_102,Ranulph,Greystoke,1132,,true,Eng,true,7.00,5.00,lang_C2,90,0,5.00,3.33,true,false,Char_102,Char_340,,,,false,500,ECU04,ECU04,ECU04,,
 pc,Char_111,William,FitzMartin,1155,,true,Eng,true,8.00,8.00,lang_C2,90,0,3.00,4.66,true,false,Char_111,Char_1139,,,,false,5000,ESM03,ESM03,ESM03,,
-pc,Char_126,Eustace,de Vescy,1170,,true,Eng,true,8.00,7.00,lang_C2,90,0,3.00,4.00,true,false,Char_126,Char_754,,,,false,5000,ENU02,ENU02,ENU02,,
+pc,Char_126,Eustace,de Vescy,1170,,true,Eng,true,8.00,7.00,lang_C2,90,4.11,3.00,4.00,true,false,Char_126,Char_754,,,,false,5000,ENU02,ENU02,ENU02,,
 pc,Char_158,William,Marshal,1146,,true,Eng,true,8.00,8.00,lang_C2,90,0,8.00,8.66,true,false,Char_158,Char_356,,,,false,7000,EPM02,EPM02,EPM02,,
 pc,Char_159,Manly,de Lancaster,1167,,true,Eng,true,5.00,3.00,lang_C2,90,0,5.00,5.00,true,false,Char_159,Char_610,,,,false,500,ECU07,ECU07,ECU07,,
 pc,Char_161,Oliver,Tracy,1158,,true,Eng,true,5.00,5.00,lang_C2,90,0,6.00,7.33,true,false,Char_161,Char_1195,,,,false,500,EDV02,EDV02,EDV02,,
@@ -361,7 +363,7 @@ pc,Char_208,Richard,Basset,1160,,true,Eng,true,5.00,8.00,lang_C2,90,0,1.00,4.33,
 pc,Char_209,Philip,Tateshal,1152,,true,Eng,true,5.00,5.00,lang_C2,90,0,9.00,5.66,true,false,Char_209,Char_1215,,,,false,500,ELC06,ELC06,ELC06,,
 pc,Char_211,Manly,de Stafford,1150,,true,Eng,true,5.00,5.00,lang_C2,90,0,8.00,5.66,true,false,Char_211,Char_343,,,,false,5000,EST02,EST02,EST02,,
 pc,Char_213,Robert FitzMaldred,Neville,1174,,true,Eng,true,6.00,5.00,lang_C2,90,0,1.00,5.00,true,false,Char_213,Char_753,,,,false,500,EDU04,EDU04,EDU04,,
-pc,Char_219,William,Malet,1176,,true,Eng,true,6.00,2.00,lang_C2,90,0,5.00,4.66,true,false,Char_219,Char_398,,,,false,500,ESM05,ESM05,ESM05,,
+pc,Char_219,William,Malet,1176,,true,Eng,true,6.00,2.00,lang_C2,90,3.64,5.00,4.66,true,false,Char_219,Char_398,,,,false,500,ESM05,ESM05,ESM05,,
 pc,Char_224,William,de Curcy,1168,,true,Eng,true,5.00,7.00,lang_C2,90,0,9.00,6.00,true,false,Char_224,,,,,false,500,ESM01,ESM01,ESM01,,
 pc,Char_225,Manly,de Bolbec,1175,,true,Eng,true,6.00,7.00,lang_C2,90,0,5.00,2.33,true,false,Char_225,,,,,false,500,EBK02,EBK02,EBK02,,
 pc,Char_226,William,de Braose,1153,,true,Eng,true,7.00,6.00,lang_C2,90,0,5.00,7.00,true,false,Char_226,Char_465,,,,false,5000,ESX03,ESX03,ESX03,,
@@ -372,7 +374,7 @@ pc,Char_236,Adam II,de Brus,1143,,true,Eng,true,6.00,7.00,lang_C2,90,0,8.00,2.66
 pc,Char_237,William,Roumare,1145,,true,Eng,true,5.00,3.00,lang_C2,90,0,8.00,3.33,true,false,Char_237,Char_367,,,,false,5000,ELC05,ELC05,ELC05,,
 pc,Char_239,William,Redvers,1145,,true,Eng,true,6.00,4.00,lang_C2,90,0,6.00,2.00,true,false,Char_239,Char_658,,,,false,5000,EDV07,EDV07,EDV07,,
 pc,Char_241,Robert,Marmion,1155,,true,Eng,true,5.00,6.00,lang_C2,90,0,6.00,1.66,true,false,Char_241,Char_1171,,,,false,500,EST04,EST04,EST04,,
-pc,Char_244,Ranulph,de Blundeville le Meschines,1172,,true,Eng,true,7.00,5.00,lang_C2,90,0,8.00,3.66,true,false,Char_244,,,,,false,5000,ECH03,ECH03,ECH03,,
+pc,Char_244,Ranulph,de Blundeville le Meschines,1172,,true,Eng,true,7.00,5.00,lang_C2,90,2.14,8.00,3.66,true,false,Char_244,,,,,false,5000,ECH03,ECH03,ECH03,,
 pc,Char_253,John,de Monmouth,1184,,true,Eng,true,6.00,7.00,lang_C2,90,0,9.00,2.66,true,false,Char_253,,,,,false,500,EHE05,EHE05,EHE05,,
 pc,Char_254,Robert,de Crevequer,1169,,true,Eng,true,5.00,2.00,lang_C2,90,0,2.00,5.00,true,false,Char_254,,,,,false,500,EKE03,EKE03,EKE03,,
 pc,Char_255,Robert II,Corbet,1151,,true,Eng,true,7.00,5.00,lang_C2,90,0,1.00,4.66,true,false,Char_255,Char_556,,,,false,500,EAR03,EAR03,EAR03,,

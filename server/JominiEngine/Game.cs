@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace JominiEngine {
             }
 
             // point towards the game objects and map data
-            var gameObjects = Path.Combine(path, "gameObjects.csv");
+            var gameObjects = Path.Combine(path, "gameObjects - Copy.csv");
             var mapData = Path.Combine(path, "map.csv");
             if (!File.Exists(gameObjects) && !File.Exists(mapData)) {
                 Console.WriteLine("wrong dir");
@@ -3225,11 +3226,17 @@ namespace JominiEngine {
             return response;
         }
 
-        public static ProtoMessage TestButton()
+        public static ProtoMessage TestButton(string charId)
         {
             Console.WriteLine("Test Button Pressed in Client");
 
-            return new ProtoMessage(DisplayMessages.Success);
+            DisplayMessages charErr;
+
+            ProtoMessage result = new ProtoMessage();
+            result.ResponseType = DisplayMessages.Success;
+            result.Message = Utility_Methods.GetCharacter(charId, out charErr).statureModifier + "";
+
+            return result;
         }
 
         /// <summary>
@@ -3314,7 +3321,9 @@ namespace JominiEngine {
                     factionReq.foundingLocation,
                     factionReq.leader,
                     factionReq.members.ToArray(),
-                    factionReq.proposedTax
+                    factionReq.proposedTax,
+                    factionReq.alliedFiefs.ToArray(),
+                    factionReq.statureBonus
                     ));
             }
 
@@ -3336,7 +3345,9 @@ namespace JominiEngine {
                         factionReq.foundingLocation,
                         factionReq.leader,
                         factionReq.members.ToArray(),
-                        factionReq.proposedTax
+                        factionReq.proposedTax,
+                        factionReq.alliedFiefs.ToArray(),
+                        factionReq.statureBonus
                     );
         }
 
@@ -3369,15 +3380,37 @@ namespace JominiEngine {
             return reply;
         }
 
+        /// <summary>
+        /// Handles the event of a faction members rank changing.
+        /// This includes a member being removed from a faction also
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="factionMember"></param>
+        /// <param name="factionRank"></param>
+        /// <returns></returns>
         public static ProtoMessage ChangeFactionRank(string factionName, string factionMember, string factionRank)
         {
-            Dictionary<string, string> members = Globals_Game.factionMasterList[factionName].members;
+            Faction faction = Globals_Game.factionMasterList[factionName];
 
-            members.Remove(factionMember);
-
+            /*
+             * Currently this removes the member from the collection and readds them.
+             * This should be changed in a later build to directly modifying the value.
+             */
+            faction.members.Remove(factionMember);
             if(factionRank != "")
-                members.Add(factionMember, factionRank);
+            {
+                // readd them with the correct rank
+                faction.members.Add(factionMember, factionRank);
+                faction.CheckStatureRank(factionMember);
+            } else
+            {
+                // the member is being removed, need to remove them from highest stature rankings if they exist there
+                for(int i = 0; i < faction.highestStature.Length; i++) 
+                    if (factionMember == faction.highestStature[i])
+                        faction.highestStature[i] = null;
+            }
 
+            // return result
             ProtoMessage reply = new ProtoMessage();
             reply.ResponseType = DisplayMessages.Success;
             return reply;
@@ -3777,7 +3810,7 @@ namespace JominiEngine {
                     {
                         Console.WriteLine("Message Recieved From Client");
                         Console.WriteLine(msgIn.Message);
-                        return TestButton();
+                        return TestButton(msgIn.Message);
                     }
                 case Actions.CreateFaction:
                     {
