@@ -327,7 +327,7 @@ namespace JominiEngine
         /// <summary>
         /// Holds bool indicating whether or not to write current object data to database on exit
         /// </summary>
-		public static bool writeToDatabase = false;
+		public static bool writeToDatabase = true;
         /// <summary>
         /// Holds bool indicating whether or not a cap on characters' stature modifier is in force
         /// </summary>

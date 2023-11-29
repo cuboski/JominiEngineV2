@@ -70,20 +70,20 @@ namespace JominiEngine
         // <summary>
         // Set up the game, run the TestRun(both for encrypted and unencrypted messages) and end
         // </summary>
-        public static void Main()
-        {
-            // create a file and write the server updates into it for future reference
-            var encryptString = "_encrypted_";
-            string datePatern = "MM_dd_H_mm";
-            logFilePath = "TestRun_NoSessions" + encryptString + DateTime.Now.ToString(datePatern) + ".txt";
-            Console.WriteLine("Program launch");
-            Globals_Server.LogFile = new System.IO.StreamWriter(logFilePath);
+        //public static void Main()
+        //{
+        //    // create a file and write the server updates into it for future reference
+        //    var encryptString = "_encrypted_";
+        //    string datePatern = "MM_dd_H_mm";
+        //    logFilePath = "TestRun_NoSessions" + encryptString + DateTime.Now.ToString(datePatern) + ".txt";
+        //    Console.WriteLine("Program launch");
+        //    Globals_Server.LogFile = new System.IO.StreamWriter(logFilePath);
 
-            // set up the game
-            InitialiseGameState();
-            SetUpForDemo();
-            //TestRun(true);                
-        }
+        //    // set up the game
+        //    InitialiseGameState();
+        //    SetUpForDemo();
+        //    //TestRun(true);                
+        //}
 
         /// <summary>
         /// Run through a sequence of actions, recording the time taken and memory consumption
@@ -164,99 +164,106 @@ namespace JominiEngine
             return end - start;
         }
 
-        ///// <summary>
-        ///// The main entry point for the application.
-        ///// </summary>
-        //static void Main()
-        //{
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        static void Main()
+        {
 
-        //    try
-        //    {
-        //        using (Globals_Server.LogFile = new System.IO.StreamWriter("LogFile.txt"))
-        //        {
+            try
+            {
+                using (Globals_Server.LogFile = new System.IO.StreamWriter("LogFile.txt"))
+                {
 
-        //           Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig", "../../app.config");
-        //            Globals_Server.rClient = Globals_Server.rCluster.CreateClient();
-        //            Globals_Server.LogFile.AutoFlush = true;
-        //            Globals_Server.logEvent("Server start");
+                    Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig", "../../app.config");
+                    Globals_Server.rClient = Globals_Server.rCluster.CreateClient();
+                    Globals_Server.LogFile.AutoFlush = true;
+                    Globals_Server.logEvent("Server start");
 
-        //            Game game = new Game();
-        //            SetUpForDemo();
-                    
-        //            DatabaseWrite.DatabaseWriteAll ("testBucket");
+                    Game game = new Game();
+                    SetUpForDemo();
 
-        //            if (Globals_Server.rClient.Ping ().IsSuccess) {
-        //                Console.WriteLine ("Database connection successful");
-        //                string gameID = "testBucket";
-        //                foreach (string trait in Globals_Game.traitKeys) {
-        //                    Console.WriteLine (trait);
-        //                }
+                    DatabaseWrite.DatabaseWriteAll("testBucket");
 
-        //                // Test can read from database
-        //                var newClient = Globals_Server.rCluster.CreateClient();
-        //                RiakClient.Models.RiakObject newObj = new RiakClient.Models.RiakObject (gameID, "superawesome3", Globals_Game.traitKeys.ToArray ());
-        //                newClient.Put (newObj);
-        //                Thread.Sleep (5000);
-        //                var testRead =newClient.Get (gameID, "superawesome3");
-        //                if (!testRead.IsSuccess) {
-        //                    Console.WriteLine ("FAIL :(" + testRead.ErrorMessage);
-        //                } else {
-        //                    Console.WriteLine ("Got traitkeys:");
-        //                }
-        //                DatabaseRead.DatabaseReadAll (gameID);
-        //            } else {
-        //                Console.WriteLine ("Could not connect to database :( ");
-        //            } 
+                    if (Globals_Server.rClient.Ping().IsSuccess)
+                    {
+                        Console.WriteLine("Database connection successful");
+                        string gameID = "testBucket";
+                        foreach (string trait in Globals_Game.traitKeys)
+                        {
+                            Console.WriteLine(trait);
+                        }
 
-        //            //testCaptives();
+                        // Test can read from database
+                        //var newClient = Globals_Server.rCluster.CreateClient();
+                        //RiakClient.Models.RiakObject newObj = new RiakClient.Models.RiakObject(gameID, "superawesome3", Globals_Game.traitKeys.ToArray());
+                        //newClient.Put(newObj);
+                        //Thread.Sleep(5000);
+                        //var testRead = newClient.Get(gameID, "superawesome3");
+                        //if (!testRead.IsSuccess)
+                        //{
+                        //    Console.WriteLine("FAIL :(" + testRead.ErrorMessage);
+                        //}
+                        //else
+                        //{
+                        //    Console.WriteLine("Got traitkeys:");
+                        //}
+                        DatabaseRead.DatabaseReadAll(gameID);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Could not connect to database :( ");
+                    }
 
-
-
-        //            Server server = new Server();
-        //            try
-        //            {
-        //                //TestSuite testSuite = new TestSuite();
-        //                TestClient client = new TestClient();
-        //                client.LogInAndConnect("helen", "potato");
-        //            }
-        //            catch (Exception e)
-        //            {
-        //                Console.WriteLine(e.Message);
-        //            }
-        //            //client.LogIn("helen", "potato");
-        //            String s = Console.ReadLine();
-        //            if (s != null && s.Equals("exit"))
-        //            {
-        //                Globals_Server.logEvent("Server exits");
-        //                Globals_Server.server.Shutdown("Server exits");
-        //            }
-
-        //            while (true)
-        //            {
-
-        //                if (s != null && s.Equals("exit"))
-        //                {
-        //                    Globals_Server.logEvent("Server exits");
-        //                    Globals_Server.server.Shutdown("Server exits");
-        //                    break;
-        //                }
-
-        //            }
-
-        //            Globals_Server.LogFile.Close();
-
-        //        }
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Globals_Server.LogFile.Close();
-        //        Console.WriteLine("Encountered an error:" + e.StackTrace);
-        //        Console.ReadLine();
-        //    }
+                    //testCaptives();
 
 
-        //}
+
+                    Server server = new Server();
+                    try
+                    {
+                        //TestSuite testSuite = new TestSuite();
+                        TestClient client = new TestClient();
+                        client.LogInAndConnect("helen", "potato");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    //client.LogIn("helen", "potato");
+                    String s = Console.ReadLine();
+                    if (s != null && s.Equals("exit"))
+                    {
+                        Globals_Server.logEvent("Server exits");
+                        Globals_Server.server.Shutdown("Server exits");
+                    }
+
+                    while (true)
+                    {
+
+                        if (s != null && s.Equals("exit"))
+                        {
+                            Globals_Server.logEvent("Server exits");
+                            Globals_Server.server.Shutdown("Server exits");
+                            break;
+                        }
+
+                    }
+
+                    Globals_Server.LogFile.Close();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Globals_Server.LogFile.Close();
+                Console.WriteLine("Encountered an error:" + e.StackTrace);
+                Console.ReadLine();
+            }
+
+
+        }
 
         /// <summary>
         /// Code which was used in the 2015 demo- sets up a few armies, adds funds and sets a few traits to demonstrate trait effects

@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using ProtoMessageClient;
+using QuickGraph.Serialization;
 using RiakClient.Messages;
 
 namespace JominiEngine {
@@ -45,6 +47,8 @@ namespace JominiEngine {
                 path = Path.Combine(dir, "CSVs");
             }
 
+            Console.WriteLine(path);
+
             // point towards the game objects and map data
             var gameObjects = Path.Combine(path, "gameObjects - Copy.csv");
             var mapData = Path.Combine(path, "map.csv");
@@ -52,7 +56,7 @@ namespace JominiEngine {
                 Console.WriteLine("wrong dir");
             }
 
-            InitGameObjects("testBucket", gameObjects, mapData,
+            InitGameObjects("testBucket", "../CSVs/gameObjects - Copy.csv", "../CSVs/map.csv",
                 start: 1194, king1: "Char_47", king2: "Char_40", herald1: "Char_1", sysAdmin: null);
         }
 
@@ -3248,19 +3252,34 @@ namespace JominiEngine {
         /// <returns>
         ///  A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
         /// </returns>
-        public static ProtoMessage CreateFactionRequest(ProtoFaction newFaction)
+        public static ProtoMessage CreateFaction(ProtoFaction f)
         {
             // create new faction object
-            Faction newFactionReq = new Faction(newFaction.factionName,
-                    newFaction.factionLeader,
-                    newFaction.factionBaseID,
-                    newFaction.factionTax);
+            Faction newFaction = new Faction(f.factionName,
+                    f.factionLeader,
+                    f.factionBaseID,
+                    f.factionTax);
 
             // add the leader as the first member to sign charter
-            newFactionReq.signFactionCharter(newFaction.factionLeader, "Leader");
+            newFaction.signFactionCharter(f.factionLeader, "Leader");
 
-            // add to the dictionary then report a success
-            Globals_Game.factionMasterList.Add(newFaction.factionName, newFactionReq);
+            // FOR NON DATABASE IMPLEMENTATION
+            //// add to the dictionary then report a success
+            //Globals_Game.factionMasterList.Add(newFaction.factionName, newFactionReq);
+
+            // NEED TO CHANGE THIS
+            // update faction key list
+            var keyRes = Globals_Server.rClient.Get("testBucket", "factionKeys");
+            List<string> factionKeys = new List<string>();
+            if(keyRes.IsSuccess)
+            {
+                factionKeys = keyRes.Value.GetObject<List<string>>();
+            }
+            factionKeys.Add(f.factionName);
+            DatabaseWrite.DatabaseWrite_KeyList("testBucket", "factionKeys", factionKeys);
+
+            // add new faction then do report success
+            DatabaseWrite.DatabaseWrite_Faction("testBucket", newFaction);
             var success = new ProtoMessage();
             success.ResponseType = DisplayMessages.Success;
             return success;
@@ -3279,13 +3298,14 @@ namespace JominiEngine {
             // get faction request and sign member
             try
             {
-                Globals_Game.factionMasterList.TryGetValue(factionName, out Faction factionReq);
+                Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", factionName);
 
-                if(!factionReq.members.ContainsKey(newMember))
+                if(!f.members.ContainsKey(newMember))
                 {
                     // player is not already in the faction
-                    factionReq.signFactionCharter(newMember, "Prospect");
+                    f.signFactionCharter(newMember, "Prospect");
 
+                    DatabaseWrite.DatabaseWrite_Faction("testBucket", f);
                     var success = new ProtoMessage();
                     success.ResponseType = DisplayMessages.Success;
                     return success;
@@ -3309,45 +3329,56 @@ namespace JominiEngine {
         /// This function returns a list of the current faction requests that are public as a protomessage
         /// to the requesting client
         /// </summary>
-        public static ProtoMessage ViewFactionRequestList()
+        public static ProtoMessage ViewFactionList()
         {
-            var factionRequests = new List<ProtoFaction>();
-
-            foreach(Faction factionReq in Globals_Game.factionMasterList.Values)
+            var keyRes = Globals_Server.rClient.Get("testBucket", "factionKeys");
+            List<string> factionKeys = new List<string>();
+            if (keyRes.IsSuccess)
             {
-                factionRequests.Add(new ProtoFaction(
-                    factionReq.factionName,
-                    factionReq.factionReqID,
-                    factionReq.foundingLocation,
-                    factionReq.leader,
-                    factionReq.members.ToArray(),
-                    factionReq.proposedTax,
-                    factionReq.alliedFiefs.ToArray(),
-                    factionReq.statureBonus
+                factionKeys = keyRes.Value.GetObject<List<string>>();
+            }
+
+
+            List<ProtoFaction> factionsToSend = new List<ProtoFaction>();
+            foreach (string key in factionKeys)
+            {
+                var f = DatabaseRead.DatabaseRead_Faction("testBucket", key);
+
+                factionsToSend.Add(new ProtoFaction(
+                    f.factionName,
+                    f.factionReqID,
+                    f.foundingLocation,
+                    f.leader,
+                    f.members.ToArray(),
+                    f.proposedTax,
+                    f.alliedFiefs.ToArray(),
+                    f.statureBonus
                     ));
             }
 
             ProtoGenericArray<ProtoFaction> result = new ProtoGenericArray<ProtoFaction>();
-            result.fields = factionRequests.ToArray();
+            result.fields = factionsToSend.ToArray();
             result.ResponseType = DisplayMessages.Success;
             result.Message = "ViewFactionReqList";
             Console.WriteLine("GET ALL FACTION REQUESTS ----------");
             return result;
         }
 
-        public static ProtoMessage GetFactionRequest(string factionToGet)
+        public static ProtoMessage GetFaction(string factionToGet)
         {
-            Faction factionReq = Globals_Game.factionMasterList[factionToGet];
+            //Faction faction = Globals_Game.factionMasterList[factionToGet];
+
+            Faction faction = DatabaseRead.DatabaseRead_Faction("testBucket", factionToGet);
 
             return new ProtoFaction(
-                        factionReq.factionName,
-                        factionReq.factionReqID,
-                        factionReq.foundingLocation,
-                        factionReq.leader,
-                        factionReq.members.ToArray(),
-                        factionReq.proposedTax,
-                        factionReq.alliedFiefs.ToArray(),
-                        factionReq.statureBonus
+                        faction.factionName,
+                        faction.factionReqID,
+                        faction.foundingLocation,
+                        faction.leader,
+                        faction.members.ToArray(),
+                        faction.proposedTax,
+                        faction.alliedFiefs.ToArray(),
+                        faction.statureBonus
                     );
         }
 
@@ -3361,7 +3392,9 @@ namespace JominiEngine {
             var members = new List<ProtoCharacterOverview>();
             DisplayMessages charErr;
 
-            foreach (KeyValuePair<string, string> member in Globals_Game.factionMasterList[faction].members)
+            Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", faction);
+
+            foreach (KeyValuePair<string, string> member in f.members)
             {
                 string memberRank = member.Value.ToString();
                 if (memberRank == "Leader" && rank == "Member")
@@ -3390,29 +3423,31 @@ namespace JominiEngine {
         /// <returns></returns>
         public static ProtoMessage ChangeFactionRank(string factionName, string factionMember, string factionRank)
         {
-            Faction faction = Globals_Game.factionMasterList[factionName];
+            Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", factionName);
 
             /*
              * Currently this removes the member from the collection and readds them.
              * This should be changed in a later build to directly modifying the value.
              */
-            faction.members.Remove(factionMember);
+            f.members.Remove(factionMember);
             if(factionRank != "")
             {
                 // readd them with the correct rank
-                faction.members.Add(factionMember, factionRank);
-                faction.CheckStatureRank(factionMember);
+                f.members.Add(factionMember, factionRank);
+                f.CheckStatureRank(factionMember);
             } else
             {
                 // the member is being removed, need to remove them from highest stature rankings if they exist there
-                for(int i = 0; i < faction.highestStature.Length; i++) 
-                    if (factionMember == faction.highestStature[i])
-                        faction.highestStature[i] = null;
+                for(int i = 0; i < f.highestStature.Length; i++) 
+                    if (factionMember == f.highestStature[i])
+                        f.highestStature[i] = null;
 
                 // also need to remove their faction stature bonus
                 DisplayMessages err;
-                Utility_Methods.GetCharacter(factionMember, out err).statureModifier -= faction.statureBonus;
+                Utility_Methods.GetCharacter(factionMember, out err).statureModifier -= f.statureBonus;
             }
+
+            DatabaseWrite.DatabaseWrite_Faction("testBucket", f);
 
             // return result
             ProtoMessage reply = new ProtoMessage();
@@ -3819,15 +3854,15 @@ namespace JominiEngine {
                 case Actions.CreateFaction:
                     {
                         var newFactionReq = (msgIn as ProtoFaction);
-                        return CreateFactionRequest(newFactionReq);
+                        return CreateFaction(newFactionReq);
                     }
                 case Actions.ViewFactionList:
                     {
-                        return ViewFactionRequestList();
+                        return ViewFactionList();
                     }
                 case Actions.GetFaction:
                     {
-                        return GetFactionRequest(msgIn.Message);
+                        return GetFaction(msgIn.Message);
                     }
                 case Actions.SignFactionCharter:
                     {
