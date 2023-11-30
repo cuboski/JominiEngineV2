@@ -1,0 +1,103 @@
+[14:14:22] Port forwarded successfully.
+[14:14:22] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[14:14:22] Waiting for event
+[14:14:27] Waiting for event
+[14:14:32] Waiting for event
+[14:14:33] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61437
+[14:14:33] 	Status is now: RespondedAwaitingApproval
+[14:14:33] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:61437
+[14:14:33] Accepted connection from acc1 | acc1 | TestString
+[14:14:33] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61437
+[14:14:33] 	Status is now: RespondedConnect
+[14:14:33] Waiting for event
+[14:14:33] Waiting for event
+[14:14:33] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61437
+[14:14:33] 	Status is now: Connected
+[14:14:33] Waiting for event
+[14:14:34] Recieved TESTnotnull: Data | 192.168.1.245:61437
+[14:14:34]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:61437
+[14:14:34] acc1 logs in from 192.168.1.245:61437
+[14:14:34] Waiting for event
+[14:14:34] Recieved TESTnotnull: Data | 192.168.1.245:61437
+[14:14:34] From: acc1: request = ViewWorldMap
+[14:14:34]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61437
+[14:14:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61437
+[14:14:34] Waiting for event
+[14:14:34] Recieved TESTnotnull: Data | 192.168.1.245:61437
+[14:14:34] From: acc1: request = ViewChar
+[14:14:34]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61437
+[14:14:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61437
+[14:14:34] Waiting for event
+[14:14:38] Recieved TESTnotnull: Data | 192.168.1.245:61437
+[14:14:38] From: acc1: request = Update
+[14:14:38]  Sending to: acc1 | ActionType = Update | ResponseType = ErrorGenericMessageInvalid | 192.168.1.245:61437
+[14:14:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61437
+[14:14:38] Waiting for event
+[14:14:43] Waiting for event
+[14:14:48] Waiting for event
+[14:14:53] Waiting for event
+[14:14:58] Waiting for event
+[14:15:03] Waiting for event
+[14:15:08] Waiting for event
+[14:15:13] Waiting for event
+[14:15:18] Waiting for event
+[14:15:23] Waiting for event
+[14:15:28] Waiting for event
+[14:15:33] Waiting for event
+[14:15:38] Waiting for event
+[14:15:43] Waiting for event
+[14:15:48] Waiting for event
+[14:15:53] Waiting for event
+[14:15:58] Waiting for event
+[14:16:03] Waiting for event
+[14:16:08] Waiting for event
+[14:16:13] Waiting for event
+[14:16:18] Waiting for event
+[14:16:23] Waiting for event
+[14:16:28] Waiting for event
+[14:16:33] Waiting for event
+[14:16:38] Waiting for event
+[14:16:43] Waiting for event
+[14:16:48] Waiting for event
+[14:16:53] Waiting for event
+[14:16:58] Waiting for event
+[14:17:03] Waiting for event
+[14:17:08] Waiting for event
+[14:17:13] Waiting for event
+[14:17:18] Waiting for event
+[14:17:23] Waiting for event
+[14:17:28] Waiting for event
+[14:17:33] Waiting for event
+[14:17:38] Waiting for event
+[14:17:43] Waiting for event
+[14:17:48] Waiting for event
+[14:17:53] Waiting for event
+[14:17:58] Waiting for event
+[14:18:03] Waiting for event
+[14:18:08] Waiting for event
+[14:18:13] Waiting for event
+[14:18:18] Waiting for event
+[14:18:23] Waiting for event
+[14:18:28] Waiting for event
+[14:18:33] Waiting for event
+[14:18:38] Waiting for event
+[14:18:43] Waiting for event
+[14:18:48] Waiting for event
+[14:18:53] Waiting for event
+[14:18:58] Waiting for event
+[14:19:03] Waiting for event
+[14:19:08] Waiting for event
+[14:19:13] Waiting for event
+[14:19:18] Waiting for event
+[14:19:23] Waiting for event
+[14:19:28] Waiting for event
+[14:19:33] Waiting for event
+[14:19:38] Waiting for event
+[14:19:43] Waiting for event
+[14:19:48] Waiting for event
+[14:19:53] Waiting for event
+[14:19:58] Waiting for event
+[14:20:03] Waiting for event
+[14:20:08] Waiting for event
+[14:20:14] Waiting for event
+[14:20:19] Waiti

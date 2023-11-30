@@ -10,7 +10,6 @@ using System.Threading;
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using UnityEditor.PackageManager;
 using static Controller;
 
 public class Controller : MonoBehaviour { 
@@ -27,7 +26,7 @@ public class Controller : MonoBehaviour {
     public static ProtoSiegeDisplay sc;
     public static ProtoGenericArray<ProtoSiegeOverview> sl;
 
-    public static string ipAddress = "192.168.1.245";
+    public static string ipAddress = "139.162.225.87";
 
     public enum SceneName {
         CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, 

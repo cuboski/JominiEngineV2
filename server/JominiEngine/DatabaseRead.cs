@@ -898,23 +898,23 @@ namespace JominiEngine
         /// <returns>Siege object</returns>
         /// <param name="gameID">Game for which Siege to be retrieved</param>
         /// <param name="siegeID">ID of Siege to be retrieved</param>
-        public static Faction DatabaseRead_Faction(string gameID, string factReqID)
+        public static Faction DatabaseRead_Faction(string gameID, string factID)
         {
-            var factReqResult = Globals_Server.rClient.Get(gameID, factReqID);
-            Faction factionReq = new Faction();
+            var factResult = Globals_Server.rClient.Get(gameID, factID);
+            Faction faction = new Faction();
 
-            if (factReqResult.IsSuccess)
+            if (factResult.IsSuccess)
             {
                 // extract Army object
-                factionReq = factReqResult.Value.GetObject<Faction>();
+                faction = factResult.Value.GetObject<Faction>();
             }
             else
             {
-                string toDisplay = "InitialDBload: Unable to retrieve faction request: " + factReqID;
+                string toDisplay = "InitialDBload: Unable to retrieve faction request: " + factID;
                 Globals_Server.logError(toDisplay);
             }
 
-            return factionReq;
+            return faction;
         }
 
         /// <summary>
@@ -1524,6 +1524,24 @@ namespace JominiEngine
             }
 
             return newBool;
+        }
+
+        public static List<string> DatabaseRead_List(string gameID, string listID)
+        {
+            var listResult = Globals_Server.rClient.Get(gameID, listID);
+            var newList = new List<string>();
+
+            if(listResult.IsSuccess)
+            {
+                newList = listResult.Value.GetObject<List<string>>();
+            }
+            else
+            {
+                string toDisplay = "InitialDBload: Unable to retrieve bool variable " + listID;
+                Globals_Server.logError(toDisplay);
+            }
+
+            return newList;
         }
 
         /// <summary>

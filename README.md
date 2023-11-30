@@ -60,11 +60,14 @@ How to run the Client within the Unity Editor :
 NOTE: Make sure that when a change is to be committed and pushed to this repository that you remove the IPv4 addresses within the files, especially if you are working from a personal computer. This will prevent the leak of sensitive information.
 
 ## JominiEngine Account Information
-There are currently two accounts that exist within the JominiEngine server application on initialisation for testing purposes.
+There are currently five accounts that exist within the JominiEngine server application on initialisation for testing purposes.
 
 These accounts are:
 - User: `acc1`, Password: `pass1`.
 - User: `acc2`, Password: `pass2`.
+- User: `acc3`, Password: `pass3`.
+- User: `acc4`, Password: `pass4`.
+- User: `acc5`, Password: `pass5`.
 
 These users are created within the initialise function found within the `JominiEngine/server/JominiEngine/Server.cs` script.
 Additional uses may be created within this file if needed.

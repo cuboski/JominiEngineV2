@@ -1,0 +1,1543 @@
+[18:13:13] Port forwarded successfully.
+[18:13:13] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[18:13:13] Waiting for event
+[18:13:15] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:15] Waiting for event
+[18:13:19] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:19] Waiting for event
+[18:13:23] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:23] Waiting for event
+[18:13:27] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:27] Waiting for event
+[18:13:31] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:31] Waiting for event
+[18:13:35] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:35] Waiting for event
+[18:13:39] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:39] Waiting for event
+[18:13:43] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:43] Waiting for event
+[18:13:47] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:47] Waiting for event
+[18:13:51] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:51] Waiting for event
+[18:13:55] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:55] Waiting for event
+[18:13:59] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:13:59] Waiting for event
+[18:14:03] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:14:03] Waiting for event
+[18:14:07] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:14:07] Waiting for event
+[18:14:11] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:14:11] Waiting for event
+[18:14:15] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:14:15] Waiting for event
+[18:14:19] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:14:19] Waiting for event
+[18:14:23] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61676
+[18:14:23] Waiting for event
+[18:14:28] Waiting for event
+[18:14:33] Waiting for event
+[18:14:38] Waiting for event
+[18:14:43] Waiting for event
+[18:14:48] Waiting for event
+[18:14:53] Waiting for event
+[18:14:58] Waiting for event
+[18:15:03] Waiting for event
+[18:15:08] Waiting for event
+[18:15:13] Waiting for event
+[18:15:18] Waiting for event
+[18:15:23] Waiting for event
+[18:15:28] Waiting for event
+[18:15:33] Waiting for event
+[18:15:38] Waiting for event
+[18:15:43] Waiting for event
+[18:15:48] Waiting for event
+[18:15:53] Waiting for event
+[18:15:58] Waiting for event
+[18:16:03] Waiting for event
+[18:16:08] Waiting for event
+[18:16:13] Waiting for event
+[18:16:19] Waiting for event
+[18:16:24] Waiting for event
+[18:16:29] Waiting for event
+[18:16:34] Waiting for event
+[18:16:39] Waiting for event
+[18:16:44] Waiting for event
+[18:16:49] Waiting for event
+[18:16:54] Waiting for event
+[18:16:59] Waiting for event
+[18:17:04] Waiting for event
+[18:17:09] Waiting for event
+[18:17:14] Waiting for event
+[18:17:19] Waiting for event
+[18:17:24] Waiting for event
+[18:17:29] Waiting for event
+[18:17:34] Waiting for event
+[18:17:39] Waiting for event
+[18:17:44] Waiting for event
+[18:17:49] Waiting for event
+[18:17:54] Waiting for event
+[18:17:59] Waiting for event
+[18:18:04] Waiting for event
+[18:18:09] Waiting for event
+[18:18:14] Waiting for event
+[18:18:19] Waiting for event
+[18:18:24] Waiting for event
+[18:18:29] Waiting for event
+[18:18:34] Waiting for event
+[18:18:39] Waiting for event
+[18:18:44] Waiting for event
+[18:18:49] Waiting for event
+[18:18:54] Waiting for event
+[18:18:59] Waiting for event
+[18:19:04] Waiting for event
+[18:19:09] Waiting for event
+[18:19:12] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53240
+[18:19:12] 	Status is now: RespondedAwaitingApproval
+[18:19:12] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:53240
+[18:19:13] Accepted connection from acc1 | acc1 | TestString
+[18:19:13] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53240
+[18:19:13] 	Status is now: RespondedConnect
+[18:19:13] Waiting for event
+[18:19:13] Waiting for event
+[18:19:13] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53240
+[18:19:13] 	Status is now: Connected
+[18:19:13] Waiting for event
+[18:19:13] Recieved TESTnotnull: Data | 192.168.1.245:53240
+[18:19:13]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:53240
+[18:19:13] acc1 logs in from 192.168.1.245:53240
+[18:19:13] Waiting for event
+[18:19:13] Recieved TESTnotnull: Data | 192.168.1.245:53240
+[18:19:13] From: acc1: request = ViewWorldMap
+[18:19:13]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:53240
+[18:19:13]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53240
+[18:19:13] Waiting for event
+[18:19:14] Recieved TESTnotnull: Data | 192.168.1.245:53240
+[18:19:14] From: acc1: request = ViewChar
+[18:19:14]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:53240
+[18:19:14]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53240
+[18:19:14] Waiting for event
+[18:19:19] Waiting for event
+[18:19:24] Waiting for event
+[18:19:29] Waiting for event
+[18:19:34] Waiting for event
+[18:19:39] Waiting for event
+[18:19:44] Waiting for event
+[18:19:49] Waiting for event
+[18:19:54] Waiting for event
+[18:19:59] Waiting for event
+[18:20:04] Waiting for event
+[18:20:09] Waiting for event
+[18:20:14] Waiting for event
+[18:20:19] Waiting for event
+[18:20:24] Waiting for event
+[18:20:29] Waiting for event
+[18:20:34] Waiting for event
+[18:20:39] Waiting for event
+[18:20:44] Waiting for event
+[18:20:49] Waiting for event
+[18:20:54] Waiting for event
+[18:20:59] Waiting for event
+[18:21:04] Waiting for event
+[18:21:09] Waiting for event
+[18:21:14] Waiting for event
+[18:21:19] Waiting for event
+[18:21:23] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53240
+[18:21:23] 	Status is now: Disconnected
+[18:21:23] 192.168.1.245:53240 has disconnected. Reason: Connection timed out
+[18:21:23] Client acc1 has disconnected.
+[18:21:23] Waiting for event
+[18:21:28] Waiting for event
+[18:21:33] Waiting for event
+[18:21:38] Waiting for event
+[18:21:43] Waiting for event
+[18:21:48] Waiting for event
+[18:21:53] Waiting for event
+[18:21:58] Waiting for event
+[18:22:03] Waiting for event
+[18:22:08] Waiting for event
+[18:22:13] Waiting for event
+[18:22:18] Waiting for event
+[18:22:23] Waiting for event
+[18:22:28] Waiting for event
+[18:22:33] Waiting for event
+[18:22:38] Waiting for event
+[18:22:43] Waiting for event
+[18:22:48] Waiting for event
+[18:22:53] Waiting for event
+[18:22:58] Waiting for event
+[18:23:03] Waiting for event
+[18:23:08] Waiting for event
+[18:23:13] Waiting for event
+[18:23:18] Waiting for event
+[18:23:23] Waiting for event
+[18:23:28] Waiting for event
+[18:23:33] Waiting for event
+[18:23:38] Waiting for event
+[18:23:43] Waiting for event
+[18:23:48] Waiting for event
+[18:23:53] Waiting for event
+[18:23:58] Waiting for event
+[18:24:03] Waiting for event
+[18:24:08] Waiting for event
+[18:24:13] Waiting for event
+[18:24:18] Waiting for event
+[18:24:23] Waiting for event
+[18:24:28] Waiting for event
+[18:24:33] Waiting for event
+[18:24:38] Waiting for event
+[18:24:43] Waiting for event
+[18:24:48] Waiting for event
+[18:24:53] Waiting for event
+[18:24:58] Waiting for event
+[18:25:03] Waiting for event
+[18:25:08] Waiting for event
+[18:25:13] Waiting for event
+[18:25:18] Waiting for event
+[18:25:23] Waiting for event
+[18:25:28] Waiting for event
+[18:25:33] Waiting for event
+[18:25:38] Waiting for event
+[18:25:43] Waiting for event
+[18:25:48] Waiting for event
+[18:25:53] Waiting for event
+[18:25:58] Waiting for event
+[18:26:03] Waiting for event
+[18:26:08] Waiting for event
+[18:26:13] Waiting for event
+[18:26:18] Waiting for event
+[18:26:23] Waiting for event
+[18:26:28] Waiting for event
+[18:26:33] Waiting for event
+[18:26:38] Waiting for event
+[18:26:43] Waiting for event
+[18:26:48] Waiting for event
+[18:26:53] Waiting for event
+[18:26:58] Waiting for event
+[18:27:03] Waiting for event
+[18:27:08] Waiting for event
+[18:27:13] Waiting for event
+[18:27:18] Waiting for event
+[18:27:23] Waiting for event
+[18:27:28] Waiting for event
+[18:27:33] Waiting for event
+[18:27:38] Waiting for event
+[18:27:43] Waiting for event
+[18:27:48] Waiting for event
+[18:27:53] Waiting for event
+[18:27:58] Waiting for event
+[18:28:03] Waiting for event
+[18:28:09] Waiting for event
+[18:28:14] Waiting for event
+[18:28:19] Waiting for event
+[18:28:24] Waiting for event
+[18:28:29] Waiting for event
+[18:28:34] Waiting for event
+[18:28:39] Waiting for event
+[18:28:44] Waiting for event
+[18:28:49] Waiting for event
+[18:28:54] Waiting for event
+[18:28:59] Waiting for event
+[18:29:04] Waiting for event
+[18:29:09] Waiting for event
+[18:29:14] Waiting for event
+[18:29:19] Waiting for event
+[18:29:24] Waiting for event
+[18:29:29] Waiting for event
+[18:29:34] Waiting for event
+[18:29:39] Waiting for event
+[18:29:44] Waiting for event
+[18:29:49] Waiting for event
+[18:29:54] Waiting for event
+[18:29:59] Waiting for event
+[18:30:04] Waiting for event
+[18:30:09] Waiting for event
+[18:30:14] Waiting for event
+[18:30:19] Waiting for event
+[18:30:24] Waiting for event
+[18:30:29] Waiting for event
+[18:30:34] Waiting for event
+[18:30:39] Waiting for event
+[18:30:44] Waiting for event
+[18:30:49] Waiting for event
+[18:30:54] Waiting for event
+[18:30:59] Waiting for event
+[18:31:04] Waiting for event
+[18:31:09] Waiting for event
+[18:31:14] Waiting for event
+[18:31:19] Waiting for event
+[18:31:24] Waiting for event
+[18:31:29] Waiting for event
+[18:31:34] Waiting for event
+[18:31:39] Waiting for event
+[18:31:44] Waiting for event
+[18:31:49] Waiting for event
+[18:31:54] Waiting for event
+[18:31:59] Waiting for event
+[18:32:04] Waiting for event
+[18:32:09] Waiting for event
+[18:32:14] Waiting for event
+[18:32:19] Waiting for event
+[18:32:24] Waiting for event
+[18:32:29] Waiting for event
+[18:32:34] Waiting for event
+[18:32:39] Waiting for event
+[18:32:44] Waiting for event
+[18:32:49] Waiting for event
+[18:32:54] Waiting for event
+[18:32:59] Waiting for event
+[18:33:04] Waiting for event
+[18:33:09] Waiting for event
+[18:33:14] Waiting for event
+[18:33:19] Waiting for event
+[18:33:24] Waiting for event
+[18:33:29] Waiting for event
+[18:33:34] Waiting for event
+[18:33:39] Waiting for event
+[18:33:44] Waiting for event
+[18:33:49] Waiting for event
+[18:33:54] Waiting for event
+[18:33:59] Waiting for event
+[18:34:04] Waiting for event
+[18:34:09] Waiting for event
+[18:34:14] Waiting for event
+[18:34:19] Waiting for event
+[18:34:24] Waiting for event
+[18:34:29] Waiting for event
+[18:34:34] Waiting for event
+[18:34:39] Waiting for event
+[18:34:44] Waiting for event
+[18:34:49] Waiting for event
+[18:34:54] Waiting for event
+[18:34:59] Waiting for event
+[18:35:04] Waiting for event
+[18:35:09] Waiting for event
+[18:35:14] Waiting for event
+[18:35:19] Waiting for event
+[18:35:24] Waiting for event
+[18:35:29] Waiting for event
+[18:35:34] Waiting for event
+[18:35:39] Waiting for event
+[18:35:44] Waiting for event
+[18:35:49] Waiting for event
+[18:35:54] Waiting for event
+[18:35:59] Waiting for event
+[18:36:04] Waiting for event
+[18:36:09] Waiting for event
+[18:36:14] Waiting for event
+[18:36:19] Waiting for event
+[18:36:24] Waiting for event
+[18:36:29] Waiting for event
+[18:36:34] Waiting for event
+[18:36:39] Waiting for event
+[18:36:44] Waiting for event
+[18:36:49] Waiting for event
+[18:36:54] Waiting for event
+[18:36:59] Waiting for event
+[18:37:04] Waiting for event
+[18:37:09] Waiting for event
+[18:37:14] Waiting for event
+[18:37:19] Waiting for event
+[18:37:24] Waiting for event
+[18:37:29] Waiting for event
+[18:37:34] Waiting for event
+[18:37:39] Waiting for event
+[18:37:44] Waiting for event
+[18:37:49] Waiting for event
+[18:37:55] Waiting for event
+[18:38:00] Waiting for event
+[18:38:05] Waiting for event
+[18:38:10] Waiting for event
+[18:38:15] Waiting for event
+[18:38:20] Waiting for event
+[18:38:25] Waiting for event
+[18:38:30] Waiting for event
+[18:38:35] Waiting for event
+[18:38:40] Waiting for event
+[18:38:45] Waiting for event
+[18:38:50] Waiting for event
+[18:38:55] Waiting for event
+[18:39:00] Waiting for event
+[18:39:05] Waiting for event
+[18:39:10] Waiting for event
+[18:39:15] Waiting for event
+[18:39:20] Waiting for event
+[18:39:25] Waiting for event
+[18:39:30] Waiting for event
+[18:39:35] Waiting for event
+[18:39:40] Waiting for event
+[18:39:45] Waiting for event
+[18:39:50] Waiting for event
+[18:39:55] Waiting for event
+[18:40:00] Waiting for event
+[18:40:05] Waiting for event
+[18:40:10] Waiting for event
+[18:40:15] Waiting for event
+[18:40:20] Waiting for event
+[18:40:25] Waiting for event
+[18:40:30] Waiting for event
+[18:40:35] Waiting for event
+[18:40:40] Waiting for event
+[18:40:45] Waiting for event
+[18:40:50] Waiting for event
+[18:40:55] Waiting for event
+[18:41:00] Waiting for event
+[18:41:05] Waiting for event
+[18:41:10] Waiting for event
+[18:41:15] Waiting for event
+[18:41:20] Waiting for event
+[18:41:25] Waiting for event
+[18:41:30] Waiting for event
+[18:41:35] Waiting for event
+[18:41:40] Waiting for event
+[18:41:45] Waiting for event
+[18:41:50] Waiting for event
+[18:41:55] Waiting for event
+[18:42:00] Waiting for event
+[18:42:05] Waiting for event
+[18:42:10] Waiting for event
+[18:42:15] Waiting for event
+[18:42:20] Waiting for event
+[18:42:25] Waiting for event
+[18:42:30] Waiting for event
+[18:42:35] Waiting for event
+[18:42:40] Waiting for event
+[18:42:45] Waiting for event
+[18:42:50] Waiting for event
+[18:42:55] Waiting for event
+[18:43:00] Waiting for event
+[18:43:05] Waiting for event
+[18:43:10] Waiting for event
+[18:43:15] Waiting for event
+[18:43:20] Waiting for event
+[18:43:25] Waiting for event
+[18:43:30] Waiting for event
+[18:43:35] Waiting for event
+[18:43:40] Waiting for event
+[18:43:45] Waiting for event
+[18:43:50] Waiting for event
+[18:43:55] Waiting for event
+[18:44:00] Waiting for event
+[18:44:05] Waiting for event
+[18:44:10] Waiting for event
+[18:44:15] Waiting for event
+[18:44:20] Waiting for event
+[18:44:25] Waiting for event
+[18:44:30] Waiting for event
+[18:44:35] Waiting for event
+[18:44:40] Waiting for event
+[18:44:45] Waiting for event
+[18:44:50] Waiting for event
+[18:44:55] Waiting for event
+[18:45:00] Waiting for event
+[18:45:05] Waiting for event
+[18:45:10] Waiting for event
+[18:45:15] Waiting for event
+[18:45:20] Waiting for event
+[18:45:25] Waiting for event
+[18:45:30] Waiting for event
+[18:45:35] Waiting for event
+[18:45:40] Waiting for event
+[18:45:45] Waiting for event
+[18:45:50] Waiting for event
+[18:45:55] Waiting for event
+[18:46:00] Waiting for event
+[18:46:05] Waiting for event
+[18:46:10] Waiting for event
+[18:46:15] Waiting for event
+[18:46:20] Waiting for event
+[18:46:25] Waiting for event
+[18:46:30] Waiting for event
+[18:46:35] Waiting for event
+[18:46:40] Waiting for event
+[18:46:45] Waiting for event
+[18:46:50] Waiting for event
+[18:46:55] Waiting for event
+[18:47:00] Waiting for event
+[18:47:05] Waiting for event
+[18:47:10] Waiting for event
+[18:47:15] Waiting for event
+[18:47:20] Waiting for event
+[18:47:25] Waiting for event
+[18:47:30] Waiting for event
+[18:47:35] Waiting for event
+[18:47:40] Waiting for event
+[18:47:45] Waiting for event
+[18:47:50] Waiting for event
+[18:47:55] Waiting for event
+[18:48:00] Waiting for event
+[18:48:05] Waiting for event
+[18:48:10] Waiting for event
+[18:48:15] Waiting for event
+[18:48:20] Waiting for event
+[18:48:25] Waiting for event
+[18:48:30] Waiting for event
+[18:48:35] Waiting for event
+[18:48:40] Waiting for event
+[18:48:45] Waiting for event
+[18:48:51] Waiting for event
+[18:48:56] Waiting for event
+[18:49:01] Waiting for event
+[18:49:06] Waiting for event
+[18:49:11] Waiting for event
+[18:49:16] Waiting for event
+[18:49:21] Waiting for event
+[18:49:26] Waiting for event
+[18:49:31] Waiting for event
+[18:49:36] Waiting for event
+[18:49:41] Waiting for event
+[18:49:46] Waiting for event
+[18:49:51] Waiting for event
+[18:49:56] Waiting for event
+[18:50:01] Waiting for event
+[18:50:06] Waiting for event
+[18:50:11] Waiting for event
+[18:50:16] Waiting for event
+[18:50:21] Waiting for event
+[18:50:26] Waiting for event
+[18:50:31] Waiting for event
+[18:50:36] Waiting for event
+[18:50:41] Waiting for event
+[18:50:46] Waiting for event
+[18:50:51] Waiting for event
+[18:50:56] Waiting for event
+[18:51:01] Waiting for event
+[18:51:06] Waiting for event
+[18:51:11] Waiting for event
+[18:51:16] Waiting for event
+[18:51:21] Waiting for event
+[18:51:26] Waiting for event
+[18:51:31] Waiting for event
+[18:51:36] Waiting for event
+[18:51:41] Waiting for event
+[18:51:46] Waiting for event
+[18:51:51] Waiting for event
+[18:51:56] Waiting for event
+[18:52:01] Waiting for event
+[18:52:06] Waiting for event
+[18:52:11] Waiting for event
+[18:52:16] Waiting for event
+[18:52:21] Waiting for event
+[18:52:26] Waiting for event
+[18:52:31] Waiting for event
+[18:52:36] Waiting for event
+[18:52:41] Waiting for event
+[18:52:46] Waiting for event
+[18:52:51] Waiting for event
+[18:52:56] Waiting for event
+[18:53:01] Waiting for event
+[18:53:06] Waiting for event
+[18:53:11] Waiting for event
+[18:53:16] Waiting for event
+[18:53:21] Waiting for event
+[18:53:26] Waiting for event
+[18:53:31] Waiting for event
+[18:53:36] Waiting for event
+[18:53:41] Waiting for event
+[18:53:46] Waiting for event
+[18:53:51] Waiting for event
+[18:53:56] Waiting for event
+[18:54:01] Waiting for event
+[18:54:06] Waiting for event
+[18:54:11] Waiting for event
+[18:54:16] Waiting for event
+[18:54:21] Waiting for event
+[18:54:26] Waiting for event
+[18:54:31] Waiting for event
+[18:54:36] Waiting for event
+[18:54:41] Waiting for event
+[18:54:46] Waiting for event
+[18:54:51] Waiting for event
+[18:54:56] Waiting for event
+[18:55:01] Waiting for event
+[18:55:06] Waiting for event
+[18:55:11] Waiting for event
+[18:55:16] Waiting for event
+[18:55:21] Waiting for event
+[18:55:26] Waiting for event
+[18:55:31] Waiting for event
+[18:55:36] Waiting for event
+[18:55:41] Waiting for event
+[18:55:46] Waiting for event
+[18:55:51] Waiting for event
+[18:55:56] Waiting for event
+[18:56:01] Waiting for event
+[18:56:06] Waiting for event
+[18:56:11] Waiting for event
+[18:56:16] Waiting for event
+[18:56:21] Waiting for event
+[18:56:26] Waiting for event
+[18:56:31] Waiting for event
+[18:56:36] Waiting for event
+[18:56:41] Waiting for event
+[18:56:46] Waiting for event
+[18:56:51] Waiting for event
+[18:56:56] Waiting for event
+[18:57:01] Waiting for event
+[18:57:06] Waiting for event
+[18:57:11] Waiting for event
+[18:57:16] Waiting for event
+[18:57:21] Waiting for event
+[18:57:26] Waiting for event
+[18:57:31] Waiting for event
+[18:57:36] Waiting for event
+[18:57:41] Waiting for event
+[18:57:46] Waiting for event
+[18:57:51] Waiting for event
+[18:57:56] Waiting for event
+[18:58:01] Waiting for event
+[18:58:06] Waiting for event
+[18:58:11] Waiting for event
+[18:58:16] Waiting for event
+[18:58:21] Waiting for event
+[18:58:26] Waiting for event
+[18:58:31] Waiting for event
+[18:58:36] Waiting for event
+[18:58:41] Waiting for event
+[18:58:46] Waiting for event
+[18:58:51] Waiting for event
+[18:58:56] Waiting for event
+[18:59:01] Waiting for event
+[18:59:07] Waiting for event
+[18:59:12] Waiting for event
+[18:59:17] Waiting for event
+[18:59:22] Waiting for event
+[18:59:27] Waiting for event
+[18:59:32] Waiting for event
+[18:59:37] Waiting for event
+[18:59:42] Waiting for event
+[18:59:47] Waiting for event
+[18:59:52] Waiting for event
+[18:59:57] Waiting for event
+[19:00:02] Waiting for event
+[19:00:07] Waiting for event
+[19:00:12] Waiting for event
+[19:00:17] Waiting for event
+[19:00:22] Waiting for event
+[19:00:27] Waiting for event
+[19:00:32] Waiting for event
+[19:00:37] Waiting for event
+[19:00:42] Waiting for event
+[19:00:47] Waiting for event
+[19:00:52] Waiting for event
+[19:00:57] Waiting for event
+[19:01:02] Waiting for event
+[19:01:07] Waiting for event
+[19:01:12] Waiting for event
+[19:01:17] Waiting for event
+[19:01:22] Waiting for event
+[19:01:27] Waiting for event
+[19:01:32] Waiting for event
+[19:01:37] Waiting for event
+[19:01:42] Waiting for event
+[19:01:47] Waiting for event
+[19:01:52] Waiting for event
+[19:01:57] Waiting for event
+[19:02:02] Waiting for event
+[19:02:07] Waiting for event
+[19:02:12] Waiting for event
+[19:02:17] Waiting for event
+[19:02:22] Waiting for event
+[19:02:27] Waiting for event
+[19:02:32] Waiting for event
+[19:02:37] Waiting for event
+[19:02:42] Waiting for event
+[19:02:47] Waiting for event
+[19:02:52] Waiting for event
+[19:02:57] Waiting for event
+[19:03:02] Waiting for event
+[19:03:07] Waiting for event
+[19:03:12] Waiting for event
+[19:03:17] Waiting for event
+[19:03:22] Waiting for event
+[19:03:27] Waiting for event
+[19:03:32] Waiting for event
+[19:03:37] Waiting for event
+[19:03:42] Waiting for event
+[19:03:47] Waiting for event
+[19:03:52] Waiting for event
+[19:03:57] Waiting for event
+[19:04:02] Waiting for event
+[19:04:07] Waiting for event
+[19:04:12] Waiting for event
+[19:04:17] Waiting for event
+[19:04:22] Waiting for event
+[19:04:27] Waiting for event
+[19:04:32] Waiting for event
+[19:04:37] Waiting for event
+[19:04:42] Waiting for event
+[19:04:47] Waiting for event
+[19:04:52] Waiting for event
+[19:04:57] Waiting for event
+[19:05:02] Waiting for event
+[19:05:07] Waiting for event
+[19:05:12] Waiting for event
+[19:05:17] Waiting for event
+[19:05:22] Waiting for event
+[19:05:27] Waiting for event
+[19:05:32] Waiting for event
+[19:05:37] Waiting for event
+[19:05:42] Waiting for event
+[19:05:47] Waiting for event
+[19:05:52] Waiting for event
+[19:05:57] Waiting for event
+[19:06:02] Waiting for event
+[19:06:07] Waiting for event
+[19:06:12] Waiting for event
+[19:06:17] Waiting for event
+[19:06:22] Waiting for event
+[19:06:27] Waiting for event
+[19:06:32] Waiting for event
+[19:06:37] Waiting for event
+[19:06:42] Waiting for event
+[19:06:47] Waiting for event
+[19:06:52] Waiting for event
+[19:06:57] Waiting for event
+[19:07:02] Waiting for event
+[19:07:07] Waiting for event
+[19:07:12] Waiting for event
+[19:07:17] Waiting for event
+[19:07:22] Waiting for event
+[19:07:27] Waiting for event
+[19:07:32] Waiting for event
+[19:07:37] Waiting for event
+[19:07:42] Waiting for event
+[19:07:47] Waiting for event
+[19:07:52] Waiting for event
+[19:07:57] Waiting for event
+[19:08:02] Waiting for event
+[19:08:07] Waiting for event
+[19:08:12] Waiting for event
+[19:08:17] Waiting for event
+[19:08:22] Waiting for event
+[19:08:27] Waiting for event
+[19:08:32] Waiting for event
+[19:08:37] Waiting for event
+[19:08:42] Waiting for event
+[19:08:47] Waiting for event
+[19:08:52] Waiting for event
+[19:08:57] Waiting for event
+[19:09:02] Waiting for event
+[19:09:07] Waiting for event
+[19:09:12] Waiting for event
+[19:09:17] Waiting for event
+[19:09:22] Waiting for event
+[19:09:28] Waiting for event
+[19:09:33] Waiting for event
+[19:09:38] Waiting for event
+[19:09:43] Waiting for event
+[19:09:48] Waiting for event
+[19:09:53] Waiting for event
+[19:09:58] Waiting for event
+[19:10:03] Waiting for event
+[19:10:08] Waiting for event
+[19:10:13] Waiting for event
+[19:10:18] Waiting for event
+[19:10:23] Waiting for event
+[19:10:28] Waiting for event
+[19:10:33] Waiting for event
+[19:10:38] Waiting for event
+[19:10:43] Waiting for event
+[19:10:48] Waiting for event
+[19:10:53] Waiting for event
+[19:10:58] Waiting for event
+[19:11:03] Waiting for event
+[19:11:08] Waiting for event
+[19:11:13] Waiting for event
+[19:11:18] Waiting for event
+[19:11:23] Waiting for event
+[19:11:28] Waiting for event
+[19:11:33] Waiting for event
+[19:11:38] Waiting for event
+[19:11:43] Waiting for event
+[19:11:48] Waiting for event
+[19:11:53] Waiting for event
+[19:11:58] Waiting for event
+[19:12:03] Waiting for event
+[19:12:08] Waiting for event
+[19:12:13] Waiting for event
+[19:12:18] Waiting for event
+[19:12:23] Waiting for event
+[19:12:28] Waiting for event
+[19:12:33] Waiting for event
+[19:12:38] Waiting for event
+[19:12:43] Waiting for event
+[19:12:48] Waiting for event
+[19:12:53] Waiting for event
+[19:12:58] Waiting for event
+[19:13:03] Waiting for event
+[19:13:08] Waiting for event
+[19:13:13] Waiting for event
+[19:13:18] Waiting for event
+[19:13:23] Waiting for event
+[19:13:28] Waiting for event
+[19:13:33] Waiting for event
+[19:13:38] Waiting for event
+[19:13:43] Waiting for event
+[19:13:48] Waiting for event
+[19:13:53] Waiting for event
+[19:13:58] Waiting for event
+[19:14:03] Waiting for event
+[19:14:08] Waiting for event
+[19:14:13] Waiting for event
+[19:14:18] Waiting for event
+[19:14:23] Waiting for event
+[19:14:28] Waiting for event
+[19:14:33] Waiting for event
+[19:14:38] Waiting for event
+[19:14:43] Waiting for event
+[19:14:48] Waiting for event
+[19:14:53] Waiting for event
+[19:14:58] Waiting for event
+[19:15:03] Waiting for event
+[19:15:08] Waiting for event
+[19:15:13] Waiting for event
+[19:15:18] Waiting for event
+[19:15:23] Waiting for event
+[19:15:28] Waiting for event
+[19:15:33] Waiting for event
+[19:15:38] Waiting for event
+[19:15:43] Waiting for event
+[19:15:48] Waiting for event
+[19:15:53] Waiting for event
+[19:15:58] Waiting for event
+[19:16:03] Waiting for event
+[19:16:08] Waiting for event
+[19:16:13] Waiting for event
+[19:16:18] Waiting for event
+[19:16:23] Waiting for event
+[19:16:28] Waiting for event
+[19:16:33] Waiting for event
+[19:16:38] Waiting for event
+[19:16:43] Waiting for event
+[19:16:48] Waiting for event
+[19:16:53] Waiting for event
+[19:16:58] Waiting for event
+[19:17:03] Waiting for event
+[19:17:08] Waiting for event
+[19:17:13] Waiting for event
+[19:17:18] Waiting for event
+[19:17:23] Waiting for event
+[19:17:28] Waiting for event
+[19:17:33] Waiting for event
+[19:17:38] Waiting for event
+[19:17:43] Waiting for event
+[19:17:48] Waiting for event
+[19:17:53] Waiting for event
+[19:17:58] Waiting for event
+[19:18:03] Waiting for event
+[19:18:08] Waiting for event
+[19:18:13] Waiting for event
+[19:18:18] Waiting for event
+[19:18:23] Waiting for event
+[19:18:28] Waiting for event
+[19:18:33] Waiting for event
+[19:18:38] Waiting for event
+[19:18:43] Waiting for event
+[19:18:48] Waiting for event
+[19:18:53] Waiting for event
+[19:18:58] Waiting for event
+[19:19:03] Waiting for event
+[19:19:08] Waiting for event
+[19:19:13] Waiting for event
+[19:19:18] Waiting for event
+[19:19:23] Waiting for event
+[19:19:28] Waiting for event
+[19:19:33] Waiting for event
+[19:19:38] Waiting for event
+[19:19:43] Waiting for event
+[19:19:48] Waiting for event
+[19:19:53] Waiting for event
+[19:19:58] Waiting for event
+[19:20:03] Waiting for event
+[19:20:09] Waiting for event
+[19:20:14] Waiting for event
+[19:20:19] Waiting for event
+[19:20:24] Waiting for event
+[19:20:29] Waiting for event
+[19:20:34] Waiting for event
+[19:20:39] Waiting for event
+[19:20:44] Waiting for event
+[19:20:49] Waiting for event
+[19:20:54] Waiting for event
+[19:20:59] Waiting for event
+[19:21:04] Waiting for event
+[19:21:09] Waiting for event
+[19:21:14] Waiting for event
+[19:21:19] Waiting for event
+[19:21:24] Waiting for event
+[19:21:29] Waiting for event
+[19:21:34] Waiting for event
+[19:21:39] Waiting for event
+[19:21:44] Waiting for event
+[19:21:49] Waiting for event
+[19:21:54] Waiting for event
+[19:21:54] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49469
+[19:21:54] 	Status is now: RespondedAwaitingApproval
+[19:21:54] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:49469
+[19:21:54] Accepted connection from acc1 | acc1 | TestString
+[19:21:54] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49469
+[19:21:54] 	Status is now: RespondedConnect
+[19:21:54] Waiting for event
+[19:21:54] Waiting for event
+[19:21:54] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49469
+[19:21:54] 	Status is now: Connected
+[19:21:54] Waiting for event
+[19:21:54] Recieved TESTnotnull: Data | 192.168.1.245:49469
+[19:21:54]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:49469
+[19:21:54] acc1 logs in from 192.168.1.245:49469
+[19:21:54] Waiting for event
+[19:21:54] Recieved TESTnotnull: Data | 192.168.1.245:49469
+[19:21:54] From: acc1: request = ViewWorldMap
+[19:21:54]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:49469
+[19:21:54]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49469
+[19:21:54] Waiting for event
+[19:21:55] Recieved TESTnotnull: Data | 192.168.1.245:49469
+[19:21:55] From: acc1: request = ViewChar
+[19:21:55]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:49469
+[19:21:55]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49469
+[19:21:55] Waiting for event
+[19:22:00] Waiting for event
+[19:22:05] Waiting for event
+[19:22:10] Waiting for event
+[19:22:15] Waiting for event
+[19:22:20] Waiting for event
+[19:22:25] Waiting for event
+[19:22:30] Waiting for event
+[19:22:35] Waiting for event
+[19:22:40] Waiting for event
+[19:22:45] Waiting for event
+[19:22:50] Waiting for event
+[19:22:55] Waiting for event
+[19:23:00] Waiting for event
+[19:23:05] Waiting for event
+[19:23:05] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59704
+[19:23:05] 	Status is now: RespondedAwaitingApproval
+[19:23:05] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:59704
+[19:23:05] Accepted connection from acc1 | acc1 | TestString
+[19:23:05] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59704
+[19:23:05] 	Status is now: RespondedConnect
+[19:23:05] Waiting for event
+[19:23:05] Waiting for event
+[19:23:05] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59704
+[19:23:05] 	Status is now: Connected
+[19:23:05] Waiting for event
+[19:23:05] Recieved TESTnotnull: Data | 192.168.1.245:59704
+[19:23:05]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:59704
+[19:23:05] acc1 logs in from 192.168.1.245:59704
+[19:23:05] Waiting for event
+[19:23:06] Recieved TESTnotnull: Data | 192.168.1.245:59704
+[19:23:06] From: acc1: request = ViewWorldMap
+[19:23:06]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:59704
+[19:23:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59704
+[19:23:06] Waiting for event
+[19:23:06] Recieved TESTnotnull: Data | 192.168.1.245:59704
+[19:23:06] From: acc1: request = ViewChar
+[19:23:06]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:59704
+[19:23:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59704
+[19:23:06] Waiting for event
+[19:23:11] Waiting for event
+[19:23:16] Waiting for event
+[19:23:21] Waiting for event
+[19:23:26] Waiting for event
+[19:23:31] Waiting for event
+[19:23:36] Waiting for event
+[19:23:41] Waiting for event
+[19:23:46] Waiting for event
+[19:23:51] Waiting for event
+[19:23:56] Waiting for event
+[19:23:57] Recieved TESTnotnull: StatusChanged | 192.168.1.245:52760
+[19:23:57] 	Status is now: RespondedAwaitingApproval
+[19:23:57] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:52760
+[19:23:57] Accepted connection from acc1 | acc1 | TestString
+[19:23:57] Recieved TESTnotnull: StatusChanged | 192.168.1.245:52760
+[19:23:57] 	Status is now: RespondedConnect
+[19:23:57] Waiting for event
+[19:23:57] Waiting for event
+[19:23:57] Recieved TESTnotnull: StatusChanged | 192.168.1.245:52760
+[19:23:57] 	Status is now: Connected
+[19:23:57] Waiting for event
+[19:23:57] Recieved TESTnotnull: Data | 192.168.1.245:52760
+[19:23:57]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:52760
+[19:23:57] acc1 logs in from 192.168.1.245:52760
+[19:23:57] Waiting for event
+[19:23:57] Recieved TESTnotnull: Data | 192.168.1.245:52760
+[19:23:57] From: acc1: request = ViewWorldMap
+[19:23:57]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:52760
+[19:23:57]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:52760
+[19:23:57] Waiting for event
+[19:23:58] Recieved TESTnotnull: Data | 192.168.1.245:52760
+[19:23:58] From: acc1: request = ViewChar
+[19:23:58]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:52760
+[19:23:58]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:52760
+[19:23:58] Waiting for event
+[19:24:03] Waiting for event
+[19:24:08] Waiting for event
+[19:24:13] Waiting for event
+[19:24:18] Waiting for event
+[19:24:23] Waiting for event
+[19:24:28] Waiting for event
+[19:24:33] Waiting for event
+[19:24:34] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49469
+[19:24:34] 	Status is now: Disconnected
+[19:24:34] 192.168.1.245:49469 has disconnected. Reason: Connection timed out
+[19:24:34] Client acc1 has disconnected.
+[19:24:34] Waiting for event
+[19:24:39] Waiting for event
+[19:24:44] Waiting for event
+[19:24:50] Waiting for event
+[19:24:55] Waiting for event
+[19:25:00] Waiting for event
+[19:25:03] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58556
+[19:25:03] 	Status is now: RespondedAwaitingApproval
+[19:25:03] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:58556
+[19:25:03] Accepted connection from acc1 | acc1 | TestString
+[19:25:03] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58556
+[19:25:03] 	Status is now: RespondedConnect
+[19:25:03] Waiting for event
+[19:25:03] Waiting for event
+[19:25:03] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58556
+[19:25:03] 	Status is now: Connected
+[19:25:03] Waiting for event
+[19:25:03] Recieved TESTnotnull: Data | 192.168.1.245:58556
+[19:25:03]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:58556
+[19:25:03] acc1 logs in from 192.168.1.245:58556
+[19:25:03] Waiting for event
+[19:25:03] Recieved TESTnotnull: Data | 192.168.1.245:58556
+[19:25:03] From: acc1: request = ViewWorldMap
+[19:25:03]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:58556
+[19:25:03]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58556
+[19:25:03] Waiting for event
+[19:25:04] Recieved TESTnotnull: Data | 192.168.1.245:58556
+[19:25:04] From: acc1: request = ViewChar
+[19:25:04]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58556
+[19:25:04]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58556
+[19:25:04] Waiting for event
+[19:25:09] Waiting for event
+[19:25:14] Waiting for event
+[19:25:19] Waiting for event
+[19:25:24] Waiting for event
+[19:25:26] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59704
+[19:25:26] 	Status is now: Disconnected
+[19:25:26] 192.168.1.245:59704 has disconnected. Reason: Connection timed out
+[19:25:26] Client acc1 has disconnected.
+[19:25:26] Waiting for event
+[19:25:31] Waiting for event
+[19:25:36] Waiting for event
+[19:25:41] Waiting for event
+[19:25:46] Waiting for event
+[19:25:51] Waiting for event
+[19:25:56] Waiting for event
+[19:26:01] Waiting for event
+[19:26:06] Waiting for event
+[19:26:11] Waiting for event
+[19:26:16] Waiting for event
+[19:26:21] Waiting for event
+[19:26:26] Waiting for event
+[19:26:31] Waiting for event
+[19:26:36] Waiting for event
+[19:26:37] Recieved TESTnotnull: StatusChanged | 192.168.1.245:52760
+[19:26:37] 	Status is now: Disconnected
+[19:26:37] 192.168.1.245:52760 has disconnected. Reason: Connection timed out
+[19:26:37] Client acc1 has disconnected.
+[19:26:37] Waiting for event
+[19:26:42] Waiting for event
+[19:26:47] Waiting for event
+[19:26:52] Waiting for event
+[19:26:57] Waiting for event
+[19:27:02] Waiting for event
+[19:27:07] Waiting for event
+[19:27:12] Waiting for event
+[19:27:17] Waiting for event
+[19:27:22] Waiting for event
+[19:27:27] Waiting for event
+[19:27:32] Waiting for event
+[19:27:37] Waiting for event
+[19:27:39] Recieved TESTnotnull: StatusChanged | 192.168.1.245:52074
+[19:27:39] 	Status is now: RespondedAwaitingApproval
+[19:27:39] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:52074
+[19:27:39] Accepted connection from acc1 | acc1 | TestString
+[19:27:39] Recieved TESTnotnull: StatusChanged | 192.168.1.245:52074
+[19:27:39] 	Status is now: RespondedConnect
+[19:27:39] Waiting for event
+[19:27:39] Waiting for event
+[19:27:39] Recieved TESTnotnull: StatusChanged | 192.168.1.245:52074
+[19:27:39] 	Status is now: Connected
+[19:27:39] Waiting for event
+[19:27:39] Recieved TESTnotnull: Data | 192.168.1.245:52074
+[19:27:39]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:52074
+[19:27:39] acc1 logs in from 192.168.1.245:52074
+[19:27:39] Waiting for event
+[19:27:39] Recieved TESTnotnull: Data | 192.168.1.245:52074
+[19:27:39] From: acc1: request = ViewWorldMap
+[19:27:39]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:52074
+[19:27:39]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:52074
+[19:27:39] Waiting for event
+[19:27:39] Recieved TESTnotnull: Data | 192.168.1.245:52074
+[19:27:39] From: acc1: request = ViewChar
+[19:27:39]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:52074
+[19:27:39]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:52074
+[19:27:39] Waiting for event
+[19:27:45] Waiting for event
+[19:27:50] Waiting for event
+[19:27:55] Waiting for event
+[19:28:00] Waiting for event
+[19:28:05] Waiting for event
+[19:28:10] Waiting for event
+[19:28:15] Waiting for event
+[19:28:20] Waiting for event
+[19:28:25] Waiting for event
+[19:28:30] Waiting for event
+[19:28:35] Waiting for event
+[19:28:40] Waiting for event
+[19:28:45] Waiting for event
+[19:28:50] Waiting for event
+[19:28:55] Waiting for event
+[19:29:00] Waiting for event
+[19:29:04] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58556
+[19:29:04] 	Status is now: Disconnected
+[19:29:04] 192.168.1.245:58556 has disconnected. Reason: Connection timed out
+[19:29:04] Client acc1 has disconnected.
+[19:29:04] Waiting for event
+[19:29:09] Waiting for event
+[19:29:14] Waiting for event
+[19:29:16] Recieved TESTnotnull: StatusChanged | 192.168.1.245:64189
+[19:29:16] 	Status is now: RespondedAwaitingApproval
+[19:29:16] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:64189
+[19:29:16] Accepted connection from acc1 | acc1 | TestString
+[19:29:16] Recieved TESTnotnull: StatusChanged | 192.168.1.245:64189
+[19:29:16] 	Status is now: RespondedConnect
+[19:29:16] Waiting for event
+[19:29:16] Waiting for event
+[19:29:16] Recieved TESTnotnull: StatusChanged | 192.168.1.245:64189
+[19:29:16] 	Status is now: Connected
+[19:29:16] Waiting for event
+[19:29:16] Recieved TESTnotnull: Data | 192.168.1.245:64189
+[19:29:16]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:64189
+[19:29:16] acc1 logs in from 192.168.1.245:64189
+[19:29:16] Waiting for event
+[19:29:16] Recieved TESTnotnull: Data | 192.168.1.245:64189
+[19:29:16] From: acc1: request = ViewWorldMap
+[19:29:16]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:64189
+[19:29:16]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:64189
+[19:29:16] Waiting for event
+[19:29:17] Recieved TESTnotnull: Data | 192.168.1.245:64189
+[19:29:17] From: acc1: request = ViewChar
+[19:29:17]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:64189
+[19:29:17]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:64189
+[19:29:17] Waiting for event
+[19:29:22] Waiting for event
+[19:29:27] Waiting for event
+[19:29:32] Waiting for event
+[19:29:37] Waiting for event
+[19:29:42] Waiting for event
+[19:29:47] Waiting for event
+[19:29:52] Waiting for event
+[19:29:57] Waiting for event
+[19:30:02] Waiting for event
+[19:30:07] Waiting for event
+[19:30:09] Recieved TESTnotnull: StatusChanged | 192.168.1.245:52074
+[19:30:09] 	Status is now: Disconnected
+[19:30:09] 192.168.1.245:52074 has disconnected. Reason: Connection timed out
+[19:30:09] Client acc1 has disconnected.
+[19:30:09] Waiting for event
+[19:30:14] Waiting for event
+[19:30:19] Waiting for event
+[19:30:24] Waiting for event
+[19:30:29] Waiting for event
+[19:30:34] Waiting for event
+[19:30:39] Waiting for event
+[19:30:44] Waiting for event
+[19:30:49] Waiting for event
+[19:30:54] Waiting for event
+[19:30:59] Waiting for event
+[19:31:04] Waiting for event
+[19:31:09] Waiting for event
+[19:31:14] Waiting for event
+[19:31:19] Waiting for event
+[19:31:24] Waiting for event
+[19:31:29] Waiting for event
+[19:31:34] Waiting for event
+[19:31:39] Waiting for event
+[19:31:44] Waiting for event
+[19:31:49] Waiting for event
+[19:31:54] Waiting for event
+[19:31:55] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60674
+[19:31:55] 	Status is now: RespondedAwaitingApproval
+[19:31:55] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:60674
+[19:31:55] Accepted connection from acc1 | acc1 | TestString
+[19:31:55] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60674
+[19:31:55] 	Status is now: RespondedConnect
+[19:31:55] Waiting for event
+[19:31:55] Waiting for event
+[19:31:55] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60674
+[19:31:55] 	Status is now: Connected
+[19:31:55] Waiting for event
+[19:32:00] Waiting for event
+[19:32:05] Waiting for event
+[19:32:10] Waiting for event
+[19:32:15] Waiting for event
+[19:32:20] Waiting for event
+[19:32:25] Waiting for event
+[19:32:30] Waiting for event
+[19:32:35] Waiting for event
+[19:32:40] Waiting for event
+[19:32:45] Waiting for event
+[19:32:49] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53589
+[19:32:49] 	Status is now: RespondedAwaitingApproval
+[19:32:49] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:53589
+[19:32:49] Accepted connection from acc1 | acc1 | TestString
+[19:32:49] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53589
+[19:32:49] 	Status is now: RespondedConnect
+[19:32:49] Waiting for event
+[19:32:49] Waiting for event
+[19:32:49] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53589
+[19:32:49] 	Status is now: Connected
+[19:32:49] Waiting for event
+[19:32:54] Waiting for event
+[19:32:59] Waiting for event
+[19:33:04] Waiting for event
+[19:33:09] Waiting for event
+[19:33:14] Waiting for event
+[19:33:17] Recieved TESTnotnull: StatusChanged | 192.168.1.245:64189
+[19:33:17] 	Status is now: Disconnected
+[19:33:17] 192.168.1.245:64189 has disconnected. Reason: Connection timed out
+[19:33:17] Client acc1 has disconnected.
+[19:33:17] Waiting for event
+[19:33:22] Waiting for event
+[19:33:27] Waiting for event
+[19:33:32] Waiting for event
+[19:33:37] Waiting for event
+[19:33:42] Waiting for event
+[19:33:45] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60674
+[19:33:45] 	Status is now: Disconnected
+[19:33:45] 192.168.1.245:60674 has disconnected. Reason: Connection timed out
+[19:33:45] Client acc1 has disconnected.
+[19:33:45] Waiting for event
+[19:33:50] Waiting for event
+[19:33:55] Waiting for event
+[19:34:00] Waiting for event
+[19:34:05] Waiting for event
+[19:34:10] Waiting for event
+[19:34:15] Waiting for event
+[19:34:20] Waiting for event
+[19:34:25] Waiting for event
+[19:34:30] Waiting for event
+[19:34:35] Waiting for event
+[19:34:39] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53589
+[19:34:39] 	Status is now: Disconnected
+[19:34:39] 192.168.1.245:53589 has disconnected. Reason: Connection timed out
+[19:34:39] Client acc1 has disconnected.
+[19:34:39] Waiting for event
+[19:34:44] Waiting for event
+[19:34:47] Recieved TESTnotnull: StatusChanged | 192.168.1.245:64918
+[19:34:47] 	Status is now: RespondedAwaitingApproval
+[19:34:47] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:64918
+[19:34:47] Accepted connection from acc1 | acc1 | TestString
+[19:34:47] Recieved TESTnotnull: StatusChanged | 192.168.1.245:64918
+[19:34:47] 	Status is now: RespondedConnect
+[19:34:47] Waiting for event
+[19:34:47] Waiting for event
+[19:34:47] Recieved TESTnotnull: StatusChanged | 192.168.1.245:64918
+[19:34:47] 	Status is now: Connected
+[19:34:47] Waiting for event
+[19:34:48] Recieved TESTnotnull: Data | 192.168.1.245:64918
+[19:34:48]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:64918
+[19:34:48] acc1 logs in from 192.168.1.245:64918
+[19:34:48] Waiting for event
+[19:34:48] Recieved TESTnotnull: Data | 192.168.1.245:64918
+[19:34:48] From: acc1: request = ViewWorldMap
+[19:34:48]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:64918
+[19:34:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:64918
+[19:34:48] Waiting for event
+[19:34:48] Recieved TESTnotnull: Data | 192.168.1.245:64918
+[19:34:48] From: acc1: request = ViewChar
+[19:34:48]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:64918
+[19:34:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:64918
+[19:34:48] Waiting for event
+[19:34:53] Waiting for event
+[19:34:58] Waiting for event
+[19:35:03] Waiting for event
+[19:35:08] Waiting for event
+[19:35:13] Waiting for event
+[19:35:18] Waiting for event
+[19:35:23] Waiting for event
+[19:35:28] Waiting for event
+[19:35:33] Waiting for event
+[19:35:38] Waiting for event
+[19:35:43] Waiting for event
+[19:35:48] Waiting for event
+[19:35:53] Waiting for event
+[19:35:58] Waiting for event
+[19:36:03] Waiting for event
+[19:36:08] Waiting for event
+[19:36:13] Waiting for event
+[19:36:18] Waiting for event
+[19:36:23] Waiting for event
+[19:36:28] Waiting for event
+[19:36:33] Waiting for event
+[19:36:38] Waiting for event
+[19:36:43] Waiting for event
+[19:36:48] Waiting for event
+[19:36:53] Waiting for event
+[19:36:58] Waiting for event
+[19:37:03] Waiting for event
+[19:37:08] Waiting for event
+[19:37:13] Waiting for event
+[19:37:18] Waiting for event
+[19:37:23] Waiting for event
+[19:37:28] Waiting for event
+[19:37:33] Waiting for event
+[19:37:38] Waiting for event
+[19:37:43] Waiting for event
+[19:37:48] Waiting for event
+[19:37:53] Waiting for event
+[19:37:58] Waiting for event
+[19:38:03] Waiting for event
+[19:38:08] Waiting for event
+[19:38:13] Waiting for event
+[19:38:18] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61450
+[19:38:18] 	Status is now: RespondedAwaitingApproval
+[19:38:18] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:61450
+[19:38:18] Accepted connection from acc1 | acc1 | TestString
+[19:38:18] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61450
+[19:38:18] 	Status is now: RespondedConnect
+[19:38:18] Waiting for event
+[19:38:18] Waiting for event
+[19:38:18] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61450
+[19:38:18] 	Status is now: Connected
+[19:38:18] Waiting for event
+[19:38:18] Recieved TESTnotnull: Data | 192.168.1.245:61450
+[19:38:18]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:61450
+[19:38:18] acc1 logs in from 192.168.1.245:61450
+[19:38:18] Waiting for event
+[19:38:18] Recieved TESTnotnull: Data | 192.168.1.245:61450
+[19:38:18] From: acc1: request = ViewWorldMap
+[19:38:18]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61450
+[19:38:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61450
+[19:38:18] Waiting for event
+[19:38:19] Recieved TESTnotnull: Data | 192.168.1.245:61450
+[19:38:19] From: acc1: request = ViewChar
+[19:38:19]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61450
+[19:38:19]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61450
+[19:38:19] Waiting for event
+[19:38:24] Waiting for event
+[19:38:29] Waiting for event
+[19:38:34] Waiting for event
+[19:38:39] Waiting for event
+[19:38:44] Waiting for event
+[19:38:49] Waiting for event
+[19:38:54] Waiting for event
+[19:38:59] Waiting for event
+[19:39:00] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56584
+[19:39:00] 	Status is now: RespondedAwaitingApproval
+[19:39:00] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:56584
+[19:39:00] Accepted connection from acc1 | acc1 | TestString
+[19:39:00] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56584
+[19:39:00] 	Status is now: RespondedConnect
+[19:39:00] Waiting for event
+[19:39:00] Waiting for event
+[19:39:00] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56584
+[19:39:00] 	Status is now: Connected
+[19:39:00] Waiting for event
+[19:39:01] Recieved TESTnotnull: Data | 192.168.1.245:56584
+[19:39:01]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:56584
+[19:39:01] acc1 logs in from 192.168.1.245:56584
+[19:39:01] Waiting for event
+[19:39:01] Recieved TESTnotnull: Data | 192.168.1.245:56584
+[19:39:01] From: acc1: request = ViewWorldMap
+[19:39:01]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56584
+[19:39:01]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56584
+[19:39:01] Waiting for event
+[19:39:01] Recieved TESTnotnull: Data | 192.168.1.245:56584
+[19:39:01] From: acc1: request = ViewChar
+[19:39:01]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56584
+[19:39:01]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56584
+[19:39:01] Waiting for event
+[19:39:06] Waiting for event
+[19:39:11] Waiting for event
+[19:39:16] Waiting for event
+[19:39:21] Waiting for event
+[19:39:26] Waiting for event
+[19:39:31] Waiting for event
+[19:39:36] Waiting for event
+[19:39:41] Waiting for event
+[19:39:46] Waiting for event
+[19:39:49] Recieved TESTnotnull: StatusChanged | 192.168.1.245:64918
+[19:39:49] 	Status is now: Disconnected
+[19:39:49] 192.168.1.245:64918 has disconnected. Reason: Connection timed out
+[19:39:49] Client acc1 has disconnected.
+[19:39:49] Waiting for event
+[19:39:54] Waiting for event
+[19:39:59] Waiting for event
+[19:40:04] Waiting for event
+[19:40:08] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61450
+[19:40:08] 	Status is now: Disconnected
+[19:40:08] 192.168.1.245:61450 has disconnected. Reason: Connection timed out
+[19:40:08] Client acc1 has disconnected.
+[19:40:08] Waiting for event
+[19:40:13] Waiting for event
+[19:40:18] Waiting for event
+[19:40:23] Waiting for event
+[19:40:28] Waiting for event
+[19:40:33] Waiting for event
+[19:40:38] Waiting for event
+[19:40:43] Waiting for event
+[19:40:48] Waiting for event
+[19:40:53] Waiting for event
+[19:40:58] Waiting for event
+[19:41:03] Waiting for event
+[19:41:08] Waiting for event
+[19:41:13] Waiting for event
+[19:41:18] Waiting for event
+[19:41:23] Waiting for event
+[19:41:28] Waiting for event
+[19:41:33] Waiting for event
+[19:41:38] Waiting for event
+[19:41:43] Waiting for event
+[19:41:48] Waiting for event
+[19:41:53] Waiting for event
+[19:41:58] Waiting for event
+[19:42:03] Waiting for event
+[19:42:08] Waiting for event
+[19:42:13] Waiting for event
+[19:42:18] Waiting for event
+[19:42:23] Waiting for event
+[19:42:28] Waiting for event
+[19:42:33] Waiting for event
+[19:42:38] Waiting for event
+[19:42:43] Waiting for event
+[19:42:48] Waiting for event
+[19:42:53] Waiting for event
+[19:42:58] Waiting for event
+[19:43:03] Waiting for event
+[19:43:08] Waiting for event
+[19:43:13] Waiting for event
+[19:43:18] Waiting for event
+[19:43:23] Waiting for event
+[19:43:28] Waiting for event
+[19:43:33] Waiting for event
+[19:43:38] Waiting for event
+[19:43:43] Waiting for event
+[19:43:48] Waiting for event
+[19:43:53] Waiting for event
+[19:43:58] Waiting for event
+[19:44:03] Waiting for event
+[19:44:08] Waiting for event
+[19:44:13] Waiting for event
+[19:44:18] Waiting for event
+[19:44:23] Waiting for event
+[19:44:28] Waiting for event
+[19:44:33] Waiting for event
+[19:44:38] Waiting for event
+[19:44:43] Waiting for event
+[19:44:48] Waiting for event
+[19:44:53] Waiting for event
+[19:44:58] Waiting for event
+[19:45:03] Waiting for event
+[19:45:08] Waiting for event
+[19:45:13] Waiting for event
+[19:45:18] Waiting for event
+[19:45:23] Waiting for event
+[19:45:28] Waiting for event
+[19:45:33] Waiting for event
+[19:45:38] Waiting for event
+[19:45:43] Waiting for event
+[19:45:48] Waiting for event
+[19:45:53] Waiting for event
+[19:45:58] Waiting for event
+[19:46:03] Waiting for event
+[19:46:08] Waiting for event
+[19:46:13] Waiting for event
+[19:46:18] Waiting for event
+[19:46:23] Waiting for event
+[19:46:28] Waiting for event
+[19:46:33] Waiting for event
+[19:46:38] Waiting for event
+[19:46:43] Waiting for event
+[19:46:48] Waiting for event
+[19:46:53] Waiting for event
+[19:46:59] Waiting for event
+[19:47:04] Waiting for event
+[19:47:09] Waiting for event
+[19:47:14] Waiting for event
+[19:47:19] Waiting for event
+[19:47:24] Waiting for event
+[19:47:29] Waiting for event
+[19:47:34] Waiting for event
+[19:47:39] Waiting for event
+[19:47:44] Waiting for event
+[19:47:49] Waiting for event
+[19:47:54] Waiting for event
+[19:47:59] Waiting for event
+[19:48:04] Waiting for event
+[19:48:09] Waiting for event
+[19:48:14] Waiting for event
+[19:48:19] Waiting for event
+[19:48:24] Waiting for event
+[19:48:29] Waiting for event
+[19:48:34] Waiting for event
+[19:48:39] Waiting for event
+[19:48:44] Waiting for event
+[19:48:49] Waiting for event
+[19:48:54] Waiting for event
+[19:48:59] Waiting for event
+[19:49:04] Waiting for event
+[19:49:09] Waiting for event
+[19:49:14] Waiting for event
+[19:49:19] Waiting for event
+[19:49:24] Waiting for event
+[19:49:29] Waiting for event
+[19:49:34] Waiting for event
+[19:49:39] Waiting for event
+[19:49:44] Waiting for event
+[19:49:49] Waiting for event
+[19:49:54] Waiting for event
+[19:49:59] Waiting for event
+[19:50:04] Waiting for event
+[19:50:09] Waiting for event
+[19:50:14] Waiting for event
+[19:50:19] Waiting for event
+[19:50:24] Waiting for event
+[19:50:29] Waiting for event
+[19:50:34] Waiting for event
+[19:50:39] Waiting for event
+[19:50:44] Waiting for event
+[19:50:49] Waiting for event
+[19:50:54] Waiting for event
+[19:50:59] Waiting for event
+[19:51:04] Waiting for event
+[19:51:09] Waiting for event
+[19:51:14] Waiting for event
+[19:51:19] Waiting for event
+[19:51:24] Waiting for event
+[19:51:29] Waiting for event
+[19:51:34] Waiting for event
+[19:51:39] Waiting for event
+[19:51:44] Waiting for event
+[19:51:49] Waiting for event
+[19:51:54] Waiting for event
+[19:51:59] Waiting for event
+[19:52:04] Waiting for event
+[19:52:09] Waiting for event
+[19:52:14] Waiting for event
