@@ -27,8 +27,8 @@ namespace JominiEngine
         /******Server Settings  ******/
         private readonly int port = 8080;
         //private readonly string host_name = "localhost";
-        private readonly string host_name = "192.168.1.245";
-        //private readonly string host_name = "92.239.228.86";
+        private readonly string host_name = "139.162.225.87";
+        //private readonly string host_name = "139.162.225.87";
         private readonly int max_connections = 2000;
         // Used in the NetPeerConfiguration to identify application
         private readonly string app_identifier = "test";
@@ -141,17 +141,21 @@ namespace JominiEngine
             String dir = Directory.GetCurrentDirectory();
             //dir = dir.Remove(dir.IndexOf("RepairHist_mmo"));
             String path;
-            if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
-            {
-                path = Path.Combine(dir, "Certificates");
-            }   
-            else
-            {
-                dir = Directory.GetParent(dir).FullName;
-                dir = Directory.GetParent(dir).FullName;
-                path = Path.Combine(dir, "Certificates");
-            }
-            LogInManager.InitialiseCertificateAndRSA(path);
+            //if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
+		//{
+                //path = Path.Combine(dir, "Certificates");
+		//}   
+            //else
+		//{
+		//dir  = Directory.GetParent(dir).FullName;
+		      // dir = Directory.GetParent(dir).FullName
+		      // path = Path.Combine(dir, "Certificates");
+		  // }
+	    dir = Directory.GetParent(dir).FullName;
+	    dir = Directory.GetParent(dir).FullName;
+	    path = Path.Combine(dir, "Certificates");
+
+	    LogInManager.InitialiseCertificateAndRSA(path);
             if (createAccountForAllPCs)
                 createUsersForEachNotUsedPC();
         }

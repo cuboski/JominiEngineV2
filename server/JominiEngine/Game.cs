@@ -32,18 +32,22 @@ namespace JominiEngine {
             string path;
 
             // if the program is being run in debug mode, this will obtain the correct directory
-            if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) {
-                if (dir.Contains("bin")) {
-                    dir = Directory.GetParent(dir).FullName;
-                }
-                path = Path.Combine(dir, "JominiEngine", "CSVs");
-            } else {
-                if (dir.Contains("bin")) {
-                    dir = Directory.GetParent(dir).FullName;
-                    dir = Directory.GetParent(dir).FullName;
-                }
-                path = Path.Combine(dir, "CSVs");
-            }
+            //if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) {
+                //if (dir.Contains("bin")) {
+                    //dir = Directory.GetParent(dir).FullName;
+		    //}
+                //path = Path.Combine(dir, "JominiEngine", "CSVs");
+		//} else {
+		//if (dir.Contains("bin")) {
+	           //dir = Directory.GetParent(dir).FullName;
+		   //dir = Directory.GetParent(dir).FullName;
+		  //}
+	       //path = Path.Combine(dir, "CSVs");
+	      //}
+
+	    dir = Directory.GetParent(dir).FullName;
+	    dir = Directory.GetParent(dir).FullName;
+	    path = Path.Combine(dir,"CSVs");
 
             // point towards the game objects and map data
             var gameObjects = Path.Combine(path, "gameObjects - Copy.csv");
@@ -52,7 +56,7 @@ namespace JominiEngine {
                 Console.WriteLine("wrong dir");
             }
 
-            InitGameObjects("testBucket", gameObjects, mapData,
+            InitGameObjects("testBucket",gameObjects, mapData,
                 start: 1194, king1: "Char_47", king2: "Char_40", herald1: "Char_1", sysAdmin: null);
         }
 
