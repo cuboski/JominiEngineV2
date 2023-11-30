@@ -1,0 +1,73 @@
+[19:34:50] Port forwarded successfully.
+[19:34:50] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[19:34:50] Waiting for event
+[19:34:55] Waiting for event
+[19:35:00] Waiting for event
+[19:35:05] Waiting for event
+[19:35:10] Waiting for event
+[19:35:15] Waiting for event
+[19:35:20] Waiting for event
+[19:35:25] Waiting for event
+[19:35:30] Waiting for event
+[19:35:35] Waiting for event
+[19:35:40] Waiting for event
+[19:35:45] Waiting for event
+[19:35:50] Waiting for event
+[19:35:55] Waiting for event
+[19:36:00] Waiting for event
+[19:36:05] Waiting for event
+[19:36:10] Waiting for event
+[19:36:15] Waiting for event
+[19:36:20] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59983
+[19:36:20] 	Status is now: RespondedAwaitingApproval
+[19:36:20] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:59983
+[19:36:20] Accepted connection from acc1 | acc1 | TestString
+[19:36:20] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59983
+[19:36:20] 	Status is now: RespondedConnect
+[19:36:20] Waiting for event
+[19:36:20] Waiting for event
+[19:36:20] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59983
+[19:36:20] 	Status is now: Connected
+[19:36:20] Waiting for event
+[19:36:21] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:21]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:59983
+[19:36:21] acc1 logs in from 192.168.1.245:59983
+[19:36:21] Waiting for event
+[19:36:21] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:21] From: acc1: request = ViewWorldMap
+[19:36:21]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:59983
+[19:36:21]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59983
+[19:36:21] Waiting for event
+[19:36:21] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:21] From: acc1: request = ViewChar
+[19:36:21]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:59983
+[19:36:21]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59983
+[19:36:21] Waiting for event
+[19:36:25] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:25] From: acc1: request = CreateFactionRequest
+[19:36:25]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:59983
+[19:36:25]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59983
+[19:36:25] Waiting for event
+[19:36:28] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:28] From: acc1: request = CreateFactionRequest
+[19:36:28]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:59983
+[19:36:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59983
+[19:36:28] Waiting for event
+[19:36:28] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:28] From: acc1: request = CreateFactionRequest
+[19:36:28]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:59983
+[19:36:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59983
+[19:36:28] Waiting for event
+[19:36:28] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:28] From: acc1: request = CreateFactionRequest
+[19:36:28]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:59983
+[19:36:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59983
+[19:36:28] Waiting for event
+[19:36:29] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:29] From: acc1: request = CreateFactionRequest
+[19:36:29]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:59983
+[19:36:29]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59983
+[19:36:29] Waiting for event
+[19:36:29] Recieved TESTnotnull: Data | 192.168.1.245:59983
+[19:36:29] From: acc1: request = CreateFactionRequest
+[19:36:29]  Sending

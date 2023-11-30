@@ -1,0 +1,68 @@
+[23:38:45] Port forward FAILED 0
+[23:38:46] Port forwarded successfully.
+[23:38:46] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[23:38:46] Waiting for event
+[23:38:48] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:51325
+[23:38:48] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:51325
+[23:38:48] Waiting for event
+[23:38:53] Waiting for event
+[23:38:58] Waiting for event
+[23:39:03] Waiting for event
+[23:39:08] Waiting for event
+[23:39:13] Waiting for event
+[23:39:18] Waiting for event
+[23:39:19] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60867
+[23:39:19] 	Status is now: RespondedAwaitingApproval
+[23:39:19] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:60867
+[23:39:19] Accepted connection from acc1 | acc1 | TestString
+[23:39:19] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60867
+[23:39:19] 	Status is now: RespondedConnect
+[23:39:19] Waiting for event
+[23:39:19] Waiting for event
+[23:39:19] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60867
+[23:39:19] 	Status is now: Connected
+[23:39:19] Waiting for event
+[23:39:19] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:19]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:60867
+[23:39:19] acc1 logs in from 192.168.1.245:60867
+[23:39:19] Waiting for event
+[23:39:20] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:20] From: acc1: request = ViewWorldMap
+[23:39:20]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:60867
+[23:39:20]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60867
+[23:39:20] Waiting for event
+[23:39:20] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:20] From: acc1: request = ViewChar
+[23:39:20]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:60867
+[23:39:20]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60867
+[23:39:20] Waiting for event
+[23:39:24] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:24] From: acc1: request = ViewChar
+[23:39:24]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:60867
+[23:39:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60867
+[23:39:24] Waiting for event
+[23:39:29] Waiting for event
+[23:39:32] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:32] From: acc1: request = CreateFactionRequest
+[23:39:32]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:60867
+[23:39:32]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60867
+[23:39:32] Waiting for event
+[23:39:32] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:32] From: acc1: request = ViewChar
+[23:39:32]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:60867
+[23:39:32]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60867
+[23:39:32] Waiting for event
+[23:39:33] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:33] From: acc1: request = ViewFactionRequestList
+[23:39:33]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:60867
+[23:39:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60867
+[23:39:33] Waiting for event
+[23:39:33] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:33] From: acc1: request = GetFactionRequest
+[23:39:33]  Sending to: acc1 | ActionType = GetFactionRequest | ResponseType = None | 192.168.1.245:60867
+[23:39:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60867
+[23:39:33] Waiting for event
+[23:39:36] Recieved TESTnotnull: Data | 192.168.1.245:60867
+[23:39:36] From: acc1: request = SignFact

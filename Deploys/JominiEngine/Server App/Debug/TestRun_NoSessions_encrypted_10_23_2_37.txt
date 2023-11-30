@@ -1,0 +1,128 @@
+[02:37:25] Port forward FAILED 0
+[02:37:26] Port forward FAILED 1
+[02:37:26] Port forwarded successfully.
+[02:37:26] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[02:37:26] Waiting for event
+[02:37:31] Recieved TESTnotnull: StatusChanged | 192.168.1.245:50053
+[02:37:31] 	Status is now: RespondedAwaitingApproval
+[02:37:31] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:50053
+[02:37:31] Accepted connection from acc1 | acc1 | TestString
+[02:37:31] Recieved TESTnotnull: StatusChanged | 192.168.1.245:50053
+[02:37:31] 	Status is now: RespondedConnect
+[02:37:31] Waiting for event
+[02:37:31] Waiting for event
+[02:37:31] Recieved TESTnotnull: StatusChanged | 192.168.1.245:50053
+[02:37:31] 	Status is now: Connected
+[02:37:31] Waiting for event
+[02:37:32] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:32]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:50053
+[02:37:32] acc1 logs in from 192.168.1.245:50053
+[02:37:32] Waiting for event
+[02:37:32] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:32] From: acc1: request = ViewWorldMap
+[02:37:32]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:50053
+[02:37:32]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:32] Waiting for event
+[02:37:32] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:32] From: acc1: request = ViewChar
+[02:37:32]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50053
+[02:37:32]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:32] Waiting for event
+[02:37:33] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:33] From: acc1: request = ListArmies
+[02:37:33]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:50053
+[02:37:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:33] Waiting for event
+[02:37:36] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:36] From: acc1: request = ViewChar
+[02:37:36]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50053
+[02:37:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:36] Waiting for event
+[02:37:36] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:36] From: acc1: request = RecruitTroops
+[02:37:36]  Sending to: acc1 | ActionType = RecruitTroops | ResponseType = Success | 192.168.1.245:50053
+[02:37:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:36] Waiting for event
+[02:37:36] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:36] From: acc1: request = ListArmies
+[02:37:36]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:50053
+[02:37:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:36] Waiting for event
+[02:37:37] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:37] From: acc1: request = ViewArmy
+[02:37:37]  Sending to: acc1 | ActionType = ViewArmy | ResponseType = Success | 192.168.1.245:50053
+[02:37:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:37] Waiting for event
+[02:37:42] Waiting for event
+[02:37:47] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:47] From: acc1: request = ViewWorldMap
+[02:37:47]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:50053
+[02:37:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:47] Waiting for event
+[02:37:47] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:47] From: acc1: request = ViewChar
+[02:37:47]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50053
+[02:37:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:47] Waiting for event
+[02:37:50] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:50] From: acc1: request = ListArmies
+[02:37:50]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:50053
+[02:37:50]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:50] Waiting for event
+[02:37:52] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:37:52] From: acc1: request = ViewArmy
+[02:37:52]  Sending to: acc1 | ActionType = ViewArmy | ResponseType = Success | 192.168.1.245:50053
+[02:37:52]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:37:52] Waiting for event
+[02:37:57] Waiting for event
+[02:38:02] Waiting for event
+[02:38:07] Waiting for event
+[02:38:07] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:07] From: acc1: request = ViewChar
+[02:38:07]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50053
+[02:38:07]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:07] Waiting for event
+[02:38:07] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:07] From: acc1: request = DropOffTroops
+[02:38:07]  Sending to: acc1 | ActionType = DropOffTroops | ResponseType = ArmyNoLeader | 192.168.1.245:50053
+[02:38:07]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:07] Waiting for event
+[02:38:07] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:07] From: acc1: request = ViewChar
+[02:38:07]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50053
+[02:38:07]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:07] Waiting for event
+[02:38:07] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:07] From: acc1: request = DropOffTroops
+[02:38:07]  Sending to: acc1 | ActionType = DropOffTroops | ResponseType = ArmyNoLeader | 192.168.1.245:50053
+[02:38:07]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:07] Waiting for event
+[02:38:08] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:08] From: acc1: request = ViewChar
+[02:38:08]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50053
+[02:38:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:08] Waiting for event
+[02:38:08] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:08] From: acc1: request = DropOffTroops
+[02:38:08]  Sending to: acc1 | ActionType = DropOffTroops | ResponseType = ArmyNoLeader | 192.168.1.245:50053
+[02:38:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:08] Waiting for event
+[02:38:08] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:08] From: acc1: request = ViewChar
+[02:38:08]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50053
+[02:38:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:08] Waiting for event
+[02:38:08] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:08] From: acc1: request = DropOffTroops
+[02:38:08]  Sending to: acc1 | ActionType = DropOffTroops | ResponseType = ArmyNoLeader | 192.168.1.245:50053
+[02:38:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:08] Waiting for event
+[02:38:08] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:08] From: acc1: request = ViewChar
+[02:38:08]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50053
+[02:38:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50053
+[02:38:08] Waiting for event
+[02:38:08] Recieved TESTnotnull: Data | 192.168.1.245:50053
+[02:38:08] From: acc1: request = DropOffTroops
+[02:38:08]  Sending to: acc1 | ActionType = DropOffTroops | ResponseType = ArmyNoLeader | 192.168.1.245:50053
+[02:38:08]  Sending t

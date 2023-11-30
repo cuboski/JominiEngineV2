@@ -1,0 +1,66 @@
+[00:43:22] Port forward FAILED 0
+[00:43:23] Port forwarded successfully.
+[00:43:23] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[00:43:23] Waiting for event
+[00:43:25] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:55590
+[00:43:25] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:55590
+[00:43:25] Waiting for event
+[00:43:30] Waiting for event
+[00:43:35] Waiting for event
+[00:43:40] Waiting for event
+[00:43:45] Waiting for event
+[00:43:48] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58099
+[00:43:48] 	Status is now: RespondedAwaitingApproval
+[00:43:48] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:58099
+[00:43:48] Accepted connection from acc1 | acc1 | TestString
+[00:43:48] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58099
+[00:43:48] 	Status is now: RespondedConnect
+[00:43:48] Waiting for event
+[00:43:48] Waiting for event
+[00:43:48] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58099
+[00:43:48] 	Status is now: Connected
+[00:43:48] Waiting for event
+[00:43:48] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:43:48]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:58099
+[00:43:48] acc1 logs in from 192.168.1.245:58099
+[00:43:48] Waiting for event
+[00:43:48] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:43:48] From: acc1: request = ViewWorldMap
+[00:43:48]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:58099
+[00:43:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58099
+[00:43:48] Waiting for event
+[00:43:49] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:43:49] From: acc1: request = ViewChar
+[00:43:49]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58099
+[00:43:49]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58099
+[00:43:49] Waiting for event
+[00:43:51] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:43:51] From: acc1: request = ViewChar
+[00:43:51]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58099
+[00:43:51]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58099
+[00:43:51] Waiting for event
+[00:43:52] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:43:52] From: acc1: request = ViewFactionRequestList
+[00:43:52]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:58099
+[00:43:52]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58099
+[00:43:52] Waiting for event
+[00:43:53] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:43:53] From: acc1: request = ViewChar
+[00:43:53]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58099
+[00:43:53]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58099
+[00:43:53] Waiting for event
+[00:43:55] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:43:55] From: acc1: request = ViewMyFiefs
+[00:43:55]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:58099
+[00:43:55]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58099
+[00:43:55] Waiting for event
+[00:44:00] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:44:00] From: acc1: request = CreateFactionRequest
+[00:44:00]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:58099
+[00:44:00]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58099
+[00:44:00] Waiting for event
+[00:44:01] Recieved TESTnotnull: Data | 192.168.1.245:58099
+[00:44:01] From: acc1: request = ViewChar
+[00:44:01]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:580

@@ -1,0 +1,66 @@
+[03:55:30] Port forward FAILED 0
+[03:55:31] Port forwarded successfully.
+[03:55:31] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[03:55:31] Waiting for event
+[03:55:36] Waiting for event
+[03:55:41] Waiting for event
+[03:55:41] Recieved TESTnotnull: StatusChanged | 192.168.1.245:55345
+[03:55:42] 	Status is now: RespondedAwaitingApproval
+[03:55:42] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:55345
+[03:55:42] Accepted connection from acc1 | acc1 | TestString
+[03:55:42] Recieved TESTnotnull: StatusChanged | 192.168.1.245:55345
+[03:55:42] 	Status is now: RespondedConnect
+[03:55:42] Waiting for event
+[03:55:42] Waiting for event
+[03:55:42] Recieved TESTnotnull: StatusChanged | 192.168.1.245:55345
+[03:55:42] 	Status is now: Connected
+[03:55:42] Waiting for event
+[03:55:42] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:42]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:55345
+[03:55:42] acc1 logs in from 192.168.1.245:55345
+[03:55:42] Waiting for event
+[03:55:42] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:42] From: acc1: request = ViewWorldMap
+[03:55:42]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:55345
+[03:55:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:55:42] Waiting for event
+[03:55:43] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:43] From: acc1: request = ViewChar
+[03:55:43]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:55345
+[03:55:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:55:43] Waiting for event
+[03:55:44] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:44] From: acc1: request = ViewChar
+[03:55:44]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:55345
+[03:55:44]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:55:44] Waiting for event
+[03:55:44] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:44] From: acc1: request = GetNPCList
+[03:55:44]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:55345
+[03:55:44]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:55:44] Waiting for event
+[03:55:45] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:45] From: acc1: request = ListArmies
+[03:55:45]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:55345
+[03:55:45]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:55:45] Waiting for event
+[03:55:47] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:47] From: acc1: request = ViewMyFiefs
+[03:55:47]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:55345
+[03:55:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:55:47] Waiting for event
+[03:55:49] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:49] From: acc1: request = ViewWorldMap
+[03:55:49]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:55345
+[03:55:49]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:55:49] Waiting for event
+[03:55:50] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:50] From: acc1: request = ViewChar
+[03:55:50]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:55345
+[03:55:50]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:55:50] Waiting for event
+[03:55:50] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[03:55:50] From: acc1: request = ViewMyFiefs
+[03:55:50]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:55345
+[03:55:50]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[03:5

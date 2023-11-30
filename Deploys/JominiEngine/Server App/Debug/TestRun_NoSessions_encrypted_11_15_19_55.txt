@@ -1,0 +1,68 @@
+[19:55:51] Port forward FAILED 0
+[19:55:52] Port forward FAILED 1
+[19:55:53] Port forwarded successfully.
+[19:55:53] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[19:55:53] Waiting for event
+[19:55:55] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:55:55] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:55:55] Waiting for event
+[19:55:59] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:55:59] Waiting for event
+[19:56:03] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:03] Waiting for event
+[19:56:07] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:07] Waiting for event
+[19:56:11] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:11] Waiting for event
+[19:56:15] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:15] Waiting for event
+[19:56:19] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:19] Waiting for event
+[19:56:23] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:23] Waiting for event
+[19:56:27] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:27] Waiting for event
+[19:56:31] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:31] Waiting for event
+[19:56:35] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:35] Waiting for event
+[19:56:39] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:39] Waiting for event
+[19:56:43] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:43] Waiting for event
+[19:56:47] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:47] Waiting for event
+[19:56:51] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:51] Waiting for event
+[19:56:55] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:61087
+[19:56:55] Waiting for event
+[19:57:00] Waiting for event
+[19:57:04] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49739
+[19:57:04] 	Status is now: RespondedAwaitingApproval
+[19:57:04] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:49739
+[19:57:05] Accepted connection from acc1 | acc1 | TestString
+[19:57:05] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49739
+[19:57:05] 	Status is now: RespondedConnect
+[19:57:05] Waiting for event
+[19:57:05] Waiting for event
+[19:57:05] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49739
+[19:57:05] 	Status is now: Connected
+[19:57:05] Waiting for event
+[19:57:05] Recieved TESTnotnull: Data | 
