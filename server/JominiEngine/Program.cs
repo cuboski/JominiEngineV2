@@ -164,7 +164,7 @@ namespace JominiEngine
             return end - start;
         }
 
-        /// <summary>
+	/// <summary>
         /// The main entry point for the application.
         /// </summary>
         static void Main()
@@ -174,8 +174,7 @@ namespace JominiEngine
             {
                 using (Globals_Server.LogFile = new System.IO.StreamWriter("LogFile.txt"))
                 {
-
-                    Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig", "../../app.config");
+		    Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig"); //, "home/JominiEngine/server/JominiEngine/app.config");
                     Globals_Server.rClient = Globals_Server.rCluster.CreateClient();
                     Globals_Server.LogFile.AutoFlush = true;
                     Globals_Server.logEvent("Server start");

@@ -31,6 +31,8 @@ namespace JominiEngine {
             // initialise game objects
             // This path handling should ensure that the correct path will be found in Linux, Windows or debug mode
             var dir = Directory.GetCurrentDirectory();
+
+	    Console.WriteLine($"Current Directory: {dir}");
             string path;
 
             // if the program is being run in debug mode, this will obtain the correct directory
@@ -45,11 +47,10 @@ namespace JominiEngine {
 		   //dir = Directory.GetParent(dir).FullName;
 		  //}
 	       //path = Path.Combine(dir, "CSVs");
-	      //}
+	    //}
 
 	    dir = Directory.GetParent(dir).FullName;
-	    dir = Directory.GetParent(dir).FullName;
-	    path = Path.Combine(dir,"CSVs");
+    	    path = Path.Combine(dir,"CSVs");
 
             Console.WriteLine(path);
 
@@ -59,6 +60,9 @@ namespace JominiEngine {
             if (!File.Exists(gameObjects) && !File.Exists(mapData)) {
                 Console.WriteLine("wrong dir");
             }
+
+	    gameObjects = "../../CSVs/gameObjects - Copy.csv";
+	    mapData = "../../CSVs/map.csv";
 
             InitGameObjects("testBucket",gameObjects, mapData,
                 start: 1194, king1: "Char_47", king2: "Char_40", herald1: "Char_1", sysAdmin: null);
