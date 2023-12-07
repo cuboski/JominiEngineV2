@@ -38,7 +38,7 @@ public class Controller : MonoBehaviour {
     public enum ViewingList {
         ArmiesInFief, YourArmies, Entourage, ListChars, AssignBailiff, AssignOverlord,
         SwitchCharacter, TransferFundsToFief, MyFiefs, Journal, FactionRequest, FactionMembers,
-        FactionJoinRequests
+        FactionJoinRequests, EstablishFactionPost, FactionFiefs
     }
 //
     public static ProtoClient protoClient;
@@ -1021,6 +1021,31 @@ public class Controller : MonoBehaviour {
         tclient.net.Send(request);
 
         return GetActionReply(Actions.ChangeFactionRank, tclient);
+    }
+
+    public static ProtoMessage EstablishFactionPost(string factionName, string fiefID) {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"Establish Faction Outpost for {factionName} in {fiefID}",
+            ActionType = Actions.EstablishFactionPost,
+            MessageFields = new string[] { factionName, fiefID }
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.EstablishFactionPost, tclient);
+    }
+
+    public static ProtoMessage ViewFactionPosts(string factionName)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"Viewing the allied fiefs for faction {factionName}",
+            ActionType = Actions.GetFactionPosts,
+            MessageFields = new string[] { factionName }
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.GetFactionPosts, tclient);
     }
 
     public static ProtoMessage TestButton() {

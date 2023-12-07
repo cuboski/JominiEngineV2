@@ -12,6 +12,8 @@ public class ViewFactionRequest : Controller
     [SerializeField] private Button btnViewMembers;
     [SerializeField] private Button btnSignCharter;
     [SerializeField] private Button btnJoinRequests;
+    [SerializeField] private Button btnEstablishPost;
+    [SerializeField] private Button btnViewAlliedFiefs;
 
     [SerializeField] private Text lblPageTitle;
     [SerializeField] private Text lblMessageForUser;
@@ -34,6 +36,8 @@ public class ViewFactionRequest : Controller
         btnViewMembers.onClick.AddListener(BtnViewMembers);
         btnSignCharter.onClick.AddListener(BtnSignCharter);
         btnJoinRequests.onClick.AddListener(BtnJoinRequests);
+        btnEstablishPost.onClick.AddListener(BtnEstablishOutpost);
+        btnViewAlliedFiefs.onClick.AddListener(BtnViewAlliedFiefs);
 
         lblPageTitle.text = viewedFaction.factionName;
         homeFief = (ProtoFief)GetFiefDetails(viewedFaction.factionBaseID, tclient);
@@ -95,6 +99,18 @@ public class ViewFactionRequest : Controller
         else
             DisplayMessage($"{protoClient.activeChar.firstName} {protoClient.activeChar.familyName}'s " +
                 $"request to join {viewedFaction.factionName} has been sent");
+    }
+
+    private void BtnEstablishOutpost()
+    {
+        viewingListSelectAction = ViewingList.EstablishFactionPost;
+        GoToScene(SceneName.ViewingList);
+    }
+
+    private void BtnViewAlliedFiefs()
+    {
+        viewingListSelectAction = ViewingList.FactionFiefs;
+        GoToScene(SceneName.ViewingList);
     }
 
     private void DisplayMessage(string message)

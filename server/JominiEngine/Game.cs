@@ -3464,6 +3464,53 @@ namespace JominiEngine {
         }
 
         /// <summary>
+        /// Add a fief to the list of a factions allied fiefs
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="fiefID"></param>
+        /// <returns></returns>
+        public static ProtoMessage EstablishFactionPost(string factionName, string fiefID)
+        {
+            Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", factionName);
+            ProtoMessage reply = new ProtoMessage();
+
+            // check that fief exists
+            DisplayMessages err;
+            Utility_Methods.GetFief(fiefID, out err);
+            
+
+            f.alliedFiefs.Add(fiefID);
+            DatabaseWrite.DatabaseWrite_Faction("testBucket", f);
+
+            reply.ResponseType = DisplayMessages.Success;
+            return reply;
+        }
+
+        /// <summary>
+        /// Create a list of all the fiefs allied with a faction
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <returns></returns>
+        public static ProtoMessage GetFactionPosts(string factionName)
+        {
+            Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", factionName);
+            ProtoGenericArray<ProtoFief> reply = new ProtoGenericArray<ProtoFief>();
+            reply.fields = new ProtoFief[f.alliedFiefs.Count];
+
+            DisplayMessages err;
+            var i = 0;
+            foreach(string s in f.alliedFiefs)
+            {
+                var pF = new ProtoFief(Utility_Methods.GetFief(s, out err));
+                reply.fields[i] = pF;
+                i++;
+            }
+
+            reply.ResponseType = DisplayMessages.Success;
+            return reply;
+        }
+
+        /// <summary>
         /// Translates a message from a client into an action to be carried out
         /// </summary>
         /// <param name="msgIn">The client's request. Cannot be null</param>
@@ -3883,6 +3930,14 @@ namespace JominiEngine {
                 case Actions.ChangeFactionRank:
                     {
                         return ChangeFactionRank(msgIn.MessageFields[1], msgIn.MessageFields[2], msgIn.MessageFields[3]);
+                    }
+                case Actions.EstablishFactionPost:
+                    {
+                        return EstablishFactionPost(msgIn.MessageFields[1], msgIn.MessageFields[2]);
+                    }
+                case Actions.GetFactionPosts:
+                    {
+                        return GetFactionPosts(msgIn.MessageFields[1]);
                     }
                 default: {
                         return null;

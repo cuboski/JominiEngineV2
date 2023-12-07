@@ -21,7 +21,8 @@ namespace JominiEngine
         SiegeRoundStorm, SiegeRoundNegotiate, SiegeList, ViewSiege, EndSiege, DisbandArmy, SpyFief, SpyCharacter, SpyArmy,
         Kidnap, ViewCaptives, ViewCaptive, RansomCaptive, ReleaseCaptive, ExecuteCaptive, RespondRansom, SeasonUpdate,
         GetTravelCost, GetAvailableTravelDirections, LoadScenario, ViewWorldMap, GetProvince, TestAction, CreateFaction, 
-        ViewFactionList, GetFaction, ReturnTime, SignFactionCharter, ListFactionMembers, ChangeFactionRank
+        ViewFactionList, GetFaction, ReturnTime, SignFactionCharter, ListFactionMembers, ChangeFactionRank, EstablishFactionPost,
+        GetFactionPosts
     }
 
     /// <summary>

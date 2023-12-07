@@ -83,6 +83,8 @@ public class ViewingList : Controller
                 }
                 break;
             }
+            case ViewingList.FactionFiefs:
+            case ViewingList.EstablishFactionPost:
             case ViewingList.MyFiefs: {
                 GoToScene(SceneName.ViewMyFiefsList);
                 break;
