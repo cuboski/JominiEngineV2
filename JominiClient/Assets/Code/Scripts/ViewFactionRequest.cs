@@ -16,8 +16,10 @@ public class ViewFactionRequest : Controller
     [SerializeField] private Text lblPageTitle;
     [SerializeField] private Text lblMessageForUser;
     [SerializeField] private Text lblStatureBonus;
+    [SerializeField] private Text lblFactionInfo;
 
     private ProtoFaction viewedFaction;
+    private ProtoFief homeFief;
 
     private bool isLeader;
     private bool isMember;
@@ -34,8 +36,17 @@ public class ViewFactionRequest : Controller
         btnJoinRequests.onClick.AddListener(BtnJoinRequests);
 
         lblPageTitle.text = viewedFaction.factionName;
-        lblStatureBonus.text = "Faction Stature Bonus: " + viewedFaction.statureBonus;
+        homeFief = (ProtoFief)GetFiefDetails(viewedFaction.factionBaseID, tclient);
 
+        lblFactionInfo.text = ""
+             + "\nLeader:\t\t\t" + GetCharName(viewedFaction.factionLeader)
+             + "\nHome Fief:\t\t" + homeFief.FiefName
+             + "\n"
+             + "\nMember Count:\t" + viewedFaction.factionMembers.Length
+             + "\nMembership Tax:\t\t\t" + viewedFaction.factionTax
+             + "\nStature Bonus:\t\t" + viewedFaction.statureBonus
+             + "\n"
+             ;
     }
 
     private void CheckMembership()

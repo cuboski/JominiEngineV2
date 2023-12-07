@@ -497,7 +497,7 @@ namespace JominiEngine
 
 			Console.WriteLine ("Writing test to : " + gameID);
 			var o = new RiakObject (gameID, "test",new TestObject("hello","world"));
-			RiakResult result = Globals_Server.rClient.Put (o);
+			RiakResult result = Globals_Server.rClient.Put(o);
 			if (!result.IsSuccess) {
 				Console.WriteLine (result.ErrorMessage);
 				Environment.Exit (1);
