@@ -3,17 +3,17 @@
 
 #define MyAppName "JominiClient"
 #define MyAppVersion "1.0"
-#define MyAppPublisher "kd41@HWU"
+#define MyAppPublisher "Heriot Watt University "
 #define MyAppURL "https://github.com/QuinnZhell/JominiEngine"
 #define MyAppExeName "JominiEngine GUI 2021.exe"
-#define MyAppAssocName MyAppName + " File"
+#define MyAppAssocName MyAppName + ""
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{48C8528A-9509-4D77-AC3B-7A758555EE41}
+AppId={{E547D44F-7CF9-47C5-8E4B-CA7CAC7F7860}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -21,13 +21,14 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={autopf}\{#MyAppName}
+DefaultDirName={autopf}\My Program
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
-; Remove the following line to run in administrative install mode (install for all users.)
-PrivilegesRequired=lowest
+; Uncomment the following line to run in non administrative install mode (install for current user only.)
+;PrivilegesRequired=lowest
+PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\Kyle\Desktop\JominiEngine\JominiEngine\Deploys\JominiClient\Windows\Installer
-OutputBaseFilename=JominiClientInstaller
+OutputBaseFilename=JominiClient
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
