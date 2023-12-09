@@ -912,6 +912,7 @@ namespace JominiEngine
             {
                 string toDisplay = "InitialDBload: Unable to retrieve faction request: " + factID;
                 Globals_Server.logError(toDisplay);
+                faction = null;
             }
 
             return faction;

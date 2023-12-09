@@ -3262,35 +3262,36 @@ namespace JominiEngine {
         /// </returns>
         public static ProtoMessage CreateFaction(ProtoFaction f)
         {
-            // create new faction object
+            var response = new ProtoMessage();
+
+            if (DatabaseRead.DatabaseRead_Faction("testBucket", f.factionName) != null)
+            {
+                // faction with that name already exists
+                response.ResponseType = DisplayMessages.CreateFactionError;
+                return response;
+            }
+
             Faction newFaction = new Faction(f.factionName,
                     f.factionLeader,
                     f.factionBaseID,
                     f.factionTax);
-
-            // add the leader as the first member to sign charter
             newFaction.signFactionCharter(f.factionLeader, "Leader");
 
             // FOR NON DATABASE IMPLEMENTATION
-            //// add to the dictionary then report a success
             //Globals_Game.factionMasterList.Add(newFaction.factionName, newFactionReq);
 
-            // NEED TO CHANGE THIS
             // update faction key list
             var keyRes = Globals_Server.rClient.Get("testBucket", "factionKeys");
             List<string> factionKeys = new List<string>();
             if(keyRes.IsSuccess)
-            {
                 factionKeys = keyRes.Value.GetObject<List<string>>();
-            }
             factionKeys.Add(f.factionName);
-            DatabaseWrite.DatabaseWrite_KeyList("testBucket", "factionKeys", factionKeys);
 
-            // add new faction then do report success
+            DatabaseWrite.DatabaseWrite_KeyList("testBucket", "factionKeys", factionKeys);
             DatabaseWrite.DatabaseWrite_Faction("testBucket", newFaction);
-            var success = new ProtoMessage();
-            success.ResponseType = DisplayMessages.Success;
-            return success;
+
+            response.ResponseType = DisplayMessages.Success;
+            return response;
         }
 
         /// <summary>
