@@ -446,7 +446,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Faction(gameID, pair.Value);
                 if (success)
                 {
-                    //Globals_Game.siegeKeys.Add(pair.Key);
+                    //Globals_Game.factionKeys.Add(pair.Key);
                 }
             }
 
@@ -1192,6 +1192,26 @@ namespace JominiEngine
         {
             TaggedEdge<string, string> edgeOut = new TaggedEdge<string, string>(te.Source.id, te.Target.id, te.Tag);
             return edgeOut;
+        }
+
+        /// <summary>
+        /// Resets the database on server startup if flagged
+        /// </summary>
+        /// <param name="fRESH_DATABASE"></param>
+        internal static void WIPE_DATABASE(bool fRESH_DATABASE)
+        {
+            if (!fRESH_DATABASE)
+                return;
+
+            List<string> yeah = (List<string>)Globals_Server.rClient.ListKeys("testBucket").Value;
+
+            foreach (string s in yeah)
+            {
+                var deleteResult = Globals_Server.rClient.Delete("testBucket", s);
+                if (deleteResult.IsSuccess)
+                    Console.WriteLine($"Removed {s} from testBucket");
+
+            }
         }
     }
 }

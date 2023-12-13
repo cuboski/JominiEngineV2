@@ -44,7 +44,10 @@ namespace JominiEngine
         public static string Pass;
         public static PlayerCharacter MyPlayerCharacter;
         public static PlayerCharacter NotMyPlayerCharacter;
-         
+
+        // should the database be wiped when server is run
+        private static bool FRESH_DATABASE = true;
+
         /// <summary>
         /// Set up the data and game state for the test run
         /// </summary>
@@ -181,6 +184,8 @@ namespace JominiEngine
 
                     Game game = new Game();
                     SetUpForDemo();
+
+                    DatabaseWrite.WIPE_DATABASE(FRESH_DATABASE);
 
                     DatabaseWrite.DatabaseWriteAll("testBucket");
 

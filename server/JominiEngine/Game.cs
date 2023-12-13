@@ -3264,7 +3264,8 @@ namespace JominiEngine {
         {
             var response = new ProtoMessage();
 
-            if (DatabaseRead.DatabaseRead_Faction("testBucket", f.factionName) != null)
+            Faction check = DatabaseRead.DatabaseRead_Faction("testBucket", f.factionName);
+            if (check != null)
             {
                 // faction with that name already exists
                 response.ResponseType = DisplayMessages.CreateFactionError;
