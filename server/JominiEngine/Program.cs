@@ -47,7 +47,7 @@ namespace JominiEngine
         public static PlayerCharacter NotMyPlayerCharacter;
 
         // should the database be wiped when server is run
-        private static bool FRESH_DATABASE = true;
+        private static bool FRESH_DATABASE = false;
 
         /// <summary>
         /// Set up the data and game state for the test run
@@ -189,12 +189,6 @@ namespace JominiEngine
                     if (Globals_Server.rClient.Ping().IsSuccess)
                     {
                         Console.WriteLine("Database connection successful");
-                        
-                        foreach(string bucketId in Enum.GetNames(typeof(BucketTypes)))
-                        {
-                            var o = new RiakObject(bucketId, "test", "test");
-                            var putResult = Globals_Server.rClient.Put(o);
-                        }
                        
                         DatabaseWrite.WIPE_DATABASE(FRESH_DATABASE);
                         DatabaseWrite.DatabaseWriteAll("testBucket");

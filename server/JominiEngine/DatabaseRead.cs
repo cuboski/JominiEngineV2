@@ -919,6 +919,28 @@ namespace JominiEngine
         }
 
         /// <summary>
+        /// Reads a Siege object from the database
+        /// </summary>
+        /// <returns>Siege object</returns>
+        /// <param name="gameID">Game for which Siege to be retrieved</param>
+        /// <param name="siegeID">ID of Siege to be retrieved</param>
+        public static Tuple<byte[], byte[]> DatabaseRead_User(string username)
+        {
+            var userResult = Globals_Server.rClient.Get(BucketTypes.AccountBucket.ToString(), username);
+
+            if (!userResult.IsSuccess) {
+                string toDisplay = "InitialDBload: Unable to retrieve faction request: " + username;
+                Globals_Server.logError(toDisplay);
+
+                return null;
+            }
+
+            Tuple<byte[], byte[]> hashes = userResult.Value.GetObject<Tuple<byte[], byte[]>>();
+
+            return hashes;
+        }
+
+        /// <summary>
         /// Reads an Army object from the database
         /// </summary>
         /// <returns>Army object</returns>

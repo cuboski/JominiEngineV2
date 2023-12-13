@@ -8,6 +8,7 @@ using RiakClient.Models;
 using ProtoBuf;
 using Newtonsoft.Json.Serialization;
 using ProtoMessageClient;
+using System.Windows.Forms;
 
 namespace JominiEngine
 {
@@ -1137,6 +1138,19 @@ namespace JominiEngine
             }
 
             return factRes.IsSuccess;
+        }
+
+        public static bool DatabaseWrite_User(string username, Tuple<byte[], byte[]>  passHash)
+        {
+            var rUser = new RiakObject(BucketTypes.AccountBucket.ToString(), username, passHash);
+            var userRes = Globals_Server.rClient.Put(rUser);
+
+            if (!userRes.IsSuccess)
+            {
+                Globals_Server.logError("Write failed: Faction Request " + rUser.Key + " to bucket " + rUser.Bucket);
+            }
+
+            return userRes.IsSuccess;
         }
 
         /// <summary>

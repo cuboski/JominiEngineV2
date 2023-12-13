@@ -78,7 +78,8 @@ namespace JominiEngine
         SeigeBucket,
         NationalityBucket,
         PositionBucket,
-        FactionBucket
+        FactionBucket,
+        AccountBucket
     }
 
     /// <summary>
