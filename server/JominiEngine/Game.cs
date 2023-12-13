@@ -3264,7 +3264,7 @@ namespace JominiEngine {
         {
             var response = new ProtoMessage();
 
-            Faction check = DatabaseRead.DatabaseRead_Faction("testBucket", f.factionName);
+            Faction check = DatabaseRead.DatabaseRead_Faction(f.factionName);
             if (check != null)
             {
                 // faction with that name already exists
@@ -3278,18 +3278,7 @@ namespace JominiEngine {
                     f.factionTax);
             newFaction.signFactionCharter(f.factionLeader, "Leader");
 
-            // FOR NON DATABASE IMPLEMENTATION
-            //Globals_Game.factionMasterList.Add(newFaction.factionName, newFactionReq);
-
-            // update faction key list
-            var keyRes = Globals_Server.rClient.Get("testBucket", "factionKeys");
-            List<string> factionKeys = new List<string>();
-            if(keyRes.IsSuccess)
-                factionKeys = keyRes.Value.GetObject<List<string>>();
-            factionKeys.Add(f.factionName);
-
-            DatabaseWrite.DatabaseWrite_KeyList("testBucket", "factionKeys", factionKeys);
-            DatabaseWrite.DatabaseWrite_Faction("testBucket", newFaction);
+            DatabaseWrite.DatabaseWrite_Faction(newFaction);
 
             response.ResponseType = DisplayMessages.Success;
             return response;
@@ -3308,14 +3297,14 @@ namespace JominiEngine {
             // get faction request and sign member
             try
             {
-                Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", factionName);
+                Faction f = DatabaseRead.DatabaseRead_Faction(factionName);
 
                 if(!f.members.ContainsKey(newMember))
                 {
                     // player is not already in the faction
                     f.signFactionCharter(newMember, "Prospect");
 
-                    DatabaseWrite.DatabaseWrite_Faction("testBucket", f);
+                    DatabaseWrite.DatabaseWrite_Faction(f);
                     var success = new ProtoMessage();
                     success.ResponseType = DisplayMessages.Success;
                     return success;
@@ -3341,18 +3330,12 @@ namespace JominiEngine {
         /// </summary>
         public static ProtoMessage ViewFactionList()
         {
-            var keyRes = Globals_Server.rClient.Get("testBucket", "factionKeys");
-            List<string> factionKeys = new List<string>();
-            if (keyRes.IsSuccess)
-            {
-                factionKeys = keyRes.Value.GetObject<List<string>>();
-            }
-
-
             List<ProtoFaction> factionsToSend = new List<ProtoFaction>();
+
+            List<string> factionKeys = (List<string>) Globals_Server.rClient.ListKeys(BucketTypes.FactionBucket.ToString()).Value;
             foreach (string key in factionKeys)
             {
-                var f = DatabaseRead.DatabaseRead_Faction("testBucket", key);
+                var f = DatabaseRead.DatabaseRead_Faction(key);
 
                 factionsToSend.Add(new ProtoFaction(
                     f.factionName,
@@ -3378,7 +3361,7 @@ namespace JominiEngine {
         {
             //Faction faction = Globals_Game.factionMasterList[factionToGet];
 
-            Faction faction = DatabaseRead.DatabaseRead_Faction("testBucket", factionToGet);
+            Faction faction = DatabaseRead.DatabaseRead_Faction(factionToGet);
 
             return new ProtoFaction(
                         faction.factionName,
@@ -3402,7 +3385,7 @@ namespace JominiEngine {
             var members = new List<ProtoCharacterOverview>();
             DisplayMessages charErr;
 
-            Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", faction);
+            Faction f = DatabaseRead.DatabaseRead_Faction(faction);
 
             foreach (KeyValuePair<string, string> member in f.members)
             {
@@ -3433,7 +3416,7 @@ namespace JominiEngine {
         /// <returns></returns>
         public static ProtoMessage ChangeFactionRank(string factionName, string factionMember, string factionRank)
         {
-            Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", factionName);
+            Faction f = DatabaseRead.DatabaseRead_Faction(factionName);
 
             /*
              * Currently this removes the member from the collection and readds them.
@@ -3457,7 +3440,7 @@ namespace JominiEngine {
                 Utility_Methods.GetCharacter(factionMember, out err).statureModifier -= f.statureBonus;
             }
 
-            DatabaseWrite.DatabaseWrite_Faction("testBucket", f);
+            DatabaseWrite.DatabaseWrite_Faction(f);
 
             // return result
             ProtoMessage reply = new ProtoMessage();
@@ -3473,7 +3456,7 @@ namespace JominiEngine {
         /// <returns></returns>
         public static ProtoMessage EstablishFactionPost(string factionName, string fiefID)
         {
-            Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", factionName);
+            Faction f = DatabaseRead.DatabaseRead_Faction(factionName);
             ProtoMessage reply = new ProtoMessage();
 
             // check that fief exists
@@ -3482,7 +3465,7 @@ namespace JominiEngine {
             
 
             f.alliedFiefs.Add(fiefID);
-            DatabaseWrite.DatabaseWrite_Faction("testBucket", f);
+            DatabaseWrite.DatabaseWrite_Faction(f);
 
             reply.ResponseType = DisplayMessages.Success;
             return reply;
@@ -3495,7 +3478,7 @@ namespace JominiEngine {
         /// <returns></returns>
         public static ProtoMessage GetFactionPosts(string factionName)
         {
-            Faction f = DatabaseRead.DatabaseRead_Faction("testBucket", factionName);
+            Faction f = DatabaseRead.DatabaseRead_Faction(factionName);
             ProtoGenericArray<ProtoFief> reply = new ProtoGenericArray<ProtoFief>();
             reply.fields = new ProtoFief[f.alliedFiefs.Count];
 

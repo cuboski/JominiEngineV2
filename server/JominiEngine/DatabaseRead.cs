@@ -898,9 +898,9 @@ namespace JominiEngine
         /// <returns>Siege object</returns>
         /// <param name="gameID">Game for which Siege to be retrieved</param>
         /// <param name="siegeID">ID of Siege to be retrieved</param>
-        public static Faction DatabaseRead_Faction(string gameID, string factID)
+        public static Faction DatabaseRead_Faction(string factID)
         {
-            var factResult = Globals_Server.rClient.Get(gameID, factID);
+            var factResult = Globals_Server.rClient.Get(BucketTypes.FactionBucket.ToString(), factID);
             Faction faction = new Faction();
 
             if (factResult.IsSuccess)

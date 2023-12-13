@@ -62,14 +62,30 @@ namespace JominiEngine
         SeasonUpdate
     }
 
+    public enum BucketTypes
+    {
+        NpcBucket,
+        PcBucket,
+        FiefBucket,
+        ProvinceBucket,
+        KingdomBucket,
+        RankBucket,
+        TerrainBucket,
+        BaseLanguageBucket,
+        LanguageBucket,
+        TraitBucket,
+        ArmyBucket,
+        SeigeBucket,
+        NationalityBucket,
+        PositionBucket,
+        FactionBucket
+    }
+
     /// <summary>
     /// Class storing any required static variables for server-side
     /// </summary>
     public static class Globals_Server
     {
-
-        
-
         /// <summary>
         /// Holds the usernames and Client objects of all players
         /// </summary>

@@ -443,7 +443,7 @@ namespace JominiEngine
             // write each object in siegeMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Faction> pair in Globals_Game.factionMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Faction(gameID, pair.Value);
+                bool success = DatabaseWrite.DatabaseWrite_Faction(pair.Value);
                 if (success)
                 {
                     //Globals_Game.factionKeys.Add(pair.Key);
@@ -1126,9 +1126,9 @@ namespace JominiEngine
         /// <param name="gameID"> The game bucket to write this request to </param>
         /// <param name="fr"> The faction request to write </param>
         /// <returns> bool indicating if the request was successful </returns>
-        public static bool DatabaseWrite_Faction(string gameID, Faction f)
+        public static bool DatabaseWrite_Faction(Faction f)
         {
-            var rFaction = new RiakObject(gameID, f.factionName, f);
+            var rFaction = new RiakObject(BucketTypes.FactionBucket.ToString(), f.factionName, f);
             var factRes = Globals_Server.rClient.Put(rFaction);
 
             if (!factRes.IsSuccess)
@@ -1203,15 +1203,18 @@ namespace JominiEngine
             if (!fRESH_DATABASE)
                 return;
 
-            List<string> yeah = (List<string>)Globals_Server.rClient.ListKeys("testBucket").Value;
-
-            foreach (string s in yeah)
+            foreach (string bucketId in Enum.GetNames(typeof(BucketTypes)))
             {
-                var deleteResult = Globals_Server.rClient.Delete("testBucket", s);
-                if (deleteResult.IsSuccess)
-                    Console.WriteLine($"Removed {s} from testBucket");
+                List<string> yeah = (List<string>)Globals_Server.rClient.ListKeys(bucketId).Value;
+                foreach (string s in yeah)
+                {
+                    var deleteResult = Globals_Server.rClient.Delete(bucketId, s);
+                    if (deleteResult.IsSuccess)
+                        Console.WriteLine($"Removed {s} from {bucketId}");
 
+                }
             }
+            
         }
     }
 }

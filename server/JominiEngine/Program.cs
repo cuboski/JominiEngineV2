@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using RiakClient;
+using RiakClient.Models;
 
 namespace JominiEngine
 {
@@ -185,34 +186,19 @@ namespace JominiEngine
                     Game game = new Game();
                     SetUpForDemo();
 
-                    DatabaseWrite.WIPE_DATABASE(FRESH_DATABASE);
-
-                    DatabaseWrite.DatabaseWriteAll("testBucket");
-
                     if (Globals_Server.rClient.Ping().IsSuccess)
                     {
                         Console.WriteLine("Database connection successful");
-                        string gameID = "testBucket";
-                        foreach (string trait in Globals_Game.traitKeys)
+                        
+                        foreach(string bucketId in Enum.GetNames(typeof(BucketTypes)))
                         {
-                            Console.WriteLine(trait);
+                            var o = new RiakObject(bucketId, "test", "test");
+                            var putResult = Globals_Server.rClient.Put(o);
                         }
-
-                        // Test can read from database
-                        //var newClient = Globals_Server.rCluster.CreateClient();
-                        //RiakClient.Models.RiakObject newObj = new RiakClient.Models.RiakObject(gameID, "superawesome3", Globals_Game.traitKeys.ToArray());
-                        //newClient.Put(newObj);
-                        //Thread.Sleep(5000);
-                        //var testRead = newClient.Get(gameID, "superawesome3");
-                        //if (!testRead.IsSuccess)
-                        //{
-                        //    Console.WriteLine("FAIL :(" + testRead.ErrorMessage);
-                        //}
-                        //else
-                        //{
-                        //    Console.WriteLine("Got traitkeys:");
-                        //}
-                        DatabaseRead.DatabaseReadAll(gameID);
+                       
+                        DatabaseWrite.WIPE_DATABASE(FRESH_DATABASE);
+                        DatabaseWrite.DatabaseWriteAll("testBucket");
+                        DatabaseRead.DatabaseReadAll("testBucket");
                     }
                     else
                     {
