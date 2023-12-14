@@ -18,8 +18,10 @@ public class CreateFactionMenu : Controller
     // dropdowns
     [SerializeField] private Dropdown drpdwnFief;
 
+    // text
+    [SerializeField] private Text lblMessageForUser;
+
     ProtoGenericArray<ProtoFief> ownedFiefs;
-    private string selectedFief;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +60,12 @@ public class CreateFactionMenu : Controller
         inputs[3] = ownedFiefs.fields[drpdwnFief.value].fiefID;
 
         ProtoMessage response = CreateFaction(inputs, tclient);
+        if (response.ResponseType == DisplayMessages.CreateFactionError)
+        {
+            lblMessageForUser.text = $"Error Creating Faction: Faction with name {txtFactionName.text} already exists.";
+            return;
+        }
 
-        Debug.Log(response);
+        lblMessageForUser.text = $"Faction with name {txtFactionName.text} has been created!";
     }
 }

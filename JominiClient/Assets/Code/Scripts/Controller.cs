@@ -38,7 +38,7 @@ public class Controller : MonoBehaviour {
     public enum ViewingList {
         ArmiesInFief, YourArmies, Entourage, ListChars, AssignBailiff, AssignOverlord,
         SwitchCharacter, TransferFundsToFief, MyFiefs, Journal, FactionRequest, FactionMembers,
-        FactionJoinRequests
+        FactionJoinRequests, EstablishFactionPost, FactionFiefs
     }
 //
     public static ProtoClient protoClient;
@@ -941,7 +941,7 @@ public class Controller : MonoBehaviour {
             msg.ActionType = Actions.CreateFaction;
             msg.factionName = factDetails[0];
             msg.factionLeader = protoClient.activeChar.charID;
-            msg.factionTax = System.Convert.ToDouble(factDetails[2]);
+            msg.factionTax = System.Convert.ToUInt32(factDetails[2]);
             msg.factionBaseID = factDetails[3];
 
         client.net.Send(msg);
@@ -1021,6 +1021,70 @@ public class Controller : MonoBehaviour {
         tclient.net.Send(request);
 
         return GetActionReply(Actions.ChangeFactionRank, tclient);
+    }
+
+    public static ProtoMessage EstablishFactionPost(string factionName, string fiefID) {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"Establish Faction Outpost for {factionName} in {fiefID}",
+            ActionType = Actions.EstablishFactionPost,
+            MessageFields = new string[] { factionName, fiefID }
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.EstablishFactionPost, tclient);
+    }
+
+    public static ProtoMessage ViewFactionPosts(string factionName)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = $"Viewing the allied fiefs for faction {factionName}",
+            ActionType = Actions.GetFactionPosts,
+            MessageFields = new string[] { factionName, protoClient.playerChar.charID }
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.GetFactionPosts, tclient);
+    }
+
+    /// <summary>
+    /// Transfer funds from the treasury of a given fief to the players coinpurse
+    /// </summary>
+    /// <param name="fiefId"></param>
+    /// <returns></returns>
+    public static ProtoMessage TransferFundsToCoinPurse(string fiefId, int amount)
+    {
+        ProtoTransfer request = new ProtoTransfer
+        {
+            Message = $"Transfer funds totalling {amount} from fief {fiefId} to player {protoClient.activeChar.charID}",
+            ActionType = Actions.TransferFundsToCoinPurse,
+            fiefFrom = fiefId,
+            fiefTo = protoClient.activeChar.charID,
+            amount = amount
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.TransferFundsToCoinPurse, tclient);
+    }
+
+    /// <summary>
+    /// Pay a characters monthly tithe to the guild
+    /// </summary>
+    /// <param name="factionName"></param>
+    /// <returns></returns>
+    public static ProtoMessage PayMembership(string factionName)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            ActionType = Actions.PayFactionFee,
+            Message = $"{protoClient.activeChar.charID} is paying for fee to {factionName}",
+            MessageFields = new string[] { factionName, protoClient.activeChar.charID }
+        };
+
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.PayFactionFee, tclient);
     }
 
     public static ProtoMessage TestButton() {

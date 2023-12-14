@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using RiakClient;
+using RiakClient.Models;
 
 namespace JominiEngine
 {
@@ -44,7 +45,10 @@ namespace JominiEngine
         public static string Pass;
         public static PlayerCharacter MyPlayerCharacter;
         public static PlayerCharacter NotMyPlayerCharacter;
-         
+
+        // should the database be wiped when server is run
+        private static bool FRESH_DATABASE = true;
+
         /// <summary>
         /// Set up the data and game state for the test run
         /// </summary>
@@ -182,32 +186,13 @@ namespace JominiEngine
                     Game game = new Game();
                     SetUpForDemo();
 
-                    DatabaseWrite.DatabaseWriteAll("testBucket");
-
                     if (Globals_Server.rClient.Ping().IsSuccess)
                     {
                         Console.WriteLine("Database connection successful");
-                        string gameID = "testBucket";
-                        foreach (string trait in Globals_Game.traitKeys)
-                        {
-                            Console.WriteLine(trait);
-                        }
-
-                        // Test can read from database
-                        //var newClient = Globals_Server.rCluster.CreateClient();
-                        //RiakClient.Models.RiakObject newObj = new RiakClient.Models.RiakObject(gameID, "superawesome3", Globals_Game.traitKeys.ToArray());
-                        //newClient.Put(newObj);
-                        //Thread.Sleep(5000);
-                        //var testRead = newClient.Get(gameID, "superawesome3");
-                        //if (!testRead.IsSuccess)
-                        //{
-                        //    Console.WriteLine("FAIL :(" + testRead.ErrorMessage);
-                        //}
-                        //else
-                        //{
-                        //    Console.WriteLine("Got traitkeys:");
-                        //}
-                        DatabaseRead.DatabaseReadAll(gameID);
+                       
+                        DatabaseWrite.WIPE_DATABASE(FRESH_DATABASE);
+                        DatabaseWrite.DatabaseWriteAll("testBucket");
+                        DatabaseRead.DatabaseReadAll("testBucket");
                     }
                     else
                     {
@@ -284,7 +269,7 @@ namespace JominiEngine
             (Globals_Game.getCharFromID("Char_158") as PlayerCharacter).GetHomeFief().AdjustTreasury(100000);
 
             // create enemy character in home fief
-            NonPlayerCharacter enemyGeneral = new NonPlayerCharacter("Char_164459", "John", "Smith", new Tuple<uint, byte>(1142, 3), true, Globals_Game.nationalityMasterList["Sco"], true, 9, 9, new Queue<Fief>(), Globals_Game.languageMasterList["lang_C1"], 90, 9, 9, 9, new Tuple<Trait, int>[0], true, false, "Char_126", null, "Char_126", null, 0, false, false, new List<string>(), null, null, Globals_Game.fiefMasterList["EPM02"]);
+            NonPlayerCharacter enemyGeneral = new NonPlayerCharacter("Char_164459", "John", "Smith", 0, new Tuple<uint, byte>(1142, 3), true, Globals_Game.nationalityMasterList["Sco"], true, 9, 9, new Queue<Fief>(), Globals_Game.languageMasterList["lang_C1"], 90, 9, 9, 9, new Tuple<Trait, int>[0], true, false, "Char_126", null, "Char_126", null, 0, false, false, new List<string>(), null, null, Globals_Game.fiefMasterList["EPM02"]);
             PlayerCharacter factionLeader = Globals_Game.pcMasterList["Char_126"];
             factionLeader.myNPCs.Add(enemyGeneral);
             enemyGeneral.inKeep = false;
@@ -304,7 +289,7 @@ namespace JominiEngine
 
             // Add single lady appropriate for marriage
             //Nationality nat = Globals_Game.nationalityMasterList["Sco"];
-            NonPlayerCharacter proposalChar = new NonPlayerCharacter("Char_626", "Mairi", "Meah", new Tuple<uint, byte>(1162, 3), false, Globals_Game.nationalityMasterList["Sco"], true, 9, 9, new Queue<Fief>(), Globals_Game.languageMasterList["lang_C1"], 90, 9, 9, 9, new Tuple<Trait, int>[0], true, false, "Char_126", null, "Char_126", null, 0, false, false, new List<string>(), null, null, Globals_Game.fiefMasterList["ESW05"]);
+            NonPlayerCharacter proposalChar = new NonPlayerCharacter("Char_626", "Mairi", "Meah", 0, new Tuple<uint, byte>(1162, 3), false, Globals_Game.nationalityMasterList["Sco"], true, 9, 9, new Queue<Fief>(), Globals_Game.languageMasterList["lang_C1"], 90, 9, 9, 9, new Tuple<Trait, int>[0], true, false, "Char_126", null, "Char_126", null, 0, false, false, new List<string>(), null, null, Globals_Game.fiefMasterList["ESW05"]);
             PlayerCharacter pc = Globals_Game.pcMasterList["Char_126"];
             pc.myNPCs.Add(proposalChar);
             proposalChar.inKeep = false;

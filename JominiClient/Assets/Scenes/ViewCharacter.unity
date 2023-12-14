@@ -2604,6 +2604,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: lblCharInfo
       objectReference: {fileID: 0}
+    - target: {fileID: 1832899526269673827, guid: b780cbd98a4949c49ac910ef5d0076d2,
+        type: 3}
+      propertyPath: m_Text
+      value: "Status:\t\tUNKNOWN\nLocation:\t\tUNKNOWN\nPurse:\t\t\tUNKNOWN\n\nDate
+        of Birth:\tUNKNOWN\nGender:\t\t\tUNKNOWN\nNationality:\tUNKNOWN\nLanguage:\t\tUNKNOWN\n\nCaptor:\t\t\tUNKNOWN\nHeir:\t\t\tUNKNOWN\nEmployer:\t\tUNKNOWN\nSpouse:\t\tUNKNOWN\nFiance:\t\t\tUNKNOWN\nFather:\t\t\tUNKNOWN\nMother:\t\tUNKNOWN\n\nTitles:\n\t\t\t\tUNKNOWN\n\t\t\t\tUNKNOWN\n\t\t\t\tUNKNOWN\nAilments:\n\t\t\t\tUNKNOWN\n\t\t\t\tUNKNOWN"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b780cbd98a4949c49ac910ef5d0076d2, type: 3}
 --- !u!114 &2046867587 stripped

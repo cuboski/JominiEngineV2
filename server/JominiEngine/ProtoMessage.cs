@@ -433,6 +433,10 @@ namespace JominiEngine {
         /// </summary>
         public string familyName { get; set; }
         /// <summary>
+        /// Holds purse value, amount of gold on the character
+        /// </summary>
+        public uint purse { get; set; }
+        /// <summary>
         /// Character's year of birth
         /// </summary>
         public uint birthYear { get; set; }
@@ -678,10 +682,6 @@ namespace JominiEngine {
         /// </summary>
         public bool outlawed { get; set; }
         /// <summary>
-        /// Holds character's treasury
-        /// </summary>
-        public uint purse { get; set; }
-        /// <summary>
         /// Holds IDs and names of character's employees and family
         /// </summary>
         public ProtoCharacterOverview[] myNPCs { get; set; }
@@ -710,6 +710,7 @@ namespace JominiEngine {
             this.homeFief = pc.homeFief;
             this.ancestralHomeFief = pc.ancestralHomeFief;
             this.outlawed = pc.outlawed;
+            this.purse = pc.purse;
         }
 
         public ProtoPlayerCharacter()
@@ -1877,22 +1878,24 @@ namespace JominiEngine {
         public KeyValuePair<string, string>[] factionMembers { get; set; }
         public string[] alliedFiefs { get; set; }
         public string[] highestStature { get; set; }
-        public double statureBonus {  get; set; }
-        public double factionTax { get; set; }
+        public double statureBonus { get; set; }
+        public uint factionTax { get; set; }
+        public uint treasury { get; set; }
 
         public ProtoFaction() : base()
         {
 
         }
 
-        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader, 
-            KeyValuePair<string, string>[] factionMembers, double factionTax, string[] alliedFiefs, double statureBonus)
+        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader,
+            KeyValuePair<string, string>[] factionMembers, uint treasury, uint factionTax, string[] alliedFiefs, double statureBonus)
         {
             this.factionName = factionName;
             this.factionID = factionID;
             this.factionBaseID = factionBaseID;
             this.factionLeader = factionLeader;
             this.factionMembers = factionMembers;
+            this.treasury = treasury;
             this.factionTax = factionTax;
             this.alliedFiefs = alliedFiefs;
             this.statureBonus = statureBonus;

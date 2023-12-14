@@ -435,6 +435,10 @@ namespace ProtoMessageClient {
             /// </summary>
             public string familyName { get; set; }
             /// <summary>
+            /// Holds purse value, amount of gold on the character
+            /// </summary>
+            public uint purse { get; set; }
+            /// <summary>
             /// Character's year of birth
             /// </summary>
             public uint birthYear { get; set; }
@@ -1877,7 +1881,8 @@ namespace ProtoMessageClient {
         public string[] alliedFiefs { get; set; }
         public string[] highestStature { get; set; }
         public double statureBonus { get; set; }
-        public double factionTax { get; set; }
+        public uint factionTax { get; set; }
+        public uint treasury { get; set; }
 
         public ProtoFaction() : base()
         {
@@ -1885,13 +1890,14 @@ namespace ProtoMessageClient {
         }
 
         public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader,
-            KeyValuePair<string, string>[] factionMembers, double factionTax, string[] alliedFiefs, double statureBonus)
+            KeyValuePair<string, string>[] factionMembers,uint treasury, uint factionTax, string[] alliedFiefs, double statureBonus)
         {
             this.factionName = factionName;
             this.factionID = factionID;
             this.factionBaseID = factionBaseID;
             this.factionLeader = factionLeader;
             this.factionMembers = factionMembers;
+            this.treasury = treasury;
             this.factionTax = factionTax;
             this.alliedFiefs = alliedFiefs;
             this.statureBonus = statureBonus;

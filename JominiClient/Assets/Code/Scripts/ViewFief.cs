@@ -25,6 +25,7 @@ public class ViewFief : Controller
     [SerializeField] private Button btnListCharsInMeetingPlace;
     [SerializeField] private Button btnTransferFunds;
     [SerializeField] private Button btnTravelTo;
+    [SerializeField] private Button btnTransferCoinPurse;
 
     [SerializeField] private InputField txtTaxRate;
     [SerializeField] private InputField txtOfficials;
@@ -32,6 +33,7 @@ public class ViewFief : Controller
     [SerializeField] private InputField txtInfrastructure;
     [SerializeField] private InputField txtKeep;
     [SerializeField] private InputField txtTransferFunds;
+    [SerializeField] private InputField txtTransferCoinPurse;
 
     [SerializeField] private Dropdown ddMeetingPlaceType;
 
@@ -62,6 +64,7 @@ public class ViewFief : Controller
         btnSiegeFief.onClick.AddListener(BtnSiegeFief);
         btnViewSiege.onClick.AddListener(BtnViewSiege);
         btnTransferOwnership.onClick.AddListener(BtnTransferOwnership);
+        btnTransferCoinPurse.onClick.AddListener(BtnTransferFundsToCoinPurse);
         lblMessageForUser.text = "";
         btnAdjustExpenditure.interactable = false;
         btnAppointBailiff.interactable = false;
@@ -70,6 +73,8 @@ public class ViewFief : Controller
         btnListCharsInMeetingPlace.interactable = false;
         btnTransferFunds.interactable = false;
         btnTransferOwnership.interactable = false;
+        txtTransferCoinPurse.interactable = false;
+        btnTransferCoinPurse.interactable = false;
 
         txtTaxRate.interactable = false;
         txtOfficials.interactable = false;
@@ -106,6 +111,8 @@ public class ViewFief : Controller
             txtTransferFunds.interactable = true;
             btnTransferFunds.interactable = true;
             btnTransferOwnership.interactable = true;
+            txtTransferCoinPurse.interactable = true;
+            btnTransferCoinPurse.interactable = true;
             btnPillageFief.gameObject.SetActive(false);
             btnSpyFief.gameObject.SetActive(false);
             btnSiegeFief.gameObject.SetActive(false);
@@ -152,9 +159,34 @@ public class ViewFief : Controller
         
     }
 
+    private void BtnTransferFundsToCoinPurse()
+    {
+        string strFunds = txtTransferCoinPurse.text;
+        if (!int.TryParse(strFunds, out int funds))
+        {
+            DisplayMessageToUser("Invalid number.");
+            return;
+        }
+        else if (funds > currentlyViewedFief.treasury)
+        {
+            DisplayMessageToUser("The treasury does not have that amount of money to transfer!");
+            return;
+        }
+
+        ProtoMessage res = TransferFundsToCoinPurse(fiefToViewID, funds);
+
+        if (res.ResponseType != DisplayMessages.Success)
+        {
+            Debug.Log("Transfer Fail");
+            return;
+        }
+
+        ReloadScene();
+    }
+
     /*
         Function to transfer ownership of a fief to another lord
-    */ 
+    */
     public void BtnTransferOwnership() {
         Debug.Log("Testing Ownership Transfer");
 

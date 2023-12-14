@@ -8,6 +8,7 @@ using RiakClient.Models;
 using ProtoBuf;
 using Newtonsoft.Json.Serialization;
 using ProtoMessageClient;
+using System.Windows.Forms;
 
 namespace JominiEngine
 {
@@ -443,10 +444,10 @@ namespace JominiEngine
             // write each object in siegeMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Faction> pair in Globals_Game.factionMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Faction(gameID, pair.Value);
+                bool success = DatabaseWrite.DatabaseWrite_Faction(pair.Value);
                 if (success)
                 {
-                    //Globals_Game.siegeKeys.Add(pair.Key);
+                    //Globals_Game.factionKeys.Add(pair.Key);
                 }
             }
 
@@ -497,7 +498,7 @@ namespace JominiEngine
 
 			Console.WriteLine ("Writing test to : " + gameID);
 			var o = new RiakObject (gameID, "test",new TestObject("hello","world"));
-			RiakResult result = Globals_Server.rClient.Put (o);
+			RiakResult result = Globals_Server.rClient.Put(o);
 			if (!result.IsSuccess) {
 				Console.WriteLine (result.ErrorMessage);
 				Environment.Exit (1);
@@ -1126,9 +1127,9 @@ namespace JominiEngine
         /// <param name="gameID"> The game bucket to write this request to </param>
         /// <param name="fr"> The faction request to write </param>
         /// <returns> bool indicating if the request was successful </returns>
-        public static bool DatabaseWrite_Faction(string gameID, Faction f)
+        public static bool DatabaseWrite_Faction(Faction f)
         {
-            var rFaction = new RiakObject(gameID, f.factionName, f);
+            var rFaction = new RiakObject(BucketTypes.FactionBucket.ToString(), f.factionName, f);
             var factRes = Globals_Server.rClient.Put(rFaction);
 
             if (!factRes.IsSuccess)
@@ -1137,6 +1138,19 @@ namespace JominiEngine
             }
 
             return factRes.IsSuccess;
+        }
+
+        public static bool DatabaseWrite_User(string username, Tuple<byte[], byte[]>  passHash)
+        {
+            var rUser = new RiakObject(BucketTypes.AccountBucket.ToString(), username, passHash);
+            var userRes = Globals_Server.rClient.Put(rUser);
+
+            if (!userRes.IsSuccess)
+            {
+                Globals_Server.logError("Write failed: Faction Request " + rUser.Key + " to bucket " + rUser.Bucket);
+            }
+
+            return userRes.IsSuccess;
         }
 
         /// <summary>
@@ -1192,6 +1206,29 @@ namespace JominiEngine
         {
             TaggedEdge<string, string> edgeOut = new TaggedEdge<string, string>(te.Source.id, te.Target.id, te.Tag);
             return edgeOut;
+        }
+
+        /// <summary>
+        /// Resets the database on server startup if flagged
+        /// </summary>
+        /// <param name="fRESH_DATABASE"></param>
+        internal static void WIPE_DATABASE(bool fRESH_DATABASE)
+        {
+            if (!fRESH_DATABASE)
+                return;
+
+            foreach (string bucketId in Enum.GetNames(typeof(BucketTypes)))
+            {
+                List<string> yeah = (List<string>)Globals_Server.rClient.ListKeys(bucketId).Value;
+                foreach (string s in yeah)
+                {
+                    var deleteResult = Globals_Server.rClient.Delete(bucketId, s);
+                    if (deleteResult.IsSuccess)
+                        Console.WriteLine($"Removed {s} from {bucketId}");
+
+                }
+            }
+            
         }
     }
 }

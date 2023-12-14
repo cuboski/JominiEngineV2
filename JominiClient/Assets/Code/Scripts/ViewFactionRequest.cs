@@ -12,12 +12,17 @@ public class ViewFactionRequest : Controller
     [SerializeField] private Button btnViewMembers;
     [SerializeField] private Button btnSignCharter;
     [SerializeField] private Button btnJoinRequests;
+    [SerializeField] private Button btnEstablishPost;
+    [SerializeField] private Button btnViewAlliedFiefs;
+    [SerializeField] private Button btnPayMembership;
 
     [SerializeField] private Text lblPageTitle;
     [SerializeField] private Text lblMessageForUser;
     [SerializeField] private Text lblStatureBonus;
+    [SerializeField] private Text lblFactionInfo;
 
     private ProtoFaction viewedFaction;
+    private ProtoFief homeFief;
 
     private bool isLeader;
     private bool isMember;
@@ -32,10 +37,39 @@ public class ViewFactionRequest : Controller
         btnViewMembers.onClick.AddListener(BtnViewMembers);
         btnSignCharter.onClick.AddListener(BtnSignCharter);
         btnJoinRequests.onClick.AddListener(BtnJoinRequests);
+        btnEstablishPost.onClick.AddListener(BtnEstablishOutpost);
+        btnViewAlliedFiefs.onClick.AddListener(BtnViewAlliedFiefs);
+        btnPayMembership.onClick.AddListener(BtnPayMembership);
 
         lblPageTitle.text = viewedFaction.factionName;
-        lblStatureBonus.text = "Faction Stature Bonus: " + viewedFaction.statureBonus;
+        homeFief = (ProtoFief)GetFiefDetails(viewedFaction.factionBaseID, tclient);
 
+        lblFactionInfo.text = ""
+             + "\nLeader:\t\t\t" + GetCharName(viewedFaction.factionLeader)
+             + "\nHome Fief:\t\t" + homeFief.FiefName
+             + "\nTreasury:\t\t" + viewedFaction.treasury
+             + "\n"
+             + "\nMember Count:\t" + viewedFaction.factionMembers.Length
+             + "\nMembership Tax:\t\t\t" + viewedFaction.factionTax
+             + "\nStature Bonus:\t\t" + viewedFaction.statureBonus
+             + "\n"
+             ;
+    }
+
+    private void BtnPayMembership()
+    {
+
+        ProtoMessage reply = GetCharacterDetails(protoClient.activeChar.charID, tclient);
+        ProtoCharacter thisGuy = (ProtoCharacter)reply;
+
+        if (thisGuy.purse < viewedFaction.factionTax)
+        {
+            DisplayMessage($"{protoClient.activeChar.firstName} {protoClient.activeChar.familyName} does not have the funds to pay their membership fee");
+            return;
+        }
+
+        if(PayMembership(viewedFaction.factionName).ResponseType == DisplayMessages.Success)
+            ReloadScene();
     }
 
     private void CheckMembership()
@@ -84,6 +118,18 @@ public class ViewFactionRequest : Controller
         else
             DisplayMessage($"{protoClient.activeChar.firstName} {protoClient.activeChar.familyName}'s " +
                 $"request to join {viewedFaction.factionName} has been sent");
+    }
+
+    private void BtnEstablishOutpost()
+    {
+        viewingListSelectAction = ViewingList.EstablishFactionPost;
+        GoToScene(SceneName.ViewingList);
+    }
+
+    private void BtnViewAlliedFiefs()
+    {
+        viewingListSelectAction = ViewingList.FactionFiefs;
+        GoToScene(SceneName.ViewingList);
     }
 
     private void DisplayMessage(string message)
