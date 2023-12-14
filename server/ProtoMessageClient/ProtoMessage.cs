@@ -435,6 +435,10 @@ namespace ProtoMessageClient {
             /// </summary>
             public string familyName { get; set; }
             /// <summary>
+            /// Holds purse value, amount of gold on the character
+            /// </summary>
+            public uint purse { get; set; }
+            /// <summary>
             /// Character's year of birth
             /// </summary>
             public uint birthYear { get; set; }

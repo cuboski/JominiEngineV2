@@ -635,53 +635,53 @@ namespace JominiEngine {
             var mySieges002 = new List<string>();
 
             // create some characters
-            var myChar1 = new PlayerCharacter("Char_47", "Dave", "Bond", myDob001, true, nationality02, true, 8.50, 9.0,
+            var myChar1 = new PlayerCharacter("Char_47", "Dave", "Bond", 0, myDob001, true, nationality02, true, 8.50, 9.0,
                 myGoTo1, c1, 90, 0, 7.2, 6.1, Utility_Methods.GenerateTraitSet(), false, false, "Char_47", "Char_403",
                 null, null, false, 13000, myEmployees1, myFiefsOwned1, myProvsOwned1, "ESX02", "ESX02", myTitles001,
                 myArmies001, mySieges001, null, loc: myFief1, pID: "libdab");
             Globals_Game.pcMasterList.Add(myChar1.charID, myChar1);
-            var myChar2 = new PlayerCharacter("Char_40", "Bave", "Dond", myDob002, true, nationality01, true, 8.50, 6.0,
+            var myChar2 = new PlayerCharacter("Char_40", "Bave", "Dond", 0, myDob002, true, nationality01, true, 8.50, 6.0,
                 myGoTo2, f1, 90, 0, 5.0, 4.5, Utility_Methods.GenerateTraitSet(), false, false, "Char_40", null, null,
                 null, false, 13000, myEmployees2, myFiefsOwned2, myProvsOwned2, "ESR03", "ESR03", myTitles002,
                 myArmies002, mySieges002, null, loc: myFief7, pID: "otherGuy");
             Globals_Game.pcMasterList.Add(myChar2.charID, myChar2);
-            var myNPC1 = new NonPlayerCharacter("Char_401", "Jimmy", "Servant", myDob003, true, nationality02, true,
+            var myNPC1 = new NonPlayerCharacter("Char_401", "Jimmy", "Servant",0, myDob003, true, nationality02, true,
                 8.50, 6.0, myGoTo3, c1, 90, 0, 3.3, 6.7, Utility_Methods.GenerateTraitSet(), false, false, null, null,
                 null, null, 0, false, false, myTitles003, null, loc: myFief1);
             Globals_Game.npcMasterList.Add(myNPC1.charID, myNPC1);
-            var myNPC2 = new NonPlayerCharacter("Char_402", "Johnny", "Servant", myDob004, true, nationality02, true,
+            var myNPC2 = new NonPlayerCharacter("Char_402", "Johnny", "Servant",0, myDob004, true, nationality02, true,
                 8.50, 6.0, myGoTo4, c1, 90, 0, 7.1, 5.2, Utility_Methods.GenerateTraitSet(), false, false, null, null,
                 null, null, 10000, true, false, myTitles004, null, empl: myChar1.charID, loc: myFief1);
             Globals_Game.npcMasterList.Add(myNPC2.charID, myNPC2);
-            var myNPC3 = new NonPlayerCharacter("Char_403", "Harry", "Bailiff", myDob005, true, nationality01, true,
+            var myNPC3 = new NonPlayerCharacter("Char_403", "Harry", "Bailiff",0, myDob005, true, nationality01, true,
                 8.50, 6.0, myGoTo5, c1, 90, 0, 7.1, 5.2, Utility_Methods.GenerateTraitSet(), true, false, null, null,
                 null, null, 10000, false, false, myTitles005, null, empl: myChar2.charID, loc: myFief6);
             Globals_Game.npcMasterList.Add(myNPC3.charID, myNPC3);
-            var myChar1Wife = new NonPlayerCharacter("Char_404", "Bev", "Bond", myDob006, false, nationality02, true,
+            var myChar1Wife = new NonPlayerCharacter("Char_404", "Bev", "Bond",0, myDob006, false, nationality02, true,
                 2.50, 9.0, myGoTo6, f1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), false, false, "Char_47",
                 "Char_47", null, null, 30000, false, false, myTitles006, null, loc: myFief1);
             Globals_Game.npcMasterList.Add(myChar1Wife.charID, myChar1Wife);
-            var myChar2Son = new NonPlayerCharacter("Char_405", "Horatio", "Dond", myDob007, true, nationality01, true,
+            var myChar2Son = new NonPlayerCharacter("Char_405", "Horatio", "Dond",0, myDob007, true, nationality01, true,
                 8.50, 6.0, myGoTo7, f1, 90, 0, 7.1, 5.2, Utility_Methods.GenerateTraitSet(), true, false, "Char_40",
                 "Char_406", "Char_40", null, 10000, false, true, myTitles007, null, loc: myFief6);
             Globals_Game.npcMasterList.Add(myChar2Son.charID, myChar2Son);
-            var myChar2SonWife = new NonPlayerCharacter("Char_406", "Mave", "Dond", myDob008, false, nationality02, true,
+            var myChar2SonWife = new NonPlayerCharacter("Char_406", "Mave", "Dond",0, myDob008, false, nationality02, true,
                 2.50, 9.0, myGoTo8, f1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false, "Char_40",
                 "Char_405", null, null, 30000, false, false, myTitles008, null, loc: myFief6);
             Globals_Game.npcMasterList.Add(myChar2SonWife.charID, myChar2SonWife);
-            var myChar1Son = new NonPlayerCharacter("Char_407", "Rickie", "Bond", myDob009, true, nationality02, true,
+            var myChar1Son = new NonPlayerCharacter("Char_407", "Rickie", "Bond", 0, myDob009, true, nationality02, true,
                 2.50, 9.0, myGoTo9, c1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false, "Char_47",
                 null, "Char_47", "Char_404", 30000, false, true, myTitles009, null, loc: myFief1);
             Globals_Game.npcMasterList.Add(myChar1Son.charID, myChar1Son);
-            var myChar1Daughter = new NonPlayerCharacter("Char_408", "Elsie", "Bond", myDob010, false, nationality02,
+            var myChar1Daughter = new NonPlayerCharacter("Char_408", "Elsie", "Bond", 0, myDob010, false, nationality02,
                 true, 2.50, 9.0, myGoTo10, c1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false,
                 "Char_47", null, "Char_47", "Char_404", 30000, false, false, myTitles010, null, loc: myFief1);
             Globals_Game.npcMasterList.Add(myChar1Daughter.charID, myChar1Daughter);
-            var myChar2Son2 = new NonPlayerCharacter("Char_409", "Wayne", "Dond", myDob011, true, nationality01, true,
+            var myChar2Son2 = new NonPlayerCharacter("Char_409", "Wayne", "Dond", 0, myDob011, true, nationality01, true,
                 2.50, 9.0, myGoTo11, f1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false, "Char_40",
                 null, "Char_40", null, 30000, false, false, myTitles011, null, loc: myFief6);
             Globals_Game.npcMasterList.Add(myChar2Son2.charID, myChar2Son2);
-            var myChar2Daughter = new NonPlayerCharacter("Char_410", "Esmerelda", "Dond", myDob012, false, nationality01,
+            var myChar2Daughter = new NonPlayerCharacter("Char_410", "Esmerelda", "Dond", 0, myDob012, false, nationality01,
                 true, 2.50, 9.0, myGoTo12, f1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false,
                 "Char_40", null, "Char_40", null, 30000, false, false, myTitles012, null, loc: myFief6);
             Globals_Game.npcMasterList.Add(myChar2Daughter.charID, myChar2Daughter);
@@ -1179,7 +1179,8 @@ namespace JominiEngine {
                 }
                 return characterDetails;
             } else {
-                var characterDetails = new ProtoPlayerCharacter(c as PlayerCharacter);
+                PlayerCharacter pc = c as PlayerCharacter;
+                var characterDetails = new ProtoPlayerCharacter(pc);
                 characterDetails.ResponseType = DisplayMessages.Success;
                 if (viewAll) {
                     characterDetails.includeAll(c as PlayerCharacter);
@@ -3495,6 +3496,28 @@ namespace JominiEngine {
             return reply;
         }
 
+        public static ProtoMessage TransferFundsToCoinPurse(ProtoTransfer transfer)
+        {
+            ProtoMessage result = new ProtoMessage();
+
+            DisplayMessages err;
+            Fief f = Utility_Methods.GetFief(transfer.fiefFrom, out err);
+
+            if (f.Treasury < transfer.amount)
+            {
+                result.ResponseType = DisplayMessages.ErrorGenericInsufficientFunds;
+                return result;
+            }
+
+            f.AdjustTreasury(-transfer.amount);
+
+            PlayerCharacter c = (PlayerCharacter) Utility_Methods.GetCharacter(transfer.fiefTo, out err);
+            c.AdjustPurse((uint) transfer.amount);
+
+            result.ResponseType = DisplayMessages.Success;
+            return result;
+        }
+
         /// <summary>
         /// Translates a message from a client into an action to be carried out
         /// </summary>
@@ -3923,6 +3946,10 @@ namespace JominiEngine {
                 case Actions.GetFactionPosts:
                     {
                         return GetFactionPosts(msgIn.MessageFields[1]);
+                    }
+                case Actions.TransferFundsToCoinPurse:
+                    {
+                        return TransferFundsToCoinPurse(msgIn as ProtoTransfer);
                     }
                 default: {
                         return null;

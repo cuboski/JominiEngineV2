@@ -1048,6 +1048,26 @@ public class Controller : MonoBehaviour {
         return GetActionReply(Actions.GetFactionPosts, tclient);
     }
 
+    /// <summary>
+    /// Transfer funds from the treasury of a given fief to the players coinpurse
+    /// </summary>
+    /// <param name="fiefId"></param>
+    /// <returns></returns>
+    public static ProtoMessage TransferFundsToCoinPurse(string fiefId, int amount)
+    {
+        ProtoTransfer request = new ProtoTransfer
+        {
+            Message = $"Transfer funds totalling {amount} from fief {fiefId} to player {protoClient.activeChar.charID}",
+            ActionType = Actions.TransferFundsToCoinPurse,
+            fiefFrom = fiefId,
+            fiefTo = protoClient.activeChar.charID,
+            amount = amount
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.TransferFundsToCoinPurse, tclient);
+    }
+
     public static ProtoMessage TestButton() {
         Debug.Log("Test Button Pressed");
 

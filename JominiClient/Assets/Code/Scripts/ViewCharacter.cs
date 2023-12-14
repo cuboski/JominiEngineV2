@@ -295,6 +295,7 @@ public class ViewCharacter : Controller
         lblCharInfo.text = ""
             + "\nStatus:\t\t\t" + lifeStatus
             + "\nLocation:\t\t" + fiefNames[currentlyViewedCharacter.location]
+            + "\nPurse:\t\t" + currentlyViewedCharacter.purse
             + "\n"
             + "\nDate of Birth:\t" + season + " " + currentlyViewedCharacter.birthYear
             + "\nSex:\t\t\t" + sex

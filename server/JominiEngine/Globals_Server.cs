@@ -22,7 +22,7 @@ namespace JominiEngine
         Kidnap, ViewCaptives, ViewCaptive, RansomCaptive, ReleaseCaptive, ExecuteCaptive, RespondRansom, SeasonUpdate,
         GetTravelCost, GetAvailableTravelDirections, LoadScenario, ViewWorldMap, GetProvince, TestAction, CreateFaction, 
         ViewFactionList, GetFaction, ReturnTime, SignFactionCharter, ListFactionMembers, ChangeFactionRank, EstablishFactionPost,
-        GetFactionPosts
+        GetFactionPosts, TransferFundsToCoinPurse
     }
 
     /// <summary>

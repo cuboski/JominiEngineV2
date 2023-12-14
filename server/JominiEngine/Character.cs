@@ -24,6 +24,10 @@ namespace JominiEngine
         /// </summary>
         public String familyName { get; set; }
         /// <summary>
+        /// Holds the purse value, amount of gold on the character
+        /// </summary>
+        public uint purse { get; set; }
+        /// <summary>
         /// Tuple holding character's year and season of birth
         /// </summary>
         public Tuple<uint, byte> birthDate { get; set; }
@@ -127,7 +131,6 @@ namespace JominiEngine
         /// Holds the journal entry id of any ransom sent
         /// </summary>
         public string ransomDemand { get; set; }
-
 #if DEBUG
         /// <summary>
         /// Fix the success chance- use -1 to calculate success based on traits
@@ -166,7 +169,7 @@ namespace JominiEngine
         /// <param name="myTi">List holding character's titles (fiefIDs)</param>
         /// <param name="aID">String holding armyID of army character is leading</param>
         /// <param name="ails">Dictionary<string, Ailment> holding ailments effecting character's health</param>
-        public Character(string id, String firstNam, String famNam, Tuple<uint, byte> dob, bool isM, Nationality nat, bool alive, Double mxHea, Double vir,
+        public Character(string id, String firstNam, String famNam, uint purse, Tuple<uint, byte> dob, bool isM, Nationality nat, bool alive, Double mxHea, Double vir,
             Queue<Fief> go, Language lang, double day, Double stat, Double mngmnt, Double cbt, Tuple<Trait, int>[] trt, bool inK, bool preg,
             String famID, String sp, String fath, String moth, List<String> myTi, string fia, Dictionary<string, Ailment> ails = null, Fief loc = null, String aID = null)
         {
@@ -198,6 +201,8 @@ namespace JominiEngine
             {
                 throw new InvalidDataException("Character family name must be 1-40 characters long and contain only valid characters (a-z and ') or spaces");
             }
+
+            this.purse = purse;
 
             // DOB
             if (!Utility_Methods.ValidateSeason(dob.Item2))
@@ -427,6 +432,7 @@ namespace JominiEngine
 				this.charID = charToUse.charID;
 				this.firstName = charToUse.firstName;
                 this.familyName = charToUse.familyName;
+                this.purse = charToUse.purse;
                 this.birthDate = charToUse.birthDate;
 				this.isMale = charToUse.isMale;
 				this.nationality = null;
@@ -471,6 +477,7 @@ namespace JominiEngine
                 case "respawn":
                     this.charID = Globals_Game.GetNextCharID();
                     this.birthDate = new Tuple<uint, byte>(Globals_Game.clock.currentYear - 20, Globals_Game.clock.currentSeason);
+                    this.purse = npc.purse;
                     this.maxHealth = Globals_Game.myRand.Next(4, 10);
                     // vary main stats slightly (virility, management, combat)
                     this.virility = npc.virility + Globals_Game.myRand.Next(-1, 2);
@@ -587,6 +594,11 @@ namespace JominiEngine
             }
         }
 
+        public void AdjustPurse(uint amount)
+        {
+            purse += amount;
+        }
+
         /// <summary>
         ///     Find the travel cost from the character position to the destination by using the shortest path.
         /// </summary>
@@ -603,7 +615,6 @@ namespace JominiEngine
             }
             return pathCost;
         }
-
         /// <summary>
         ///     Search the possible directions the character can move to from its current location
         /// </summary>
@@ -4634,10 +4645,6 @@ namespace JominiEngine
         /// </summary>
         public bool outlawed { get; set; }
         /// <summary>
-        /// Holds character's treasury
-        /// </summary>
-        public uint purse { get; set; }
-        /// <summary>
         /// Holds character's employees and family (NonPlayerCharacter objects)
         /// </summary>
         public List<NonPlayerCharacter> myNPCs = new List<NonPlayerCharacter>();
@@ -4692,11 +4699,11 @@ namespace JominiEngine
         /// <param name="pID">String holding ID of player who is currently playing this PlayerCharacter</param>
         /// <param name="myA">List(Army) holding character's armies</param>
         /// <param name="myS">List(string) holding character's sieges (siegeIDs)</param>
-        public PlayerCharacter(string id, String firstNam, String famNam, Tuple<uint, byte> dob, bool isM, Nationality nat, bool alive, Double mxHea, Double vir,
+        public PlayerCharacter(string id, String firstNam, String famNam, uint purse, Tuple<uint, byte> dob, bool isM, Nationality nat, bool alive, Double mxHea, Double vir,
             Queue<Fief> go, Language lang, double day, Double stat, Double mngmnt, Double cbt, Tuple<Trait, int>[] trt, bool inK, bool preg, String famID,
             String sp, String fath, String moth, bool outl, uint pur, List<NonPlayerCharacter> npcs, List<Fief> ownedF, List<Province> ownedP, String home, String ancHome, List<String> myTi, List<Army> myA,
             List<string> myS, string fia, Dictionary<string, Ailment> ails = null, Fief loc = null, String aID = null, String pID = null)
-            : base(id, firstNam, famNam, dob, isM, nat, alive, mxHea, vir, go, lang, day, stat, mngmnt, cbt, trt, inK, preg, famID, sp, fath, moth, myTi, fia, ails, loc, aID)
+            : base(id, firstNam, famNam, purse, dob, isM, nat, alive, mxHea, vir, go, lang, day, stat, mngmnt, cbt, trt, inK, preg, famID, sp, fath, moth, myTi, fia, ails, loc, aID)
         {
             // VALIDATION
             //TODO exception handling
@@ -4807,7 +4814,7 @@ namespace JominiEngine
             this.mySieges = pc.mySieges;
         }
 
-		//TODO change to Proto
+        //TODO change to Proto
         /// <summary>
         /// Retrieves PlayerCharacter-specific information for Character display 
         /// </summary>
@@ -6266,10 +6273,10 @@ namespace JominiEngine
         /// <param name="sal">string holding NPC's wage</param>
         /// <param name="inEnt">bool denoting if in employer's entourage</param>
         /// <param name="isH">bool denoting if is player's heir</param>
-        public NonPlayerCharacter(String id, String firstNam, String famNam, Tuple<uint, byte> dob, bool isM, Nationality nat, bool alive, Double mxHea, Double vir,
+        public NonPlayerCharacter(String id, String firstNam, String famNam, uint purse, Tuple<uint, byte> dob, bool isM, Nationality nat, bool alive, Double mxHea, Double vir,
             Queue<Fief> go, Language lang, double day, Double stat, Double mngmnt, Double cbt, Tuple<Trait, int>[] trt, bool inK, bool preg, String famID,
             String sp, String fath, String moth, uint sal, bool inEnt, bool isH, List<String> myTi, string fia, Dictionary<string, Ailment> ails = null, Fief loc = null, String aID = null, String empl = null)
-            : base(id, firstNam, famNam, dob, isM, nat, alive, mxHea, vir, go, lang, day, stat, mngmnt, cbt, trt, inK, preg, famID, sp, fath, moth, myTi, fia, ails, loc, aID)
+            : base(id, firstNam, famNam, purse, dob, isM, nat, alive, mxHea, vir, go, lang, day, stat, mngmnt, cbt, trt, inK, preg, famID, sp, fath, moth, myTi, fia, ails, loc, aID)
         {
             // VALIDATION
             // EMPL
@@ -7011,6 +7018,10 @@ namespace JominiEngine
         /// </summary>
         public String familyName { get; set; }
         /// <summary>
+        /// Holds the Purse Value, amount of gold on the character
+        /// </summary>
+        public uint purse { get; set; }
+        /// <summary>
         /// Tuple holding character's year and season of birth
         /// </summary>
         public Tuple<uint, byte> birthDate { get; set; }
@@ -7494,10 +7505,6 @@ namespace JominiEngine
 		/// Holds character outlawed status
 		/// </summary>
 		public bool isOutlawed { get; set; }
-		/// <summary>
-		/// Holds character's finances
-		/// </summary>
-		public uint purse { get; set; }
 		/// <summary>
 		/// Holds character's employees and family (charID)
 		/// </summary>

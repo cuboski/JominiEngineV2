@@ -433,6 +433,10 @@ namespace JominiEngine {
         /// </summary>
         public string familyName { get; set; }
         /// <summary>
+        /// Holds purse value, amount of gold on the character
+        /// </summary>
+        public uint purse { get; set; }
+        /// <summary>
         /// Character's year of birth
         /// </summary>
         public uint birthYear { get; set; }
@@ -678,10 +682,6 @@ namespace JominiEngine {
         /// </summary>
         public bool outlawed { get; set; }
         /// <summary>
-        /// Holds character's treasury
-        /// </summary>
-        public uint purse { get; set; }
-        /// <summary>
         /// Holds IDs and names of character's employees and family
         /// </summary>
         public ProtoCharacterOverview[] myNPCs { get; set; }
@@ -710,6 +710,7 @@ namespace JominiEngine {
             this.homeFief = pc.homeFief;
             this.ancestralHomeFief = pc.ancestralHomeFief;
             this.outlawed = pc.outlawed;
+            this.purse = pc.purse;
         }
 
         public ProtoPlayerCharacter()
