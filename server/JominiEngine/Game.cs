@@ -3344,6 +3344,7 @@ namespace JominiEngine {
                     f.foundingLocation,
                     f.leader,
                     f.members.ToArray(),
+                    f.treasury,
                     f.proposedTax,
                     f.alliedFiefs.ToArray(),
                     f.statureBonus
@@ -3370,6 +3371,7 @@ namespace JominiEngine {
                         faction.foundingLocation,
                         faction.leader,
                         faction.members.ToArray(),
+                        faction.treasury,
                         faction.proposedTax,
                         faction.alliedFiefs.ToArray(),
                         faction.statureBonus
@@ -3496,6 +3498,11 @@ namespace JominiEngine {
             return reply;
         }
 
+        /// <summary>
+        /// Transferring funds from a fiefs treasury to a characters pockets
+        /// </summary>
+        /// <param name="transfer"></param>
+        /// <returns></returns>
         public static ProtoMessage TransferFundsToCoinPurse(ProtoTransfer transfer)
         {
             ProtoMessage result = new ProtoMessage();
@@ -3514,6 +3521,29 @@ namespace JominiEngine {
             PlayerCharacter c = (PlayerCharacter) Utility_Methods.GetCharacter(transfer.fiefTo, out err);
             c.AdjustPurse((uint) transfer.amount);
 
+            result.ResponseType = DisplayMessages.Success;
+            return result;
+        }
+
+        /// <summary>
+        /// Pays a characters faction fee to the guild
+        /// </summary>
+        /// <param name="faction"></param>
+        /// <param name="charId"></param>
+        /// <returns></returns>
+        public static ProtoMessage PayFactionFee(string faction, string charId)
+        {
+            Faction f = DatabaseRead.DatabaseRead_Faction(faction);
+
+            DisplayMessages err;
+            Character c = Utility_Methods.GetCharacter(charId, out err);
+
+            c.AdjustPurse(0 - f.proposedTax);
+            f.AdjustTreasury(f.proposedTax);
+
+            DatabaseWrite.DatabaseWrite_Faction(f);
+
+            ProtoMessage result = new ProtoMessage();
             result.ResponseType = DisplayMessages.Success;
             return result;
         }
@@ -3950,6 +3980,10 @@ namespace JominiEngine {
                 case Actions.TransferFundsToCoinPurse:
                     {
                         return TransferFundsToCoinPurse(msgIn as ProtoTransfer);
+                    }
+                case Actions.PayFactionFee:
+                    {
+                        return PayFactionFee(msgIn.MessageFields[1], msgIn.MessageFields[2]);
                     }
                 default: {
                         return null;

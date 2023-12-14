@@ -1878,22 +1878,24 @@ namespace JominiEngine {
         public KeyValuePair<string, string>[] factionMembers { get; set; }
         public string[] alliedFiefs { get; set; }
         public string[] highestStature { get; set; }
-        public double statureBonus {  get; set; }
-        public double factionTax { get; set; }
+        public double statureBonus { get; set; }
+        public uint factionTax { get; set; }
+        public uint treasury { get; set; }
 
         public ProtoFaction() : base()
         {
 
         }
 
-        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader, 
-            KeyValuePair<string, string>[] factionMembers, double factionTax, string[] alliedFiefs, double statureBonus)
+        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader,
+            KeyValuePair<string, string>[] factionMembers, uint treasury, uint factionTax, string[] alliedFiefs, double statureBonus)
         {
             this.factionName = factionName;
             this.factionID = factionID;
             this.factionBaseID = factionBaseID;
             this.factionLeader = factionLeader;
             this.factionMembers = factionMembers;
+            this.treasury = treasury;
             this.factionTax = factionTax;
             this.alliedFiefs = alliedFiefs;
             this.statureBonus = statureBonus;

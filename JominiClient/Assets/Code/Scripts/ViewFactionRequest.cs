@@ -14,6 +14,7 @@ public class ViewFactionRequest : Controller
     [SerializeField] private Button btnJoinRequests;
     [SerializeField] private Button btnEstablishPost;
     [SerializeField] private Button btnViewAlliedFiefs;
+    [SerializeField] private Button btnPayMembership;
 
     [SerializeField] private Text lblPageTitle;
     [SerializeField] private Text lblMessageForUser;
@@ -38,6 +39,7 @@ public class ViewFactionRequest : Controller
         btnJoinRequests.onClick.AddListener(BtnJoinRequests);
         btnEstablishPost.onClick.AddListener(BtnEstablishOutpost);
         btnViewAlliedFiefs.onClick.AddListener(BtnViewAlliedFiefs);
+        btnPayMembership.onClick.AddListener(BtnPayMembership);
 
         lblPageTitle.text = viewedFaction.factionName;
         homeFief = (ProtoFief)GetFiefDetails(viewedFaction.factionBaseID, tclient);
@@ -45,12 +47,29 @@ public class ViewFactionRequest : Controller
         lblFactionInfo.text = ""
              + "\nLeader:\t\t\t" + GetCharName(viewedFaction.factionLeader)
              + "\nHome Fief:\t\t" + homeFief.FiefName
+             + "\nTreasury:\t\t" + viewedFaction.treasury
              + "\n"
              + "\nMember Count:\t" + viewedFaction.factionMembers.Length
              + "\nMembership Tax:\t\t\t" + viewedFaction.factionTax
              + "\nStature Bonus:\t\t" + viewedFaction.statureBonus
              + "\n"
              ;
+    }
+
+    private void BtnPayMembership()
+    {
+
+        ProtoMessage reply = GetCharacterDetails(protoClient.activeChar.charID, tclient);
+        ProtoCharacter thisGuy = (ProtoCharacter)reply;
+
+        if (thisGuy.purse < viewedFaction.factionTax)
+        {
+            DisplayMessage($"{protoClient.activeChar.firstName} {protoClient.activeChar.familyName} does not have the funds to pay their membership fee");
+            return;
+        }
+
+        if(PayMembership(viewedFaction.factionName).ResponseType == DisplayMessages.Success)
+            ReloadScene();
     }
 
     private void CheckMembership()

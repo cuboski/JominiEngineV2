@@ -47,7 +47,7 @@ namespace JominiEngine
         public static PlayerCharacter NotMyPlayerCharacter;
 
         // should the database be wiped when server is run
-        private static bool FRESH_DATABASE = false;
+        private static bool FRESH_DATABASE = true;
 
         /// <summary>
         /// Set up the data and game state for the test run

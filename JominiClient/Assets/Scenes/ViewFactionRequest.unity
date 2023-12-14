@@ -762,6 +762,7 @@ MonoBehaviour:
   btnJoinRequests: {fileID: 1158281087}
   btnEstablishPost: {fileID: 1290569182}
   btnViewAlliedFiefs: {fileID: 1227232960}
+  btnPayMembership: {fileID: 596655287}
   lblPageTitle: {fileID: 1987734678}
   lblMessageForUser: {fileID: 1987734679}
   lblStatureBonus: {fileID: 514464436}
@@ -911,6 +912,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 596655285}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &596655287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6658472811304710165, guid: e3cec33740eef634c8a6d51144725cdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 596655285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &755785682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,7 +2324,7 @@ PrefabInstance:
     - target: {fileID: 1832899526269673827, guid: b780cbd98a4949c49ac910ef5d0076d2,
         type: 3}
       propertyPath: m_Text
-      value: "Leader:\t\t\t\t\t\tUNKNOWN\nHome Fief:\t\t\t\t\tUNKNOWN\n\nDescription:\t\t\t\tUNKNOWN\nMembership
+      value: "Leader:\t\t\t\t\t\tUNKNOWN\nHome Fief:\t\t\t\t\tUNKNOWN\nTreasury:\t\t\t\t\tUNKNOWN\n\nDescription:\t\t\t\tUNKNOWN\nMembership
         Tax:\t\tUNKNOWN\nStature Bonus:\t\t\tUNKNOWN"
       objectReference: {fileID: 0}
     - target: {fileID: 1832899526269673827, guid: b780cbd98a4949c49ac910ef5d0076d2,

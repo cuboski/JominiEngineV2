@@ -21,18 +21,20 @@ namespace JominiEngine
         public string leader { get; set; }
         public string factionName { get; set; }
         public Dictionary<string, string> members = new Dictionary<string, string>();
+        public List<string> PaymentDue = new List<string>();
         public string[] highestStature = new string[5];
         public string foundingLocation { get; set; }
         public List<string> alliedFiefs = new List<string>();
-        public Double proposedTax { get; set; }
+        public uint proposedTax { get; set; }
         public double statureBonus = 0;
+        public uint treasury { get; set; }
 
         public Faction()
         {
 
         }
 
-        public Faction(string factionName, string leader, string foundingLocation, Double proposedTax)
+        public Faction(string factionName, string leader, string foundingLocation, uint proposedTax)
         {
             this.factionName = factionName;
             this.leader = leader;
@@ -40,12 +42,18 @@ namespace JominiEngine
             this.proposedTax = proposedTax;
             highestStature[0] = leader;
             alliedFiefs.Add(foundingLocation);
+            this.treasury = 0;
 
             CalculateStatureBonus();
 
             // apply base modifier to leader
             DisplayMessages err;
             Utility_Methods.GetCharacter(leader, out err).statureModifier += statureBonus;
+        }
+
+        public void AdjustTreasury(uint amount)
+        {
+            treasury += amount; 
         }
 
         // Signs the new faction member as a prospect

@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour {
     public static ProtoSiegeDisplay sc;
     public static ProtoGenericArray<ProtoSiegeOverview> sl;
 
-    public static string ipAddress = "192.168.1.245";
+    public static string ipAddress = "139.162.225.87";
 
     public enum SceneName {
         CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, 
@@ -941,7 +941,7 @@ public class Controller : MonoBehaviour {
             msg.ActionType = Actions.CreateFaction;
             msg.factionName = factDetails[0];
             msg.factionLeader = protoClient.activeChar.charID;
-            msg.factionTax = System.Convert.ToDouble(factDetails[2]);
+            msg.factionTax = System.Convert.ToUInt32(factDetails[2]);
             msg.factionBaseID = factDetails[3];
 
         client.net.Send(msg);
@@ -1041,7 +1041,7 @@ public class Controller : MonoBehaviour {
         {
             Message = $"Viewing the allied fiefs for faction {factionName}",
             ActionType = Actions.GetFactionPosts,
-            MessageFields = new string[] { factionName }
+            MessageFields = new string[] { factionName, protoClient.playerChar.charID }
         };
         tclient.net.Send(request);
 
@@ -1066,6 +1066,25 @@ public class Controller : MonoBehaviour {
         tclient.net.Send(request);
 
         return GetActionReply(Actions.TransferFundsToCoinPurse, tclient);
+    }
+
+    /// <summary>
+    /// Pay a characters monthly tithe to the guild
+    /// </summary>
+    /// <param name="factionName"></param>
+    /// <returns></returns>
+    public static ProtoMessage PayMembership(string factionName)
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            ActionType = Actions.PayFactionFee,
+            Message = $"{protoClient.activeChar.charID} is paying for fee to {factionName}",
+            MessageFields = new string[] { factionName, protoClient.activeChar.charID }
+        };
+
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.PayFactionFee, tclient);
     }
 
     public static ProtoMessage TestButton() {
