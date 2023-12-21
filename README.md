@@ -42,6 +42,18 @@ This folder contains a C# visual studio project for the JominiEngine server.
 
 ## How to run JominiEngine
 
+A video is now available that covers the installation process on Windows environments.
+
+https://www.youtube.com/watch?v=BCAK7P5NG0Q
+
+Required Links:
+
+Unity: https://unity.com/download
+
+Riak: https://files.tiot.jp/riak/kv/3.0/3.0.9/ubuntu/
+
+WSL: https://learn.microsoft.com/en-us/windows/wsl/install
+
 To run the JominiEngine project in full it is required that both the server and client are run.
 
 How to run the server locally:
