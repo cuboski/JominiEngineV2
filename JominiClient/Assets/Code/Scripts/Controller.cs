@@ -26,14 +26,14 @@ public class Controller : MonoBehaviour {
     public static ProtoSiegeDisplay sc;
     public static ProtoGenericArray<ProtoSiegeOverview> sl;
 
-    public static string ipAddress = "192.168.1.245";
+    public static string ipAddress = "139.162.225.87";
     // server ip = 139.162.225.87
 
     public enum SceneName {
         CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, 
         ViewCharacter, ViewFief, ViewingList, ViewJournalEntry, ViewArmiesList, ViewMyFiefsList, 
         ChangeCharactersList, ViewJournalEntries, AssignBailiff, AssignOverlord, ViewCharacters, ArmiesInFief,
-        ViewSiege, FactionRequestList, ViewFactionRequest
+        ViewSiege, FactionRequestList, ViewFactionRequest, Options
     }
 
     public enum ViewingList {
@@ -60,7 +60,7 @@ public class Controller : MonoBehaviour {
     public static string globalString;
     public static int globalInt;
     public static string userMessageOnSceneLoad;
-
+    public static SceneName prevScene;
     public static bool viewFiefAssign;
 
     public static Dictionary<string, string> fiefNames = new Dictionary<string, string>();

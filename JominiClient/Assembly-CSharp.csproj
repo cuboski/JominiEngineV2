@@ -86,6 +86,7 @@
     <Compile Include="Assets\TilemapStuff\TilemapStuff.cs" />
     <Compile Include="Assets\Code\Scripts\ViewCharacter.cs" />
     <Compile Include="Assets\Code\Scripts\ViewingLists\ViewFactionRequestList.cs" />
+    <Compile Include="Assets\Code\Scripts\OptionMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

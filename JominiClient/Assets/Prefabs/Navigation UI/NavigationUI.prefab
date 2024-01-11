@@ -2767,12 +2767,12 @@ PrefabInstance:
     - target: {fileID: 7498344957296525705, guid: da84c66991f92b649a17f80f9a2e6060,
         type: 3}
       propertyPath: m_Name
-      value: btnTestButton
+      value: btnOptions
       objectReference: {fileID: 0}
     - target: {fileID: 8484525060672259947, guid: da84c66991f92b649a17f80f9a2e6060,
         type: 3}
       propertyPath: m_Text
-      value: Test Button
+      value: Options
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da84c66991f92b649a17f80f9a2e6060, type: 3}

@@ -65,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ViewFactionRequest.unity
     guid: d21d0cc2fcb1b4f4ab51ef25aaea1853
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: 21a441b858c575d429cfa1f4fdc78ce8
   m_configObjects: {}

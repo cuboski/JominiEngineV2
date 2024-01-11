@@ -48,7 +48,8 @@ public class NavigationUI : Controller
 
     // This function returns true for a test communication
     private void BtnTest() {
-        TestButton();
+        prevScene = (SceneName)Enum.Parse(typeof(SceneName), SceneManager.GetActiveScene().name);
+        GoToScene(SceneName.Options);
     }
 
     public void BtnShowEvent(string message)
