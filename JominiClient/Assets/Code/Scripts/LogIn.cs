@@ -15,6 +15,7 @@ public class LogIn : Controller
     [SerializeField] private Text lblErrorMessage;
     [SerializeField] private Button btnLogIn;
     [SerializeField] private Button btnQuit;
+    [SerializeField] private Button btnOption;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +26,9 @@ public class LogIn : Controller
 
         btnLogIn.onClick.AddListener(BtnLogIn);
         btnQuit.onClick.AddListener(BtnQuit);
+        btnOption.onClick.AddListener(BtnOption);
 
-        if(string.IsNullOrWhiteSpace(globalString)) {
+        if (string.IsNullOrWhiteSpace(globalString)) {
             lblErrorMessage.text = "";
         }
         else {
@@ -54,5 +56,11 @@ public class LogIn : Controller
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+    }
+
+    private void BtnOption()
+    {
+        prevScene = SceneName.LogIn;
+        GoToScene(SceneName.Options);
     }
 }

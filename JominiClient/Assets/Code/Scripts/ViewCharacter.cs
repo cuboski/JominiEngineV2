@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static RiakClient.Commands.CRDT.Map;
 
 public class ViewCharacter : Controller
 {
@@ -16,6 +17,7 @@ public class ViewCharacter : Controller
     [SerializeField] private Text lblPageTitle;
     [SerializeField] private Text lblCharInfo;
     [SerializeField] private Text lblMessageForUser;
+    [SerializeField] private Text lblCharStats;
 
     public Button btnUseCharacter;
 
@@ -61,6 +63,7 @@ public class ViewCharacter : Controller
             currentlyViewedCharacter = (ProtoCharacter)reply;
             fullName = currentlyViewedCharacter.firstName + " " + currentlyViewedCharacter.familyName;
             DisplayCharacterDetails();
+            DisplayCharacterStats();
             btnPropose.gameObject.SetActive(false);
             btnTryForChild.gameObject.SetActive(false);
             btnAcceptProposal.gameObject.SetActive(false);
@@ -339,12 +342,43 @@ public class ViewCharacter : Controller
             }
             lblCharInfo.text += "\n";
         }
-        if(currentlyViewedCharacter.ailments != null) {
-            lblCharInfo.text += "\nAilments:";
-            foreach(var ailment in currentlyViewedCharacter.ailments) {
-                lblCharInfo.text += "\n\t\t\t\t" + ailment.value;
-            }
-            lblCharInfo.text += "\n";
+    }
+    
+    private void DisplayCharacterStats()
+    {
+        // general character stats
+        lblCharStats.text = ""
+            + "\nDays Remaining:\t\t\t" + currentlyViewedCharacter.days
+            + "\nHealth:\t\t" + currentlyViewedCharacter.health + " / " + currentlyViewedCharacter.maxHealth
+            + "\nStature:\t\t" + currentlyViewedCharacter.stature
+            + "\n"
+            + "\nSkills"
+            + "\nCombat:\t\t" + currentlyViewedCharacter.combat
+            + "\nManagement:\t\t" + currentlyViewedCharacter.management
+            + "\nVirility:\t\t" + currentlyViewedCharacter.virility
+            + "\n"
+            ;
+
+        // any traits learned
+        if(currentlyViewedCharacter.traits != null)
+        {
+            lblCharStats.text += "\nTraits:";
+
+            foreach(var trait in currentlyViewedCharacter.traits)
+                lblCharStats.text += "\n\t\t\t\t" + trait.key;
+
+            lblCharStats.text += "\n";
+        }
+
+        // any ailments affecting the character
+        if (currentlyViewedCharacter.ailments != null)
+        {
+            lblCharStats.text += "\nAilments:";
+
+            foreach (var ailment in currentlyViewedCharacter.ailments)
+                lblCharStats.text += "\n\t\t\t\t" + ailment.key;
+
+            lblCharStats.text += "\n";
         }
     }
 }
