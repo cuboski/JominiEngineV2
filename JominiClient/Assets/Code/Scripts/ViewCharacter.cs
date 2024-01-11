@@ -365,7 +365,7 @@ public class ViewCharacter : Controller
             lblCharStats.text += "\nTraits:";
 
             foreach(var trait in currentlyViewedCharacter.traits)
-                lblCharStats.text += "\n\t\t\t\t" + trait.value;
+                lblCharStats.text += "\n\t\t\t\t" + trait.key;
 
             lblCharStats.text += "\n";
         }
@@ -376,7 +376,7 @@ public class ViewCharacter : Controller
             lblCharStats.text += "\nAilments:";
 
             foreach (var ailment in currentlyViewedCharacter.ailments)
-                lblCharStats.text += "\n\t\t\t\t" + ailment.value;
+                lblCharStats.text += "\n\t\t\t\t" + ailment.key;
 
             lblCharStats.text += "\n";
         }
