@@ -16,7 +16,7 @@ Additional Information:
 
 ## Client Download
 
-[Latest Client Build](Deploys/JominiClient/Windows/JominiClient.zip)
+[Latest Client Build (0.1.0)](Deploys/JominiClient/Windows/JominiClient.zip)
 
 Note: Client currently built for exclusively Windows environments.
 
