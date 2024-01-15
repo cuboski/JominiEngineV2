@@ -16,6 +16,7 @@ public class LogIn : Controller
     [SerializeField] private Button btnLogIn;
     [SerializeField] private Button btnQuit;
     [SerializeField] private Button btnOption;
+    [SerializeField] private Text lblBuildVersion;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,8 @@ public class LogIn : Controller
         else {
             lblErrorMessage.text = "[" + DateTime.Now.ToString("HH:mm:ss") + "] " + globalString;
         }
+
+        lblBuildVersion.text = "Client Version: " + buildVersion;
     }
 
     private void BtnLogIn()

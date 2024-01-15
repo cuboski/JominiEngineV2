@@ -23,6 +23,7 @@ public class NavigationUI : Controller
 
     [SerializeField] private Text lblGameDate;
     [SerializeField] private Text lblRealTime;
+    [SerializeField] private Text lblBuildVersion;
 
     public Text textEventMessage;
     public GameObject eventBox;
@@ -44,6 +45,7 @@ public class NavigationUI : Controller
 
         string season = SeasonToString(protoClient.Season);
         lblGameDate.text = season + "\n" + protoClient.Year.ToString();
+        lblBuildVersion.text = "Client Version: " + buildVersion;
     }
 
     // This function returns true for a test communication
