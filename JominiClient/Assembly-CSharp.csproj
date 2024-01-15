@@ -67,6 +67,7 @@
     <Compile Include="Assets\Code\Scripts\TestTextClient.cs" />
     <Compile Include="Assets\Code\Scripts\CameraZoomContoller.cs" />
     <Compile Include="Assets\Code\Scripts\ViewSiege.cs" />
+    <Compile Include="Assets\Code\Scripts\OptionMenu.cs" />
     <Compile Include="Assets\Code\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Code\Scripts\ViewingLists\AssignOverlord.cs" />
     <Compile Include="Assets\Code\Scripts\ViewingLists\YourCharacters.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Assets\TilemapStuff\TilemapStuff.cs" />
     <Compile Include="Assets\Code\Scripts\ViewCharacter.cs" />
     <Compile Include="Assets\Code\Scripts\ViewingLists\ViewFactionRequestList.cs" />
-    <Compile Include="Assets\Code\Scripts\OptionMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

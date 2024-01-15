@@ -12,6 +12,14 @@ Additional Information:
 - Help Understanding Time Period: http://www.hundredyearswar.com/Books/History/1_help_c.htm
 - http://hundredyearswar.com/playhyw/documents/QuickStart.asp
 
+# Download Links
+
+## Client Download
+
+[Latest Client Build (0.1.0)](Deploys/JominiClient/Windows/JominiClient.zip)
+
+Note: Client currently built for exclusively Windows environments.
+
 # Repository Map
 
 The following will be an overview of the project structure.
