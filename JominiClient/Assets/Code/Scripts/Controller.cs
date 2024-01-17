@@ -28,7 +28,7 @@ public class Controller : MonoBehaviour {
 
     public static string ipAddress = "139.162.225.87";
     // server ip = 139.162.225.87
-    public static string buildVersion = "0.1.0";
+    public static string buildVersion = "0.1.0a";
 
     public enum SceneName {
         CreateFaction, FiefDetails, LogIn, MainMenu, Map, ViewArmy, 
