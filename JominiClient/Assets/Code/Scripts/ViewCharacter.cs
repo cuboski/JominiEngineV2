@@ -348,7 +348,7 @@ public class ViewCharacter : Controller
     {
         // general character stats
         lblCharStats.text = ""
-            + "\nDays Remaining:\t\t\t" + currentlyViewedCharacter.days
+            + "\nDays Remaining:\t\t" + currentlyViewedCharacter.days
             + "\nHealth:\t\t" + currentlyViewedCharacter.health + " / " + currentlyViewedCharacter.maxHealth
             + "\nStature:\t\t" + currentlyViewedCharacter.stature
             + "\n"
