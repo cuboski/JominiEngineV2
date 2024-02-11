@@ -1,0 +1,214 @@
+[17:01:22] Port forwarded successfully.
+[17:01:22] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[17:01:23] Waiting for event
+[17:01:28] Waiting for event
+[17:01:30] Recieved TESTnotnull: StatusChanged | 192.168.1.245:63141
+[17:01:30] 	Status is now: RespondedAwaitingApproval
+[17:01:30] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:63141
+[17:01:30] Accepted connection from acc1 | acc1 | TestString
+[17:01:30] Recieved TESTnotnull: StatusChanged | 192.168.1.245:63141
+[17:01:30] 	Status is now: RespondedConnect
+[17:01:30] Waiting for event
+[17:01:30] Waiting for event
+[17:01:30] Recieved TESTnotnull: StatusChanged | 192.168.1.245:63141
+[17:01:30] 	Status is now: Connected
+[17:01:30] Waiting for event
+[17:01:30] Recieved TESTnotnull: Data | 192.168.1.245:63141
+[17:01:30]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:63141
+[17:01:30] acc1 logs in from 192.168.1.245:63141
+[17:01:30] Waiting for event
+[17:01:30] Recieved TESTnotnull: Data | 192.168.1.245:63141
+[17:01:30] From: acc1: request = ViewWorldMap
+[17:01:30]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:63141
+[17:01:30]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:63141
+[17:01:30] Waiting for event
+[17:01:31] Recieved TESTnotnull: Data | 192.168.1.245:63141
+[17:01:31] From: acc1: request = ViewChar
+[17:01:31]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:63141
+[17:01:31]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:63141
+[17:01:31] Waiting for event
+[17:01:36] Waiting for event
+[17:01:41] Waiting for event
+[17:01:46] Waiting for event
+[17:01:51] Waiting for event
+[17:01:56] Waiting for event
+[17:02:01] Waiting for event
+[17:02:06] Waiting for event
+[17:02:11] Waiting for event
+[17:02:16] Waiting for event
+[17:02:21] Waiting for event
+[17:02:26] Waiting for event
+[17:02:31] Waiting for event
+[17:02:36] Waiting for event
+[17:02:41] Waiting for event
+[17:02:46] Waiting for event
+[17:02:51] Waiting for event
+[17:02:56] Waiting for event
+[17:03:01] Waiting for event
+[17:03:06] Waiting for event
+[17:03:11] Waiting for event
+[17:03:16] Waiting for event
+[17:03:21] Waiting for event
+[17:03:26] Waiting for event
+[17:03:30] Recieved TESTnotnull: StatusChanged | 192.168.1.245:63141
+[17:03:30] 	Status is now: Disconnected
+[17:03:30] 192.168.1.245:63141 has disconnected. Reason: Connection timed out
+[17:03:30] Client acc1 has disconnected.
+[17:03:30] Waiting for event
+[17:03:35] Waiting for event
+[17:03:40] Waiting for event
+[17:03:45] Waiting for event
+[17:03:50] Waiting for event
+[17:03:55] Waiting for event
+[17:04:00] Recieved TESTnotnull: StatusChanged | 192.168.1.245:55345
+[17:04:00] 	Status is now: RespondedAwaitingApproval
+[17:04:00] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:55345
+[17:04:00] Accepted connection from acc1 | acc1 | TestString
+[17:04:00] Recieved TESTnotnull: StatusChanged | 192.168.1.245:55345
+[17:04:00] 	Status is now: RespondedConnect
+[17:04:00] Waiting for event
+[17:04:00] Waiting for event
+[17:04:00] Recieved TESTnotnull: StatusChanged | 192.168.1.245:55345
+[17:04:00] 	Status is now: Connected
+[17:04:00] Waiting for event
+[17:04:00] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[17:04:00]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:55345
+[17:04:00] acc1 logs in from 192.168.1.245:55345
+[17:04:00] Waiting for event
+[17:04:00] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[17:04:00] From: acc1: request = ViewWorldMap
+[17:04:00]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:55345
+[17:04:00]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[17:04:00] Waiting for event
+[17:04:01] Recieved TESTnotnull: Data | 192.168.1.245:55345
+[17:04:01] From: acc1: request = ViewChar
+[17:04:01]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:55345
+[17:04:01]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:55345
+[17:04:01] Waiting for event
+[17:04:06] Waiting for event
+[17:04:11] Waiting for event
+[17:04:16] Waiting for event
+[17:04:21] Waiting for event
+[17:04:26] Waiting for event
+[17:04:31] Waiting for event
+[17:04:36] Waiting for event
+[17:04:41] Waiting for event
+[17:04:46] Waiting for event
+[17:04:51] Waiting for event
+[17:04:56] Waiting for event
+[17:05:01] Waiting for event
+[17:05:06] Waiting for event
+[17:05:11] Waiting for event
+[17:05:16] Waiting for event
+[17:05:21] Waiting for event
+[17:05:26] Waiting for event
+[17:05:31] Waiting for event
+[17:05:36] Waiting for event
+[17:05:41] Waiting for event
+[17:05:46] Waiting for event
+[17:05:50] Recieved TESTnotnull: StatusChanged | 192.168.1.245:55345
+[17:05:50] 	Status is now: Disconnected
+[17:05:50] 192.168.1.245:55345 has disconnected. Reason: Connection timed out
+[17:05:50] Client acc1 has disconnected.
+[17:05:50] Waiting for event
+[17:05:55] Waiting for event
+[17:06:00] Waiting for event
+[17:06:05] Waiting for event
+[17:06:10] Waiting for event
+[17:06:15] Waiting for event
+[17:06:20] Waiting for event
+[17:06:25] Waiting for event
+[17:06:30] Waiting for event
+[17:06:35] Waiting for event
+[17:06:40] Waiting for event
+[17:06:45] Waiting for event
+[17:06:50] Waiting for event
+[17:06:55] Waiting for event
+[17:07:00] Waiting for event
+[17:07:05] Waiting for event
+[17:07:10] Waiting for event
+[17:07:15] Waiting for event
+[17:07:20] Waiting for event
+[17:07:25] Waiting for event
+[17:07:30] Waiting for event
+[17:07:35] Waiting for event
+[17:07:40] Waiting for event
+[17:07:45] Waiting for event
+[17:07:50] Waiting for event
+[17:07:55] Waiting for event
+[17:08:00] Waiting for event
+[17:08:05] Waiting for event
+[17:08:10] Waiting for event
+[17:08:15] Waiting for event
+[17:08:20] Waiting for event
+[17:08:25] Waiting for event
+[17:08:30] Waiting for event
+[17:08:35] Waiting for event
+[17:08:40] Waiting for event
+[17:08:45] Waiting for event
+[17:08:50] Waiting for event
+[17:08:55] Waiting for event
+[17:09:00] Waiting for event
+[17:09:05] Waiting for event
+[17:09:10] Waiting for event
+[17:09:15] Waiting for event
+[17:09:20] Waiting for event
+[17:09:25] Waiting for event
+[17:09:30] Waiting for event
+[17:09:35] Waiting for event
+[17:09:40] Waiting for event
+[17:09:45] Waiting for event
+[17:09:50] Waiting for event
+[17:09:55] Waiting for event
+[17:10:00] Waiting for event
+[17:10:05] Waiting for event
+[17:10:10] Waiting for event
+[17:10:15] Waiting for event
+[17:10:20] Waiting for event
+[17:10:25] Waiting for event
+[17:10:30] Waiting for event
+[17:10:35] Waiting for event
+[17:10:40] Waiting for event
+[17:10:45] Waiting for event
+[17:10:50] Waiting for event
+[17:10:55] Waiting for event
+[17:11:00] Waiting for event
+[17:11:05] Waiting for event
+[17:11:10] Waiting for event
+[17:11:15] Waiting for event
+[17:11:20] Waiting for event
+[17:11:25] Waiting for event
+[17:11:30] Waiting for event
+[17:11:35] Waiting for event
+[17:11:40] Waiting for event
+[17:11:45] Waiting for event
+[17:11:50] Waiting for event
+[17:11:55] Waiting for event
+[17:12:00] Waiting for event
+[17:12:05] Waiting for event
+[17:12:10] Waiting for event
+[17:12:15] Waiting for event
+[17:12:20] Waiting for event
+[17:12:25] Waiting for event
+[17:12:30] Waiting for event
+[17:12:35] Waiting for event
+[17:12:40] Waiting for event
+[17:12:46] Waiting for event
+[17:12:51] Waiting for event
+[17:12:56] Waiting for event
+[17:13:01] Waiting for event
+[17:13:06] Waiting for event
+[17:13:11] Waiting for event
+[17:13:16] Waiting for event
+[17:13:21] Waiting for event
+[17:13:26] Waiting for event
+[17:13:31] Waiting for event
+[17:13:36] Waiting for event
+[17:13:41] Waiting for event
+[17:13:46] Waiting for event
+[17:13:51] Waiting for event
+[17:13:56] Waiting for event
+[17:14:01] Waiting for event
+[17:14:06] Waiting for event
+[17:14:11] Waiting for event
+[17:14:16] Wa

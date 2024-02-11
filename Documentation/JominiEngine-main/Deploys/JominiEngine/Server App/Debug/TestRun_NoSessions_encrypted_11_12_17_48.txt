@@ -1,0 +1,99 @@
+[17:48:28] Port forward FAILED 0
+[17:48:29] Port forward FAILED 1
+[17:48:29] Port forwarded successfully.
+[17:48:29] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[17:48:29] Waiting for event
+[17:48:34] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60075
+[17:48:34] 	Status is now: RespondedAwaitingApproval
+[17:48:34] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:60075
+[17:48:34] Accepted connection from acc1 | acc1 | TestString
+[17:48:34] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60075
+[17:48:34] 	Status is now: RespondedConnect
+[17:48:34] Waiting for event
+[17:48:34] Waiting for event
+[17:48:34] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60075
+[17:48:34] 	Status is now: Connected
+[17:48:34] Waiting for event
+[17:48:34] Recieved TESTnotnull: Data | 192.168.1.245:60075
+[17:48:34]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:60075
+[17:48:34] acc1 logs in from 192.168.1.245:60075
+[17:48:34] Waiting for event
+[17:48:34] Recieved TESTnotnull: Data | 192.168.1.245:60075
+[17:48:34] From: acc1: request = ViewWorldMap
+[17:48:34]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:60075
+[17:48:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60075
+[17:48:34] Waiting for event
+[17:48:35] Recieved TESTnotnull: Data | 192.168.1.245:60075
+[17:48:35] From: acc1: request = ViewChar
+[17:48:35]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:60075
+[17:48:35]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60075
+[17:48:35] Waiting for event
+[17:48:40] Waiting for event
+[17:48:41] Recieved TESTnotnull: Data | 192.168.1.245:60075
+[17:48:41] From: acc1: request = CreateFactionRequest
+[17:48:41]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:60075
+[17:48:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:60075
+[17:48:41] Waiting for event
+[17:48:46] Waiting for event
+[17:48:51] Waiting for event
+[17:48:56] Waiting for event
+[17:49:01] Waiting for event
+[17:49:06] Waiting for event
+[17:49:11] Waiting for event
+[17:49:16] Waiting for event
+[17:49:21] Waiting for event
+[17:49:26] Waiting for event
+[17:49:31] Waiting for event
+[17:49:36] Waiting for event
+[17:49:41] Waiting for event
+[17:49:46] Waiting for event
+[17:49:51] Waiting for event
+[17:49:56] Waiting for event
+[17:50:01] Waiting for event
+[17:50:06] Waiting for event
+[17:50:11] Waiting for event
+[17:50:16] Waiting for event
+[17:50:21] Waiting for event
+[17:50:26] Waiting for event
+[17:50:31] Waiting for event
+[17:50:34] Recieved TESTnotnull: StatusChanged | 192.168.1.245:60075
+[17:50:34] 	Status is now: Disconnected
+[17:50:34] 192.168.1.245:60075 has disconnected. Reason: Connection timed out
+[17:50:34] Client acc1 has disconnected.
+[17:50:34] Waiting for event
+[17:50:39] Waiting for event
+[17:50:44] Waiting for event
+[17:50:49] Waiting for event
+[17:50:54] Waiting for event
+[17:50:59] Waiting for event
+[17:51:04] Waiting for event
+[17:51:09] Waiting for event
+[17:51:14] Waiting for event
+[17:51:19] Waiting for event
+[17:51:24] Waiting for event
+[17:51:29] Waiting for event
+[17:51:34] Waiting for event
+[17:51:39] Waiting for event
+[17:51:44] Waiting for event
+[17:51:49] Waiting for event
+[17:51:54] Waiting for event
+[17:51:59] Waiting for event
+[17:52:04] Waiting for event
+[17:52:09] Waiting for event
+[17:52:14] Waiting for event
+[17:52:19] Waiting for event
+[17:52:24] Waiting for event
+[17:52:29] Waiting for event
+[17:52:34] Waiting for event
+[17:52:39] Waiting for event
+[17:52:44] Waiting for event
+[17:52:49] Waiting for event
+[17:52:54] Waiting for event
+[17:52:59] Waiting for event
+[17:53:04] Waiting for event
+[17:53:09] Waiting for event
+[17:53:14] Waiting for event
+[17:53:18] Waiting for event
+[17:53:23] Waiting for event
+[17:53:28] Waiting for event
+[17:53:

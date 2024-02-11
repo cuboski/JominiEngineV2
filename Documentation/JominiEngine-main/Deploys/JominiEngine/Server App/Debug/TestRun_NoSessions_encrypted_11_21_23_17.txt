@@ -1,0 +1,357 @@
+[23:17:49] Port forward FAILED 0
+[23:17:49] Port forwarded successfully.
+[23:17:49] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[23:17:50] Waiting for event
+[23:17:50] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:53749
+[23:17:50] Waiting for event
+[23:17:55] Waiting for event
+[23:18:00] Waiting for event
+[23:18:05] Waiting for event
+[23:18:10] Waiting for event
+[23:18:15] Waiting for event
+[23:18:20] Waiting for event
+[23:18:25] Waiting for event
+[23:18:30] Waiting for event
+[23:18:35] Waiting for event
+[23:18:40] Waiting for event
+[23:18:45] Waiting for event
+[23:18:50] Waiting for event
+[23:18:55] Waiting for event
+[23:19:00] Waiting for event
+[23:19:05] Waiting for event
+[23:19:10] Waiting for event
+[23:19:15] Waiting for event
+[23:19:20] Waiting for event
+[23:19:25] Waiting for event
+[23:19:30] Waiting for event
+[23:19:32] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56779
+[23:19:32] 	Status is now: RespondedAwaitingApproval
+[23:19:32] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:56779
+[23:19:33] Accepted connection from acc1 | acc1 | TestString
+[23:19:33] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56779
+[23:19:33] 	Status is now: RespondedConnect
+[23:19:33] Waiting for event
+[23:19:33] Waiting for event
+[23:19:33] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56779
+[23:19:33] 	Status is now: Connected
+[23:19:33] Waiting for event
+[23:19:33] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:33]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:56779
+[23:19:33] acc1 logs in from 192.168.1.245:56779
+[23:19:33] Waiting for event
+[23:19:33] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:33] From: acc1: request = ViewWorldMap
+[23:19:33]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56779
+[23:19:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:33] Waiting for event
+[23:19:34] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:34] From: acc1: request = ViewChar
+[23:19:34]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56779
+[23:19:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:34] Waiting for event
+[23:19:36] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:36] From: acc1: request = ViewChar
+[23:19:36]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56779
+[23:19:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:36] Waiting for event
+[23:19:36] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:36] From: acc1: request = ViewFactionRequestList
+[23:19:36]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:56779
+[23:19:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:36] Waiting for event
+[23:19:37] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:37] From: acc1: request = ViewChar
+[23:19:37]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56779
+[23:19:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:37] Waiting for event
+[23:19:38] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:38] From: acc1: request = ViewMyFiefs
+[23:19:38]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:56779
+[23:19:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:38] Waiting for event
+[23:19:42] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:42] From: acc1: request = CreateFactionRequest
+[23:19:42]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:56779
+[23:19:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:42] Waiting for event
+[23:19:42] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:42] From: acc1: request = ViewChar
+[23:19:42]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56779
+[23:19:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:42] Waiting for event
+[23:19:43] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:43] From: acc1: request = ViewFactionRequestList
+[23:19:43]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:56779
+[23:19:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:43] Waiting for event
+[23:19:44] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:44] From: acc1: request = GetFactionRequest
+[23:19:44]  Sending to: acc1 | ActionType = GetFactionRequest | ResponseType = None | 192.168.1.245:56779
+[23:19:44]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:44] Waiting for event
+[23:19:45] Recieved TESTnotnull: Data | 192.168.1.245:56779
+[23:19:45] From: acc1: request = ListFactionMembers
+[23:19:45]  Sending to: acc1 | ActionType = ListFactionMembers | ResponseType = Success | 192.168.1.245:56779
+[23:19:45]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56779
+[23:19:45] Waiting for event
+[23:19:46] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56779
+[23:19:46] 	Status is now: Disconnected
+[23:19:46] 192.168.1.245:56779 has disconnected. Reason: Client logged out.
+[23:19:46] Client acc1 has disconnected.
+[23:19:46] Waiting for event
+[23:19:51] Waiting for event
+[23:19:53] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56221
+[23:19:53] 	Status is now: RespondedAwaitingApproval
+[23:19:53] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:56221
+[23:19:53] Accepted connection from acc2 | acc2 | TestString
+[23:19:53] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56221
+[23:19:53] 	Status is now: RespondedConnect
+[23:19:53] Waiting for event
+[23:19:53] Waiting for event
+[23:19:53] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56221
+[23:19:53] 	Status is now: Connected
+[23:19:53] Waiting for event
+[23:19:53] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:19:53]  Sending to: acc2 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:56221
+[23:19:53] acc2 logs in from 192.168.1.245:56221
+[23:19:53] Waiting for event
+[23:19:53] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:19:53] From: acc2: request = ViewWorldMap
+[23:19:53]  Sending to: acc2 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56221
+[23:19:53]  Sending to: acc2 | ActionType = Update | ResponseType = Success | 192.168.1.245:56221
+[23:19:53] Waiting for event
+[23:19:53] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:19:53] From: acc2: request = ViewChar
+[23:19:53]  Sending to: acc2 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56221
+[23:19:53]  Sending to: acc2 | ActionType = Update | ResponseType = Success | 192.168.1.245:56221
+[23:19:53] Waiting for event
+[23:19:53] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:19:53] From: acc2: request = ViewChar
+[23:19:53]  Sending to: acc2 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56221
+[23:19:53]  Sending to: acc2 | ActionType = Update | ResponseType = Success | 192.168.1.245:56221
+[23:19:53] Waiting for event
+[23:19:57] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:19:57] From: acc2: request = ViewChar
+[23:19:57]  Sending to: acc2 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56221
+[23:19:57]  Sending to: acc2 | ActionType = Update | ResponseType = Success | 192.168.1.245:56221
+[23:19:57] Waiting for event
+[23:19:58] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:19:58] From: acc2: request = ViewFactionRequestList
+[23:19:58]  Sending to: acc2 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:56221
+[23:19:58]  Sending to: acc2 | ActionType = Update | ResponseType = Success | 192.168.1.245:56221
+[23:19:58] Waiting for event
+[23:19:59] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:19:59] From: acc2: request = GetFactionRequest
+[23:19:59]  Sending to: acc2 | ActionType = GetFactionRequest | ResponseType = None | 192.168.1.245:56221
+[23:19:59]  Sending to: acc2 | ActionType = Update | ResponseType = Success | 192.168.1.245:56221
+[23:19:59] Waiting for event
+[23:19:59] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:19:59] From: acc2: request = ListFactionMembers
+[23:19:59]  Sending to: acc2 | ActionType = ListFactionMembers | ResponseType = Success | 192.168.1.245:56221
+[23:19:59]  Sending to: acc2 | ActionType = Update | ResponseType = Success | 192.168.1.245:56221
+[23:19:59] Waiting for event
+[23:20:00] Recieved TESTnotnull: Data | 192.168.1.245:56221
+[23:20:00] From: acc2: request = SignFactionCharter
+[23:20:00]  Sending to: acc2 | ActionType = SignFactionCharter | ResponseType = Success | 192.168.1.245:56221
+[23:20:00]  Sending to: acc2 | ActionType = Update | ResponseType = Success | 192.168.1.245:56221
+[23:20:00] Waiting for event
+[23:20:01] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56221
+[23:20:01] 	Status is now: Disconnected
+[23:20:01] 192.168.1.245:56221 has disconnected. Reason: Client logged out.
+[23:20:01] Client acc2 has disconnected.
+[23:20:01] Waiting for event
+[23:20:04] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53423
+[23:20:04] 	Status is now: RespondedAwaitingApproval
+[23:20:04] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:53423
+[23:20:04] Accepted connection from acc1 | acc1 | TestString
+[23:20:04] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53423
+[23:20:04] 	Status is now: RespondedConnect
+[23:20:04] Waiting for event
+[23:20:04] Waiting for event
+[23:20:04] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53423
+[23:20:04] 	Status is now: Connected
+[23:20:04] Waiting for event
+[23:20:04] Recieved TESTnotnull: Data | 192.168.1.245:53423
+[23:20:04]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:53423
+[23:20:04] acc1 logs in from 192.168.1.245:53423
+[23:20:04] Waiting for event
+[23:20:05] Recieved TESTnotnull: Data | 192.168.1.245:53423
+[23:20:05] From: acc1: request = ViewWorldMap
+[23:20:05]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:53423
+[23:20:05]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53423
+[23:20:05] Waiting for event
+[23:20:06] Recieved TESTnotnull: Data | 192.168.1.245:53423
+[23:20:06] From: acc1: request = ViewChar
+[23:20:06]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:53423
+[23:20:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53423
+[23:20:06] Waiting for event
+[23:20:06] Recieved TESTnotnull: Data | 192.168.1.245:53423
+[23:20:06] From: acc1: request = ViewFactionRequestList
+[23:20:06]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:53423
+[23:20:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53423
+[23:20:06] Waiting for event
+[23:20:08] Recieved TESTnotnull: Data | 192.168.1.245:53423
+[23:20:08] From: acc1: request = GetFactionRequest
+[23:20:08]  Sending to: acc1 | ActionType = GetFactionRequest | ResponseType = None | 192.168.1.245:53423
+[23:20:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53423
+[23:20:08] Waiting for event
+[23:20:09] Recieved TESTnotnull: Data | 192.168.1.245:53423
+[23:20:09] From: acc1: request = ListFactionMembers
+[23:20:09]  Sending to: acc1 | ActionType = ListFactionMembers | ResponseType = Success | 192.168.1.245:53423
+[23:20:09]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53423
+[23:20:09] Waiting for event
+[23:20:14] Waiting for event
+[23:20:19] Waiting for event
+[23:20:24] Waiting for event
+[23:20:29] Waiting for event
+[23:20:34] Waiting for event
+[23:20:39] Waiting for event
+[23:20:44] Waiting for event
+[23:20:49] Waiting for event
+[23:20:54] Waiting for event
+[23:20:59] Waiting for event
+[23:21:04] Waiting for event
+[23:21:09] Waiting for event
+[23:21:14] Waiting for event
+[23:21:19] Waiting for event
+[23:21:24] Waiting for event
+[23:21:29] Waiting for event
+[23:21:34] Waiting for event
+[23:21:39] Waiting for event
+[23:21:44] Waiting for event
+[23:21:49] Waiting for event
+[23:21:54] Waiting for event
+[23:21:59] Waiting for event
+[23:22:04] Waiting for event
+[23:22:09] Waiting for event
+[23:22:14] Waiting for event
+[23:22:19] Waiting for event
+[23:22:24] Waiting for event
+[23:22:29] Waiting for event
+[23:22:30] Recieved TESTnotnull: StatusChanged | 192.168.1.245:62372
+[23:22:30] 	Status is now: RespondedAwaitingApproval
+[23:22:30] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:62372
+[23:22:30] Accepted connection from acc1 | acc1 | TestString
+[23:22:30] Recieved TESTnotnull: StatusChanged | 192.168.1.245:62372
+[23:22:30] 	Status is now: RespondedConnect
+[23:22:30] Waiting for event
+[23:22:30] Waiting for event
+[23:22:30] Recieved TESTnotnull: StatusChanged | 192.168.1.245:62372
+[23:22:30] 	Status is now: Connected
+[23:22:30] Waiting for event
+[23:22:30] Recieved TESTnotnull: Data | 192.168.1.245:62372
+[23:22:30]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:62372
+[23:22:30] acc1 logs in from 192.168.1.245:62372
+[23:22:30] Waiting for event
+[23:22:30] Recieved TESTnotnull: Data | 192.168.1.245:62372
+[23:22:30] From: acc1: request = ViewWorldMap
+[23:22:30]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:62372
+[23:22:30]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62372
+[23:22:30] Waiting for event
+[23:22:31] Recieved TESTnotnull: Data | 192.168.1.245:62372
+[23:22:31] From: acc1: request = ViewChar
+[23:22:31]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:62372
+[23:22:31]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62372
+[23:22:31] Waiting for event
+[23:22:31] Recieved TESTnotnull: Data | 192.168.1.245:62372
+[23:22:31] From: acc1: request = ViewChar
+[23:22:31]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:62372
+[23:22:31]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62372
+[23:22:31] Waiting for event
+[23:22:33] Recieved TESTnotnull: Data | 192.168.1.245:62372
+[23:22:33] From: acc1: request = ViewFactionRequestList
+[23:22:33]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:62372
+[23:22:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62372
+[23:22:33] Waiting for event
+[23:22:33] Recieved TESTnotnull: Data | 192.168.1.245:62372
+[23:22:33] From: acc1: request = GetFactionRequest
+[23:22:33]  Sending to: acc1 | ActionType = GetFactionRequest | ResponseType = None | 192.168.1.245:62372
+[23:22:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62372
+[23:22:33] Waiting for event
+[23:22:37] Recieved TESTnotnull: Data | 192.168.1.245:62372
+[23:22:37] From: acc1: request = ListFactionMembers
+[23:22:37]  Sending to: acc1 | ActionType = ListFactionMembers | ResponseType = Success | 192.168.1.245:62372
+[23:22:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62372
+[23:22:37] Waiting for event
+[23:22:42] Waiting for event
+[23:22:48] Waiting for event
+[23:22:53] Waiting for event
+[23:22:58] Waiting for event
+[23:23:03] Waiting for event
+[23:23:08] Waiting for event
+[23:23:13] Waiting for event
+[23:23:18] Waiting for event
+[23:23:23] Waiting for event
+[23:23:28] Waiting for event
+[23:23:33] Waiting for event
+[23:23:35] Recieved TESTnotnull: StatusChanged | 192.168.1.245:63804
+[23:23:35] 	Status is now: RespondedAwaitingApproval
+[23:23:35] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:63804
+[23:23:35] Accepted connection from acc1 | acc1 | TestString
+[23:23:35] Recieved TESTnotnull: StatusChanged | 192.168.1.245:63804
+[23:23:35] 	Status is now: RespondedConnect
+[23:23:35] Waiting for event
+[23:23:35] Waiting for event
+[23:23:35] Recieved TESTnotnull: StatusChanged | 192.168.1.245:63804
+[23:23:35] 	Status is now: Connected
+[23:23:35] Waiting for event
+[23:23:35] Recieved TESTnotnull: Data | 192.168.1.245:63804
+[23:23:35]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:63804
+[23:23:35] acc1 logs in from 192.168.1.245:63804
+[23:23:35] Waiting for event
+[23:23:35] Recieved TESTnotnull: Data | 192.168.1.245:63804
+[23:23:35] From: acc1: request = ViewWorldMap
+[23:23:35]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:63804
+[23:23:35]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:63804
+[23:23:35] Waiting for event
+[23:23:36] Recieved TESTnotnull: Data | 192.168.1.245:63804
+[23:23:36] From: acc1: request = ViewChar
+[23:23:36]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:63804
+[23:23:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:63804
+[23:23:36] Waiting for event
+[23:23:37] Recieved TESTnotnull: Data | 192.168.1.245:63804
+[23:23:37] From: acc1: request = ViewChar
+[23:23:37]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:63804
+[23:23:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:63804
+[23:23:37] Waiting for event
+[23:23:38] Recieved TESTnotnull: Data | 192.168.1.245:63804
+[23:23:38] From: acc1: request = ViewFactionRequestList
+[23:23:38]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:63804
+[23:23:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:63804
+[23:23:38] Waiting for event
+[23:23:38] Recieved TESTnotnull: Data | 192.168.1.245:63804
+[23:23:38] From: acc1: request = GetFactionRequest
+[23:23:38]  Sending to: acc1 | ActionType = GetFactionRequest | ResponseType = None | 192.168.1.245:63804
+[23:23:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:63804
+[23:23:38] Waiting for event
+[23:23:39] Recieved TESTnotnull: Data | 192.168.1.245:63804
+[23:23:39] From: acc1: request = ListFactionMembers
+[23:23:39]  Sending to: acc1 | ActionType = ListFactionMembers | ResponseType = Success | 192.168.1.245:63804
+[23:23:39]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:63804
+[23:23:39] Waiting for event
+[23:23:44] Waiting for event
+[23:23:49] Waiting for event
+[23:23:54] Waiting for event
+[23:23:55] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53423
+[23:23:55] 	Status is now: Disconnected
+[23:23:55] 192.168.1.245:53423 has disconnected. Reason: Connection timed out
+[23:23:55] Client acc1 has disconnected.
+[23:23:55] Waiting for event
+[23:24:00] Waiting for event
+[23:24:05] Waiting for event
+[23:24:10] Waiting for event
+[23:24:13] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53296
+[23:24:13] 	Status is now: RespondedAwaitingApproval
+[23:24:13] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:53296
+[23:24:13] Accepted connection from acc1 | acc1 | TestString
+[23:24:13] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53296
+[23:24:13] 	Status is now: RespondedConnect
+[23:24:13] Waiting for event
+[23:24:13] Waiting for event
+[23:24:13] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53296
+[23:24:13] 	Status is now: Connected
+[23:24:13] Waiting for event
+[23:24:14] Recieved TESTnotnull: Data | 192.168.1.245:53296
+[23:24:14]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:53296
+[23:24:14] acc1 logs in from 192.168.1.24

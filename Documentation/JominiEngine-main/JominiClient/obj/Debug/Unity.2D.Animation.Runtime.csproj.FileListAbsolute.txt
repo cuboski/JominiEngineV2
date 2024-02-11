@@ -1,0 +1,2 @@
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\Unity.2D.Animation.Runtime.csprojAssemblyReference.cache
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\Unity.2D.Animation.Runtime.csproj.CoreCompileInputs.cache

@@ -1,0 +1,191 @@
+[00:26:03] Port forward FAILED 0
+[00:26:04] Port forward FAILED 1
+[00:26:05] Port forwarded successfully.
+[00:26:05] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[00:26:05] Waiting for event
+[00:26:07] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:55824
+[00:26:07] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:55824
+[00:26:07] Waiting for event
+[00:26:12] Waiting for event
+[00:26:14] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54826
+[00:26:14] 	Status is now: RespondedAwaitingApproval
+[00:26:14] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:54826
+[00:26:14] Accepted connection from acc1 | acc1 | TestString
+[00:26:14] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54826
+[00:26:14] 	Status is now: RespondedConnect
+[00:26:14] Waiting for event
+[00:26:14] Waiting for event
+[00:26:14] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54826
+[00:26:14] 	Status is now: Connected
+[00:26:14] Waiting for event
+[00:26:15] Recieved TESTnotnull: Data | 192.168.1.245:54826
+[00:26:15]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:54826
+[00:26:15] acc1 logs in from 192.168.1.245:54826
+[00:26:15] Waiting for event
+[00:26:15] Recieved TESTnotnull: Data | 192.168.1.245:54826
+[00:26:15] From: acc1: request = ViewWorldMap
+[00:26:15]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:54826
+[00:26:15]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54826
+[00:26:15] Waiting for event
+[00:26:15] Recieved TESTnotnull: Data | 192.168.1.245:54826
+[00:26:15] From: acc1: request = ViewChar
+[00:26:15]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54826
+[00:26:15]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54826
+[00:26:15] Waiting for event
+[00:26:17] Recieved TESTnotnull: Data | 192.168.1.245:54826
+[00:26:17] From: acc1: request = TestAction
+[00:26:17]  Sending to: acc1 | ActionType = TestAction | ResponseType = Success | 192.168.1.245:54826
+[00:26:17]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54826
+[00:26:17] Waiting for event
+[00:26:22] Waiting for event
+[00:26:27] Waiting for event
+[00:26:28] Recieved TESTnotnull: Data | 192.168.1.245:54826
+[00:26:28] From: acc1: request = TestAction
+[00:26:28]  Sending to: acc1 | ActionType = TestAction | ResponseType = Success | 192.168.1.245:54826
+[00:26:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54826
+[00:26:28] Waiting for event
+[00:26:33] Waiting for event
+[00:26:38] Waiting for event
+[00:26:43] Waiting for event
+[00:26:48] Waiting for event
+[00:26:53] Waiting for event
+[00:26:58] Waiting for event
+[00:27:03] Waiting for event
+[00:27:08] Waiting for event
+[00:27:13] Waiting for event
+[00:27:18] Waiting for event
+[00:27:23] Waiting for event
+[00:27:28] Waiting for event
+[00:27:33] Waiting for event
+[00:27:38] Waiting for event
+[00:27:43] Waiting for event
+[00:27:48] Waiting for event
+[00:27:53] Waiting for event
+[00:27:58] Waiting for event
+[00:28:03] Waiting for event
+[00:28:08] Waiting for event
+[00:28:13] Waiting for event
+[00:28:18] Waiting for event
+[00:28:23] Waiting for event
+[00:28:28] Waiting for event
+[00:28:33] Waiting for event
+[00:28:38] Waiting for event
+[00:28:43] Waiting for event
+[00:28:48] Waiting for event
+[00:28:53] Waiting for event
+[00:28:58] Waiting for event
+[00:29:03] Waiting for event
+[00:29:08] Waiting for event
+[00:29:13] Waiting for event
+[00:29:18] Waiting for event
+[00:29:23] Waiting for event
+[00:29:28] Waiting for event
+[00:29:33] Waiting for event
+[00:29:38] Waiting for event
+[00:29:43] Waiting for event
+[00:29:48] Waiting for event
+[00:29:54] Waiting for event
+[00:29:59] Waiting for event
+[00:30:04] Waiting for event
+[00:30:09] Waiting for event
+[00:30:14] Waiting for event
+[00:30:19] Waiting for event
+[00:30:24] Waiting for event
+[00:30:29] Waiting for event
+[00:30:34] Waiting for event
+[00:30:39] Waiting for event
+[00:30:44] Waiting for event
+[00:30:49] Waiting for event
+[00:30:54] Waiting for event
+[00:30:59] Waiting for event
+[00:31:04] Waiting for event
+[00:31:09] Waiting for event
+[00:31:14] Waiting for event
+[00:31:19] Waiting for event
+[00:31:24] Waiting for event
+[00:31:29] Waiting for event
+[00:31:34] Waiting for event
+[00:31:39] Waiting for event
+[00:31:44] Waiting for event
+[00:31:49] Waiting for event
+[00:31:54] Waiting for event
+[00:31:59] Waiting for event
+[00:32:04] Waiting for event
+[00:32:09] Waiting for event
+[00:32:14] Waiting for event
+[00:32:19] Waiting for event
+[00:32:24] Waiting for event
+[00:32:29] Waiting for event
+[00:32:34] Waiting for event
+[00:32:39] Waiting for event
+[00:32:44] Waiting for event
+[00:32:49] Waiting for event
+[00:32:54] Waiting for event
+[00:32:59] Waiting for event
+[00:33:04] Waiting for event
+[00:33:09] Waiting for event
+[00:33:14] Waiting for event
+[00:33:19] Waiting for event
+[00:33:24] Waiting for event
+[00:33:29] Waiting for event
+[00:33:34] Waiting for event
+[00:33:39] Waiting for event
+[00:33:44] Waiting for event
+[00:33:49] Waiting for event
+[00:33:54] Waiting for event
+[00:33:59] Waiting for event
+[00:34:04] Waiting for event
+[00:34:09] Waiting for event
+[00:34:14] Waiting for event
+[00:34:19] Waiting for event
+[00:34:24] Waiting for event
+[00:34:29] Waiting for event
+[00:34:34] Waiting for event
+[00:34:39] Waiting for event
+[00:34:44] Waiting for event
+[00:34:49] Waiting for event
+[00:34:54] Waiting for event
+[00:34:59] Waiting for event
+[00:35:04] Waiting for event
+[00:35:09] Waiting for event
+[00:35:14] Waiting for event
+[00:35:19] Waiting for event
+[00:35:24] Waiting for event
+[00:35:29] Waiting for event
+[00:35:34] Waiting for event
+[00:35:39] Waiting for event
+[00:35:41] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53137
+[00:35:41] 	Status is now: RespondedAwaitingApproval
+[00:35:41] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:53137
+[00:35:41] Accepted connection from acc1 | acc1 | TestString
+[00:35:41] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53137
+[00:35:41] 	Status is now: RespondedConnect
+[00:35:41] Waiting for event
+[00:35:41] Waiting for event
+[00:35:41] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53137
+[00:35:41] 	Status is now: Connected
+[00:35:41] Waiting for event
+[00:35:42] Recieved TESTnotnull: Data | 192.168.1.245:53137
+[00:35:42]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:53137
+[00:35:42] acc1 logs in from 192.168.1.245:53137
+[00:35:42] Waiting for event
+[00:35:42] Recieved TESTnotnull: Data | 192.168.1.245:53137
+[00:35:42] From: acc1: request = ViewWorldMap
+[00:35:42]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:53137
+[00:35:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53137
+[00:35:42] Waiting for event
+[00:35:42] Recieved TESTnotnull: Data | 192.168.1.245:53137
+[00:35:42] From: acc1: request = ViewChar
+[00:35:42]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:53137
+[00:35:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53137
+[00:35:42] Waiting for event
+[00:35:46] Recieved TESTnotnull: Data | 192.168.1.245:53137
+[00:35:46] From: acc1: request = ViewChar
+[00:35:46]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:53137
+[00:35:46]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53137
+[00:35:46] Waiting for event
+[00:35:47] Recieved TESTnotnull: Data | 192.168.1.245:53137
+[00:35:47] From: acc1: request = ViewFief
+[00:35:47]  Sending to: acc1 | ActionType = ViewFief | ResponseType = ErrorGenericTooFarFromFief | 192.168.1.245:
