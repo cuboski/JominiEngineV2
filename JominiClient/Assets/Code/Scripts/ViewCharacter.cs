@@ -55,6 +55,11 @@ public class ViewCharacter : Controller
         btnViewFactionList.interactable = true;
         btnCreateFaction.interactable = true;
 
+        // faction buttons
+        btnViewFactionReq.interactable = true;
+        btnViewFactionList.interactable = true;
+        btnCreateFaction.interactable = true;
+
         ProtoMessage reply = GetCharacterDetails(characterToViewID, tclient);
         if(reply.ResponseType == DisplayMessages.Success) {
             Debug.Log($"Check character");

@@ -228,6 +228,7 @@ C:/Users/Kyle/Desktop/JominiEngine/JominiEngine/server/ProtoMessageClient/obj/De
 /home/kd41/JominiEngine/server/ProtoMessageClient/obj/Debug/ProtoMessageClient.csproj.CopyComplete
 /home/kd41/JominiEngine/server/ProtoMessageClient/obj/Debug/ProtoMessageClient.dll
 /home/kd41/JominiEngine/server/ProtoMessageClient/obj/Debug/ProtoMessageClient.pdb
+<<<<<<< Updated upstream
 C:\Users\Kyle\Desktop\JominiEngine\JominiEngine\server\ProtoMessageClient\bin\Debug\ProtoMessage.cs
 C:\Users\Kyle\Desktop\JominiEngine\JominiEngine\server\ProtoMessageClient\bin\Debug\ProtoMessageClient.dll.config
 C:\Users\Kyle\Desktop\JominiEngine\JominiEngine\server\ProtoMessageClient\bin\Debug\ProtoMessageClient.dll
@@ -264,42 +265,7 @@ C:\Users\Kyle\Desktop\JominiEngine\JominiEngine\server\ProtoMessageClient\obj\De
 C:\Users\Kyle\Desktop\JominiEngine\JominiEngine\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.csproj.CopyComplete
 C:\Users\Kyle\Desktop\JominiEngine\JominiEngine\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.dll
 C:\Users\Kyle\Desktop\JominiEngine\JominiEngine\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.pdb
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\ProtoMessage.cs
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\ProtoMessageClient.dll.config
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\ProtoMessageClient.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\ProtoMessageClient.pdb
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\Lidgren.Network.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\Newtonsoft.Json.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\protobuf-net.Core.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\protobuf-net.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\QuickGraph.Data.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\QuickGraph.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\QuickGraph.Graphviz.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\QuickGraph.Serialization.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\RiakClient.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Buffers.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Collections.Immutable.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Memory.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Numerics.Vectors.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\Newtonsoft.Json.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\protobuf-net.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\protobuf-net.Core.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\QuickGraph.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\QuickGraph.Data.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\QuickGraph.Graphviz.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\QuickGraph.Serialization.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\RiakClient.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Buffers.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Collections.Immutable.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Memory.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Numerics.Vectors.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.csproj.AssemblyReference.cache
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.csproj.CoreCompileInputs.cache
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.csproj.CopyComplete
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.dll
-F:\JominiEngine-main\JominiEngine-main\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.pdb
+=======
 G:\JominiEngine\server\ProtoMessageClient\bin\Debug\ProtoMessage.cs
 G:\JominiEngine\server\ProtoMessageClient\bin\Debug\ProtoMessageClient.dll.config
 G:\JominiEngine\server\ProtoMessageClient\bin\Debug\ProtoMessageClient.dll
@@ -336,3 +302,4 @@ G:\JominiEngine\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.csproj.Co
 G:\JominiEngine\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.csproj.CopyComplete
 G:\JominiEngine\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.dll
 G:\JominiEngine\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.pdb
+>>>>>>> Stashed changes

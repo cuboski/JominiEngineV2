@@ -1,0 +1,264 @@
+[14:05:39] Port forward FAILED 0
+[14:05:40] Port forward FAILED 1
+[14:05:41] Port forwarded successfully.
+[14:05:41] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[14:05:41] Waiting for event
+[14:05:46] Waiting for event
+[14:05:51] Waiting for event
+[14:05:56] Waiting for event
+[14:05:59] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54690
+[14:05:59] 	Status is now: RespondedAwaitingApproval
+[14:05:59] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:54690
+[14:05:59] Accepted connection from acc1 | acc1 | TestString
+[14:05:59] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54690
+[14:05:59] 	Status is now: RespondedConnect
+[14:05:59] Waiting for event
+[14:05:59] Waiting for event
+[14:05:59] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54690
+[14:05:59] 	Status is now: Connected
+[14:05:59] Waiting for event
+[14:06:00] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:00]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:54690
+[14:06:00] acc1 logs in from 192.168.1.245:54690
+[14:06:00] Waiting for event
+[14:06:00] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:00] From: acc1: request = ViewWorldMap
+[14:06:00]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:54690
+[14:06:00]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:00] Waiting for event
+[14:06:00] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:00] From: acc1: request = ViewChar
+[14:06:00]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54690
+[14:06:00]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:00] Waiting for event
+[14:06:03] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:03] From: acc1: request = GetNPCList
+[14:06:03]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54690
+[14:06:03]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:03] Waiting for event
+[14:06:08] Waiting for event
+[14:06:13] Waiting for event
+[14:06:15] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:15] From: acc1: request = GetNPCList
+[14:06:15]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54690
+[14:06:15]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:15] Waiting for event
+[14:06:20] Waiting for event
+[14:06:24] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:24] From: acc1: request = UseChar
+[14:06:24]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:54690
+[14:06:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:24] Waiting for event
+[14:06:24] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:24] From: acc1: request = ViewChar
+[14:06:24]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54690
+[14:06:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:24] Waiting for event
+[14:06:29] Waiting for event
+[14:06:31] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:31] From: acc1: request = GetNPCList
+[14:06:31]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54690
+[14:06:31]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:31] Waiting for event
+[14:06:33] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:33] From: acc1: request = GetNPCList
+[14:06:33]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54690
+[14:06:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:33] Waiting for event
+[14:06:37] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:37] From: acc1: request = UseChar
+[14:06:37]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:54690
+[14:06:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:37] Waiting for event
+[14:06:37] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:06:37] From: acc1: request = ViewChar
+[14:06:37]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54690
+[14:06:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:06:37] Waiting for event
+[14:06:42] Waiting for event
+[14:06:47] Waiting for event
+[14:06:52] Waiting for event
+[14:06:57] Waiting for event
+[14:07:02] Waiting for event
+[14:07:07] Waiting for event
+[14:07:12] Waiting for event
+[14:07:17] Waiting for event
+[14:07:22] Waiting for event
+[14:07:27] Waiting for event
+[14:07:32] Waiting for event
+[14:07:37] Waiting for event
+[14:07:42] Waiting for event
+[14:07:47] Waiting for event
+[14:07:52] Waiting for event
+[14:07:57] Waiting for event
+[14:08:02] Waiting for event
+[14:08:02] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:08:02] From: acc1: request = ViewFactionRequestList
+[14:08:02]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:54690
+[14:08:02]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:08:02] Waiting for event
+[14:08:05] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:08:05] From: acc1: request = GetNPCList
+[14:08:05]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54690
+[14:08:05]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:08:05] Waiting for event
+[14:08:06] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:08:06] From: acc1: request = UseChar
+[14:08:06]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:54690
+[14:08:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:08:06] Waiting for event
+[14:08:06] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:08:06] From: acc1: request = ViewChar
+[14:08:06]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54690
+[14:08:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:08:06] Waiting for event
+[14:08:10] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:08:10] From: acc1: request = ViewChar
+[14:08:10]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54690
+[14:08:10]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:08:10] Waiting for event
+[14:08:11] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:08:11] From: acc1: request = GetNPCList
+[14:08:11]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54690
+[14:08:11]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:08:11] Waiting for event
+[14:08:16] Waiting for event
+[14:08:21] Waiting for event
+[14:08:26] Waiting for event
+[14:08:31] Waiting for event
+[14:08:36] Waiting for event
+[14:08:41] Waiting for event
+[14:08:46] Waiting for event
+[14:08:51] Waiting for event
+[14:08:56] Waiting for event
+[14:09:01] Waiting for event
+[14:09:06] Waiting for event
+[14:09:11] Waiting for event
+[14:09:16] Waiting for event
+[14:09:21] Waiting for event
+[14:09:26] Waiting for event
+[14:09:31] Waiting for event
+[14:09:36] Waiting for event
+[14:09:41] Waiting for event
+[14:09:46] Waiting for event
+[14:09:51] Waiting for event
+[14:09:56] Waiting for event
+[14:10:01] Waiting for event
+[14:10:06] Waiting for event
+[14:10:11] Waiting for event
+[14:10:16] Waiting for event
+[14:10:21] Waiting for event
+[14:10:26] Waiting for event
+[14:10:31] Waiting for event
+[14:10:36] Waiting for event
+[14:10:41] Waiting for event
+[14:10:46] Waiting for event
+[14:10:51] Waiting for event
+[14:10:56] Waiting for event
+[14:11:01] Waiting for event
+[14:11:06] Waiting for event
+[14:11:11] Waiting for event
+[14:11:16] Waiting for event
+[14:11:21] Waiting for event
+[14:11:26] Waiting for event
+[14:11:31] Waiting for event
+[14:11:36] Waiting for event
+[14:11:41] Waiting for event
+[14:11:46] Waiting for event
+[14:11:51] Waiting for event
+[14:11:56] Waiting for event
+[14:12:01] Waiting for event
+[14:12:04] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:12:04] From: acc1: request = GetNPCList
+[14:12:04]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54690
+[14:12:04]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:12:04] Waiting for event
+[14:12:05] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:12:05] From: acc1: request = UseChar
+[14:12:05]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:54690
+[14:12:05]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:12:05] Waiting for event
+[14:12:05] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:12:05] From: acc1: request = ViewChar
+[14:12:05]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54690
+[14:12:05]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:12:05] Waiting for event
+[14:12:09] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:12:09] From: acc1: request = GetNPCList
+[14:12:09]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54690
+[14:12:09]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:12:09] Waiting for event
+[14:12:14] Waiting for event
+[14:12:19] Waiting for event
+[14:12:24] Waiting for event
+[14:12:29] Waiting for event
+[14:12:34] Waiting for event
+[14:12:39] Waiting for event
+[14:12:44] Waiting for event
+[14:12:49] Waiting for event
+[14:12:54] Waiting for event
+[14:12:59] Waiting for event
+[14:13:04] Waiting for event
+[14:13:09] Waiting for event
+[14:13:14] Recieved TESTnotnull: Data | 192.168.1.245:54690
+[14:13:14] From: acc1: request = ViewWorldMap
+[14:13:14]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:54690
+[14:13:14]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54690
+[14:13:14] Waiting for event
+[14:13:19] Waiting for event
+[14:13:24] Waiting for event
+[14:13:29] Waiting for event
+[14:13:34] Waiting for event
+[14:13:39] Waiting for event
+[14:13:44] Waiting for event
+[14:13:49] Waiting for event
+[14:13:54] Waiting for event
+[14:13:59] Waiting for event
+[14:14:04] Waiting for event
+[14:14:09] Waiting for event
+[14:14:14] Waiting for event
+[14:14:19] Waiting for event
+[14:14:24] Waiting for event
+[14:14:29] Waiting for event
+[14:14:34] Waiting for event
+[14:14:39] Waiting for event
+[14:14:44] Waiting for event
+[14:14:49] Waiting for event
+[14:14:54] Waiting for event
+[14:14:59] Waiting for event
+[14:15:04] Waiting for event
+[14:15:09] Waiting for event
+[14:15:14] Waiting for event
+[14:15:19] Waiting for event
+[14:15:24] Waiting for event
+[14:15:29] Waiting for event
+[14:15:34] Waiting for event
+[14:15:39] Waiting for event
+[14:15:44] Waiting for event
+[14:15:49] Waiting for event
+[14:15:54] Waiting for event
+[14:15:59] Waiting for event
+[14:16:04] Waiting for event
+[14:16:09] Waiting for event
+[14:16:14] Waiting for event
+[14:16:19] Waiting for event
+[14:16:24] Waiting for event
+[14:16:29] Waiting for event
+[14:16:34] Waiting for event
+[14:16:39] Waiting for event
+[14:16:44] Waiting for event
+[14:16:49] Waiting for event
+[14:16:54] Waiting for event
+[14:16:59] Waiting for event
+[14:17:04] Waiting for event
+[14:17:09] Waiting for event
+[14:17:14] Waiting for event
+[14:17:19] Waiting for event
+[14:17:24] Waiting for event
+[14:17:29] Waiting for event
+[14:17:34] Waiting for event
+[14:17:39] Waiting for event
+[14:17:45] Waiting for event
+[14:17:50] Waiting for event
+[14:17:55] Waiting for event
+[14:17:56] Re

@@ -1,0 +1,666 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProtoMessageClient.Ailment" Collapsed="true">
+    <Position X="62" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAgIAAAAAAAAAAAAAAACAAAAAAAQAA=</HashCode>
+      <FileName>Ailment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Army" Collapsed="true">
+    <Position X="63.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIRAICAIAggQTAQAAAiQCmABBAOEAAAAAGkUIkAiA=</HashCode>
+      <FileName>Army.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Battle" Collapsed="true">
+    <Position X="67.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAABgAEAAAgAAAAAAAAEAAAAAAQE=</HashCode>
+      <FileName>Battle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Birth" Collapsed="true">
+    <Position X="69" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEACAAAAAAAIAAAAAAAAAAAAAAggAAAAAAAA=</HashCode>
+      <FileName>Birth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Character" Collapsed="true">
+    <Position X="9.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YEgPgUQYMQBHGQ0CpAgkIpImAlEbAoNCsqBogWOCmgY=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ProtoMessageClient.PlayerCharacter" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ekAEAwAsAACAEBgBIYAYwAAJAgkIkAIAABxEgSBGgwA=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.NonPlayerCharacter" Collapsed="true">
+    <Position X="10.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAACAAAAEAgAAEAICAAACQEAgAAAEAAEAsIAAIABIA=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Character_Serialised" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEgMgEAIAABCAAgABAggAIAiAEAKAAEIAIAIAWGAAAA=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.PlayerCharacter_Serialised" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAIAAAgAAAAgAAEAAAAAQAACACgAA=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.NonPlayerCharacter_Serialised" Collapsed="true">
+    <Position X="10.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAEAEAAAIABAA=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Client" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="70.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAIABAEAAIAAAAgIEAAAEAAAQgAAAABAAQAACIACA=</HashCode>
+      <FileName>Client.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProtoMessageClient.Client_Serialized" Collapsed="true">
+    <Position X="72.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAEAAAAAAAAAAAAAAAAAAAAAIgAAAAAAAAAQA=</HashCode>
+      <FileName>Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientSerializer" Collapsed="true">
+    <Position X="62" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAQAIAEAAACAACEADAAQgAAAAAQAQgCEAEEAE=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientFief" Collapsed="true">
+    <Position X="63.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAEAAAAAAAAAARAAgI=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientTerrain" Collapsed="true">
+    <Position X="63.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientProvince" Collapsed="true">
+    <Position X="70.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAQAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientKingdom" Collapsed="true">
+    <Position X="65.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAQAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientNationality" Collapsed="true">
+    <Position X="69" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientLanguage" Collapsed="true">
+    <Position X="67.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientBaseLanguage" Collapsed="true">
+    <Position X="62" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ClientRank" Collapsed="true">
+    <Position X="72.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>ClientSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.CSVimport" Collapsed="true">
+    <Position X="67.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AjAACAACAJAAIACAAgAAgAAAAIAAAAAAAAUCAAAJAAI=</HashCode>
+      <FileName>CSVimport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.DatabaseRead" Collapsed="true">
+    <Position X="69" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SAEoEUJCMQUEAAEYAABAREAQAAEIEkAYGAAAJEAABAA=</HashCode>
+      <FileName>DatabaseRead.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.DatabaseWrite" Collapsed="true">
+    <Position X="70.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAYACACIwCAAAASISQkBCgBgAAAgEJCAAITAAABBA=</HashCode>
+      <FileName>DatabaseWrite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Fief" Collapsed="true">
+    <Position X="5.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgXTkivAZQwgFEjQMAEBBAF8agAobCGgJh0lkIThHoY=</HashCode>
+      <FileName>Fief.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ProtoMessageClient.Fief_Serialised" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACSAggGAAQwAAAgAEAAABAEAAAAgAACAJBgAgIRABoI=</HashCode>
+      <FileName>Fief.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Game" Collapsed="true">
+    <Position X="72.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAgKAnwEAQWAgPgEBAIgwKKJmpgUEACgUAEDEEjAiQA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.GameClock" Collapsed="true">
+    <Position X="62" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkAAAAAAAAAAAAABAAIAAAAAAABAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>GameClock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Globals_Game" Collapsed="true">
+    <Position X="63.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>bSJJQIYIEBoAJcCDO+4Al0DDALUEPgLICKiaCAUhARg=</HashCode>
+      <FileName>Globals_Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.VictoryData" Collapsed="true">
+    <Position X="63.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAgAAAgGAAIAIAAEAAAAEAAAQACQACACAAAAAQAAAA=</HashCode>
+      <FileName>Globals_Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.OwnershipChallenge" Collapsed="true">
+    <Position X="67.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAABAAAAAAABAAAAAAAAAgACAEAAAAAAAIAAgA=</HashCode>
+      <FileName>Globals_Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Globals_Server" Collapsed="true">
+    <Position X="65.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAEMAAAAIAAESAAAAFAAACAAAAAAIAAAiAAAAI=</HashCode>
+      <FileName>Globals_Server.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.HexMapGraph" Collapsed="true">
+    <Position X="67.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAABAEIACIAAopAgAAAAAEAAQQCiAAAAEAg=</HashCode>
+      <FileName>HexMapGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Journal" Collapsed="true">
+    <Position X="69" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAIAAAQAAAAAAAAoAAAAAAAAAIQQAAABAAAAAAA=</HashCode>
+      <FileName>Journal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.JournalEntry" Collapsed="true">
+    <Position X="70.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEFAAAAAABIAAAAAQCQAAGCAAABAEAAIAABAAAAEAI=</HashCode>
+      <FileName>Journal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Kingdom" Collapsed="true">
+    <Position X="0.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAABAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Kingdom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Kingdom_Serialised" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Kingdom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Language" Collapsed="true">
+    <Position X="72.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAABAAAAAAAAAAAAAAAAAAABgA=</HashCode>
+      <FileName>Language.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.BaseLanguage" Collapsed="true">
+    <Position X="65.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Language.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Language_Serialised" Collapsed="true">
+    <Position X="62" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAABAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Language.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.LogInManager" Collapsed="true">
+    <Position X="63.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAgCAQEABEQAAAAgAAAgAAACAAIAAIACCgAAAA=</HashCode>
+      <FileName>LogInManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Nationality" Collapsed="true">
+    <Position X="65.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Nationality.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.PermissionManager" Collapsed="true">
+    <Position X="70.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgAAAAIAIAQEIAEAEAAAAAAIAAAABAggIAABCAEQAUA=</HashCode>
+      <FileName>PermissionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Pillage_Siege" Collapsed="true">
+    <Position X="72.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAQAAAAIAIAAA=</HashCode>
+      <FileName>Pillage_Siege.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Place" Collapsed="true">
+    <Position X="3" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAQAAgEAAAAAAAAAgAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Place.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Place_Serialised" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAQAAgAAAAAAAAAAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Place.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Program" Collapsed="true">
+    <Position X="63.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBAAAAAQCAQQAiAAAQAACAAAEAAACAAZAAAAhAAAAAI=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoMessage" Collapsed="true">
+    <Position X="31.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAACAAAAAEAAAAgAAIAAgAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Pair" Collapsed="true">
+    <Position X="69" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoLogIn" Collapsed="true">
+    <Position X="19" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAIAAQAAAAAAAAAAAAAAAAAQAAACAAAAAE=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoGenericArray&lt;T&gt;" Collapsed="true">
+    <Position X="25.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoClient" Collapsed="true">
+    <Position X="32.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAFQAAAAAAAAAAAAAAAgAAgAgAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoAilment" Collapsed="true">
+    <Position X="39.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAACAAEAAAAAAAAAAAAAAAAAgAAAEAgAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoArmy" Collapsed="true">
+    <Position X="46" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAAAAAAgIBAAAAAAQCiAABAAAAAAAIIgEAIACA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoCharacter" Collapsed="true">
+    <Position X="53.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GMiMgAAIQQBCAA0IAAgAAIAiAEAKAAEAAIAICWGCAAg=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoPlayerCharacter" Collapsed="true">
+    <Position X="52.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAABUAAAQAgAAAAgAAEAAAAAAAAAACAAI=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoNPC" Collapsed="true">
+    <Position X="55" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAgAAUAAAAAAAAAABAAAAEAEAEAAAAABAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoFief" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GCyAggGEAQwAgAAAEAAABAEAAAAgAACBpAgAgIRIBoI=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoArmyOverview" Collapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBAIAAAAAAAAAAAAAAAAAAAgAAAAAAIAAAIABAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoCharacterOverview" Collapsed="true">
+    <Position X="21.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAgAAAAAAAABAAAEAAAAAAAICAAQAAQAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoPillageResult" Collapsed="true">
+    <Position X="28" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgACgAAAEAAQAAAAAAAIAEAICBgABAAAAAQKKIA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoSiegeOverview" Collapsed="true">
+    <Position X="34.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAEAAAIAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoSiegeDisplay" Collapsed="true">
+    <Position X="41.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAGAAAAIAAAAAEAIBLAAQACAAAABAAABAggAAEIIQAE=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoBattle" Collapsed="true">
+    <Position X="48.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAhAAAIAAEAIAAAAAAgQQAIAAAAAhBABBBAAIAACAMA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoJournalEntry" Collapsed="true">
+    <Position X="57.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAFAAAAAAQAAAAAAQAAAACCAAABAAAAAAAAAAAAECI=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoJournal" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAIAAQAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoDetachment" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAgAAAAAAAAAAAAAAAgAAAAAAAAAAAAgEAAAgA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoTransfer" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAIAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoTransferPlayer" Collapsed="true">
+    <Position X="16.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoTravelTo" Collapsed="true">
+    <Position X="23.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAEAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoRecruit" Collapsed="true">
+    <Position X="30.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAgAAAQgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoCombatValues" Collapsed="true">
+    <Position X="37" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACgAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoPlayer" Collapsed="true">
+    <Position X="43.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAEAAAAIAAAgAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoWorldMap" Collapsed="true">
+    <Position X="50.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAACAAAAAAAAAAMAAAAgAAAAAAQgAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoGameEvent" Collapsed="true">
+    <Position X="59.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ProtoProvince" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAIAqA=</HashCode>
+      <FileName>ProtoMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Province" Collapsed="true">
+    <Position X="3" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAQAAAAEAAAAAABAAAgAAAAAAEAAAAAAAAAAIA=</HashCode>
+      <FileName>Province.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ProtoMessageClient.Province_Serialised" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Province.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Rank" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAABgA=</HashCode>
+      <FileName>Rank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Position" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAIAAAAAAAAAAAAQAAAAIAAAIAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Rank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Position_Serialised" Collapsed="true">
+    <Position X="62" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAIAAAAAAAAAIAAAAAAAAAIAAAAAgA=</HashCode>
+      <FileName>Rank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Server" Collapsed="true">
+    <Position X="65.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAQAAAAAEEAAAEAAYAAAQAEgAgAAAAAgAAAAAI=</HashCode>
+      <FileName>Server.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Siege" Collapsed="true">
+    <Position X="67.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wAEQAAAIAIACAEAIAbEC4ACAEAABAICQAAACAEAIQAA=</HashCode>
+      <FileName>Siege.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Terrain" Collapsed="true">
+    <Position X="69" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAgAAAAgA=</HashCode>
+      <FileName>Terrain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.TestClient" Collapsed="true">
+    <Position X="70.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAKABSkAaUIAHqUAqAx4QAB2MhwBACEVCEGEIjACQI=</HashCode>
+      <FileName>TestClient.Battle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.ConcurrentQueueWithEvent&lt;T&gt;" Collapsed="true">
+    <Position X="65.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Trait" Collapsed="true">
+    <Position X="72.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Trait.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProtoMessageClient.Utility_Methods" Collapsed="true">
+    <Position X="62" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIAIAQCARABAAIAQKIAgAAwQAQAgAgAAIAACAAAAFAA=</HashCode>
+      <FileName>Utility_Methods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ProtoMessageClient.TitleName" Collapsed="true">
+    <Position X="62" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rank.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="ProtoMessageClient.Game_Observer" Collapsed="true">
+    <Position X="63.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ProtoMessageClient.Game_Observable" Collapsed="true">
+    <Position X="62" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Interfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ProtoMessageClient.Actions" Collapsed="true">
+    <Position X="62" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQKA3wEAQWAhPgEBAIjZCKpmpgUEBCgcAEDEAjAiQA=</HashCode>
+      <FileName>Globals_Game.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ProtoMessageClient.DisplayMessages" Collapsed="true">
+    <Position X="63.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>f8aWd1FKlHZEFUWXDYqXY9tlvv0RdiZ4ZVb0zwcSsgM=</HashCode>
+      <FileName>Globals_Game.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ProtoMessageClient.EventTypes" Collapsed="true">
+    <Position X="65.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Globals_Server.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

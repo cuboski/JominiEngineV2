@@ -14,7 +14,11 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vFvZ4tJyeUe2MnDpNge07yFj9vjfEWKPYiHHK0bTy88=</dsig:DigestValue>
+<<<<<<< Updated upstream
+        <dsig:DigestValue>PE6Xlq2WMYlr+VRAz8byoK2g3WeUN2qx6Yu/mXSCrUE=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>vN+0U1/ZaIqQ3yGhFM2osejy3AGdgBWG6XuI9b8UqeM=</dsig:DigestValue>
+>>>>>>> Stashed changes
       </hash>
     </dependentAssembly>
   </dependency>

@@ -1,0 +1,838 @@
+[02:39:33] Port forward FAILED 0
+[02:39:34] Port forward FAILED 1
+[02:39:35] Port forwarded successfully.
+[02:39:35] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[02:39:35] Waiting for event
+[02:39:39] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61363
+[02:39:39] 	Status is now: RespondedAwaitingApproval
+[02:39:39] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:61363
+[02:39:40] Accepted connection from acc1 | acc1 | TestString
+[02:39:40] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61363
+[02:39:40] 	Status is now: RespondedConnect
+[02:39:40] Waiting for event
+[02:39:40] Waiting for event
+[02:39:40] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61363
+[02:39:40] 	Status is now: Connected
+[02:39:40] Waiting for event
+[02:39:40] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:39:40]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:61363
+[02:39:40] acc1 logs in from 192.168.1.245:61363
+[02:39:40] Waiting for event
+[02:39:40] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:39:40] From: acc1: request = ViewWorldMap
+[02:39:40]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61363
+[02:39:40]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:39:40] Waiting for event
+[02:39:40] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:39:40] From: acc1: request = ViewChar
+[02:39:40]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61363
+[02:39:40]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:39:40] Waiting for event
+[02:39:45] Waiting for event
+[02:39:48] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:39:48] From: acc1: request = ViewChar
+[02:39:48]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61363
+[02:39:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:39:48] Waiting for event
+[02:39:51] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:39:51] From: acc1: request = ViewWorldMap
+[02:39:51]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61363
+[02:39:51]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:39:51] Waiting for event
+[02:39:53] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:39:53] From: acc1: request = ViewWorldMap
+[02:39:53]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61363
+[02:39:53]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:39:53] Waiting for event
+[02:39:58] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:39:58] From: acc1: request = ViewWorldMap
+[02:39:58]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61363
+[02:39:58]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:39:58] Waiting for event
+[02:39:59] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:39:59] From: acc1: request = ViewWorldMap
+[02:39:59]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61363
+[02:39:59]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:39:59] Waiting for event
+[02:40:04] Waiting for event
+[02:40:06] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:40:06] From: acc1: request = ViewWorldMap
+[02:40:06]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61363
+[02:40:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:40:06] Waiting for event
+[02:40:09] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:40:09] From: acc1: request = ViewFief
+[02:40:09]  Sending to: acc1 | ActionType = ViewFief | ResponseType = Success | 192.168.1.245:61363
+[02:40:09]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:40:09] Waiting for event
+[02:40:12] Recieved TESTnotnull: Data | 192.168.1.245:61363
+[02:40:12] From: acc1: request = GetNPCList
+[02:40:12]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:61363
+[02:40:12]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61363
+[02:40:12] Waiting for event
+[02:40:17] Waiting for event
+[02:40:22] Waiting for event
+[02:40:22] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54710
+[02:40:22] 	Status is now: RespondedAwaitingApproval
+[02:40:22] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:54710
+[02:40:22] Accepted connection from acc1 | acc1 | TestString
+[02:40:22] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54710
+[02:40:22] 	Status is now: RespondedConnect
+[02:40:22] Waiting for event
+[02:40:22] Waiting for event
+[02:40:22] Recieved TESTnotnull: StatusChanged | 192.168.1.245:54710
+[02:40:22] 	Status is now: Connected
+[02:40:22] Waiting for event
+[02:40:22] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:22]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:54710
+[02:40:22] acc1 logs in from 192.168.1.245:54710
+[02:40:22] Waiting for event
+[02:40:22] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:22] From: acc1: request = ViewWorldMap
+[02:40:22]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:54710
+[02:40:22]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:22] Waiting for event
+[02:40:23] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:23] From: acc1: request = ViewChar
+[02:40:23]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54710
+[02:40:23]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:23] Waiting for event
+[02:40:25] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:25] From: acc1: request = ListArmies
+[02:40:25]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:54710
+[02:40:25]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:25] Waiting for event
+[02:40:25] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:25] From: acc1: request = ViewMyFiefs
+[02:40:26]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:54710
+[02:40:26]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:26] Waiting for event
+[02:40:26] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:26] From: acc1: request = GetNPCList
+[02:40:26]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54710
+[02:40:26]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:26] Waiting for event
+[02:40:27] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:27] From: acc1: request = ListArmies
+[02:40:27]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:54710
+[02:40:27]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:27] Waiting for event
+[02:40:28] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:28] From: acc1: request = GetNPCList
+[02:40:28]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54710
+[02:40:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:28] Waiting for event
+[02:40:28] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:28] From: acc1: request = ViewMyFiefs
+[02:40:28]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:54710
+[02:40:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:28] Waiting for event
+[02:40:29] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:29] From: acc1: request = ViewMyFiefs
+[02:40:29]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:54710
+[02:40:29]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:29] Waiting for event
+[02:40:31] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:31] From: acc1: request = ViewFief
+[02:40:31]  Sending to: acc1 | ActionType = ViewFief | ResponseType = Success | 192.168.1.245:54710
+[02:40:31]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:31] Waiting for event
+[02:40:32] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:32] From: acc1: request = TravelTo
+[02:40:32]  Sending to: acc1 | ActionType = TravelTo | ResponseType = Success | 192.168.1.245:54710
+[02:40:32]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:32] Waiting for event
+[02:40:32] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:32] From: acc1: request = ViewFief
+[02:40:32]  Sending to: acc1 | ActionType = ViewFief | ResponseType = Success | 192.168.1.245:54710
+[02:40:32]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:32] Waiting for event
+[02:40:36] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:36] From: acc1: request = ViewChar
+[02:40:36]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54710
+[02:40:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:36] Waiting for event
+[02:40:39] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:39] From: acc1: request = ViewWorldMap
+[02:40:39]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:54710
+[02:40:39]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:39] Waiting for event
+[02:40:40] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:40] From: acc1: request = ViewChar
+[02:40:40]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54710
+[02:40:40]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:40] Waiting for event
+[02:40:43] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:43] From: acc1: request = TryForChild
+[02:40:43]  Sending to: acc1 | ActionType = TryForChild | ResponseType = ErrorGenericNotInSameFief | 192.168.1.245:54710
+[02:40:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:43] Waiting for event
+[02:40:47] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:47] From: acc1: request = GetNPCList
+[02:40:47]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:54710
+[02:40:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:47] Waiting for event
+[02:40:50] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:50] From: acc1: request = ViewWorldMap
+[02:40:50]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:54710
+[02:40:50]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:50] Waiting for event
+[02:40:53] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:53] From: acc1: request = ViewChar
+[02:40:53]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54710
+[02:40:53]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:53] Waiting for event
+[02:40:54] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:40:54] From: acc1: request = ViewMyFiefs
+[02:40:54]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:54710
+[02:40:54]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:40:54] Waiting for event
+[02:40:59] Waiting for event
+[02:41:01] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:01] From: acc1: request = ViewFief
+[02:41:01]  Sending to: acc1 | ActionType = ViewFief | ResponseType = Success | 192.168.1.245:54710
+[02:41:01]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:01] Waiting for event
+[02:41:04] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:04] From: acc1: request = TravelTo
+[02:41:04]  Sending to: acc1 | ActionType = TravelTo | ResponseType = Success | 192.168.1.245:54710
+[02:41:04]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:04] Waiting for event
+[02:41:04] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:04] From: acc1: request = ViewFief
+[02:41:04]  Sending to: acc1 | ActionType = ViewFief | ResponseType = Success | 192.168.1.245:54710
+[02:41:04]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:04] Waiting for event
+[02:41:05] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:05] From: acc1: request = ViewChar
+[02:41:05]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54710
+[02:41:05]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:05] Waiting for event
+[02:41:06] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:06] From: acc1: request = TryForChild
+[02:41:06]  Sending to: acc1 | ActionType = TryForChild | ResponseType = CharacterSpousePregnant | 192.168.1.245:54710
+[02:41:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:06] Waiting for event
+[02:41:11] Waiting for event
+[02:41:13] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:13] From: acc1: request = SeasonUpdate
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Random hex method returned a null value for fief.
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Char_18 dies; Char_899 inherits
+[02:41:13] Debug: role is  : Son
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Char_196 dies; Char_1220 inherits
+[02:41:13] Debug: role is  : Son
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Char_213 dies; Char_945 inherits
+[02:41:13] Debug: role is  : Son
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Char_226 dies; Char_661 inherits
+[02:41:13] Debug: role is  : Son
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Char_236 dies; Char_1176 inherits
+[02:41:13] Debug: role is  : Son
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13] Update acc1: newEvent
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:13]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:13] Waiting for event
+[02:41:13] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:13] From: acc1: request = ViewJournalEntries
+[02:41:13]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:13]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:13] Waiting for event
+[02:41:18] Waiting for event
+[02:41:23] Waiting for event
+[02:41:28] Waiting for event
+[02:41:33] Waiting for event
+[02:41:35] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:35] From: acc1: request = SeasonUpdate
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Random hex method returned a null value for fief.
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Char_161 dies; Char_1197 inherits
+[02:41:35] Debug: role is  : Son
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Char_228 dies; Char_995 inherits
+[02:41:35] Debug: role is  : Son
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35] Update acc1: newEvent
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:35]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:35] Waiting for event
+[02:41:35] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:35] From: acc1: request = ViewJournalEntries
+[02:41:35]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:35]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:35] Waiting for event
+[02:41:37] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:37] From: acc1: request = ViewWorldMap
+[02:41:37]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:54710
+[02:41:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:37] Waiting for event
+[02:41:40] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:40] From: acc1: request = ViewChar
+[02:41:40]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:54710
+[02:41:40]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:40] Waiting for event
+[02:41:45] Waiting for event
+[02:41:47] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:47] From: acc1: request = SeasonUpdate
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Random hex method returned a null value for fief.
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Char_284 dies; Char_1165 inherits
+[02:41:47] Debug: role is  : Son
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47] Update acc1: newEvent
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:47]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:47] Waiting for event
+[02:41:47] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:47] From: acc1: request = ViewJournalEntries
+[02:41:47]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:47] Waiting for event
+[02:41:48] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:48] From: acc1: request = SeasonUpdate
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Random hex method returned a null value for fief.
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48] Char_267 dies; Char_745 inherits
+[02:41:48] Debug: role is  : Son
+[02:41:48] Update acc1: newEvent
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:48]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:48] Waiting for event
+[02:41:48] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:48] From: acc1: request = ViewJournalEntries
+[02:41:48]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:48] Waiting for event
+[02:41:50] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:50] From: acc1: request = SeasonUpdate
+[02:41:50] Update acc1: newEvent
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:50] Update acc1: newEvent
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:50] Update acc1: newEvent
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Random hex method returned a null value for fief.
+[02:41:50] Update acc1: newEvent
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:50] Update acc1: newEvent
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:50] Char_258 dies; Char_1168 inherits
+[02:41:50] Debug: role is  : Son
+[02:41:50] Update acc1: newEvent
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:50] Char_1165 dies; Char_985 inherits
+[02:41:50] Debug: role is  : Brother
+[02:41:50] Update acc1: newEvent
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:50]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:50] Waiting for event
+[02:41:50] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:50] From: acc1: request = ViewJournalEntries
+[02:41:50]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:50]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:50] Waiting for event
+[02:41:51] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:51] From: acc1: request = SeasonUpdate
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Char_186 dies; Char_827 inherits
+[02:41:51] Debug: role is  : Son
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Char_192 dies; Char_969 inherits
+[02:41:51] Debug: role is  : Son
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Char_209 dies; Char_329 inherits
+[02:41:51] Debug: role is  : Son
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Char_268 dies; Char_867 inherits
+[02:41:51] Debug: role is  : Son
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:51] Waiting for event
+[02:41:51] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:51] From: acc1: request = ViewJournalEntries
+[02:41:51]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:51] Waiting for event
+[02:41:51] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:51] From: acc1: request = SeasonUpdate
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Random hex method returned a null value for fief.
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Char_102 dies; Char_564 inherits
+[02:41:51] Debug: role is  : Son
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51] Update acc1: newEvent
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = newEvent | 192.168.1.245:54710
+[02:41:51]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:51] Waiting for event
+[02:41:51] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:51] From: acc1: request = ViewJournalEntries
+[02:41:51]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:51]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:51] Waiting for event
+[02:41:52] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61363
+[02:41:52] 	Status is now: Disconnected
+[02:41:52] 192.168.1.245:61363 has disconnected. Reason: Connection timed out
+[02:41:52] Client acc1 has disconnected.
+[02:41:52] Waiting for event
+[02:41:52] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:52] From: acc1: request = SeasonUpdate
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52] Random hex method returned a null value for fief.
+[02:41:52]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:52]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:52] Waiting for event
+[02:41:52] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:52] From: acc1: request = ViewJournalEntries
+[02:41:52]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:52]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:52] Waiting for event
+[02:41:53] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:53] From: acc1: request = SeasonUpdate
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Random hex method returned a null value for fief.
+[02:41:53] Char_40 dies; Char_1187 inherits
+[02:41:53] Debug: role is  : Son
+[02:41:53]  Sending to: acc1 | ActionType = SeasonUpdate | ResponseType = Success | 192.168.1.245:54710
+[02:41:53]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:53] Waiting for event
+[02:41:53] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:53] From: acc1: request = ViewJournalEntries
+[02:41:53]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:54710
+[02:41:53]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:54710
+[02:41:53] Waiting for event
+[02:41:53] Recieved TESTnotnull: Data | 192.168.1.245:54710
+[02:41:53] From: acc1: request = SeasonUpdate
+[02:41

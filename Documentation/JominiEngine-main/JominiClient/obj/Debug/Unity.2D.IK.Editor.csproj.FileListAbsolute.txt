@@ -1,0 +1,2 @@
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\Unity.2D.IK.Editor.csprojAssemblyReference.cache
+C:\Users\Kyle\Desktop\sz42_Jomini-main\JominiClient\obj\Debug\Unity.2D.IK.Editor.csproj.CoreCompileInputs.cache

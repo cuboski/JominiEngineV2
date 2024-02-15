@@ -1,0 +1,743 @@
+[02:33:18] Port forwarded successfully.
+[02:33:18] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[02:33:18] Waiting for event
+[02:33:23] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:60094
+[02:33:23] Waiting for event
+[02:33:25] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56843
+[02:33:25] 	Status is now: RespondedAwaitingApproval
+[02:33:25] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:56843
+[02:33:25] Accepted connection from acc1 | acc1 | TestString
+[02:33:25] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56843
+[02:33:25] 	Status is now: RespondedConnect
+[02:33:25] Waiting for event
+[02:33:25] Waiting for event
+[02:33:25] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56843
+[02:33:25] 	Status is now: Connected
+[02:33:25] Waiting for event
+[02:33:25] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:25]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:56843
+[02:33:25] acc1 logs in from 192.168.1.245:56843
+[02:33:25] Waiting for event
+[02:33:25] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:25] From: acc1: request = ViewWorldMap
+[02:33:25]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:33:25]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:25] Waiting for event
+[02:33:26] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:26] From: acc1: request = ViewChar
+[02:33:26]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:26]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:26] Waiting for event
+[02:33:27] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:27] From: acc1: request = ListArmies
+[02:33:27]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56843
+[02:33:27]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:27] Waiting for event
+[02:33:29] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:29] From: acc1: request = ViewWorldMap
+[02:33:29]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:33:29]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:29] Waiting for event
+[02:33:31] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:31] From: acc1: request = ListArmies
+[02:33:31]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56843
+[02:33:31]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:31] Waiting for event
+[02:33:33] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:33] From: acc1: request = ViewChar
+[02:33:33]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:33] Waiting for event
+[02:33:33] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:33] From: acc1: request = RecruitTroops
+[02:33:33]  Sending to: acc1 | ActionType = RecruitTroops | ResponseType = Success | 192.168.1.245:56843
+[02:33:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:33] Waiting for event
+[02:33:33] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:33] From: acc1: request = ListArmies
+[02:33:33]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56843
+[02:33:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:33] Waiting for event
+[02:33:34] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:34] From: acc1: request = ViewWorldMap
+[02:33:34]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:33:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:34] Waiting for event
+[02:33:35] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:35] From: acc1: request = ViewChar
+[02:33:35]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:35]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:35] Waiting for event
+[02:33:36] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:36] From: acc1: request = ViewChar
+[02:33:36]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:36] Waiting for event
+[02:33:36] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:36] From: acc1: request = ViewChar
+[02:33:36]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:36] Waiting for event
+[02:33:37] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:37] From: acc1: request = ViewChar
+[02:33:37]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:37] Waiting for event
+[02:33:37] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:37] From: acc1: request = GetNPCList
+[02:33:37]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:56843
+[02:33:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:37] Waiting for event
+[02:33:38] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:38] From: acc1: request = ViewChar
+[02:33:38]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:38] Waiting for event
+[02:33:38] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:38] From: acc1: request = ViewWorldMap
+[02:33:38]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:33:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:38] Waiting for event
+[02:33:39] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:39] From: acc1: request = ViewWorldMap
+[02:33:39]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:33:39]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:39] Waiting for event
+[02:33:39] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:39] From: acc1: request = ViewChar
+[02:33:39]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:39]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:39] Waiting for event
+[02:33:40] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:40] From: acc1: request = GetNPCList
+[02:33:40]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:56843
+[02:33:40]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:40] Waiting for event
+[02:33:40] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:40] From: acc1: request = ViewChar
+[02:33:40]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:33:40]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:40] Waiting for event
+[02:33:41] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:41] From: acc1: request = GetNPCList
+[02:33:41]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:56843
+[02:33:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:41] Waiting for event
+[02:33:41] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:41] From: acc1: request = ListArmies
+[02:33:41]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56843
+[02:33:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:41] Waiting for event
+[02:33:42] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:33:42] From: acc1: request = ViewWorldMap
+[02:33:42]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:33:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:33:42] Waiting for event
+[02:33:47] Waiting for event
+[02:33:52] Waiting for event
+[02:33:57] Waiting for event
+[02:34:02] Waiting for event
+[02:34:07] Waiting for event
+[02:34:11] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:11] From: acc1: request = GetNPCList
+[02:34:11]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:56843
+[02:34:11]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:11] Waiting for event
+[02:34:14] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:14] From: acc1: request = UseChar
+[02:34:14]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:14]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:14] Waiting for event
+[02:34:14] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:14] From: acc1: request = ViewChar
+[02:34:14]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:14]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:14] Waiting for event
+[02:34:15] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:15] From: acc1: request = UseChar
+[02:34:15]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:15]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:15] Waiting for event
+[02:34:16] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:16] From: acc1: request = ViewWorldMap
+[02:34:16]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:34:16]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:16] Waiting for event
+[02:34:18] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:18] From: acc1: request = ListArmies
+[02:34:18]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56843
+[02:34:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:18] Waiting for event
+[02:34:20] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:20] From: acc1: request = ViewChar
+[02:34:20]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:20]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:20] Waiting for event
+[02:34:20] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:20] From: acc1: request = RecruitTroops
+[02:34:20]  Sending to: acc1 | ActionType = RecruitTroops | ResponseType = CharacterRecruitAlready | 192.168.1.245:56843
+[02:34:20]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:20] Waiting for event
+[02:34:24] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:24] From: acc1: request = ViewWorldMap
+[02:34:24]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:34:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:24] Waiting for event
+[02:34:25] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:25] From: acc1: request = ViewChar
+[02:34:25]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:25]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:25] Waiting for event
+[02:34:26] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:26] From: acc1: request = GetNPCList
+[02:34:26]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:56843
+[02:34:26]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:26] Waiting for event
+[02:34:27] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:27] From: acc1: request = GetNPCList
+[02:34:27]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:56843
+[02:34:27]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:27] Waiting for event
+[02:34:28] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:28] From: acc1: request = UseChar
+[02:34:28]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:28] Waiting for event
+[02:34:28] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:28] From: acc1: request = ViewChar
+[02:34:28]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:28] Waiting for event
+[02:34:29] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:29] From: acc1: request = UseChar
+[02:34:29]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:29]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:29] Waiting for event
+[02:34:29] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:29] From: acc1: request = ViewWorldMap
+[02:34:29]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:34:29]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:29] Waiting for event
+[02:34:32] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:32] From: acc1: request = ViewChar
+[02:34:32]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:32]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:32] Waiting for event
+[02:34:33] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:33] From: acc1: request = ViewFief
+[02:34:33]  Sending to: acc1 | ActionType = ViewFief | ResponseType = ErrorGenericTooFarFromFief | 192.168.1.245:56843
+[02:34:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:33] Waiting for event
+[02:34:34] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:34] From: acc1: request = TravelTo
+[02:34:34]  Sending to: acc1 | ActionType = TravelTo | ResponseType = Success | 192.168.1.245:56843
+[02:34:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:34] Waiting for event
+[02:34:34] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:34] From: acc1: request = ViewFief
+[02:34:34]  Sending to: acc1 | ActionType = ViewFief | ResponseType = Success | 192.168.1.245:56843
+[02:34:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:34] Waiting for event
+[02:34:38] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:38] From: acc1: request = SpyFief
+[02:34:38] Update acc1: SpySuccess
+[02:34:38]  Sending to: acc1 | ActionType = Update | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:34:38]  Sending to: acc1 | ActionType = SpyFief | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:34:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:38] Waiting for event
+[02:34:41] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:41] From: acc1: request = ViewChar
+[02:34:41]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:41] Waiting for event
+[02:34:41] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:41] From: acc1: request = BesiegeFief
+[02:34:41]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:41] Waiting for event
+[02:34:42] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:42] From: acc1: request = ViewChar
+[02:34:42]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:42] Waiting for event
+[02:34:42] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:42] From: acc1: request = BesiegeFief
+[02:34:42]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:42] Waiting for event
+[02:34:43] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:43] From: acc1: request = ViewChar
+[02:34:43]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:43] Waiting for event
+[02:34:43] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:43] From: acc1: request = BesiegeFief
+[02:34:43]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:43] Waiting for event
+[02:34:43] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:43] From: acc1: request = ViewChar
+[02:34:43]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:43] Waiting for event
+[02:34:43] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:43] From: acc1: request = BesiegeFief
+[02:34:43]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:43] Waiting for event
+[02:34:43] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:43] From: acc1: request = ViewChar
+[02:34:43]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:43] Waiting for event
+[02:34:43] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:43] From: acc1: request = BesiegeFief
+[02:34:43]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:43] Waiting for event
+[02:34:43] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:43] From: acc1: request = ViewChar
+[02:34:43]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:43] Waiting for event
+[02:34:43] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:43] From: acc1: request = BesiegeFief
+[02:34:43]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:43] Waiting for event
+[02:34:44] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:44] From: acc1: request = ViewChar
+[02:34:44]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:44]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:44] Waiting for event
+[02:34:44] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:44] From: acc1: request = PillageFief
+[02:34:44]  Sending to: acc1 | ActionType = PillageFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:44]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:44] Waiting for event
+[02:34:45] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:45] From: acc1: request = ViewChar
+[02:34:45]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:45]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:45] Waiting for event
+[02:34:45] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:45] From: acc1: request = PillageFief
+[02:34:45]  Sending to: acc1 | ActionType = PillageFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:45]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:45] Waiting for event
+[02:34:45] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:45] From: acc1: request = ViewChar
+[02:34:45]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:45]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:45] Waiting for event
+[02:34:45] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:45] From: acc1: request = PillageFief
+[02:34:45]  Sending to: acc1 | ActionType = PillageFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:45]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:45] Waiting for event
+[02:34:46] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:46] From: acc1: request = ViewChar
+[02:34:46]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:46]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:46] Waiting for event
+[02:34:46] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:46] From: acc1: request = PillageFief
+[02:34:46]  Sending to: acc1 | ActionType = PillageFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:46]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:46] Waiting for event
+[02:34:46] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:46] From: acc1: request = ViewChar
+[02:34:46]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:46]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:46] Waiting for event
+[02:34:46] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:46] From: acc1: request = PillageFief
+[02:34:46]  Sending to: acc1 | ActionType = PillageFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:46]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:46] Waiting for event
+[02:34:47] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:47] From: acc1: request = ViewChar
+[02:34:47]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:47] Waiting for event
+[02:34:47] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:47] From: acc1: request = BesiegeFief
+[02:34:47]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:47] Waiting for event
+[02:34:47] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:47] From: acc1: request = SpyFief
+[02:34:47] Update acc1: SpySuccess
+[02:34:47]  Sending to: acc1 | ActionType = Update | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:34:47]  Sending to: acc1 | ActionType = SpyFief | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:34:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:47] Waiting for event
+[02:34:48] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:48] From: acc1: request = ViewChar
+[02:34:48]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:48] Waiting for event
+[02:34:48] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:48] From: acc1: request = PillageFief
+[02:34:48]  Sending to: acc1 | ActionType = PillageFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:48] Waiting for event
+[02:34:48] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:48] From: acc1: request = SpyFief
+[02:34:48] Update acc1: SpySuccess
+[02:34:48]  Sending to: acc1 | ActionType = Update | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:34:48]  Sending to: acc1 | ActionType = SpyFief | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:34:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:48] Waiting for event
+[02:34:48] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:48] From: acc1: request = ViewChar
+[02:34:48]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:48] Waiting for event
+[02:34:48] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:48] From: acc1: request = BesiegeFief
+[02:34:48]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:34:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:48] Waiting for event
+[02:34:49] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:49] From: acc1: request = EnterExitKeep
+[02:34:49]  Sending to: acc1 | ActionType = EnterExitKeep | ResponseType = Success | 192.168.1.245:56843
+[02:34:49]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:49] Waiting for event
+[02:34:50] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:50] From: acc1: request = EnterExitKeep
+[02:34:50]  Sending to: acc1 | ActionType = EnterExitKeep | ResponseType = Success | 192.168.1.245:56843
+[02:34:50]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:50] Waiting for event
+[02:34:53] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:53] From: acc1: request = ViewChar
+[02:34:53]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:53]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:53] Waiting for event
+[02:34:56] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:56] From: acc1: request = ViewWorldMap
+[02:34:56]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:34:56]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:56] Waiting for event
+[02:34:59] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:59] From: acc1: request = ViewChar
+[02:34:59]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:59]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:59] Waiting for event
+[02:34:59] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:34:59] From: acc1: request = ViewChar
+[02:34:59]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:34:59]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:34:59] Waiting for event
+[02:35:00] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:00] From: acc1: request = ViewFief
+[02:35:00]  Sending to: acc1 | ActionType = ViewFief | ResponseType = ErrorGenericTooFarFromFief | 192.168.1.245:56843
+[02:35:00]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:00] Waiting for event
+[02:35:01] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:01] From: acc1: request = TravelTo
+[02:35:01]  Sending to: acc1 | ActionType = TravelTo | ResponseType = Success | 192.168.1.245:56843
+[02:35:01]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:01] Waiting for event
+[02:35:01] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:01] From: acc1: request = ViewFief
+[02:35:01]  Sending to: acc1 | ActionType = ViewFief | ResponseType = Success | 192.168.1.245:56843
+[02:35:01]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:01] Waiting for event
+[02:35:02] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:02] From: acc1: request = ViewChar
+[02:35:02]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:35:02]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:02] Waiting for event
+[02:35:04] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:04] From: acc1: request = ListArmies
+[02:35:04]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56843
+[02:35:04]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:04] Waiting for event
+[02:35:04] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:04] From: acc1: request = GetNPCList
+[02:35:04]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:56843
+[02:35:04]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:04] Waiting for event
+[02:35:05] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:05] From: acc1: request = ViewMyFiefs
+[02:35:05]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:56843
+[02:35:05]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:05] Waiting for event
+[02:35:05] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:05] From: acc1: request = ListArmies
+[02:35:05]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56843
+[02:35:05]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:05] Waiting for event
+[02:35:06] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:06] From: acc1: request = ViewWorldMap
+[02:35:06]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:35:06]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:06] Waiting for event
+[02:35:11] Waiting for event
+[02:35:16] Waiting for event
+[02:35:18] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:18] From: acc1: request = ViewFief
+[02:35:18]  Sending to: acc1 | ActionType = ViewFief | ResponseType = Success | 192.168.1.245:56843
+[02:35:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:18] Waiting for event
+[02:35:21] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:21] From: acc1: request = ViewChar
+[02:35:21]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:35:21]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:21] Waiting for event
+[02:35:21] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:21] From: acc1: request = BesiegeFief
+[02:35:21]  Sending to: acc1 | ActionType = BesiegeFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:35:21]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:21] Waiting for event
+[02:35:22] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:22] From: acc1: request = SpyFief
+[02:35:22] Update acc1: SpySuccess
+[02:35:22]  Sending to: acc1 | ActionType = Update | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:35:22]  Sending to: acc1 | ActionType = SpyFief | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:35:22]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:22] Waiting for event
+[02:35:22] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:22] From: acc1: request = ViewChar
+[02:35:22]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56843
+[02:35:22]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:22] Waiting for event
+[02:35:22] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:22] From: acc1: request = PillageFief
+[02:35:22]  Sending to: acc1 | ActionType = PillageFief | ResponseType = ErrorGenericArmyUnidentified | 192.168.1.245:56843
+[02:35:22]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:22] Waiting for event
+[02:35:23] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:23] From: acc1: request = SpyFief
+[02:35:23] Update acc1: SpySuccess
+[02:35:23]  Sending to: acc1 | ActionType = Update | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:35:23]  Sending to: acc1 | ActionType = SpyFief | ResponseType = SpySuccess | 192.168.1.245:56843
+[02:35:23]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:23] Waiting for event
+[02:35:24] Recieved TESTnotnull: Data | 192.168.1.245:56843
+[02:35:24] From: acc1: request = ViewWorldMap
+[02:35:24]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56843
+[02:35:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56843
+[02:35:24] Waiting for event
+[02:35:29] Waiting for event
+[02:35:34] Waiting for event
+[02:35:35] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56592
+[02:35:35] 	Status is now: RespondedAwaitingApproval
+[02:35:35] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:56592
+[02:35:35] Accepted connection from acc1 | acc1 | TestString
+[02:35:35] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56592
+[02:35:35] 	Status is now: RespondedConnect
+[02:35:35] Waiting for event
+[02:35:35] Waiting for event
+[02:35:35] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56592
+[02:35:35] 	Status is now: Connected
+[02:35:35] Waiting for event
+[02:35:36] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:36]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:56592
+[02:35:36] acc1 logs in from 192.168.1.245:56592
+[02:35:36] Waiting for event
+[02:35:36] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:36] From: acc1: request = ViewWorldMap
+[02:35:36]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56592
+[02:35:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:35:36] Waiting for event
+[02:35:36] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:36] From: acc1: request = ViewChar
+[02:35:36]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56592
+[02:35:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:35:36] Waiting for event
+[02:35:36] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:36] From: acc1: request = ViewChar
+[02:35:36]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56592
+[02:35:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:35:36] Waiting for event
+[02:35:38] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:38] From: acc1: request = ListArmies
+[02:35:38]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56592
+[02:35:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:35:38] Waiting for event
+[02:35:39] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:39] From: acc1: request = ViewMyFiefs
+[02:35:39]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:56592
+[02:35:39]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:35:39] Waiting for event
+[02:35:40] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:40] From: acc1: request = ListArmies
+[02:35:40]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56592
+[02:35:40]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:35:40] Waiting for event
+[02:35:41] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:41] From: acc1: request = ViewArmy
+[02:35:41]  Sending to: acc1 | ActionType = ViewArmy | ResponseType = Success | 192.168.1.245:56592
+[02:35:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:35:41] Waiting for event
+[02:35:46] Waiting for event
+[02:35:48] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:35:48] From: acc1: request = ListDetachments
+[02:35:48]  Sending to: acc1 | ActionType = ListDetachments | ResponseType = Success | 192.168.1.245:56592
+[02:35:48]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:35:48] Waiting for event
+[02:35:53] Waiting for event
+[02:35:58] Waiting for event
+[02:36:03] Waiting for event
+[02:36:08] Waiting for event
+[02:36:11] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:11] From: acc1: request = ListDetachments
+[02:36:11]  Sending to: acc1 | ActionType = ListDetachments | ResponseType = Success | 192.168.1.245:56592
+[02:36:11]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:11] Waiting for event
+[02:36:16] Waiting for event
+[02:36:16] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:16] From: acc1: request = MaintainArmy
+[02:36:16]  Sending to: acc1 | ActionType = MaintainArmy | ResponseType = ArmyMaintainInsufficientFunds | 192.168.1.245:56592
+[02:36:16]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:16] Waiting for event
+[02:36:18] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:18] From: acc1: request = AppointLeader
+[02:36:18]  Sending to: acc1 | ActionType = AppointLeader | ResponseType = CharacterLeaderLocation | 192.168.1.245:56592
+[02:36:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:18] Waiting for event
+[02:36:18] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:18] From: acc1: request = ViewArmy
+[02:36:18]  Sending to: acc1 | ActionType = ViewArmy | ResponseType = Success | 192.168.1.245:56592
+[02:36:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:18] Waiting for event
+[02:36:18] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:18] From: acc1: request = AppointLeader
+[02:36:18]  Sending to: acc1 | ActionType = AppointLeader | ResponseType = CharacterLeaderLocation | 192.168.1.245:56592
+[02:36:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:18] Waiting for event
+[02:36:18] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:18] From: acc1: request = ViewArmy
+[02:36:18]  Sending to: acc1 | ActionType = ViewArmy | ResponseType = Success | 192.168.1.245:56592
+[02:36:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:18] Waiting for event
+[02:36:19] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:19] From: acc1: request = AppointLeader
+[02:36:19]  Sending to: acc1 | ActionType = AppointLeader | ResponseType = CharacterLeaderLocation | 192.168.1.245:56592
+[02:36:19]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:19] Waiting for event
+[02:36:19] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:19] From: acc1: request = ViewArmy
+[02:36:19]  Sending to: acc1 | ActionType = ViewArmy | ResponseType = Success | 192.168.1.245:56592
+[02:36:19]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:19] Waiting for event
+[02:36:20] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:20] From: acc1: request = DisbandArmy
+[02:36:20] Update acc1: ArmyDisband
+[02:36:20]  Sending to: acc1 | ActionType = Update | ResponseType = ArmyDisband | 192.168.1.245:56592
+[02:36:20]  Sending to: acc1 | ActionType = DisbandArmy | ResponseType = Success | 192.168.1.245:56592
+[02:36:20]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:20] Waiting for event
+[02:36:20] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:20] From: acc1: request = ListArmies
+[02:36:20]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56592
+[02:36:20]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:20] Waiting for event
+[02:36:23] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:23] From: acc1: request = ViewChar
+[02:36:23]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56592
+[02:36:23]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:23] Waiting for event
+[02:36:23] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:23] From: acc1: request = RecruitTroops
+[02:36:23]  Sending to: acc1 | ActionType = RecruitTroops | ResponseType = CharacterRecruitOwn | 192.168.1.245:56592
+[02:36:23]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:23] Waiting for event
+[02:36:24] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:24] From: acc1: request = ViewChar
+[02:36:24]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56592
+[02:36:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:24] Waiting for event
+[02:36:24] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:24] From: acc1: request = ViewWorldMap
+[02:36:24]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56592
+[02:36:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:24] Waiting for event
+[02:36:26] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:26] From: acc1: request = ViewChar
+[02:36:26]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56592
+[02:36:26]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:26] Waiting for event
+[02:36:28] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:28] From: acc1: request = UseChar
+[02:36:28]  Sending to: acc1 | ActionType = UseChar | ResponseType = Success | 192.168.1.245:56592
+[02:36:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:28] Waiting for event
+[02:36:29] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:29] From: acc1: request = ViewWorldMap
+[02:36:29]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:56592
+[02:36:29]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:29] Waiting for event
+[02:36:29] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:29] From: acc1: request = GetNPCList
+[02:36:29]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:56592
+[02:36:29]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:29] Waiting for event
+[02:36:30] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:30] From: acc1: request = ListArmies
+[02:36:30]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:56592
+[02:36:30]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:30] Waiting for event
+[02:36:33] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:33] From: acc1: request = ViewChar
+[02:36:33]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:56592
+[02:36:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:33] Waiting for event
+[02:36:33] Recieved TESTnotnull: Data | 192.168.1.245:56592
+[02:36:33] From: acc1: request = RecruitTroops
+[02:36:33]  Sending to: acc1 | ActionType = RecruitTroops | ResponseType = CharacterRecruitOwn | 192.168.1.245:56592
+[02:36:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:56592
+[02:36:33] Waiting for event
+[02:36:38] Waiting for event
+[02:36:43] Waiting for event
+[02:36:48] Waiting for event
+[02:36:53] Waiting for event
+[02:36:58] Waiting for event
+[02:37:03] Waiting for event
+[02:37:06] Recieved TESTnotnull: StatusChanged | 192.168.1.245:56843
+[02:37:06] 	Status is now: Disconnected
+[02:37:06] 192.168.1.245:56843 has disconnected. Reason: Connection timed out
+[02:37:06] Client acc1 has disconnected.
+[02:37:06] Waiting for event
+[02:37:07] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59327
+[02:37:07] 	Status is now: RespondedAwaitingApproval
+[02:37:07] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:59327
+[02:37:07] Accepted connection from acc1 | acc1 | TestString
+[02:37:07] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59327
+[02:37:07] 	Status is now: RespondedConnect
+[02:37:07] Waiting for event
+[02:37:07] Waiting for event
+[02:37:07] Recieved TESTnotnull: StatusChanged | 192.168.1.245:59327
+[02:37:07] 	Status is now: Connected
+[02:37:07] Waiting for event
+[02:37:07] Recieved TESTnotnull: Data | 192.168.1.245:59327
+[02:37:07]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:59327
+[02:37:07] acc1 logs in from 192.168.1.245:59327
+[02:37:07] Waiting for event
+[02:37:08] Recieved TESTnotnull: Data | 192.168.1.245:59327
+[02:37:08] From: acc1: request = ViewWorldMap
+[02:37:08]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:59327
+[02:37:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59327
+[02:37:08] Waiting for event
+[02:37:08] Recieved TESTnotnull: Data | 192.168.1.245:59327
+[02:37:08] From: acc1: request = ViewChar
+[02:37:08]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:59327
+[02:37:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59327
+[02:37:08] Waiting for event
+[02:37:08] Recieved TESTnotnull: Data | 192.168.1.245:59327
+[02:37:08] From: acc1: request = ViewChar
+[02:37:08]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:59327
+[02:37:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59327
+[02:37:08] Waiting for event
+[02:37:10] Recieved TESTnotnull: Data | 192.168.1.245:59327
+[02:37:10] From: acc1: request = ViewMyFiefs
+[02:37:10]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:59327
+[02:37:10]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:59327
+[02:37:10] Waiting for event
+[02:37:10] Recieved TESTnotnull: Data | 192.168.1.245:59327
+[02:37:10] From: acc1: request = ListArmies
+[02:37:10]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:59327
+[02:37:10]  Sending to: acc1 | ActionType = Update | Respons
