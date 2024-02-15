@@ -1014,9 +1014,9 @@ public class Controller : MonoBehaviour {
     {
         ProtoMessage request = new ProtoMessage
         {
-            Message = "test message",
+            Message = "Entourage",
             ActionType = Actions.GetNPCList,
-            MessageFields = new string[] { "Entourage" }
+            MessageFields = new string[] { }
         };
         tclient.net.Send(request);
 
