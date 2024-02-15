@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using ProtoMessageClient;
+using QuickGraph.Serialization;
 using RiakClient.Messages;
 
 namespace JominiEngine {
@@ -23,29 +27,44 @@ namespace JominiEngine {
         /// </summary>
         public Game() {
             Globals_Game.game = this;
+
             // initialise game objects
             // This path handling should ensure that the correct path will be found in Linux, Windows or debug mode
             var dir = Directory.GetCurrentDirectory();
+
+	    Console.WriteLine($"Current Directory: {dir}");
             string path;
+
             // if the program is being run in debug mode, this will obtain the correct directory
-            if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) {
-                if (dir.Contains("bin")) {
-                    dir = Directory.GetParent(dir).FullName;
-                }
-                path = Path.Combine(dir, "JominiEngine", "CSVs");
-            } else {
-                if (dir.Contains("bin")) {
-                    dir = Directory.GetParent(dir).FullName;
-                    dir = Directory.GetParent(dir).FullName;
-                }
-                path = Path.Combine(dir, "CSVs");
-            }
-            var gameObjects = Path.Combine(path, "gameObjects.csv");
+            //if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX) {
+                //if (dir.Contains("bin")) {
+                    //dir = Directory.GetParent(dir).FullName;
+		    //}
+                //path = Path.Combine(dir, "JominiEngine", "CSVs");
+		//} else {
+		//if (dir.Contains("bin")) {
+	           //dir = Directory.GetParent(dir).FullName;
+		   //dir = Directory.GetParent(dir).FullName;
+		  //}
+	       //path = Path.Combine(dir, "CSVs");
+	    //}
+
+	    dir = Directory.GetParent(dir).FullName;
+    	    path = Path.Combine(dir,"CSVs");
+
+            Console.WriteLine(path);
+
+            // point towards the game objects and map data
+            var gameObjects = Path.Combine(path, "gameObjects - Copy.csv");
             var mapData = Path.Combine(path, "map.csv");
             if (!File.Exists(gameObjects) && !File.Exists(mapData)) {
                 Console.WriteLine("wrong dir");
             }
-            InitGameObjects("testBucket", gameObjects, mapData,
+
+	    gameObjects = "../../CSVs/gameObjects - Copy.csv";
+	    mapData = "../../CSVs/map.csv";
+
+            InitGameObjects("testBucket",gameObjects, mapData,
                 start: 1194, king1: "Char_47", king2: "Char_40", herald1: "Char_1", sysAdmin: null);
         }
 
@@ -616,53 +635,53 @@ namespace JominiEngine {
             var mySieges002 = new List<string>();
 
             // create some characters
-            var myChar1 = new PlayerCharacter("Char_47", "Dave", "Bond", myDob001, true, nationality02, true, 8.50, 9.0,
+            var myChar1 = new PlayerCharacter("Char_47", "Dave", "Bond", 0, myDob001, true, nationality02, true, 8.50, 9.0,
                 myGoTo1, c1, 90, 0, 7.2, 6.1, Utility_Methods.GenerateTraitSet(), false, false, "Char_47", "Char_403",
                 null, null, false, 13000, myEmployees1, myFiefsOwned1, myProvsOwned1, "ESX02", "ESX02", myTitles001,
                 myArmies001, mySieges001, null, loc: myFief1, pID: "libdab");
             Globals_Game.pcMasterList.Add(myChar1.charID, myChar1);
-            var myChar2 = new PlayerCharacter("Char_40", "Bave", "Dond", myDob002, true, nationality01, true, 8.50, 6.0,
+            var myChar2 = new PlayerCharacter("Char_40", "Bave", "Dond", 0, myDob002, true, nationality01, true, 8.50, 6.0,
                 myGoTo2, f1, 90, 0, 5.0, 4.5, Utility_Methods.GenerateTraitSet(), false, false, "Char_40", null, null,
                 null, false, 13000, myEmployees2, myFiefsOwned2, myProvsOwned2, "ESR03", "ESR03", myTitles002,
                 myArmies002, mySieges002, null, loc: myFief7, pID: "otherGuy");
             Globals_Game.pcMasterList.Add(myChar2.charID, myChar2);
-            var myNPC1 = new NonPlayerCharacter("Char_401", "Jimmy", "Servant", myDob003, true, nationality02, true,
+            var myNPC1 = new NonPlayerCharacter("Char_401", "Jimmy", "Servant",0, myDob003, true, nationality02, true,
                 8.50, 6.0, myGoTo3, c1, 90, 0, 3.3, 6.7, Utility_Methods.GenerateTraitSet(), false, false, null, null,
                 null, null, 0, false, false, myTitles003, null, loc: myFief1);
             Globals_Game.npcMasterList.Add(myNPC1.charID, myNPC1);
-            var myNPC2 = new NonPlayerCharacter("Char_402", "Johnny", "Servant", myDob004, true, nationality02, true,
+            var myNPC2 = new NonPlayerCharacter("Char_402", "Johnny", "Servant",0, myDob004, true, nationality02, true,
                 8.50, 6.0, myGoTo4, c1, 90, 0, 7.1, 5.2, Utility_Methods.GenerateTraitSet(), false, false, null, null,
                 null, null, 10000, true, false, myTitles004, null, empl: myChar1.charID, loc: myFief1);
             Globals_Game.npcMasterList.Add(myNPC2.charID, myNPC2);
-            var myNPC3 = new NonPlayerCharacter("Char_403", "Harry", "Bailiff", myDob005, true, nationality01, true,
+            var myNPC3 = new NonPlayerCharacter("Char_403", "Harry", "Bailiff",0, myDob005, true, nationality01, true,
                 8.50, 6.0, myGoTo5, c1, 90, 0, 7.1, 5.2, Utility_Methods.GenerateTraitSet(), true, false, null, null,
                 null, null, 10000, false, false, myTitles005, null, empl: myChar2.charID, loc: myFief6);
             Globals_Game.npcMasterList.Add(myNPC3.charID, myNPC3);
-            var myChar1Wife = new NonPlayerCharacter("Char_404", "Bev", "Bond", myDob006, false, nationality02, true,
+            var myChar1Wife = new NonPlayerCharacter("Char_404", "Bev", "Bond",0, myDob006, false, nationality02, true,
                 2.50, 9.0, myGoTo6, f1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), false, false, "Char_47",
                 "Char_47", null, null, 30000, false, false, myTitles006, null, loc: myFief1);
             Globals_Game.npcMasterList.Add(myChar1Wife.charID, myChar1Wife);
-            var myChar2Son = new NonPlayerCharacter("Char_405", "Horatio", "Dond", myDob007, true, nationality01, true,
+            var myChar2Son = new NonPlayerCharacter("Char_405", "Horatio", "Dond",0, myDob007, true, nationality01, true,
                 8.50, 6.0, myGoTo7, f1, 90, 0, 7.1, 5.2, Utility_Methods.GenerateTraitSet(), true, false, "Char_40",
                 "Char_406", "Char_40", null, 10000, false, true, myTitles007, null, loc: myFief6);
             Globals_Game.npcMasterList.Add(myChar2Son.charID, myChar2Son);
-            var myChar2SonWife = new NonPlayerCharacter("Char_406", "Mave", "Dond", myDob008, false, nationality02, true,
+            var myChar2SonWife = new NonPlayerCharacter("Char_406", "Mave", "Dond",0, myDob008, false, nationality02, true,
                 2.50, 9.0, myGoTo8, f1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false, "Char_40",
                 "Char_405", null, null, 30000, false, false, myTitles008, null, loc: myFief6);
             Globals_Game.npcMasterList.Add(myChar2SonWife.charID, myChar2SonWife);
-            var myChar1Son = new NonPlayerCharacter("Char_407", "Rickie", "Bond", myDob009, true, nationality02, true,
+            var myChar1Son = new NonPlayerCharacter("Char_407", "Rickie", "Bond", 0, myDob009, true, nationality02, true,
                 2.50, 9.0, myGoTo9, c1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false, "Char_47",
                 null, "Char_47", "Char_404", 30000, false, true, myTitles009, null, loc: myFief1);
             Globals_Game.npcMasterList.Add(myChar1Son.charID, myChar1Son);
-            var myChar1Daughter = new NonPlayerCharacter("Char_408", "Elsie", "Bond", myDob010, false, nationality02,
+            var myChar1Daughter = new NonPlayerCharacter("Char_408", "Elsie", "Bond", 0, myDob010, false, nationality02,
                 true, 2.50, 9.0, myGoTo10, c1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false,
                 "Char_47", null, "Char_47", "Char_404", 30000, false, false, myTitles010, null, loc: myFief1);
             Globals_Game.npcMasterList.Add(myChar1Daughter.charID, myChar1Daughter);
-            var myChar2Son2 = new NonPlayerCharacter("Char_409", "Wayne", "Dond", myDob011, true, nationality01, true,
+            var myChar2Son2 = new NonPlayerCharacter("Char_409", "Wayne", "Dond", 0, myDob011, true, nationality01, true,
                 2.50, 9.0, myGoTo11, f1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false, "Char_40",
                 null, "Char_40", null, 30000, false, false, myTitles011, null, loc: myFief6);
             Globals_Game.npcMasterList.Add(myChar2Son2.charID, myChar2Son2);
-            var myChar2Daughter = new NonPlayerCharacter("Char_410", "Esmerelda", "Dond", myDob012, false, nationality01,
+            var myChar2Daughter = new NonPlayerCharacter("Char_410", "Esmerelda", "Dond", 0, myDob012, false, nationality01,
                 true, 2.50, 9.0, myGoTo12, f1, 90, 0, 4.0, 6.0, Utility_Methods.GenerateTraitSet(), true, false,
                 "Char_40", null, "Char_40", null, 30000, false, false, myTitles012, null, loc: myFief6);
             Globals_Game.npcMasterList.Add(myChar2Daughter.charID, myChar2Daughter);
@@ -1160,7 +1179,8 @@ namespace JominiEngine {
                 }
                 return characterDetails;
             } else {
-                var characterDetails = new ProtoPlayerCharacter(c as PlayerCharacter);
+                PlayerCharacter pc = c as PlayerCharacter;
+                var characterDetails = new ProtoPlayerCharacter(pc);
                 characterDetails.ResponseType = DisplayMessages.Success;
                 if (viewAll) {
                     characterDetails.includeAll(c as PlayerCharacter);
@@ -3219,11 +3239,313 @@ namespace JominiEngine {
             return response;
         }
 
-        public static ProtoMessage TestButton()
+        public static ProtoMessage TestButton(string charId)
         {
             Console.WriteLine("Test Button Pressed in Client");
 
-            return new ProtoMessage(DisplayMessages.Success);
+            DisplayMessages charErr;
+
+            ProtoMessage result = new ProtoMessage();
+            result.ResponseType = DisplayMessages.Success;
+            result.Message = Utility_Methods.GetCharacter(charId, out charErr).statureModifier + "";
+
+            return result;
+        }
+
+        /// <summary>
+        /// Creates a new faction request within the server environment
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="factionLeader"></param>
+        /// <param name="factionTax"></param>
+        /// <returns>
+        ///  A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
+        /// </returns>
+        public static ProtoMessage CreateFaction(ProtoFaction f)
+        {
+            var response = new ProtoMessage();
+
+            Faction check = DatabaseRead.DatabaseRead_Faction(f.factionName);
+            if (check != null)
+            {
+                // faction with that name already exists
+                response.ResponseType = DisplayMessages.CreateFactionError;
+                return response;
+            }
+
+            Faction newFaction = new Faction(f.factionName,
+                    f.factionLeader,
+                    f.factionBaseID,
+                    f.factionTax);
+            newFaction.signFactionCharter(f.factionLeader, "Leader");
+
+            DatabaseWrite.DatabaseWrite_Faction(newFaction);
+
+            response.ResponseType = DisplayMessages.Success;
+            return response;
+        }
+
+        /// <summary>
+        /// Process a new member signing a faction request
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="newMember"></param>
+        /// <returns>
+        ///     A protomessage that denotes a success or fail (FAIL NOT IMPLEMENTED YET!!)
+        /// </returns>
+        public static ProtoMessage SignFactionCharter(string factionName, string newMember)
+        {
+            // get faction request and sign member
+            try
+            {
+                Faction f = DatabaseRead.DatabaseRead_Faction(factionName);
+
+                if(!f.members.ContainsKey(newMember))
+                {
+                    // player is not already in the faction
+                    f.signFactionCharter(newMember, "Prospect");
+
+                    DatabaseWrite.DatabaseWrite_Faction(f);
+                    var success = new ProtoMessage();
+                    success.ResponseType = DisplayMessages.Success;
+                    return success;
+                } else
+                {
+                    // player already in the faction
+                    var failure = new ProtoMessage();
+                    failure.ResponseType = DisplayMessages.ErrorGenericCharacterUnidentified;
+                    return failure;
+                }
+            } catch (Exception e)
+            {
+                // some other error
+                var result = new ProtoMessage();
+                result.ResponseType = DisplayMessages.Error;
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// This function returns a list of the current faction requests that are public as a protomessage
+        /// to the requesting client
+        /// </summary>
+        public static ProtoMessage ViewFactionList()
+        {
+            List<ProtoFaction> factionsToSend = new List<ProtoFaction>();
+
+            List<string> factionKeys = (List<string>) Globals_Server.rClient.ListKeys(BucketTypes.FactionBucket.ToString()).Value;
+            foreach (string key in factionKeys)
+            {
+                var f = DatabaseRead.DatabaseRead_Faction(key);
+
+                factionsToSend.Add(new ProtoFaction(
+                    f.factionName,
+                    f.factionReqID,
+                    f.foundingLocation,
+                    f.leader,
+                    f.members.ToArray(),
+                    f.treasury,
+                    f.proposedTax,
+                    f.alliedFiefs.ToArray(),
+                    f.statureBonus
+                    ));
+            }
+
+            ProtoGenericArray<ProtoFaction> result = new ProtoGenericArray<ProtoFaction>();
+            result.fields = factionsToSend.ToArray();
+            result.ResponseType = DisplayMessages.Success;
+            result.Message = "ViewFactionReqList";
+            Console.WriteLine("GET ALL FACTION REQUESTS ----------");
+            return result;
+        }
+
+        public static ProtoMessage GetFaction(string factionToGet)
+        {
+            //Faction faction = Globals_Game.factionMasterList[factionToGet];
+
+            Faction faction = DatabaseRead.DatabaseRead_Faction(factionToGet);
+
+            return new ProtoFaction(
+                        faction.factionName,
+                        faction.factionReqID,
+                        faction.foundingLocation,
+                        faction.leader,
+                        faction.members.ToArray(),
+                        faction.treasury,
+                        faction.proposedTax,
+                        faction.alliedFiefs.ToArray(),
+                        faction.statureBonus
+                    );
+        }
+
+        /// <summary>
+        /// Returns a protomessage containing a list of members for a given faction
+        /// </summary>
+        /// <param name="faction"></param>
+        /// <returns></returns>
+        public static ProtoMessage ListFactionMembers(string faction, string rank)
+        {
+            var members = new List<ProtoCharacterOverview>();
+            DisplayMessages charErr;
+
+            Faction f = DatabaseRead.DatabaseRead_Faction(faction);
+
+            foreach (KeyValuePair<string, string> member in f.members)
+            {
+                string memberRank = member.Value.ToString();
+                if (memberRank == "Leader" && rank == "Member")
+                {
+                    members.Add(new ProtoCharacterOverview(Utility_Methods.GetCharacter(member.Key, out charErr)));
+                }
+                else if (memberRank == rank)
+                {
+                    members.Add(new ProtoCharacterOverview(Utility_Methods.GetCharacter(member.Key, out charErr)));
+                }
+            }
+
+            ProtoGenericArray<ProtoCharacterOverview> reply = new ProtoGenericArray<ProtoCharacterOverview>();
+            reply.ResponseType = DisplayMessages.Success;
+            reply.fields = members.ToArray();
+            return reply;
+        }
+
+        /// <summary>
+        /// Handles the event of a faction members rank changing.
+        /// This includes a member being removed from a faction also
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="factionMember"></param>
+        /// <param name="factionRank"></param>
+        /// <returns></returns>
+        public static ProtoMessage ChangeFactionRank(string factionName, string factionMember, string factionRank)
+        {
+            Faction f = DatabaseRead.DatabaseRead_Faction(factionName);
+
+            /*
+             * Currently this removes the member from the collection and readds them.
+             * This should be changed in a later build to directly modifying the value.
+             */
+            f.members.Remove(factionMember);
+            if(factionRank != "")
+            {
+                // readd them with the correct rank
+                f.members.Add(factionMember, factionRank);
+                f.CheckStatureRank(factionMember);
+            } else
+            {
+                // the member is being removed, need to remove them from highest stature rankings if they exist there
+                for(int i = 0; i < f.highestStature.Length; i++) 
+                    if (factionMember == f.highestStature[i])
+                        f.highestStature[i] = null;
+
+                // also need to remove their faction stature bonus
+                DisplayMessages err;
+                Utility_Methods.GetCharacter(factionMember, out err).statureModifier -= f.statureBonus;
+            }
+
+            DatabaseWrite.DatabaseWrite_Faction(f);
+
+            // return result
+            ProtoMessage reply = new ProtoMessage();
+            reply.ResponseType = DisplayMessages.Success;
+            return reply;
+        }
+
+        /// <summary>
+        /// Add a fief to the list of a factions allied fiefs
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <param name="fiefID"></param>
+        /// <returns></returns>
+        public static ProtoMessage EstablishFactionPost(string factionName, string fiefID)
+        {
+            Faction f = DatabaseRead.DatabaseRead_Faction(factionName);
+            ProtoMessage reply = new ProtoMessage();
+
+            // check that fief exists
+            DisplayMessages err;
+            Utility_Methods.GetFief(fiefID, out err);
+            
+
+            f.alliedFiefs.Add(fiefID);
+            DatabaseWrite.DatabaseWrite_Faction(f);
+
+            reply.ResponseType = DisplayMessages.Success;
+            return reply;
+        }
+
+        /// <summary>
+        /// Create a list of all the fiefs allied with a faction
+        /// </summary>
+        /// <param name="factionName"></param>
+        /// <returns></returns>
+        public static ProtoMessage GetFactionPosts(string factionName)
+        {
+            Faction f = DatabaseRead.DatabaseRead_Faction(factionName);
+            ProtoGenericArray<ProtoFief> reply = new ProtoGenericArray<ProtoFief>();
+            reply.fields = new ProtoFief[f.alliedFiefs.Count];
+
+            DisplayMessages err;
+            var i = 0;
+            foreach(string s in f.alliedFiefs)
+            {
+                var pF = new ProtoFief(Utility_Methods.GetFief(s, out err));
+                reply.fields[i] = pF;
+                i++;
+            }
+
+            reply.ResponseType = DisplayMessages.Success;
+            return reply;
+        }
+
+        /// <summary>
+        /// Transferring funds from a fiefs treasury to a characters pockets
+        /// </summary>
+        /// <param name="transfer"></param>
+        /// <returns></returns>
+        public static ProtoMessage TransferFundsToCoinPurse(ProtoTransfer transfer)
+        {
+            ProtoMessage result = new ProtoMessage();
+
+            DisplayMessages err;
+            Fief f = Utility_Methods.GetFief(transfer.fiefFrom, out err);
+
+            if (f.Treasury < transfer.amount)
+            {
+                result.ResponseType = DisplayMessages.ErrorGenericInsufficientFunds;
+                return result;
+            }
+
+            f.AdjustTreasury(-transfer.amount);
+
+            PlayerCharacter c = (PlayerCharacter) Utility_Methods.GetCharacter(transfer.fiefTo, out err);
+            c.AdjustPurse((uint) transfer.amount);
+
+            result.ResponseType = DisplayMessages.Success;
+            return result;
+        }
+
+        /// <summary>
+        /// Pays a characters faction fee to the guild
+        /// </summary>
+        /// <param name="faction"></param>
+        /// <param name="charId"></param>
+        /// <returns></returns>
+        public static ProtoMessage PayFactionFee(string faction, string charId)
+        {
+            Faction f = DatabaseRead.DatabaseRead_Faction(faction);
+
+            DisplayMessages err;
+            Character c = Utility_Methods.GetCharacter(charId, out err);
+
+            c.AdjustPurse(0 - f.proposedTax);
+            f.AdjustTreasury(f.proposedTax);
+
+            DatabaseWrite.DatabaseWrite_Faction(f);
+
+            ProtoMessage result = new ProtoMessage();
+            result.ResponseType = DisplayMessages.Success;
+            return result;
         }
 
         /// <summary>
@@ -3618,7 +3940,50 @@ namespace JominiEngine {
                     }
                 case Actions.TestAction:
                     {
-                        return TestButton();
+                        Console.WriteLine("Message Recieved From Client");
+                        Console.WriteLine(msgIn.Message);
+                        return TestButton(msgIn.Message);
+                    }
+                case Actions.CreateFaction:
+                    {
+                        var newFactionReq = (msgIn as ProtoFaction);
+                        return CreateFaction(newFactionReq);
+                    }
+                case Actions.ViewFactionList:
+                    {
+                        return ViewFactionList();
+                    }
+                case Actions.GetFaction:
+                    {
+                        return GetFaction(msgIn.Message);
+                    }
+                case Actions.SignFactionCharter:
+                    {
+                        return SignFactionCharter(msgIn.MessageFields[1], msgIn.MessageFields[2]);
+                    }
+                case Actions.ListFactionMembers:
+                    {
+                        return ListFactionMembers(msgIn.MessageFields[1], msgIn.MessageFields[2]);
+                    }
+                case Actions.ChangeFactionRank:
+                    {
+                        return ChangeFactionRank(msgIn.MessageFields[1], msgIn.MessageFields[2], msgIn.MessageFields[3]);
+                    }
+                case Actions.EstablishFactionPost:
+                    {
+                        return EstablishFactionPost(msgIn.MessageFields[1], msgIn.MessageFields[2]);
+                    }
+                case Actions.GetFactionPosts:
+                    {
+                        return GetFactionPosts(msgIn.MessageFields[1]);
+                    }
+                case Actions.TransferFundsToCoinPurse:
+                    {
+                        return TransferFundsToCoinPurse(msgIn as ProtoTransfer);
+                    }
+                case Actions.PayFactionFee:
+                    {
+                        return PayFactionFee(msgIn.MessageFields[1], msgIn.MessageFields[2]);
                     }
                 default: {
                         return null;

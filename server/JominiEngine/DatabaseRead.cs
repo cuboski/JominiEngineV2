@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using QuickGraph;
+using RiakClient.Models;
 
 namespace JominiEngine
 {
@@ -892,6 +893,54 @@ namespace JominiEngine
         }
 
         /// <summary>
+        /// Reads a Siege object from the database
+        /// </summary>
+        /// <returns>Siege object</returns>
+        /// <param name="gameID">Game for which Siege to be retrieved</param>
+        /// <param name="siegeID">ID of Siege to be retrieved</param>
+        public static Faction DatabaseRead_Faction(string factID)
+        {
+            var factResult = Globals_Server.rClient.Get(BucketTypes.FactionBucket.ToString(), factID);
+            Faction faction = new Faction();
+
+            if (factResult.IsSuccess)
+            {
+                // extract Army object
+                faction = factResult.Value.GetObject<Faction>();
+            }
+            else
+            {
+                string toDisplay = "InitialDBload: Unable to retrieve faction request: " + factID;
+                Globals_Server.logError(toDisplay);
+                faction = null;
+            }
+
+            return faction;
+        }
+
+        /// <summary>
+        /// Reads a Siege object from the database
+        /// </summary>
+        /// <returns>Siege object</returns>
+        /// <param name="gameID">Game for which Siege to be retrieved</param>
+        /// <param name="siegeID">ID of Siege to be retrieved</param>
+        public static Tuple<byte[], byte[]> DatabaseRead_User(string username)
+        {
+            var userResult = Globals_Server.rClient.Get(BucketTypes.AccountBucket.ToString(), username);
+
+            if (!userResult.IsSuccess) {
+                string toDisplay = "InitialDBload: Unable to retrieve faction request: " + username;
+                Globals_Server.logError(toDisplay);
+
+                return null;
+            }
+
+            Tuple<byte[], byte[]> hashes = userResult.Value.GetObject<Tuple<byte[], byte[]>>();
+
+            return hashes;
+        }
+
+        /// <summary>
         /// Reads an Army object from the database
         /// </summary>
         /// <returns>Army object</returns>
@@ -1498,6 +1547,24 @@ namespace JominiEngine
             }
 
             return newBool;
+        }
+
+        public static List<string> DatabaseRead_List(string gameID, string listID)
+        {
+            var listResult = Globals_Server.rClient.Get(gameID, listID);
+            var newList = new List<string>();
+
+            if(listResult.IsSuccess)
+            {
+                newList = listResult.Value.GetObject<List<string>>();
+            }
+            else
+            {
+                string toDisplay = "InitialDBload: Unable to retrieve bool variable " + listID;
+                Globals_Server.logError(toDisplay);
+            }
+
+            return newList;
         }
 
         /// <summary>

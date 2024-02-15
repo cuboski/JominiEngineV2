@@ -7,6 +7,9 @@ using RiakClient;
 using RiakClient.Models;
 using ProtoBuf;
 using Newtonsoft.Json.Serialization;
+using ProtoMessageClient;
+using System.Windows.Forms;
+
 namespace JominiEngine
 {
     public static class DatabaseWrite
@@ -127,7 +130,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Trait(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Game.traitKeys.Add(pair.Key);
+                    //Globals_Game.traitKeys.Add(pair.Key);
                 }
             }
 
@@ -147,7 +150,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_BaseLanguage(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Game.baseLangKeys.Add(pair.Key);
+                    //Globals_Game.baseLangKeys.Add(pair.Key);
                 }
             }
 
@@ -167,7 +170,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Language(gameID, l: pair.Value);
                 if (success)
                 {
-                    Globals_Game.langKeys.Add(pair.Key);
+                    //Globals_Game.langKeys.Add(pair.Key);
                 }
             }
 
@@ -187,7 +190,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Nationality(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Game.nationalityKeys.Add(pair.Key);
+                    //Globals_Game.nationalityKeys.Add(pair.Key);
                 }
             }
 
@@ -207,7 +210,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Rank(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Game.rankKeys.Add(pair.Key);
+                    //Globals_Game.rankKeys.Add(pair.Key);
                 }
             }
 
@@ -227,7 +230,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Position(gameID, p: pair.Value);
                 if (success)
                 {
-                    Globals_Game.positionKeys.Add(pair.Key);
+                   // Globals_Game.positionKeys.Add(pair.Key);
                 }
             }
 
@@ -247,7 +250,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_NPC(gameID, npc: pair.Value);
                 if (success)
                 {
-                    Globals_Game.npcKeys.Add(pair.Key);
+                    //Globals_Game.npcKeys.Add(pair.Key);
                 }
             }
 
@@ -267,7 +270,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_PC(gameID, pc: pair.Value);
                 if (success)
                 {
-                    Globals_Game.pcKeys.Add(pair.Key);
+                   // Globals_Game.pcKeys.Add(pair.Key);
                 }
             }
 
@@ -287,7 +290,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Kingdom(gameID, k: pair.Value);
                 if (success)
                 {
-                    Globals_Game.kingKeys.Add(pair.Key);
+                   // Globals_Game.kingKeys.Add(pair.Key);
                 }
             }
 
@@ -307,7 +310,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Province(gameID, p: pair.Value);
                 if (success)
                 {
-                    Globals_Game.provKeys.Add(pair.Key);
+                   // Globals_Game.provKeys.Add(pair.Key);
                 }
             }
 
@@ -318,7 +321,7 @@ namespace JominiEngine
             // clear existing key list
             if (Globals_Game.terrKeys.Count > 0)
             {
-                Globals_Game.terrKeys.Clear();
+               Globals_Game.terrKeys.Clear();
             }
 
             // write each object in terrainMasterList, whilst also repopulating key list
@@ -327,7 +330,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Terrain(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Game.terrKeys.Add(pair.Key);
+                   // Globals_Game.terrKeys.Add(pair.Key);
                 }
             }
 
@@ -347,9 +350,11 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_VictoryData(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Game.victoryDataKeys.Add(pair.Key);
+                    // Globals_Game.victoryDataKeys.Add(pair.Key);
                 }
             }
+
+            Globals_Game.victoryData.Clear();
 
             // write key list to database
             DatabaseWrite.DatabaseWrite_KeyList(gameID, "victoryDataKeys", Globals_Game.victoryDataKeys);
@@ -367,7 +372,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Fief(gameID, f: pair.Value);
                 if (success)
                 {
-                    Globals_Game.fiefKeys.Add(pair.Key);
+                    //Globals_Game.fiefKeys.Add(pair.Key);
                 }
             }
 
@@ -387,7 +392,7 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Army(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Game.armyKeys.Add(pair.Key);
+                    //Globals_Game.armyKeys.Add(pair.Key);
                 }
             }
 
@@ -407,25 +412,48 @@ namespace JominiEngine
                 bool success = DatabaseWrite.DatabaseWrite_Siege(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Game.siegeKeys.Add(pair.Key);
+                    //Globals_Game.siegeKeys.Add(pair.Key);
                 }
             }
 
             // write key list to database
             DatabaseWrite.DatabaseWrite_KeyList(gameID, "siegeKeys", Globals_Game.siegeKeys);
 			Console.WriteLine ("Finished writing sieges");
+
+            // ======== write clients
             // write clients
             foreach (KeyValuePair<string, Client> pair in Globals_Server.Clients)
             {
                 bool success = DatabaseWrite_Client(gameID, pair.Value);
                 if (success)
                 {
-                    Globals_Server.client_keys.Add(pair.Key);
+                    //Globals_Server.client_keys.Add(pair.Key);
                 }
             }
 
             DatabaseWrite_KeyList(gameID, "clientKeys", Globals_Server.client_keys);
 			Console.WriteLine ("Finished writing clients");
+
+            // ========= write FACTIONS
+            // clear existing key list
+            if (Globals_Game.factionKeys.Count > 0)
+            {
+                Globals_Game.factionKeys.Clear();
+            }
+
+            // write each object in siegeMasterList, whilst also repopulating key list
+            foreach (KeyValuePair<string, Faction> pair in Globals_Game.factionMasterList)
+            {
+                bool success = DatabaseWrite.DatabaseWrite_Faction(pair.Value);
+                if (success)
+                {
+                    //Globals_Game.factionKeys.Add(pair.Key);
+                }
+            }
+
+            // write key list to database
+            DatabaseWrite.DatabaseWrite_KeyList(gameID, "factionKeys", Globals_Game.factionKeys);
+            Console.WriteLine("Finished writing factions");
             // ========= write MAP (edges collection)
             DatabaseWrite.DatabaseWrite_MapEdges(gameID, map: Globals_Game.gameMap);
 
@@ -456,22 +484,42 @@ namespace JominiEngine
 			}
 		}
         public static bool DatabaseWrite_Test(string gameID) {
-			if (!Globals_Server.rClient.Ping ().IsSuccess) {
-				Console.WriteLine ("NOW PING FAILS");
-			}
+            var pingResult = Globals_Server.rClient.Ping();
+
+            if (pingResult.IsSuccess)
+            {
+                Console.WriteLine("Pong");
+            }
+            else
+            {
+                Console.WriteLine("Are you sure Riak is running?");
+                Console.WriteLine("{0}: {1}", pingResult.ResultCode, pingResult.ErrorMessage);
+            }
+
 			Console.WriteLine ("Writing test to : " + gameID);
 			var o = new RiakObject (gameID, "test",new TestObject("hello","world"));
-			RiakResult result = Globals_Server.rClient.Put (o);
+			RiakResult result = Globals_Server.rClient.Put(o);
 			if (!result.IsSuccess) {
 				Console.WriteLine (result.ErrorMessage);
 				Environment.Exit (1);
 			} else {
-				Console.WriteLine ("apparent success: " + result.ResultCode.ToString ());
+				Console.WriteLine ($"Saved {o.Key} to bucket {o.Bucket}");
 			}
-			return true;
 
 
-		}
+            var readTest = Globals_Server.rClient.Get(gameID, "test");
+            if(readTest.IsSuccess)
+            {
+                TestObject test = readTest.Value.GetObject<TestObject>();
+                Console.WriteLine ($"Found {o.Key} in {o.Bucket}");
+            } else
+            {
+                Console.WriteLine("DB Read Error");
+                Console.WriteLine($"{readTest.ResultCode}: {readTest.ErrorMessage}");
+            }
+
+            return true;
+        }
 
 		/// <summary>
 		/// Writes a key list (List object) to the database
@@ -483,7 +531,7 @@ namespace JominiEngine
 		public static bool DatabaseWrite_KeyList<T>(string gameID, string k, List<T> kl)
 		{
 			Console.WriteLine ("Writing key list " + k + " to bucket " + gameID);
-			RiakObject rList = new RiakObject(gameID, k);
+			RiakObject rList = new RiakObject(gameID, k, kl);
 			var putListResult = Globals_Server.rClient.Put(rList);
 
 			if (!putListResult.IsSuccess)
@@ -491,7 +539,7 @@ namespace JominiEngine
 				Globals_Server.logError("Write failed: Key list " + rList.Key + " to bucket " + rList.Bucket);
 			}
 
-			return putListResult.IsSuccess;
+            return putListResult.IsSuccess;
 		}
 		
         /// <summary>
@@ -1074,6 +1122,38 @@ namespace JominiEngine
         }
 
         /// <summary>
+        /// Writes a new faction request to the database
+        /// </summary>
+        /// <param name="gameID"> The game bucket to write this request to </param>
+        /// <param name="fr"> The faction request to write </param>
+        /// <returns> bool indicating if the request was successful </returns>
+        public static bool DatabaseWrite_Faction(Faction f)
+        {
+            var rFaction = new RiakObject(BucketTypes.FactionBucket.ToString(), f.factionName, f);
+            var factRes = Globals_Server.rClient.Put(rFaction);
+
+            if (!factRes.IsSuccess)
+            {
+                Globals_Server.logError("Write failed: Faction Request " + rFaction.Key + " to bucket " + rFaction.Bucket);
+            }
+
+            return factRes.IsSuccess;
+        }
+
+        public static bool DatabaseWrite_User(string username, Tuple<byte[], byte[]>  passHash)
+        {
+            var rUser = new RiakObject(BucketTypes.AccountBucket.ToString(), username, passHash);
+            var userRes = Globals_Server.rClient.Put(rUser);
+
+            if (!userRes.IsSuccess)
+            {
+                Globals_Server.logError("Write failed: Faction Request " + rUser.Key + " to bucket " + rUser.Bucket);
+            }
+
+            return userRes.IsSuccess;
+        }
+
+        /// <summary>
         /// Writes a HexMapGraph edges collection to the database
         /// </summary>
         /// <returns>bool indicating success</returns>
@@ -1126,6 +1206,29 @@ namespace JominiEngine
         {
             TaggedEdge<string, string> edgeOut = new TaggedEdge<string, string>(te.Source.id, te.Target.id, te.Tag);
             return edgeOut;
+        }
+
+        /// <summary>
+        /// Resets the database on server startup if flagged
+        /// </summary>
+        /// <param name="fRESH_DATABASE"></param>
+        internal static void WIPE_DATABASE(bool fRESH_DATABASE)
+        {
+            if (!fRESH_DATABASE)
+                return;
+
+            foreach (string bucketId in Enum.GetNames(typeof(BucketTypes)))
+            {
+                List<string> yeah = (List<string>)Globals_Server.rClient.ListKeys(bucketId).Value;
+                foreach (string s in yeah)
+                {
+                    var deleteResult = Globals_Server.rClient.Delete(bucketId, s);
+                    if (deleteResult.IsSuccess)
+                        Console.WriteLine($"Removed {s} from {bucketId}");
+
+                }
+            }
+            
         }
     }
 }

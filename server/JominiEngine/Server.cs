@@ -28,7 +28,7 @@ namespace JominiEngine
         private readonly int port = 8080;
         //private readonly string host_name = "localhost";
         private readonly string host_name = "192.168.199.1";
-        //private readonly string host_name = "92.239.228.86";
+        //private readonly string host_name = "139.162.225.87";
         private readonly int max_connections = 2000;
         // Used in the NetPeerConfiguration to identify application
         private readonly string app_identifier = "test";
@@ -80,6 +80,9 @@ namespace JominiEngine
             // general user test accounts
             LogInManager.StoreNewUser("acc1", "pass1");
             LogInManager.StoreNewUser("acc2", "pass2");
+            LogInManager.StoreNewUser("acc3", "pass3");
+            LogInManager.StoreNewUser("acc4", "pass4");
+            LogInManager.StoreNewUser("acc5", "pass5");
 
             // test account for the religion system
             //LogInManager.StoreNewUser("faithTest", "faithtest");
@@ -98,7 +101,7 @@ namespace JominiEngine
             server = new NetServer(config);
             ctSource = new CancellationTokenSource();
             server.Start();
-
+            
             try {
                 for(int i = 0; i < 3; i++) {
                     if(server.UPnP.ForwardPort(port, "Designated Listening Port")) {
@@ -121,8 +124,15 @@ namespace JominiEngine
             // test accounts character assign
             Client client = new Client("acc1", "Char_47");      // King Richard I
             Globals_Server.Clients.Add("acc1", client);
-            Client client2 = new Client("acc2", "Char_126");
+            Client client2 = new Client("acc2", "Char_126");    // Eustace De Vescy
             Globals_Server.Clients.Add("acc2", client2);
+            Client client3 = new Client("acc3", "Char_219");    // William Malet
+            Globals_Server.Clients.Add("acc3", client3);
+            Client client4 = new Client("acc4", "Char_244");    // Beatrice de Beauchamp
+            Globals_Server.Clients.Add("acc4", client4);
+            Client client5 = new Client("acc5", "Char_96");     // Manly de Courtenay
+            Globals_Server.Clients.Add("acc5", client5);
+
 
             // Faith Test Account
             //Client clientArchbishop = new Client("faithTest", "Char_300");
@@ -131,17 +141,21 @@ namespace JominiEngine
             String dir = Directory.GetCurrentDirectory();
             //dir = dir.Remove(dir.IndexOf("RepairHist_mmo"));
             String path;
-            if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
-            {
-                path = Path.Combine(dir, "Certificates");
-            }   
-            else
-            {
-                dir = Directory.GetParent(dir).FullName;
-                dir = Directory.GetParent(dir).FullName;
-                path = Path.Combine(dir, "Certificates");
-            }
-            LogInManager.InitialiseCertificateAndRSA(path);
+            //if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
+		//{
+                //path = Path.Combine(dir, "Certificates");
+		//}   
+            //else
+		//{
+		//dir  = Directory.GetParent(dir).FullName;
+		      // dir = Directory.GetParent(dir).FullName
+		      // path = Path.Combine(dir, "Certificates");
+		  // }
+	    dir = Directory.GetParent(dir).FullName;
+	    dir = Directory.GetParent(dir).FullName;
+	    path = Path.Combine(dir, "Certificates");
+
+	    LogInManager.InitialiseCertificateAndRSA(path);
             if (createAccountForAllPCs)
                 createUsersForEachNotUsedPC();
         }
@@ -370,10 +384,12 @@ namespace JominiEngine
         {
             Contract.Requires(m != null&&conn!=null);
             NetOutgoingMessage msg = server.CreateMessage();
+
             MemoryStream ms = new MemoryStream();
             Console.WriteLine($"\n\nSerilaize: {m.ActionType}. Msg: {m.Message}\n\n");
             Serializer.SerializeWithLengthPrefix(ms, m, PrefixStyle.Fixed32);
             msg.Write(ms.GetBuffer());
+
             if (alg != null)
             {
                 msg.Encrypt(alg);
@@ -500,6 +516,7 @@ namespace JominiEngine
                 if (!alreadyExist) {
                     string clientUsername = pcID + "_username";
                     string clientPassword = pcID + "_password";
+                    Console.WriteLine(clientUsername + " " + clientPassword);
                     LogInManager.StoreNewUser(clientUsername, clientPassword);
                     Client client = new Client(clientUsername, pcID);
                     Globals_Server.Clients.Add(clientUsername, client);

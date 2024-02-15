@@ -64,7 +64,10 @@ namespace ProtoMessageClient {
     [ProtoInclude(34, typeof(ProtoCombatValues))]
     [ProtoInclude(37, typeof(ProtoWorldMap))]
     [ProtoInclude(38, typeof(ProtoProvince))]
-    [ProtoInclude(39, typeof(ProtoGameEvent))]
+    [ProtoInclude(39, typeof(ProtoFaction))]
+    [ProtoInclude(40, typeof(ProtoGameEvent))]
+    [ProtoInclude(41, typeof(ProtoGenericArray<ProtoFaction>))]
+    [ProtoInclude(42, typeof(ProtoGenericDictionary<ProtoCharacterOverview, string>))]
 
 
     [ProtoContract, Serializable]
@@ -431,6 +434,10 @@ namespace ProtoMessageClient {
             /// Holds character's family name
             /// </summary>
             public string familyName { get; set; }
+            /// <summary>
+            /// Holds purse value, amount of gold on the character
+            /// </summary>
+            public uint purse { get; set; }
             /// <summary>
             /// Character's year of birth
             /// </summary>
@@ -1857,6 +1864,60 @@ namespace ProtoMessageClient {
             ownerID = province.owner.charID;
             kingdomID = province.kingdom.id;
             rankID = province.rank.id;
+        }
+    }
+
+    /// <summary>
+    /// Class for sending faction request details
+    /// </summary>
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoFaction : ProtoMessage
+    {
+        public string factionName { get; set; }
+        public string factionID { get; set; }
+        public string factionBaseID { get; set; }
+        public string factionLeader { get; set; }
+        public KeyValuePair<string, string>[] factionMembers { get; set; }
+        public string[] alliedFiefs { get; set; }
+        public string[] highestStature { get; set; }
+        public double statureBonus { get; set; }
+        public uint factionTax { get; set; }
+        public uint treasury { get; set; }
+
+        public ProtoFaction() : base()
+        {
+
+        }
+
+        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader,
+            KeyValuePair<string, string>[] factionMembers,uint treasury, uint factionTax, string[] alliedFiefs, double statureBonus)
+        {
+            this.factionName = factionName;
+            this.factionID = factionID;
+            this.factionBaseID = factionBaseID;
+            this.factionLeader = factionLeader;
+            this.factionMembers = factionMembers;
+            this.treasury = treasury;
+            this.factionTax = factionTax;
+            this.alliedFiefs = alliedFiefs;
+            this.statureBonus = statureBonus;
+        }
+    }
+
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoGenericDictionary<K, V> : ProtoMessage
+    {
+        public KeyValuePair<K, V>[] fields { get; set; }
+
+        public ProtoGenericDictionary()
+            : base()
+        {
+
+        }
+
+        public ProtoGenericDictionary(KeyValuePair<K, V>[] p)
+        {
+            this.fields = p;
         }
     }
 

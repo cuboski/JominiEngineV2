@@ -99,6 +99,7 @@ public partial class TextTestClient
         ProtoMessage m = null;
         var waitHandles = new WaitHandle[] { protobufMessageQueue.eventWaiter, net.ctSource.Token.WaitHandle };
         while (!protobufMessageQueue.TryDequeue(out m)) {
+            Debug.Log("trying to deQ");
             EventWaitHandle.WaitAny(waitHandles);
             net.ctSource.Token.ThrowIfCancellationRequested();
         }
@@ -250,7 +251,6 @@ public partial class TextTestClient
             } catch (Exception e) {
                 Debug.Log(e.Message);
             }
-
         }
 
         public void ComputeAndSendHashAndKey(ProtoLogIn salts, byte[] key)

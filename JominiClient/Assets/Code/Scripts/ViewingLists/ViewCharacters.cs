@@ -1,20 +1,61 @@
 using ProtoMessageClient;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ViewCharacters : Controller
 {
     public Transform CanvasParent;
-    public GameObject prefab;
     public Text lblPageTitle;
+
+    public GameObject prefabCharacter;
+    public GameObject prefabFactionMember;
+    private GameObject activePrefab;
+
+    private Dropdown factionDrpDwn;
+
+    private List<string> charIDList = new List<string>();
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        ProtoMessage reply;
 
-        lblPageTitle.text = "Persons present in the " + globalString + " of " + fiefNames[fiefToViewID];
+        // Decide between the location list or the list of faction members
+        switch (viewingListSelectAction)
+        {
+            case ViewingList.ListChars:
+                {
+                    lblPageTitle.text = "Persons present in the " + globalString + " of " + fiefNames[fiefToViewID];
 
-        ProtoMessage reply = ListCharsInMeetingPlace(globalString, protoClient.activeChar.charID, tclient);
+                    reply = ListCharsInMeetingPlace(globalString, protoClient.activeChar.charID, tclient);
+
+                    activePrefab = prefabCharacter;
+                    break;
+                }
+            case ViewingList.FactionJoinRequests:
+            case ViewingList.FactionMembers:
+                {
+                    reply = ListFactionMembers(factionToView);
+                    activePrefab = prefabFactionMember;
+                    break;
+                }
+            case ViewingList.Entourage:
+                {
+                    Debug.Log("getting ent");
+                    reply = ListEntourageMembers();
+                    Debug.Log(reply.Message);
+                    activePrefab = prefabCharacter;
+                    break;
+                }
+            default:
+                {
+                    reply = null;
+                    break;  
+                }
+        }
+        
         if (reply.ResponseType == DisplayMessages.Success)
         {
             characterList = (ProtoGenericArray<ProtoCharacterOverview>)reply;
@@ -22,22 +63,43 @@ public class ViewCharacters : Controller
             {
                 foreach (ProtoCharacterOverview character in characterList.fields)
                 {
+                    Debug.Log(character.charName);
+                    if (activePrefab != prefabCharacter)
+                    {
+                        // transform some variables into cleaner values before creating record object
+                        string location = string.IsNullOrWhiteSpace(character.locationID) ? "Unknown" : fiefNames[character.locationID];
+                        string sex = character.isMale ? "Male" : "Female";
+                        string[] options;
 
-                    string location = string.IsNullOrWhiteSpace(character.locationID) ? "Unknown" : fiefNames[character.locationID];
+                        if (viewingListSelectAction == ViewingList.FactionJoinRequests)
+                            options = new string[] { "approve", "view" };
+                        else
+                            options = new string[] { "view", "remove" };
 
-                    string sex = character.isMale ? "Male" : "Female";
+                        GameObject recordGameObject = Instantiate(activePrefab);
+                        FactionMember thisRecord = recordGameObject.GetComponent<FactionMember>();
+                        thisRecord.SetValues(CanvasParent, character.charID, character.charName,
+                            sex, location, options);
+                    }
+                    else
+                    {
+                        string location = string.IsNullOrWhiteSpace(character.locationID) ? "Unknown" : fiefNames[character.locationID];
 
-                    GameObject UIElement = Instantiate(prefab);
-                    UIElement.transform.SetParent(CanvasParent);
-                    UIElement.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().SetText(character.charName);
-                    UIElement.transform.GetChild(1).GetComponent<TMPro.TMP_Text>().SetText(sex);
-                    UIElement.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().SetText(character.role);
-                    UIElement.transform.GetChild(3).GetComponent<TMPro.TMP_Text>().SetText(location);
-                    UIElement.transform.localScale = Vector3.one;
+                        string sex = character.isMale ? "Male" : "Female";
 
-                    UIElement.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => { BtnSwitchCharacter(character.charID); });
+                        GameObject UIElement = Instantiate(activePrefab);
+                        UIElement.transform.SetParent(CanvasParent);
+                        UIElement.transform.GetChild(0).GetComponent<TMPro.TMP_Text>().SetText(character.charName);
+                        UIElement.transform.GetChild(1).GetComponent<TMPro.TMP_Text>().SetText(sex);
+                        UIElement.transform.GetChild(2).GetComponent<TMPro.TMP_Text>().SetText(character.role);
+                        UIElement.transform.GetChild(3).GetComponent<TMPro.TMP_Text>().SetText(location);
+                        UIElement.transform.localScale = Vector3.one;
+
+                        UIElement.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => { BtnSwitchCharacter(character.charID); });
+                    }
+
+                    charIDList.Add(character.charID);
                     Debug.Log($"{character.charName} {character.charID}");
-
                 }
             }
             

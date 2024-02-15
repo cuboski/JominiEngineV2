@@ -11,11 +11,20 @@ namespace JominiEngine
     /// enum representing all valid actions in the gane
     /// </summary>
     public enum Actions {
-        Update = 0, LogIn, UseChar, GetPlayers, ViewChar, ViewArmy, GetNPCList, HireNPC, FireNPC, TravelTo, MoveCharacter, ViewFief, ViewMyFiefs, AppointBailiff, RemoveBailiff, AssignOverlord, BarCharacters, BarNationalities, UnbarCharacters, UnbarNationalities, GrantFiefTitle, AdjustExpenditure, TransferFunds,
-        TransferFundsToPlayer, EnterExitKeep, ListCharsInMeetingPlace, TakeThisRoute, Camp, AddRemoveEntourage, ProposeMarriage, AcceptRejectProposal, RejectProposal, AppointHeir, TryForChild, RecruitTroops, MaintainArmy, AppointLeader, DropOffTroops,
-        ListDetachments, ListArmies, PickUpTroops, PillageFief, BesiegeFief, AdjustCombatValues, ExamineArmiesInFief, Attack, ViewJournalEntries, ViewJournalEntry, SiegeRoundReduction, SiegeRoundStorm, SiegeRoundNegotiate, SiegeList, ViewSiege, EndSiege, DisbandArmy, SpyFief, SpyCharacter, SpyArmy, Kidnap, ViewCaptives, ViewCaptive, RansomCaptive, ReleaseCaptive, ExecuteCaptive, RespondRansom, SeasonUpdate,
-        GetTravelCost, GetAvailableTravelDirections, LoadScenario, ViewWorldMap, GetProvince, TestAction
+        Update = 0, LogIn, UseChar, GetPlayers, ViewChar, ViewArmy, GetNPCList, HireNPC, FireNPC, TravelTo, 
+        MoveCharacter, ViewFief, ViewMyFiefs, AppointBailiff, RemoveBailiff, AssignOverlord, BarCharacters, 
+        BarNationalities, UnbarCharacters, UnbarNationalities, GrantFiefTitle, AdjustExpenditure, TransferFunds,
+        TransferFundsToPlayer, EnterExitKeep, ListCharsInMeetingPlace, TakeThisRoute, Camp, AddRemoveEntourage, 
+        ProposeMarriage, AcceptRejectProposal, RejectProposal, AppointHeir, TryForChild, RecruitTroops, MaintainArmy, 
+        AppointLeader, DropOffTroops, ListDetachments, ListArmies, PickUpTroops, PillageFief, BesiegeFief, 
+        AdjustCombatValues, ExamineArmiesInFief, Attack, ViewJournalEntries, ViewJournalEntry, SiegeRoundReduction, 
+        SiegeRoundStorm, SiegeRoundNegotiate, SiegeList, ViewSiege, EndSiege, DisbandArmy, SpyFief, SpyCharacter, SpyArmy,
+        Kidnap, ViewCaptives, ViewCaptive, RansomCaptive, ReleaseCaptive, ExecuteCaptive, RespondRansom, SeasonUpdate,
+        GetTravelCost, GetAvailableTravelDirections, LoadScenario, ViewWorldMap, GetProvince, TestAction, CreateFaction, 
+        ViewFactionList, GetFaction, ReturnTime, SignFactionCharter, ListFactionMembers, ChangeFactionRank, EstablishFactionPost,
+        GetFactionPosts, TransferFundsToCoinPurse, PayFactionFee
     }
+
     /// <summary>
     /// enum representing all strings that may be sent to a client,
     ///  mapped to string from enum on client side
@@ -45,7 +54,7 @@ namespace JominiEngine
         CharacterMoveEndSiege, MoveCancelled, CharacterInvalidMovement, ErrorGenericFiefUnidentified, CharacterHireNotEmployable, CharacterFireNotEmployee, CharacterOfferLow, CharacterOfferHigh, CharacterOfferOk, CharacterOfferAlmost, CharacterOfferHaggle, CharacterBarredKeep, CharacterRecruitOwn, CharacterRecruitAlready, CharacterLoyaltyLanguage, ErrorGenericInsufficientFunds, CharacterRecruitSiege, CharacterRecruitRebellion, RecruitCancelled,
         CharacterTransferTitle, CharacterTitleOwner, CharacterTitleHighest, CharacterTitleKing, CharacterTitleAncestral, CharacterHeir, PillageInitiateSiege, PillageRetreat, PillageDays, PillageOwnFief, PillageUnderSiege, PillageSiegeAlready, PillageAlready, PillageArmyDefeat, PillageSiegeRebellion, FiefExpenditureAdjustment, FiefExpenditureAdjusted, FiefStatus, FiefOwnershipHome,
         FiefOwnershipNewHome, FiefOwnershipNoFiefs, FiefChangeOwnership, FiefQuellRebellionFail, FiefEjectCharacter, FiefNoCaptives, ProvinceAlreadyOwn, KingdomAlreadyKing, KingdomOwnershipChallenge, ProvinceOwnershipChallenge, ErrorGenericCharacterUnidentified, ErrorGenericUnauthorised, ErrorGenericMessageInvalid, ErrorGenericTooFarFromFief, FiefNoBailiff, FiefCouldNotBar, FiefCouldNotUnbar,
-        ErrorGenericBarOwnNationality, ErrorGenericPositiveInteger, GenericReceivedFunds, ErrorGenericNoHomeFief, CharacterRecruitInsufficientFunds, CharacterRecruitOk, SiegeNotBesieger, JournalEntryUnrecognised, JournalEntryNotProposal, ErrorGenericArmyUnidentified, ErrorGenericSiegeUnidentified, ErrorSpyDead, ErrorSpyCaptive, ErrorSpyOwn, SpyChance, SpySuccess, SpyFail, SpySuccessDetected, SpyFailDetected, SpyFailDead, SpyCancelled, EnemySpySuccess, EnemySpyFail, EnemySpyKilled, CharacterHeldCaptive, RansomReceived, RansomPaid, RansonDenied, RansomRepliedAlready, RansomCaptiveDead, RansomAlready, NotCaptive, EntryNotRansom, KidnapOwnCharacter, KidnapDead, KidnapNoPlayer, KidnapSuccess, KidnapSuccessDetected, KidnapFailDetected, KidnapFailDead, KidnapFail, EnemyKidnapSuccess, EnemyKidnapSuccessDetected, EnemyKidnapFail, EnemyKidnapKilled, CharacterExecuted, CharacterReleased, LogInSuccess, LogInFail, YouDied, YouDiedNoHeir, CharacterIsDead, Timeout
+        ErrorGenericBarOwnNationality, ErrorGenericPositiveInteger, GenericReceivedFunds, ErrorGenericNoHomeFief, CharacterRecruitInsufficientFunds, CharacterRecruitOk, SiegeNotBesieger, JournalEntryUnrecognised, JournalEntryNotProposal, ErrorGenericArmyUnidentified, ErrorGenericSiegeUnidentified, ErrorSpyDead, ErrorSpyCaptive, ErrorSpyOwn, SpyChance, SpySuccess, SpyFail, SpySuccessDetected, SpyFailDetected, SpyFailDead, SpyCancelled, EnemySpySuccess, EnemySpyFail, EnemySpyKilled, CharacterHeldCaptive, RansomReceived, RansomPaid, RansonDenied, RansomRepliedAlready, RansomCaptiveDead, RansomAlready, NotCaptive, EntryNotRansom, KidnapOwnCharacter, KidnapDead, KidnapNoPlayer, KidnapSuccess, KidnapSuccessDetected, KidnapFailDetected, KidnapFailDead, KidnapFail, EnemyKidnapSuccess, EnemyKidnapSuccessDetected, EnemyKidnapFail, EnemyKidnapKilled, CharacterExecuted, CharacterReleased, LogInSuccess, LogInFail, YouDied, YouDiedNoHeir, CharacterIsDead, Timeout, CreateFactionError
     }
 
     public enum EventTypes
@@ -53,14 +62,31 @@ namespace JominiEngine
         SeasonUpdate
     }
 
+    public enum BucketTypes
+    {
+        NpcBucket,
+        PcBucket,
+        FiefBucket,
+        ProvinceBucket,
+        KingdomBucket,
+        RankBucket,
+        TerrainBucket,
+        BaseLanguageBucket,
+        LanguageBucket,
+        TraitBucket,
+        ArmyBucket,
+        SeigeBucket,
+        NationalityBucket,
+        PositionBucket,
+        FactionBucket,
+        AccountBucket
+    }
+
     /// <summary>
     /// Class storing any required static variables for server-side
     /// </summary>
     public static class Globals_Server
     {
-
-        
-
         /// <summary>
         /// Holds the usernames and Client objects of all players
         /// </summary>

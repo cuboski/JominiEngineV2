@@ -10,10 +10,14 @@ public class YourFiefs : Controller
     public GameObject prefab;
 
     // Start is called before the first frame update
-    void Start() {        
+    void Start() {
 
+        ProtoMessage reply;
+        if (viewingListSelectAction == ViewingList.FactionFiefs)
+            reply = ViewFactionPosts(factionToView);
+        else
+            reply = ViewMyFiefs(tclient);
 
-        ProtoMessage reply = ViewMyFiefs(tclient);
         if (reply.ResponseType == DisplayMessages.Success) {
 
             fiefList = (ProtoGenericArray<ProtoFief>)reply;
@@ -43,7 +47,12 @@ public class YourFiefs : Controller
                     UIElement.transform.GetChild(6).GetComponent<TMPro.TMP_Text>().SetText(fief.treasury.ToString());
                     UIElement.transform.localScale = Vector3.one;
 
-                    UIElement.transform.GetChild(7).GetComponent<Button>().onClick.AddListener(() => { BtnViewFief(fief.fiefID); });
+                    UIElement.transform.GetChild(7).GetComponent<Button>().onClick.AddListener(() => {
+                        if (viewingListSelectAction == ViewingList.EstablishFactionPost)
+                            BtnEstablishPost(fief.fiefID);
+                        else 
+                            BtnViewFief(fief.fiefID); 
+                    });
 
                 }
 
@@ -54,6 +63,12 @@ public class YourFiefs : Controller
         }
 
 
+    }
+
+    private void BtnEstablishPost(string fiefId)
+    {
+        EstablishFactionPost(factionToView, fiefId);
+        GoToScene(SceneName.ViewFactionRequest);
     }
 
     private void BtnViewFief(string fiefID) {

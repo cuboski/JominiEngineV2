@@ -174,6 +174,14 @@ namespace JominiEngine
         /// </summary>
         public static List<byte> positionKeys = new List<byte>();
         /// <summary>
+        /// Holds all faction objects
+        /// </summary>
+        public static Dictionary<string, Faction> factionMasterList = new Dictionary<string, Faction>();
+        /// <summary>
+        /// Holds keys for position objects (used when retrieving from database)
+        /// </summary>
+        public static List<string> factionKeys = new List<string>();
+        /// <summary>
         /// Holds Character_Serialised objects with existing goTo queues (used during load from database)
         /// </summary>
         public static List<Character_Serialised> goToList = new List<Character_Serialised>();
@@ -319,7 +327,7 @@ namespace JominiEngine
         /// <summary>
         /// Holds bool indicating whether or not to write current object data to database on exit
         /// </summary>
-		public static bool writeToDatabase = false;
+		public static bool writeToDatabase = true;
         /// <summary>
         /// Holds bool indicating whether or not a cap on characters' stature modifier is in force
         /// </summary>

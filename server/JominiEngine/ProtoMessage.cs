@@ -64,7 +64,10 @@ namespace JominiEngine {
     [ProtoInclude(34, typeof(ProtoCombatValues))]
     [ProtoInclude(37, typeof(ProtoWorldMap))]
     [ProtoInclude(38, typeof(ProtoProvince))]
-    [ProtoInclude(39, typeof(ProtoGameEvent))]
+    [ProtoInclude(39, typeof(ProtoFaction))]
+    [ProtoInclude(40, typeof(ProtoGameEvent))]
+    [ProtoInclude(41, typeof(ProtoGenericArray<ProtoFaction>))]
+    [ProtoInclude(42, typeof(ProtoGenericDictionary<ProtoCharacterOverview, string>))]
 
 
     [ProtoContract, Serializable]
@@ -430,6 +433,10 @@ namespace JominiEngine {
         /// </summary>
         public string familyName { get; set; }
         /// <summary>
+        /// Holds purse value, amount of gold on the character
+        /// </summary>
+        public uint purse { get; set; }
+        /// <summary>
         /// Character's year of birth
         /// </summary>
         public uint birthYear { get; set; }
@@ -675,10 +682,6 @@ namespace JominiEngine {
         /// </summary>
         public bool outlawed { get; set; }
         /// <summary>
-        /// Holds character's treasury
-        /// </summary>
-        public uint purse { get; set; }
-        /// <summary>
         /// Holds IDs and names of character's employees and family
         /// </summary>
         public ProtoCharacterOverview[] myNPCs { get; set; }
@@ -707,6 +710,7 @@ namespace JominiEngine {
             this.homeFief = pc.homeFief;
             this.ancestralHomeFief = pc.ancestralHomeFief;
             this.outlawed = pc.outlawed;
+            this.purse = pc.purse;
         }
 
         public ProtoPlayerCharacter()
@@ -1861,4 +1865,57 @@ namespace JominiEngine {
         }
     }
 
+    /// <summary>
+    /// Class for sending faction request details
+    /// </summary>
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoFaction : ProtoMessage
+    {
+        public string factionName { get; set; }
+        public string factionID { get; set; }
+        public string factionBaseID { get; set; }
+        public string factionLeader { get; set; }
+        public KeyValuePair<string, string>[] factionMembers { get; set; }
+        public string[] alliedFiefs { get; set; }
+        public string[] highestStature { get; set; }
+        public double statureBonus { get; set; }
+        public uint factionTax { get; set; }
+        public uint treasury { get; set; }
+
+        public ProtoFaction() : base()
+        {
+
+        }
+
+        public ProtoFaction(string factionName, string factionID, string factionBaseID, string factionLeader,
+            KeyValuePair<string, string>[] factionMembers, uint treasury, uint factionTax, string[] alliedFiefs, double statureBonus)
+        {
+            this.factionName = factionName;
+            this.factionID = factionID;
+            this.factionBaseID = factionBaseID;
+            this.factionLeader = factionLeader;
+            this.factionMembers = factionMembers;
+            this.treasury = treasury;
+            this.factionTax = factionTax;
+            this.alliedFiefs = alliedFiefs;
+            this.statureBonus = statureBonus;
+        }
+    }
+
+    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
+    public class ProtoGenericDictionary<K,V> : ProtoMessage
+    {
+        public KeyValuePair<K,V>[] fields { get; set; }
+
+        public ProtoGenericDictionary()
+            : base()
+        {
+
+        }
+
+        public ProtoGenericDictionary(KeyValuePair<K, V>[] p)
+        {
+            this.fields = p;
+        }
+    }
 }

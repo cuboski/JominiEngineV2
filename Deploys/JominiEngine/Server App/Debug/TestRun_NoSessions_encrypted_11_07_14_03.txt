@@ -1,0 +1,456 @@
+[14:03:40] Port forwarded successfully.
+[14:03:40] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[14:03:40] Waiting for event
+[14:03:45] Waiting for event
+[14:03:50] Waiting for event
+[14:03:55] Waiting for event
+[14:04:00] Waiting for event
+[14:04:05] Waiting for event
+[14:04:07] Recieved TESTnotnull: StatusChanged | 192.168.1.245:62874
+[14:04:07] 	Status is now: RespondedAwaitingApproval
+[14:04:07] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:62874
+[14:04:07] Accepted connection from acc1 | acc1 | TestString
+[14:04:07] Recieved TESTnotnull: StatusChanged | 192.168.1.245:62874
+[14:04:07] 	Status is now: RespondedConnect
+[14:04:07] Waiting for event
+[14:04:07] Waiting for event
+[14:04:07] Recieved TESTnotnull: StatusChanged | 192.168.1.245:62874
+[14:04:07] 	Status is now: Connected
+[14:04:07] Waiting for event
+[14:04:07] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:07]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:62874
+[14:04:07] acc1 logs in from 192.168.1.245:62874
+[14:04:07] Waiting for event
+[14:04:07] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:07] From: acc1: request = ViewWorldMap
+[14:04:07]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:62874
+[14:04:07]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:07] Waiting for event
+[14:04:08] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:08] From: acc1: request = ViewChar
+[14:04:08]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:62874
+[14:04:08]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:08] Waiting for event
+[14:04:10] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:10] From: acc1: request = ViewChar
+[14:04:10]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:62874
+[14:04:10]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:10] Waiting for event
+[14:04:11] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:11] From: acc1: request = ViewMyFiefs
+[14:04:11]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:62874
+[14:04:11]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:11] Waiting for event
+[14:04:12] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:12] From: acc1: request = GetNPCList
+[14:04:12]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:62874
+[14:04:12]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:12] Waiting for event
+[14:04:13] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:13] From: acc1: request = ViewChar
+[14:04:13]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:62874
+[14:04:13]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:13] Waiting for event
+[14:04:15] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:15] From: acc1: request = ViewWorldMap
+[14:04:15]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:62874
+[14:04:15]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:15] Waiting for event
+[14:04:17] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:17] From: acc1: request = GetNPCList
+[14:04:17]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:62874
+[14:04:17]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:17] Waiting for event
+[14:04:17] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:17] From: acc1: request = ListArmies
+[14:04:17]  Sending to: acc1 | ActionType = ListArmies | ResponseType = Success | 192.168.1.245:62874
+[14:04:17]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:17] Waiting for event
+[14:04:18] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:18] From: acc1: request = ViewMyFiefs
+[14:04:18]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:62874
+[14:04:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:18] Waiting for event
+[14:04:18] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:18] From: acc1: request = ViewJournalEntries
+[14:04:18]  Sending to: acc1 | ActionType = ViewJournalEntries | ResponseType = JournalEntries | 192.168.1.245:62874
+[14:04:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:18] Waiting for event
+[14:04:19] Recieved TESTnotnull: Data | 192.168.1.245:62874
+[14:04:19] From: acc1: request = GetNPCList
+[14:04:19]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:62874
+[14:04:19]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:62874
+[14:04:19] Waiting for event
+[14:04:24] Waiting for event
+[14:04:29] Waiting for event
+[14:04:34] Waiting for event
+[14:04:39] Waiting for event
+[14:04:44] Waiting for event
+[14:04:49] Waiting for event
+[14:04:54] Waiting for event
+[14:04:59] Waiting for event
+[14:05:04] Waiting for event
+[14:05:09] Waiting for event
+[14:05:14] Waiting for event
+[14:05:19] Waiting for event
+[14:05:24] Waiting for event
+[14:05:29] Waiting for event
+[14:05:34] Waiting for event
+[14:05:39] Waiting for event
+[14:05:44] Waiting for event
+[14:05:49] Waiting for event
+[14:05:54] Waiting for event
+[14:05:59] Waiting for event
+[14:06:04] Waiting for event
+[14:06:09] Waiting for event
+[14:06:14] Waiting for event
+[14:06:19] Waiting for event
+[14:06:24] Waiting for event
+[14:06:29] Waiting for event
+[14:06:34] Waiting for event
+[14:06:39] Waiting for event
+[14:06:44] Waiting for event
+[14:06:49] Waiting for event
+[14:06:54] Waiting for event
+[14:06:59] Waiting for event
+[14:07:04] Waiting for event
+[14:07:09] Waiting for event
+[14:07:14] Waiting for event
+[14:07:19] Waiting for event
+[14:07:24] Waiting for event
+[14:07:29] Waiting for event
+[14:07:34] Waiting for event
+[14:07:39] Waiting for event
+[14:07:44] Waiting for event
+[14:07:49] Waiting for event
+[14:07:54] Waiting for event
+[14:07:59] Waiting for event
+[14:08:04] Waiting for event
+[14:08:09] Waiting for event
+[14:08:14] Waiting for event
+[14:08:19] Waiting for event
+[14:08:24] Waiting for event
+[14:08:30] Waiting for event
+[14:08:35] Waiting for event
+[14:08:40] Waiting for event
+[14:08:45] Waiting for event
+[14:08:50] Waiting for event
+[14:08:55] Waiting for event
+[14:09:00] Waiting for event
+[14:09:05] Waiting for event
+[14:09:10] Waiting for event
+[14:09:15] Waiting for event
+[14:09:20] Waiting for event
+[14:09:25] Waiting for event
+[14:09:30] Waiting for event
+[14:09:35] Waiting for event
+[14:09:40] Waiting for event
+[14:09:45] Waiting for event
+[14:09:50] Waiting for event
+[14:09:55] Waiting for event
+[14:10:00] Waiting for event
+[14:10:05] Waiting for event
+[14:10:10] Waiting for event
+[14:10:15] Waiting for event
+[14:10:20] Waiting for event
+[14:10:25] Waiting for event
+[14:10:30] Waiting for event
+[14:10:35] Waiting for event
+[14:10:40] Waiting for event
+[14:10:45] Waiting for event
+[14:10:50] Waiting for event
+[14:10:55] Waiting for event
+[14:11:00] Waiting for event
+[14:11:05] Waiting for event
+[14:11:10] Waiting for event
+[14:11:15] Waiting for event
+[14:11:20] Waiting for event
+[14:11:25] Waiting for event
+[14:11:30] Waiting for event
+[14:11:35] Waiting for event
+[14:11:40] Waiting for event
+[14:11:45] Waiting for event
+[14:11:50] Waiting for event
+[14:11:55] Waiting for event
+[14:12:00] Waiting for event
+[14:12:05] Waiting for event
+[14:12:10] Waiting for event
+[14:12:15] Waiting for event
+[14:12:20] Waiting for event
+[14:12:25] Waiting for event
+[14:12:30] Waiting for event
+[14:12:35] Waiting for event
+[14:12:40] Waiting for event
+[14:12:45] Waiting for event
+[14:12:50] Waiting for event
+[14:12:55] Waiting for event
+[14:13:00] Waiting for event
+[14:13:05] Waiting for event
+[14:13:10] Waiting for event
+[14:13:15] Waiting for event
+[14:13:20] Waiting for event
+[14:13:25] Waiting for event
+[14:13:30] Waiting for event
+[14:13:35] Waiting for event
+[14:13:40] Waiting for event
+[14:13:45] Waiting for event
+[14:13:50] Waiting for event
+[14:13:55] Waiting for event
+[14:14:00] Waiting for event
+[14:14:05] Waiting for event
+[14:14:10] Waiting for event
+[14:14:15] Waiting for event
+[14:14:20] Waiting for event
+[14:14:25] Waiting for event
+[14:14:30] Waiting for event
+[14:14:35] Waiting for event
+[14:14:40] Waiting for event
+[14:14:45] Waiting for event
+[14:14:50] Waiting for event
+[14:14:55] Waiting for event
+[14:15:00] Waiting for event
+[14:15:05] Waiting for event
+[14:15:10] Waiting for event
+[14:15:15] Waiting for event
+[14:15:20] Waiting for event
+[14:15:25] Waiting for event
+[14:15:30] Waiting for event
+[14:15:35] Waiting for event
+[14:15:40] Waiting for event
+[14:15:45] Waiting for event
+[14:15:50] Waiting for event
+[14:15:55] Waiting for event
+[14:16:00] Waiting for event
+[14:16:05] Waiting for event
+[14:16:10] Waiting for event
+[14:16:15] Waiting for event
+[14:16:20] Waiting for event
+[14:16:25] Waiting for event
+[14:16:30] Waiting for event
+[14:16:35] Waiting for event
+[14:16:40] Waiting for event
+[14:16:45] Waiting for event
+[14:16:50] Waiting for event
+[14:16:55] Waiting for event
+[14:17:00] Waiting for event
+[14:17:05] Waiting for event
+[14:17:10] Waiting for event
+[14:17:15] Waiting for event
+[14:17:20] Waiting for event
+[14:17:25] Waiting for event
+[14:17:30] Waiting for event
+[14:17:35] Waiting for event
+[14:17:40] Waiting for event
+[14:17:45] Waiting for event
+[14:17:50] Waiting for event
+[14:17:55] Waiting for event
+[14:18:00] Waiting for event
+[14:18:05] Waiting for event
+[14:18:10] Waiting for event
+[14:18:15] Waiting for event
+[14:18:20] Waiting for event
+[14:18:25] Waiting for event
+[14:18:30] Waiting for event
+[14:18:35] Waiting for event
+[14:18:40] Waiting for event
+[14:18:46] Waiting for event
+[14:18:51] Waiting for event
+[14:18:56] Waiting for event
+[14:19:01] Waiting for event
+[14:19:06] Waiting for event
+[14:19:11] Waiting for event
+[14:19:16] Waiting for event
+[14:19:21] Waiting for event
+[14:19:26] Waiting for event
+[14:19:31] Waiting for event
+[14:19:36] Waiting for event
+[14:19:41] Waiting for event
+[14:19:46] Waiting for event
+[14:19:51] Waiting for event
+[14:19:56] Waiting for event
+[14:20:01] Waiting for event
+[14:20:06] Waiting for event
+[14:20:11] Waiting for event
+[14:20:16] Waiting for event
+[14:20:21] Waiting for event
+[14:20:26] Waiting for event
+[14:20:31] Waiting for event
+[14:20:36] Waiting for event
+[14:20:41] Waiting for event
+[14:20:46] Waiting for event
+[14:20:51] Waiting for event
+[14:20:56] Waiting for event
+[14:21:01] Waiting for event
+[14:21:06] Waiting for event
+[14:21:11] Waiting for event
+[14:21:16] Waiting for event
+[14:21:21] Waiting for event
+[14:21:26] Waiting for event
+[14:21:31] Waiting for event
+[14:21:36] Waiting for event
+[14:21:41] Waiting for event
+[14:21:46] Waiting for event
+[14:21:51] Waiting for event
+[14:21:56] Waiting for event
+[14:22:01] Waiting for event
+[14:22:06] Waiting for event
+[14:22:11] Waiting for event
+[14:22:16] Waiting for event
+[14:22:21] Waiting for event
+[14:22:26] Waiting for event
+[14:22:31] Waiting for event
+[14:22:36] Waiting for event
+[14:22:41] Waiting for event
+[14:22:46] Waiting for event
+[14:22:51] Waiting for event
+[14:22:56] Waiting for event
+[14:23:01] Waiting for event
+[14:23:06] Waiting for event
+[14:23:11] Waiting for event
+[14:23:16] Waiting for event
+[14:23:21] Waiting for event
+[14:23:26] Waiting for event
+[14:23:31] Waiting for event
+[14:23:36] Waiting for event
+[14:23:41] Waiting for event
+[14:23:46] Waiting for event
+[14:23:51] Waiting for event
+[14:23:56] Waiting for event
+[14:24:01] Waiting for event
+[14:24:06] Waiting for event
+[14:24:11] Waiting for event
+[14:24:16] Waiting for event
+[14:24:21] Waiting for event
+[14:24:26] Waiting for event
+[14:24:31] Waiting for event
+[14:24:36] Waiting for event
+[14:24:41] Waiting for event
+[14:24:46] Waiting for event
+[14:24:51] Waiting for event
+[14:24:56] Waiting for event
+[14:25:01] Waiting for event
+[14:25:06] Waiting for event
+[14:25:11] Waiting for event
+[14:25:16] Waiting for event
+[14:25:21] Waiting for event
+[14:25:26] Waiting for event
+[14:25:31] Waiting for event
+[14:25:36] Waiting for event
+[14:25:41] Waiting for event
+[14:25:46] Waiting for event
+[14:25:51] Waiting for event
+[14:25:56] Waiting for event
+[14:26:01] Waiting for event
+[14:26:06] Waiting for event
+[14:26:11] Waiting for event
+[14:26:16] Waiting for event
+[14:26:21] Waiting for event
+[14:26:26] Waiting for event
+[14:26:31] Waiting for event
+[14:26:36] Waiting for event
+[14:26:41] Waiting for event
+[14:26:46] Waiting for event
+[14:26:51] Waiting for event
+[14:26:56] Waiting for event
+[14:27:01] Waiting for event
+[14:27:06] Waiting for event
+[14:27:11] Waiting for event
+[14:27:16] Waiting for event
+[14:27:21] Waiting for event
+[14:27:26] Waiting for event
+[14:27:31] Waiting for event
+[14:27:36] Waiting for event
+[14:27:41] Waiting for event
+[14:27:46] Waiting for event
+[14:27:51] Waiting for event
+[14:27:56] Waiting for event
+[14:28:01] Waiting for event
+[14:28:06] Waiting for event
+[14:28:11] Waiting for event
+[14:28:16] Waiting for event
+[14:28:21] Waiting for event
+[14:28:26] Waiting for event
+[14:28:31] Waiting for event
+[14:28:36] Waiting for event
+[14:28:41] Waiting for event
+[14:28:46] Waiting for event
+[14:28:51] Waiting for event
+[14:28:56] Waiting for event
+[14:29:02] Waiting for event
+[14:29:07] Waiting for event
+[14:29:12] Waiting for event
+[14:29:17] Waiting for event
+[14:29:22] Waiting for event
+[14:29:27] Waiting for event
+[14:29:32] Waiting for event
+[14:29:37] Waiting for event
+[14:29:42] Waiting for event
+[14:29:47] Waiting for event
+[14:29:52] Waiting for event
+[14:29:57] Waiting for event
+[14:30:02] Waiting for event
+[14:30:07] Waiting for event
+[14:30:12] Waiting for event
+[14:30:17] Waiting for event
+[14:30:22] Waiting for event
+[14:30:27] Waiting for event
+[14:30:32] Waiting for event
+[14:30:37] Waiting for event
+[14:30:42] Waiting for event
+[14:30:47] Waiting for event
+[14:30:52] Waiting for event
+[14:30:57] Waiting for event
+[14:31:02] Waiting for event
+[14:31:07] Waiting for event
+[14:31:12] Waiting for event
+[14:31:17] Waiting for event
+[14:31:22] Waiting for event
+[14:31:27] Waiting for event
+[14:31:32] Waiting for event
+[14:31:37] Waiting for event
+[14:31:42] Waiting for event
+[14:31:47] Waiting for event
+[14:31:52] Waiting for event
+[14:31:57] Waiting for event
+[14:32:02] Waiting for event
+[14:32:07] Waiting for event
+[14:32:12] Waiting for event
+[14:32:17] Waiting for event
+[14:32:22] Waiting for event
+[14:32:27] Waiting for event
+[14:32:32] Waiting for event
+[14:32:37] Waiting for event
+[14:32:42] Waiting for event
+[14:32:47] Waiting for event
+[14:32:52] Waiting for event
+[14:32:57] Waiting for event
+[14:33:02] Waiting for event
+[14:33:07] Waiting for event
+[14:33:12] Waiting for event
+[14:33:17] Waiting for event
+[14:33:22] Waiting for event
+[14:33:27] Waiting for event
+[14:33:32] Waiting for event
+[14:33:37] Waiting for event
+[14:33:42] Waiting for event
+[14:33:47] Waiting for event
+[14:33:52] Waiting for event
+[14:33:57] Waiting for event
+[14:34:02] Waiting for event
+[14:34:07] Waiting for event
+[14:34:12] Waiting for event
+[14:34:17] Waiting for event
+[14:34:22] Waiting for event
+[14:34:27] Waiting for event
+[14:34:32] Waiting for event
+[14:34:37] Waiting for event
+[14:34:42] Waiting for event
+[14:34:47] Waiting for event
+[14:34:52] Waiting for event
+[14:34:57] Waiting for event
+[14:35:02] Waiting for event
+[14:35:07] Waiting for event
+[14:35:12] Waiting for event
+[14:35:17] Waiting for event
+[14:35:22] Waiting for event
+[14:35:27]

@@ -1,0 +1,66 @@
+[03:39:14] Port forward FAILED 0
+[03:39:15] Port forward FAILED 1
+[03:39:16] Port forwarded successfully.
+[03:39:16] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[03:39:16] Waiting for event
+[03:39:20] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58110
+[03:39:20] 	Status is now: RespondedAwaitingApproval
+[03:39:20] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:58110
+[03:39:20] Accepted connection from acc1 | acc1 | TestString
+[03:39:20] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58110
+[03:39:20] 	Status is now: RespondedConnect
+[03:39:20] Waiting for event
+[03:39:20] Waiting for event
+[03:39:20] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58110
+[03:39:20] 	Status is now: Connected
+[03:39:20] Waiting for event
+[03:39:21] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:21]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:58110
+[03:39:21] acc1 logs in from 192.168.1.245:58110
+[03:39:21] Waiting for event
+[03:39:21] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:21] From: acc1: request = ViewWorldMap
+[03:39:21]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:58110
+[03:39:21]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58110
+[03:39:21] Waiting for event
+[03:39:21] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:21] From: acc1: request = ViewChar
+[03:39:21]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58110
+[03:39:21]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58110
+[03:39:21] Waiting for event
+[03:39:22] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:22] From: acc1: request = ViewChar
+[03:39:22]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58110
+[03:39:22]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58110
+[03:39:22] Waiting for event
+[03:39:27] Waiting for event
+[03:39:32] Waiting for event
+[03:39:37] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:37] From: acc1: request = ViewMyFiefs
+[03:39:37]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:58110
+[03:39:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58110
+[03:39:37] Waiting for event
+[03:39:42] Waiting for event
+[03:39:44] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:44] From: acc1: request = CreateFactionRequest
+[03:39:44]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:58110
+[03:39:44]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58110
+[03:39:44] Waiting for event
+[03:39:45] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:45] From: acc1: request = ViewChar
+[03:39:45]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58110
+[03:39:45]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58110
+[03:39:45] Waiting for event
+[03:39:46] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:46] From: acc1: request = ViewFactionRequestList
+[03:39:46]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:58110
+[03:39:46]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58110
+[03:39:46] Waiting for event
+[03:39:47] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:47] From: acc1: request = GetFactionRequest
+[03:39:47]  Sending to: acc1 | ActionType = GetFactionRequest | ResponseType = None | 192.168.1.245:58110
+[03:39:47]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58110
+[03:39:47] Waiting for event
+[03:39:49] Recieved TESTnotnull: Data | 192.168.1.245:58110
+[03:39:49] From: acc1: request = ListCharsInMeetingPlace
+[03:39:49]  Sending to: acc1 | ActionType = ListCharsInMeetingPlace | ResponseTyp

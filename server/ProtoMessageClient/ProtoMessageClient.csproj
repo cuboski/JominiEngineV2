@@ -96,6 +96,7 @@
     <Compile Include="CSVimport.cs" />
     <Compile Include="DatabaseRead.cs" />
     <Compile Include="DatabaseWrite.cs" />
+    <Compile Include="Faction.cs" />
     <Compile Include="Fief.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameClock.cs" />

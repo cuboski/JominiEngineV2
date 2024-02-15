@@ -3465,10 +3465,39 @@ namespace ProtoMessageClient
             return ransomResult;
         }
 
+        public static ProtoMessage TransferFundsToCoinPurse(int amount, string fiefId, string charId)
+        {
+            ProtoMessage result = new ProtoMessage();
+
+            DisplayMessages err;
+            Fief f = Utility_Methods.GetFief(fiefId, out err);
+            
+            if (f.Treasury < amount)
+            {
+                result.ResponseType = DisplayMessages.ErrorGenericInsufficientFunds;
+                return result;
+            }
+
+            f.AdjustTreasury(-amount);
+
+            Character c = Utility_Methods.GetCharacter(charId, out err);
+            
+
+            result.ResponseType = DisplayMessages.Success;
+            return result;
+        }
+
         public static ProtoMessage ViewWorldMap() {
             ProtoWorldMap response = new ProtoWorldMap(Globals_Game.gameMapLayout, Globals_Game.fiefMasterList);
             response.ResponseType = DisplayMessages.Success;
             return response;
+        }
+
+        public static ProtoMessage TestButton()
+        {
+            Console.WriteLine("Test Button Pressed in Client");
+
+            return new ProtoMessage(DisplayMessages.Success);
         }
 
         /// <summary>
@@ -3941,6 +3970,19 @@ namespace ProtoMessageClient
                 case Actions.ViewWorldMap: {
                     return ViewWorldMap();
                 }
+                case Actions.TestAction:
+                    {
+                        Console.WriteLine("Message Recieved From Client");
+                        Console.WriteLine(msgIn.Message);
+                        return TestButton();
+                    }
+                case Actions.CreateFaction:
+                    {
+                        var success = new ProtoMessage();
+                        success.ResponseType = DisplayMessages.Success;
+                        //var newFactionReq = (msgIn as ProtoFactionRequest);
+                        return success;//CreateFactionRequest(newFactionReq.factionName, newFactionReq.factionLeader, newFactionReq.factionTax);
+                    }
                 default:
                 {
                     return null;

@@ -48,9 +48,11 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Code\Scripts\ViewingLists\YourFiefs.cs" />
+     <Compile Include="Assets\Code\Scripts\ViewingLists\Records\FactionMember.cs" />
      <Compile Include="Assets\Code\Scripts\Controller.cs" />
      <Compile Include="Assets\Code\Scripts\NavigationUI.cs" />
      <Compile Include="Assets\Code\Scripts\ViewingLists\ViewCharacters.cs" />
+     <Compile Include="Assets\Code\Scripts\EntourageManager.cs" />
      <Compile Include="Assets\Code\Scripts\ViewingLists\AssignBailif.cs" />
      <Compile Include="Assets\Code\Scripts\TestTextClient.cs" />
      <Compile Include="Assets\Code\Scripts\CameraZoomContoller.cs" />
@@ -59,18 +61,22 @@
      <Compile Include="Assets\Code\Scripts\ViewingLists\AssignOverlord.cs" />
      <Compile Include="Assets\Code\Scripts\ViewingLists\YourCharacters.cs" />
      <Compile Include="Assets\Code\Scripts\MapManager.cs" />
+     <Compile Include="Assets\Code\Scripts\ViewEntourage.cs" />
      <Compile Include="Assets\Code\Scripts\ViewingLists\YourArmies.cs" />
+     <Compile Include="Assets\Code\Scripts\ViewFactionRequest.cs" />
      <Compile Include="Assets\Code\Scripts\ViewArmy.cs" />
      <Compile Include="Assets\Code\Scripts\ViewJournalEntry.cs" />
      <Compile Include="Assets\Code\Scripts\ViewingLists\JournalEntries.cs" />
      <Compile Include="Assets\Code\Scripts\GridManager.cs" />
      <Compile Include="Assets\Code\Scripts\LogIn.cs" />
+     <Compile Include="Assets\Code\Scripts\CreateFactionMenu.cs" />
      <Compile Include="Assets\Code\Scripts\ViewingLists\ArmiesInFiefs.cs" />
      <Compile Include="Assets\Code\Scripts\CameraDragController.cs" />
      <Compile Include="Assets\Code\Scripts\ViewingList.cs" />
      <Compile Include="Assets\Code\Scripts\ViewFief.cs" />
      <Compile Include="Assets\TilemapStuff\TilemapStuff.cs" />
      <Compile Include="Assets\Code\Scripts\ViewCharacter.cs" />
+     <Compile Include="Assets\Code\Scripts\ViewingLists\ViewFactionRequestList.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
@@ -316,49 +322,49 @@
  <HintPath>D:/unityhub/2020.3.23f1/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
  </Reference>
  <Reference Include="QuickGraph">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/QuickGraph.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/QuickGraph.dll</HintPath>
  </Reference>
  <Reference Include="QuickGraph.Serialization">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/QuickGraph.Serialization.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/QuickGraph.Serialization.dll</HintPath>
  </Reference>
  <Reference Include="QuickGraph.Data">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/QuickGraph.Data.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/QuickGraph.Data.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.CompilerServices.Unsafe">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
  </Reference>
  <Reference Include="System.Numerics.Vectors">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Numerics.Vectors.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Numerics.Vectors.dll</HintPath>
  </Reference>
  <Reference Include="QuickGraph.Graphviz">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/QuickGraph.Graphviz.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/QuickGraph.Graphviz.dll</HintPath>
  </Reference>
  <Reference Include="System.Collections.Immutable">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Collections.Immutable.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Collections.Immutable.dll</HintPath>
  </Reference>
  <Reference Include="RiakClient">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/RiakClient.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/RiakClient.dll</HintPath>
  </Reference>
  <Reference Include="protobuf-net.Core">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/protobuf-net.Core.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/protobuf-net.Core.dll</HintPath>
  </Reference>
  <Reference Include="Lidgren.Network">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/Lidgren.Network.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/Lidgren.Network.dll</HintPath>
  </Reference>
  <Reference Include="Newtonsoft.Json">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="ProtoMessageClient">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/ProtoMessageClient.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/ProtoMessageClient.dll</HintPath>
  </Reference>
  <Reference Include="protobuf-net">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/protobuf-net.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/protobuf-net.dll</HintPath>
  </Reference>
  <Reference Include="System.Buffers">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Buffers.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Buffers.dll</HintPath>
  </Reference>
  <Reference Include="System.Memory">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Memory.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Assets/Code/DLL Files/System.Memory.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>D:/unityhub/2020.3.23f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -712,34 +718,34 @@
  <HintPath>D:/unityhub/2020.3.23f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/System.Net.Http.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>D:/360Downloads/JominiEngine-main (1)/JominiEngine-main/JominiClient/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>F:/JominiEngine-main/JominiEngine-main/JominiClient/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

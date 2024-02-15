@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JominiEngine.exe" size="428544">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JominiEngine.exe" size="440320">
       <assemblyIdentity name="JominiEngine" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>7gZAxNsKG31F2tbA2sCfORobrGkKAcwiRWrPw62kwZA=</dsig:DigestValue>
+        <dsig:DigestValue>QKKLGz1q7eFF5rc5c7HCuw8tcVhsPoCJVvEAAFdUNYc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -102,14 +102,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProtoMessageClient.dll" size="428544">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ProtoMessageClient.dll" size="433664">
       <assemblyIdentity name="ProtoMessageClient" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>o5vhPQf9fS2bnCP3Exf3fL18Oay37BbCn2PWBVEXwXw=</dsig:DigestValue>
+        <dsig:DigestValue>/D8JGLySlal+G+2oxBtpP3+S20GrF+57R6VwF2IWxUo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -233,13 +233,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="JominiEngine.exe.config" size="2513">
+  <file name="JominiEngine.exe.config" size="2197">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>ekSyuZb/Ui3Gmrsygqoc6nr62S5FCBhsaDZoL8T5bGo=</dsig:DigestValue>
+      <dsig:DigestValue>VviOZzi2r+iX8Tkh8syVqBorl+2Dshvf3xE/GxlOaPM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
