@@ -150,6 +150,11 @@ namespace JominiEngine
         {
             return this.username.Equals(other.username);
         }
+
+        internal string GetCurrentCharID()
+        {
+            return myPlayerCharacter.charID;
+        }
     }
 
     /// <summary>

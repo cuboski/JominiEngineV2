@@ -1173,7 +1173,7 @@ namespace JominiEngine {
         // boolean for character gender
         public bool isMale { get; set; }
 
-        public ProtoCharacterOverview()
+        public ProtoCharacterOverview(object entourageChar)
             : base() {
         }
         public ProtoCharacterOverview(Character c) {

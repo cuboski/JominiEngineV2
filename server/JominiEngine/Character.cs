@@ -139,6 +139,8 @@ namespace JominiEngine
 #endif
         /**************LOCKS**************/
         protected object entourageLock = new Object();
+        internal IEnumerable<object> myEntourage;
+
         /// <summary>
         /// Constructor for Character
         /// </summary>
@@ -3211,6 +3213,16 @@ namespace JominiEngine
 
             return fiefMgtRating;
         }
+
+        /*internal void AddToEntourage(NonPlayerCharacter myNPC)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void RemoveFromEntourage(NonPlayerCharacter myNPC)
+        {
+            throw new NotImplementedException();
+        }*/
 
         /// <summary>
         /// Calculates the character's army leadership rating (i.e. how good they are at leading an army)

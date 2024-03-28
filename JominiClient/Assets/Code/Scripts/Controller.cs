@@ -507,6 +507,7 @@ public class Controller : MonoBehaviour {
     public static ProtoMessage AppointLeader(string armyID,string charID, TextTestClient client)                    // Complete
     {
         //ProtoPlayerCharacter armyResult = GetArmyID(client);
+        Debug.Log(armyID);
         ProtoMessage protoMessage = new ProtoMessage();
         protoMessage.ActionType = Actions.AppointLeader;
         protoMessage.Message = armyID;
@@ -633,6 +634,7 @@ public class Controller : MonoBehaviour {
         ProtoMessage protoSiegeStart = new ProtoMessage();
         protoSiegeStart.ActionType = Actions.BesiegeFief;
         protoSiegeStart.Message = armyResult.armyID;
+        Debug.Log(armyResult.armyID);
         client.net.Send(protoSiegeStart);
         var reply = GetActionReply(Actions.BesiegeFief, client);
         return reply;

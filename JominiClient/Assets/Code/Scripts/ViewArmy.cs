@@ -50,17 +50,20 @@ public class ViewArmy : Controller
 
 
         ProtoMessage reply = GetArmyDetails(armyToViewID, tclient);
-        if(reply.ResponseType == DisplayMessages.Success) 
+        if (reply.ResponseType == DisplayMessages.Success)
         {
             currentlyViewedArmy = (ProtoArmy)reply;
-            
+
             DisplayArmyDetails();
 
             // Can't attack if you don't have an army.
-            if(!string.IsNullOrWhiteSpace(protoClient.activeChar.armyID)) {
+            if (!string.IsNullOrWhiteSpace(protoClient.activeChar.armyID))
+            {
                 // Can't attack your own armies.
-                if (!currentlyViewedArmy.ownerID.Equals(protoClient.playerChar.charID)) {
-                    if(currentlyViewedArmy.location.StartsWith(fiefNames[protoClient.playerChar.location])) {
+                if (!currentlyViewedArmy.ownerID.Equals(protoClient.playerChar.charID))
+                {
+                    if (currentlyViewedArmy.location.StartsWith(fiefNames[protoClient.playerChar.location]))
+                    {
                         btnAttackArmy.interactable = true;
                     }
                 }
@@ -72,10 +75,11 @@ public class ViewArmy : Controller
             }
 
         }
-        else {
+        else
+        {
             DisplayMessageToUser("ERROR: Response type: " + reply.ResponseType.ToString());
         }
-        
+
     }
 
     private void SwitchOffPanel()
@@ -92,21 +96,21 @@ public class ViewArmy : Controller
     private void BtnListDetachments()
     {
         Debug.Log("Get detachements for: " + currentlyViewedArmy.armyID);
-        ProtoMessage reply = ListDetachments(currentlyViewedArmy.armyID ,tclient);
+        ProtoMessage reply = ListDetachments(currentlyViewedArmy.armyID, tclient);
         switch (reply.ResponseType)
         {
             case DisplayMessages.Success:
                 {
                     ProtoGenericArray<ProtoDetachment> detachemts = (ProtoGenericArray<ProtoDetachment>)reply;
-                    if(detachemts.fields == null)
+                    if (detachemts.fields == null)
                     {
                         DisplayMessageToUser("There are no detachements in " + currentlyViewedArmy.location);
                     }
                     else
                     {
-                        if(PickUpPanelHolder.transform.childCount > 2)
+                        if (PickUpPanelHolder.transform.childCount > 2)
                         {
-                            for(int i = 2; i < PickUpPanelHolder.transform.childCount; i++)
+                            for (int i = 2; i < PickUpPanelHolder.transform.childCount; i++)
                             {
                                 Destroy(PickUpPanelHolder.transform.GetChild(i).gameObject);
                             }
@@ -208,7 +212,7 @@ public class ViewArmy : Controller
         uint totalTroops = 0;
         foreach (var troop in troops) totalTroops += troop;
 
-        if(totalTroops > 0)
+        if (totalTroops > 0)
         {
             ProtoMessage reply = DropOffTroops(troops, tclient);
 
@@ -236,7 +240,7 @@ public class ViewArmy : Controller
                     }
             }
 
-            
+
         }
 
     }
@@ -266,9 +270,11 @@ public class ViewArmy : Controller
 
     }
 
-    private void BtnAttackArmy() {
+    private void BtnAttackArmy()
+    {
         ProtoMessage reply = Attack(protoClient.activeChar.armyID, currentlyViewedArmy.armyID, tclient);
-        if(reply.ResponseType == DisplayMessages.BattleResults) {
+        if (reply.ResponseType == DisplayMessages.BattleResults)
+        {
             var battleResult = (ProtoBattle)reply;
             lblArmyInfo.text = ""
                 + "Battle Took Place: " + battleResult.battleTookPlace.ToString()
@@ -282,7 +288,8 @@ public class ViewArmy : Controller
                 + "\nStature Change: " + battleResult.statureChangeDefender.ToString()
                 ;
         }
-        else {
+        else
+        {
             DisplayMessageToUser("ERROR: Response type: " + reply.ResponseType.ToString());
         }
     }
@@ -314,22 +321,25 @@ public class ViewArmy : Controller
         }
 
 
-        if(reply.ResponseType == DisplayMessages.Success)
+        if (reply.ResponseType == DisplayMessages.Success)
         {
 
         }
     }
 
-    void DisplayMessageToUser(string message) {
+    void DisplayMessageToUser(string message)
+    {
         lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
     }
 
-    private void DisplayArmyDetails() {
+    private void DisplayArmyDetails()
+    {
         //lblPageTitle.text = currentlyViewedCharacter.firstName + " " + currentlyViewedCharacter.familyName + "'s Army";
         lblPageTitle.text = currentlyViewedArmy.leader + "'s Army";
 
         uint totalTroops = 0;
-        foreach(uint troops in currentlyViewedArmy.troops) {
+        foreach (uint troops in currentlyViewedArmy.troops)
+        {
             totalTroops += troops;
         }
 
@@ -353,6 +363,6 @@ public class ViewArmy : Controller
             + "\nRabble:\t\t\t\t" + currentlyViewedArmy.troops[6].ToString()
             + "\n"
             + "\nTotal Soldiers:\t" + totalTroops.ToString();
-            ;
+        ;
     }
 }
