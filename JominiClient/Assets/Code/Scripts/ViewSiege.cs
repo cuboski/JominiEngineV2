@@ -1,13 +1,10 @@
 using ProtoMessageClient;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ViewSiege : Controller
 {
-
     private string SiegeID;
     private ProtoFief currentlyViewedFief;
 
@@ -39,7 +36,7 @@ public class ViewSiege : Controller
         {
             currentlyViewedFief = (ProtoFief)reply;
             SiegeID = currentlyViewedFief.siege;
-            if (SiegeID == "" || SiegeID == null) GoToScene(SceneName.ViewFief);
+            if (string.IsNullOrEmpty(SiegeID)) GoToScene(SceneName.ViewFief);
         }
         else
         {
@@ -97,10 +94,11 @@ public class ViewSiege : Controller
             case DisplayMessages.Success:
             case DisplayMessages.None:
                 {
-                    DisplayMessageToUser("Successfuly updated siege window.");
+                    DisplayMessageToUser("Successfully updated siege window.");
                     pageTitle.text = "Siege on " + currentlyViewedFief.FiefName;
                     ProtoSiegeDisplay siegeDisplay = (ProtoSiegeDisplay)protoSiegeDisplay;
 
+                    // Update all text displays
                     _SiegeID.SetText(siegeDisplay.siegeID);
                     _StartYear.SetText(siegeDisplay.startYear.ToString());
                     _StartSeason.SetText(SeasonToString(siegeDisplay.startSeason));
@@ -118,16 +116,17 @@ public class ViewSiege : Controller
                     _CasualtiesDefender.SetText(siegeDisplay.casualtiesDefender.ToString());
                     _DefenderAdditional.SetText(siegeDisplay.defenderAdditional);
 
+                    // Added a display of military fatalities
+                    lblMessageForUser.text += $"\nAttacker casualties: {siegeDisplay.casualtiesAttacker}";
+                    lblMessageForUser.text += $"\nDefender casualties: {siegeDisplay.casualtiesDefender}";
 
                     break;
                 }
         }
     }
 
-
     void DisplayMessageToUser(string message)
     {
-        lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
+        lblMessageForUser.text = $"[{DateTime.Now.ToString("h:mm:ss tt")}] {message}";
     }
-
 }

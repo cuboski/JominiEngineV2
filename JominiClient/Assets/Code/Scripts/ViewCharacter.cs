@@ -49,8 +49,13 @@ public class ViewCharacter : Controller
         btnViewArmy.interactable = false;
         btnHireNPC.interactable = false;
         btnFireNPC.interactable = false;
-        btnAddToEntourage.interactable = false;
-        btnRemoveFromEntourage.interactable = false;
+        btnAddToEntourage.interactable = true;
+        btnRemoveFromEntourage.interactable = true;
+
+        // faction buttons
+        btnViewFactionReq.interactable = true;
+        btnViewFactionList.interactable = true;
+        btnCreateFaction.interactable = true;
 
         // faction buttons
         btnViewFactionReq.interactable = true;

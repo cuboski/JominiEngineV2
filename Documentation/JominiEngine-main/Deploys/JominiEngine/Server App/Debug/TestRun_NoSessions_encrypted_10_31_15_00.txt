@@ -1,0 +1,76 @@
+[15:00:46] Port forward FAILED 0
+[15:00:47] Port forward FAILED 1
+[15:00:48] Port forward FAILED 2
+[15:00:48] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[15:00:49] Waiting for event
+[15:00:54] Waiting for event
+[15:00:59] Waiting for event
+[15:01:04] Waiting for event
+[15:01:09] Waiting for event
+[15:01:14] Waiting for event
+[15:01:17] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58485
+[15:01:17] 	Status is now: RespondedAwaitingApproval
+[15:01:17] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:58485
+[15:01:17] Accepted connection from acc1 | acc1 | TestString
+[15:01:17] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58485
+[15:01:17] 	Status is now: RespondedConnect
+[15:01:17] Waiting for event
+[15:01:17] Waiting for event
+[15:01:17] Recieved TESTnotnull: StatusChanged | 192.168.1.245:58485
+[15:01:17] 	Status is now: Connected
+[15:01:17] Waiting for event
+[15:01:17] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:01:17]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:58485
+[15:01:17] acc1 logs in from 192.168.1.245:58485
+[15:01:17] Waiting for event
+[15:01:17] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:01:17] From: acc1: request = ViewWorldMap
+[15:01:17]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:58485
+[15:01:17]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58485
+[15:01:17] Waiting for event
+[15:01:18] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:01:18] From: acc1: request = ViewChar
+[15:01:18]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58485
+[15:01:18]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58485
+[15:01:18] Waiting for event
+[15:01:23] Waiting for event
+[15:01:28] Waiting for event
+[15:01:33] Waiting for event
+[15:01:38] Waiting for event
+[15:01:43] Waiting for event
+[15:01:48] Waiting for event
+[15:01:53] Waiting for event
+[15:01:58] Waiting for event
+[15:02:03] Waiting for event
+[15:02:08] Waiting for event
+[15:02:13] Waiting for event
+[15:02:18] Waiting for event
+[15:02:23] Waiting for event
+[15:02:24] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:02:24] From: acc1: request = ViewChar
+[15:02:24]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58485
+[15:02:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58485
+[15:02:24] Waiting for event
+[15:02:24] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:02:24] From: acc1: request = ViewChar
+[15:02:24]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58485
+[15:02:24]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58485
+[15:02:24] Waiting for event
+[15:02:25] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:02:25] From: acc1: request = ViewFief
+[15:02:25]  Sending to: acc1 | ActionType = ViewFief | ResponseType = ErrorGenericTooFarFromFief | 192.168.1.245:58485
+[15:02:25]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58485
+[15:02:25] Waiting for event
+[15:02:26] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:02:26] From: acc1: request = ViewWorldMap
+[15:02:26]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:58485
+[15:02:26]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58485
+[15:02:26] Waiting for event
+[15:02:28] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:02:28] From: acc1: request = ViewChar
+[15:02:28]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:58485
+[15:02:28]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:58485
+[15:02:28] Waiting for event
+[15:02:28] Recieved TESTnotnull: Data | 192.168.1.245:58485
+[15:02:28] From: acc1: request = ViewFief
+[15:02:28]  Sending to: acc1 | Ac

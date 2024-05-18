@@ -22,6 +22,8 @@ namespace JominiEngine {
     [ContractVerification(true)]
 #endif
     public class Game {
+        private string currentCharID;
+
         /// <summary>
         ///     Create a new game
         /// </summary>
@@ -2261,6 +2263,10 @@ namespace JominiEngine {
             // if unauthorised, error
             return new ProtoMessage(DisplayMessages.ErrorGenericUnauthorised);
         }
+        public string GetCurrentCharID()
+        {
+            return currentCharID;
+        }
 
         public static ProtoMessage AddRemoveEntourage(string charID, Client client) {
             DisplayMessages charErr;
@@ -2273,10 +2279,12 @@ namespace JominiEngine {
             if (myNPC == null) {
                 return new ProtoMessage(DisplayMessages.ErrorGenericCharacterUnidentified);
             }
-            var pc = client.myPlayerCharacter;
-            // ensure player is authorized to add to entourage
-            if (!PermissionManager.isAuthorized(PermissionManager.ownsCharNotCapturedOrAdmin, pc, myNPC)) {
-                return new ProtoMessage(DisplayMessages.ErrorGenericUnauthorised);
+            //change this
+            var pc = (PlayerCharacter) Utility_Methods.GetCharacter(client.GetCurrentCharID(), out charErr);
+
+            if (pc == null)
+            {
+                return new ProtoMessage(charErr);
             }
             // Ensure playercharacter is not captured
             if (!string.IsNullOrWhiteSpace(pc.captorID)) {
@@ -2355,7 +2363,8 @@ namespace JominiEngine {
 
         public static ProtoMessage AppointHeir(string charID, Client client) {
             // Cannot appioint an heir if captured
-            if (!string.IsNullOrWhiteSpace(client.myPlayerCharacter.captorID)) {
+            if (!string.IsNullOrWhiteSpace(client.myPlayerCharacter.captorID))
+            {
                 return new ProtoMessage(DisplayMessages.CharacterHeldCaptive);
             }
             // validate character

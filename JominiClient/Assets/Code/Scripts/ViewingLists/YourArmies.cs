@@ -22,12 +22,14 @@ public class YourArmies : Controller
         btnHireTroops.onClick.AddListener(BtnHireTroops);
 
         ProtoMessage reply = ListArmies(tclient);
-        if (reply.ResponseType == DisplayMessages.Success) {
+        if (reply.ResponseType == DisplayMessages.Success)
+        {
             armyList = (ProtoGenericArray<ProtoArmyOverview>)reply;
 
             if (armyList.fields != null)
             {
-                foreach(ProtoArmyOverview army in armyList.fields) {
+                foreach (ProtoArmyOverview army in armyList.fields)
+                {
 
                     string location = string.IsNullOrWhiteSpace(army.locationID) ? "Unknown" : fiefNames[army.locationID];
 
@@ -39,14 +41,16 @@ public class YourArmies : Controller
                     UIElement.transform.GetChild(3).GetComponent<TMPro.TMP_Text>().SetText(location);
                     UIElement.transform.localScale = Vector3.one;
 
-                    if (viewingListSelectAction.Equals("ArmiesInFief") || viewingListSelectAction.Equals("YourArmies")) {
-                        UIElement.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => { BtnViewArmy(army.armyID); });
-                    }
+                    //if (viewingListSelectAction.Equals("ArmiesInFief") || viewingListSelectAction.Equals("YourArmies")) {
+                    UIElement.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(() => { BtnViewArmy(army.armyID); });
+                    //}
 
                 }
             }
 
-        } else {
+        }
+        else
+        {
             Debug.Log("Failed to retrieve list of armies");
         }
 
@@ -107,7 +111,9 @@ public class YourArmies : Controller
         lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
     }
 
-    private void BtnViewArmy(string armyID) {
+    private void BtnViewArmy(string armyID)
+    {
+        Debug.Log("view army clicked");
         armyToViewID = armyID;
         GoToScene(SceneName.ViewArmy);
     }

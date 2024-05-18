@@ -46,11 +46,11 @@ public class ViewingList : Controller
                     GoToScene(SceneName.ViewArmiesList);
                     break;
             }
-            case ViewingList.Entourage: {
+            case ViewingList.Entourage: /*{
                 lblPageTitle.text = "Your Current Entourage";
                 listType = ListType.Character;
                 break;
-            }
+            }*/
             // ListChars and FactionMembers point to same scene, the difference is important for displaying data
             case ViewingList.ListChars:
             case ViewingList.FactionMembers:

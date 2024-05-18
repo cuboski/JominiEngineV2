@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1700f6e06d46aff4dab7db9ced160336
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - lblPageTitle: {instanceID: 0}
+  - lblMessageForUser: {instanceID: 0}
+  - viewportContent: {instanceID: 0}
+  - panelTemplate: {instanceID: 0}
+  - lblTemplate: {instanceID: 0}
+  - btnTemplate: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

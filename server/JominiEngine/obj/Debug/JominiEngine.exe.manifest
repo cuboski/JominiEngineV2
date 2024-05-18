@@ -109,7 +109,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>RHsEZhm3mRhQviZO3zoAAmU44USfkaAFMSrzjkq55dg=</dsig:DigestValue>
+        <dsig:DigestValue>RrMvt4Y8q9iIMQOsKU9A/o0qREuQGG6mequOF4elRkE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -233,13 +233,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="JominiEngine.exe.config" size="2243">
+  <file name="JominiEngine.exe.config" size="2197">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>D2WZDFCy1F/i8rKSv18CDKdAKfLCgDHFvg3oyWR5izo=</dsig:DigestValue>
+      <dsig:DigestValue>VviOZzi2r+iX8Tkh8syVqBorl+2Dshvf3xE/GxlOaPM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

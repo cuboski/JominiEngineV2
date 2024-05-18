@@ -1,0 +1,66 @@
+[02:40:20] Port forward FAILED 0
+[02:40:21] Port forward FAILED 1
+[02:40:22] Port forwarded successfully.
+[02:40:22] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[02:40:22] Waiting for event
+[02:40:27] Waiting for event
+[02:40:32] Waiting for event
+[02:40:33] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49962
+[02:40:33] 	Status is now: RespondedAwaitingApproval
+[02:40:33] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:49962
+[02:40:33] Accepted connection from acc1 | acc1 | TestString
+[02:40:33] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49962
+[02:40:33] 	Status is now: RespondedConnect
+[02:40:33] Waiting for event
+[02:40:33] Waiting for event
+[02:40:33] Recieved TESTnotnull: StatusChanged | 192.168.1.245:49962
+[02:40:33] 	Status is now: Connected
+[02:40:33] Waiting for event
+[02:40:33] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:33]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:49962
+[02:40:33] acc1 logs in from 192.168.1.245:49962
+[02:40:33] Waiting for event
+[02:40:33] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:33] From: acc1: request = ViewWorldMap
+[02:40:33]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:49962
+[02:40:33]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49962
+[02:40:33] Waiting for event
+[02:40:34] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:34] From: acc1: request = ViewChar
+[02:40:34]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:49962
+[02:40:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49962
+[02:40:34] Waiting for event
+[02:40:35] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:35] From: acc1: request = ViewChar
+[02:40:35]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:49962
+[02:40:35]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49962
+[02:40:35] Waiting for event
+[02:40:36] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:36] From: acc1: request = ViewMyFiefs
+[02:40:36]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:49962
+[02:40:36]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49962
+[02:40:36] Waiting for event
+[02:40:40] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:40] From: acc1: request = CreateFactionRequest
+[02:40:40]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:49962
+[02:40:40]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49962
+[02:40:40] Waiting for event
+[02:40:41] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:41] From: acc1: request = ViewChar
+[02:40:41]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:49962
+[02:40:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49962
+[02:40:41] Waiting for event
+[02:40:41] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:41] From: acc1: request = ViewFactionRequestList
+[02:40:41]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:49962
+[02:40:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49962
+[02:40:41] Waiting for event
+[02:40:42] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:42] From: acc1: request = GetFactionRequest
+[02:40:42]  Sending to: acc1 | ActionType = GetFactionRequest | ResponseType = None | 192.168.1.245:49962
+[02:40:42]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:49962
+[02:40:42] Waiting for event
+[02:40:43] Recieved TESTnotnull: Data | 192.168.1.245:49962
+[02:40:43] From: acc1: request = ListFactionMembers
+[02:40:43]  Sending to: acc1 | ActionType = ListFactionMembers | ResponseType = Success | 192.168.1.245:49962
+[02:4

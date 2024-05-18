@@ -41,6 +41,14 @@ public class ViewCharacters : Controller
                     activePrefab = prefabFactionMember;
                     break;
                 }
+            case ViewingList.Entourage:
+                {
+                    Debug.Log("getting ent");
+                    reply = ListEntourageMembers();
+                    Debug.Log(reply.Message);
+                    activePrefab = prefabCharacter;
+                    break;
+                }
             default:
                 {
                     reply = null;
@@ -55,6 +63,7 @@ public class ViewCharacters : Controller
             {
                 foreach (ProtoCharacterOverview character in characterList.fields)
                 {
+                    Debug.Log(character.charName);
                     if (activePrefab != prefabCharacter)
                     {
                         // transform some variables into cleaner values before creating record object

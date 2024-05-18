@@ -1,0 +1,79 @@
+[03:22:40] Port forwarded successfully.
+[03:22:40] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[03:22:40] Waiting for event
+[03:22:45] Waiting for event
+[03:22:50] Waiting for event
+[03:22:55] Recieved TESTnotnull: StatusChanged | 192.168.1.245:50356
+[03:22:55] 	Status is now: RespondedAwaitingApproval
+[03:22:55] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:50356
+[03:22:55] Accepted connection from acc1 | acc1 | TestString
+[03:22:55] Recieved TESTnotnull: StatusChanged | 192.168.1.245:50356
+[03:22:55] 	Status is now: RespondedConnect
+[03:22:55] Waiting for event
+[03:22:55] Waiting for event
+[03:22:55] Recieved TESTnotnull: StatusChanged | 192.168.1.245:50356
+[03:22:55] 	Status is now: Connected
+[03:22:55] Waiting for event
+[03:22:55] Recieved TESTnotnull: Data | 192.168.1.245:50356
+[03:22:55]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:50356
+[03:22:55] acc1 logs in from 192.168.1.245:50356
+[03:22:55] Waiting for event
+[03:22:55] Recieved TESTnotnull: Data | 192.168.1.245:50356
+[03:22:55] From: acc1: request = ViewWorldMap
+[03:22:55]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:50356
+[03:22:55]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50356
+[03:22:55] Waiting for event
+[03:22:56] Recieved TESTnotnull: Data | 192.168.1.245:50356
+[03:22:56] From: acc1: request = ViewChar
+[03:22:56]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:50356
+[03:22:56]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50356
+[03:22:56] Waiting for event
+[03:23:01] Waiting for event
+[03:23:04] Recieved TESTnotnull: Data | 192.168.1.245:50356
+[03:23:04] From: acc1: request = GetNPCList
+[03:23:04]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:50356
+[03:23:04]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:50356
+[03:23:04] Waiting for event
+[03:23:09] Waiting for event
+[03:23:14] Waiting for event
+[03:23:19] Waiting for event
+[03:23:24] Waiting for event
+[03:23:29] Waiting for event
+[03:23:34] Waiting for event
+[03:23:39] Waiting for event
+[03:23:40] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61369
+[03:23:40] 	Status is now: RespondedAwaitingApproval
+[03:23:40] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:61369
+[03:23:40] Accepted connection from acc1 | acc1 | TestString
+[03:23:40] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61369
+[03:23:40] 	Status is now: RespondedConnect
+[03:23:40] Waiting for event
+[03:23:40] Waiting for event
+[03:23:40] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61369
+[03:23:40] 	Status is now: Connected
+[03:23:40] Waiting for event
+[03:23:41] Recieved TESTnotnull: Data | 192.168.1.245:61369
+[03:23:41]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:61369
+[03:23:41] acc1 logs in from 192.168.1.245:61369
+[03:23:41] Waiting for event
+[03:23:41] Recieved TESTnotnull: Data | 192.168.1.245:61369
+[03:23:41] From: acc1: request = ViewWorldMap
+[03:23:41]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61369
+[03:23:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61369
+[03:23:41] Waiting for event
+[03:23:41] Recieved TESTnotnull: Data | 192.168.1.245:61369
+[03:23:41] From: acc1: request = ViewChar
+[03:23:41]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61369
+[03:23:41]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61369
+[03:23:41] Waiting for event
+[03:23:46] Waiting for event
+[03:23:51] Waiting for event
+[03:23:56] Waiting for event
+[03:24:01] Waiting for event
+[03:24:06] Waiting for event
+[03:24:11] Waiting for event
+[03:24:16] Waiting for event
+[03:24:21] Waiting for event
+[03:24:26] Waiting for event
+[03:24:31] Waiting for event
+[03

@@ -1,0 +1,65 @@
+[00:46:08] Port forward FAILED 0
+[00:46:09] Port forwarded successfully.
+[00:46:09] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[00:46:09] Waiting for event
+[00:46:11] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:51623
+[00:46:11] Recieved TESTnull: WarningMessage | NULL
+Run-time error: Recieved warning message: Received unhandled library message Ping from 192.168.1.245:51623
+[00:46:11] Waiting for event
+[00:46:16] Waiting for event
+[00:46:21] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53050
+[00:46:21] 	Status is now: RespondedAwaitingApproval
+[00:46:21] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:53050
+[00:46:21] Accepted connection from acc1 | acc1 | TestString
+[00:46:21] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53050
+[00:46:21] 	Status is now: RespondedConnect
+[00:46:21] Waiting for event
+[00:46:21] Waiting for event
+[00:46:21] Recieved TESTnotnull: StatusChanged | 192.168.1.245:53050
+[00:46:21] 	Status is now: Connected
+[00:46:21] Waiting for event
+[00:46:21] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:21]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:53050
+[00:46:21] acc1 logs in from 192.168.1.245:53050
+[00:46:21] Waiting for event
+[00:46:21] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:21] From: acc1: request = ViewWorldMap
+[00:46:21]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:53050
+[00:46:21]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53050
+[00:46:21] Waiting for event
+[00:46:22] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:22] From: acc1: request = ViewChar
+[00:46:22]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:53050
+[00:46:22]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53050
+[00:46:22] Waiting for event
+[00:46:23] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:23] From: acc1: request = ViewChar
+[00:46:23]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:53050
+[00:46:23]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53050
+[00:46:23] Waiting for event
+[00:46:25] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:25] From: acc1: request = ViewFactionRequestList
+[00:46:25]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:53050
+[00:46:25]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53050
+[00:46:25] Waiting for event
+[00:46:26] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:26] From: acc1: request = ViewChar
+[00:46:26]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:53050
+[00:46:26]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53050
+[00:46:26] Waiting for event
+[00:46:26] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:26] From: acc1: request = ViewMyFiefs
+[00:46:27]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:53050
+[00:46:27]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53050
+[00:46:27] Waiting for event
+[00:46:32] Waiting for event
+[00:46:32] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:32] From: acc1: request = CreateFactionRequest
+[00:46:32]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:53050
+[00:46:32]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:53050
+[00:46:32] Waiting for event
+[00:46:33] Recieved TESTnotnull: Data | 192.168.1.245:53050
+[00:46:33] From: acc1: request = ViewChar
+[00:46:33]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:53050
+[00:46:33]  Sending to: acc1 | ActionType = Update | Res

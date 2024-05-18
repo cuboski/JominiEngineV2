@@ -25,7 +25,7 @@ public class Controller : MonoBehaviour {
     public static ProtoMessage sm;
     public static ProtoSiegeDisplay sc;
     public static ProtoGenericArray<ProtoSiegeOverview> sl;
-
+    
     public static string ipAddress = "139.162.225.87";
     // server ip = 139.162.225.87
     public static string buildVersion = "0.1.0a";
@@ -181,16 +181,16 @@ public class Controller : MonoBehaviour {
             }
             else if (reply.ActionType == Actions.Update)
             {
-                Debug.Log("update reply");
+               // Debug.Log("update reply");
                 if (reply.ResponseType == DisplayMessages.ErrorGenericMessageInvalid)
                 {
-                    Debug.Log("error reply");
+                   // Debug.Log("error reply");
                     actionReply = reply; // When the server found something wrong with the action.
                     receivedActionReply = true;
                 }
                 else if (reply.ResponseType == DisplayMessages.Success)
                 {
-                    Debug.Log("success reply");
+                   //Debug.Log("success reply");
                     protoClient = (ProtoClient)reply;
                     receivedUpdateReply = true;
                 }
@@ -509,6 +509,7 @@ public class Controller : MonoBehaviour {
     public static ProtoMessage AppointLeader(string armyID,string charID, TextTestClient client)                    // Complete
     {
         //ProtoPlayerCharacter armyResult = GetArmyID(client);
+        Debug.Log(armyID);
         ProtoMessage protoMessage = new ProtoMessage();
         protoMessage.ActionType = Actions.AppointLeader;
         protoMessage.Message = armyID;
@@ -635,6 +636,7 @@ public class Controller : MonoBehaviour {
         ProtoMessage protoSiegeStart = new ProtoMessage();
         protoSiegeStart.ActionType = Actions.BesiegeFief;
         protoSiegeStart.Message = armyResult.armyID;
+        Debug.Log(armyResult.armyID);
         client.net.Send(protoSiegeStart);
         var reply = GetActionReply(Actions.BesiegeFief, client);
         return reply;
@@ -1010,6 +1012,19 @@ public class Controller : MonoBehaviour {
         tclient.net.Send (request);
          
         return GetActionReply(Actions.ListFactionMembers, tclient);
+    }
+
+    public static ProtoMessage ListEntourageMembers()
+    {
+        ProtoMessage request = new ProtoMessage
+        {
+            Message = "Entourage",
+            ActionType = Actions.GetNPCList,
+            MessageFields = new string[] { }
+        };
+        tclient.net.Send(request);
+
+        return GetActionReply(Actions.GetNPCList, tclient);
     }
 
     public static ProtoMessage ChangeFactionRank(string factionName, string member, string rank)

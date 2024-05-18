@@ -1,0 +1,65 @@
+[19:54:12] Port forwarded successfully.
+[19:54:12] Server started- host: 192.168.1.245, port: 8080, appID: test, max connections: 2000
+[19:54:12] Waiting for event
+[19:54:17] Waiting for event
+[19:54:19] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61087
+[19:54:19] 	Status is now: RespondedAwaitingApproval
+[19:54:19] Recieved TESTnotnull: ConnectionApproval | 192.168.1.245:61087
+[19:54:19] Accepted connection from acc1 | acc1 | TestString
+[19:54:19] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61087
+[19:54:19] 	Status is now: RespondedConnect
+[19:54:19] Waiting for event
+[19:54:19] Waiting for event
+[19:54:19] Recieved TESTnotnull: StatusChanged | 192.168.1.245:61087
+[19:54:19] 	Status is now: Connected
+[19:54:19] Waiting for event
+[19:54:19] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:19]  Sending to: acc1 | ActionType = LogIn | ResponseType = LogInSuccess | 192.168.1.245:61087
+[19:54:19] acc1 logs in from 192.168.1.245:61087
+[19:54:19] Waiting for event
+[19:54:19] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:19] From: acc1: request = ViewWorldMap
+[19:54:19]  Sending to: acc1 | ActionType = ViewWorldMap | ResponseType = Success | 192.168.1.245:61087
+[19:54:19]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61087
+[19:54:19] Waiting for event
+[19:54:20] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:20] From: acc1: request = ViewChar
+[19:54:20]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61087
+[19:54:20]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61087
+[19:54:20] Waiting for event
+[19:54:21] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:21] From: acc1: request = ViewChar
+[19:54:21]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61087
+[19:54:21]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61087
+[19:54:21] Waiting for event
+[19:54:26] Waiting for event
+[19:54:31] Waiting for event
+[19:54:34] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:34] From: acc1: request = ViewFactionRequestList
+[19:54:34]  Sending to: acc1 | ActionType = ViewFactionRequestList | ResponseType = Success | 192.168.1.245:61087
+[19:54:34]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61087
+[19:54:34] Waiting for event
+[19:54:37] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:37] From: acc1: request = GetNPCList
+[19:54:37]  Sending to: acc1 | ActionType = GetNPCList | ResponseType = Success | 192.168.1.245:61087
+[19:54:37]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61087
+[19:54:37] Waiting for event
+[19:54:38] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:38] From: acc1: request = ViewChar
+[19:54:38]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61087
+[19:54:38]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61087
+[19:54:38] Waiting for event
+[19:54:39] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:39] From: acc1: request = ViewMyFiefs
+[19:54:39]  Sending to: acc1 | ActionType = ViewMyFiefs | ResponseType = Success | 192.168.1.245:61087
+[19:54:39]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61087
+[19:54:39] Waiting for event
+[19:54:43] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:43] From: acc1: request = CreateFactionRequest
+[19:54:43]  Sending to: acc1 | ActionType = CreateFactionRequest | ResponseType = Success | 192.168.1.245:61087
+[19:54:43]  Sending to: acc1 | ActionType = Update | ResponseType = Success | 192.168.1.245:61087
+[19:54:43] Waiting for event
+[19:54:44] Recieved TESTnotnull: Data | 192.168.1.245:61087
+[19:54:44] From: acc1: request = ViewChar
+[19:54:44]  Sending to: acc1 | ActionType = ViewChar | ResponseType = Success | 192.168.1.245:61087
+[19:54:44]  Sending to: acc1 | ActionType = Update | ResponseType = Succes
