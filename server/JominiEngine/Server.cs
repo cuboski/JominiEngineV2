@@ -27,7 +27,7 @@ namespace JominiEngine
         /******Server Settings  ******/
         private readonly int port = 8080;
         //private readonly string host_name = "localhost";
-        private readonly string host_name = "139.162.225.87";
+        private readonly string host_name = "192.168.1.68";
         //private readonly string host_name = "139.162.225.87";
         private readonly int max_connections = 2000;
         // Used in the NetPeerConfiguration to identify application

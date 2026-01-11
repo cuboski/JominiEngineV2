@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using RiakClient;
 using Lidgren.Network;
+using Cassandra;
+using Cassandra.Mapping;
 namespace JominiEngine
 {
 
@@ -103,6 +105,15 @@ namespace JominiEngine
         /// Holds RiakClient to communicate with RiakCluster
         /// </summary>
         public static IRiakClient rClient;
+
+        public static ICluster cCluster;
+
+        public static ISession cSession;
+
+        public static IMapper cMapper;
+
+
+
         /// <summary>
         /// Holds next value for game ID
         /// </summary>

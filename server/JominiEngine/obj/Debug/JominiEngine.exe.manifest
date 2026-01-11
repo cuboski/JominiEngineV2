@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>qFKAoKAhD9B4jeu8xsWexVDiGV2snzHux/QNWHAWlZs=</dsig:DigestValue>
+        <dsig:DigestValue>pOCuy+oxT5zZAYio54z/dZzZiWYJp8ldFt3Rs2JvSGQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -109,7 +109,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>RrMvt4Y8q9iIMQOsKU9A/o0qREuQGG6mequOF4elRkE=</dsig:DigestValue>
+        <dsig:DigestValue>nbiZ3Oh5UdfixSA/xvD/enyVLEct9Cp+g+CFlS2Nd1g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -233,13 +233,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="JominiEngine.exe.config" size="2197">
+  <file name="JominiEngine.exe.config" size="2241">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>VviOZzi2r+iX8Tkh8syVqBorl+2Dshvf3xE/GxlOaPM=</dsig:DigestValue>
+      <dsig:DigestValue>D9k3sAvb05TGPQYvDAUZJwQjsUtoofwA1AX4BoHpn2M=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
