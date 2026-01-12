@@ -5,6 +5,7 @@ using RiakClient;
 using Lidgren.Network;
 using Cassandra;
 using Cassandra.Mapping;
+using System.Linq;
 namespace JominiEngine
 {
 
@@ -106,11 +107,15 @@ namespace JominiEngine
         /// </summary>
         public static IRiakClient rClient;
 
+
+
         public static ICluster cCluster;
 
         public static ISession cSession;
 
         public static IMapper cMapper;
+
+        public static IQueryProvider cProvider;
 
 
 

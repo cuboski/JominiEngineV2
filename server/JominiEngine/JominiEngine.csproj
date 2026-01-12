@@ -297,6 +297,7 @@
     <Compile Include="Army.cs" />
     <Compile Include="Battle.cs" />
     <Compile Include="Birth.cs" />
+    <Compile Include="CassandraInitialisation.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientSerializer.cs" />
