@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Cassandra;
 using Cassandra.Data.Linq;
+using Cassandra.Mapping;
 using static System.Collections.Specialized.BitVector32;
 
 namespace JominiEngine
@@ -31,6 +32,15 @@ namespace JominiEngine
             //cSession.ChangeKeyspace("CassDatabase");
             cSession.ChangeKeyspace("CassDatabase");
             Console.WriteLine("Database alocated");
+
+            cSession.Execute("CREATE TABLE IF NOT EXISTS ailments (ailmentID text, description text, when text, effect int, minimumEffect int, PRIMARY KEY (ailmentID))");
+            cSession.Execute("CREATE TABLE IF NOT EXISTS armies (armyID text, troops list<int>, leader text, owner text, days double, location text, isMaintained boolean, aggression text, combatOdds text, PRIMARY KEY (armyID))");
+            cSession.Execute("CREATE TABLE IF NOT EXISTS Terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
+
+            MappingConfiguration.Global.Define<JominiMapper>();
+
+            cluster.Shutdown();
+
 
             //var terrains = new Table<Terrain>(cSession);
 
