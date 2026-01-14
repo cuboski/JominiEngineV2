@@ -179,7 +179,10 @@ namespace JominiEngine
             {
                 using (Globals_Server.LogFile = new System.IO.StreamWriter("LogFile.txt"))
                 {
-		    Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig"); //, "home/JominiEngine/server/JominiEngine/app.config");
+                    Globals_Server.logEvent("Before");
+                    CassandraInitialisation.ConnectDb();
+                    Globals_Server.logEvent("After");
+                    Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig"); //, "home/JominiEngine/server/JominiEngine/app.config");
                     Globals_Server.rClient = Globals_Server.rCluster.CreateClient();
                     Globals_Server.LogFile.AutoFlush = true;
                     Globals_Server.logEvent("Server start");

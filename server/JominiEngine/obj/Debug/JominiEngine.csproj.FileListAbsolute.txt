@@ -87,3 +87,15 @@ C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\ob
 C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\obj\Debug\JominiEngine.exe
 C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\obj\Debug\JominiEngine.pdb
 C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\obj\Debug\JominiEngine.exe.config
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\Cassandra.dll
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\Microsoft.Extensions.Logging.dll
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\System.Threading.Tasks.Dataflow.dll
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\Cassandra.xml
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\Microsoft.Extensions.Logging.xml
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\chris\Desktop\Dissertation\JominiEngine_AI_Agent\server\JominiEngine\bin\Debug\System.Threading.Tasks.Dataflow.xml
