@@ -33,8 +33,13 @@ namespace JominiEngine
             cSession.ChangeKeyspace("CassDatabase");
             Console.WriteLine("Database alocated");
 
+            //cSession.Execute("CREATE TYPE IF NOT EXISTS journal ()");
+
+
             cSession.Execute("CREATE TABLE IF NOT EXISTS ailments (ailmentID text, description text, when text, effect int, minimumEffect int, PRIMARY KEY (ailmentID))");
             cSession.Execute("CREATE TABLE IF NOT EXISTS armies (armyID text, troops list<int>, leader text, owner text, days double, location text, isMaintained boolean, aggression text, combatOdds text, PRIMARY KEY (armyID))");
+            //cSession.Execute("CREATE TABLE IF NOT EXISTS client (user text, pcID text, activeChar text, myPastEvents journal, PRIMARY KEY (user))");
+            cSession.Execute("CREATE TABLE IF NOT EXISTS faction (factionReqID text, leader text, factionName text, members map<text,text>, PaymentDue list<text>, highestStature list<text>, foundingLocation text, alliedFiefs list<text>, proposedTax int, statureBonus double, treasury int, PRIMARY KEY (factionReqID))");
             cSession.Execute("CREATE TABLE IF NOT EXISTS Terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
 
             MappingConfiguration.Global.Define<JominiMapper>();
