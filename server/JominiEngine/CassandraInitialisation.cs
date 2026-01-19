@@ -48,10 +48,14 @@ namespace JominiEngine
             cSession.Execute("CREATE TABLE IF NOT EXISTS provinces (kingdomId text, taxRate double, PRIMARY KEY (kingdomId))");
             cSession.Execute("CREATE TABLE IF NOT EXISTS ranks (id text, langID text, name text, stature text, PRIMARY KEY (id))");
             cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason text, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
-            cSession.Execute("CREATE TABLE IF NOT EXISTS Terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
-            cSession.Execute("CREATE TABLE IF NOT EXISTS Traits (id text, name text, effects map<text,double>, PRIMARY KEY (id))");
-
+            cSession.Execute("CREATE TABLE IF NOT EXISTS terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
+            cSession.Execute("CREATE TABLE IF NOT EXISTS traits (id text, name text, effects map<text,double>, PRIMARY KEY (id))");
+            Mapper cMapper = new Mapper(cSession);
+            JominiMapper jMapper = new JominiMapper();
+            Terrain testTerrain = new Terrain("terr_dust", "Quite glittery", 1.1);
+            cMapper.InsertIfNotExists(testTerrain);
             MappingConfiguration.Global.Define<JominiMapper>();
+            //Terrain t = cMapper.Fetch<Terrain>();
 
             cluster.Shutdown();
 
