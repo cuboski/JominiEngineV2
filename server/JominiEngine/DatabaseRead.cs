@@ -459,6 +459,15 @@ namespace JominiEngine
             return newClock;
         }
 
+        public static GameClock Cass_DatabaseRead_GameClock(string clockID)
+        {
+            GameClock[] retrievedClock = Globals_Server.cMapper.Fetch<GameClock>("WHERE id = ?", clockID).ToArray();
+            GameClock newClock = new GameClock();
+            newClock = retrievedClock[0];
+
+            return newClock;
+        }
+
         /// <summary>
         /// Reads a Dictionary(string, uint[]) from the database
         /// </summary>
@@ -698,6 +707,15 @@ namespace JominiEngine
             return newTrait;
         }
 
+        public static Trait Cass_DatabaseRead_Trait(string traitID)
+        {
+            Trait[] retrievedTrait = Globals_Server.cMapper.Fetch<Trait>("WHERE id = ?", traitID).ToArray();
+            Trait newTrait = new Trait();
+            newTrait = retrievedTrait[0];
+
+            return newTrait;
+        }
+
         /// <summary>
         /// Reads a BaseLanguage object from the database
         /// </summary>
@@ -817,6 +835,15 @@ namespace JominiEngine
             return newRank;
         }
 
+        public static Rank Cass_DatabaseRead_Rank(string rankID)
+        {
+            Rank[] retrievedRank = Globals_Server.cMapper.Fetch<Rank>("WHERE id = ?", rankID).ToArray();
+            Rank newRank = new Rank();
+            newRank = retrievedRank[0];
+
+            return newRank;
+        }
+
         /// <summary>
         /// Reads a Position object from the database
         /// </summary>
@@ -892,6 +919,15 @@ namespace JominiEngine
             return mySiege;
         }
 
+        public static Siege Cass_DatabaseRead_Siege(string siegeID)
+        {
+            Siege[] retrievedSiege = Globals_Server.cMapper.Fetch<Siege>("WHERE id = ?", siegeID).ToArray();
+            Siege newSiege = new Siege();
+            newSiege = retrievedSiege[0];
+
+            return newSiege;
+        }
+
         /// <summary>
         /// Reads a Siege object from the database
         /// </summary>
@@ -916,6 +952,15 @@ namespace JominiEngine
             }
 
             return faction;
+        }
+
+        public static Faction Cass_DatabaseRead_Faction(string factID)
+        {
+            Faction[] retrievedFaction = Globals_Server.cMapper.Fetch<Faction>("WHERE id = ?", factID).ToArray();
+            Faction newFaction = new Faction();
+            newFaction = retrievedFaction[0];
+
+            return newFaction;
         }
 
         /// <summary>
@@ -963,6 +1008,15 @@ namespace JominiEngine
             }
 
             return myArmy;
+        }
+
+        public static Army Cass_DatabaseRead_Army(string armyID)
+        {
+            Army[] retrievedArmy = Globals_Server.cMapper.Fetch<Army>("WHERE id = ?", armyID).ToArray();
+            Army newArmy = new Army();
+            newArmy = retrievedArmy[0];
+
+            return newArmy;
         }
 
         /// <summary>
@@ -1141,6 +1195,19 @@ namespace JominiEngine
             return myKing;
         }
 
+        public static Kingdom Cass_DatabaseRead_Kingdom(string kingID)
+        {
+            Kingdom_Serialised[] retrievedKingdom = Globals_Server.cMapper.Fetch<Kingdom_Serialised>("WHERE id = ?", kingID).ToArray();
+            Kingdom_Serialised newSKingdom = new Kingdom_Serialised();
+            newSKingdom = retrievedKingdom[0];
+
+            Kingdom newKingdom = new Kingdom();
+            newKingdom = DatabaseRead.Kingdom_deserialise(newSKingdom);
+
+            return newKingdom;
+        }
+
+
         /// <summary>
         /// Deserialises a Kingdom object
         /// </summary>
@@ -1308,6 +1375,15 @@ namespace JominiEngine
                 string toDisplay = "InitialDBload: Unable to retrieve Terrain " + terrID;
                 Globals_Server.logError(toDisplay);
             }
+
+            return newTerrain;
+        }
+
+        public static Terrain Cass_DatabaseRead_terrain(string terrID)
+        {
+            Terrain[] retrievedTerrain = Globals_Server.cMapper.Fetch<Terrain>("WHERE id = ?", terrID).ToArray();
+            Terrain newTerrain = new Terrain();
+            newTerrain = retrievedTerrain[0];
 
             return newTerrain;
         }

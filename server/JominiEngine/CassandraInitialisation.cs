@@ -10,7 +10,7 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace JominiEngine
 {
-    public static class CassandraConnection
+    public static class CassandraInitialisation
     {
         public static void ConnectDb()
         {
@@ -25,7 +25,7 @@ namespace JominiEngine
             //replicationInfo.Add("NetworkTopologyStrategy", "2");
             Globals_Server.cSession = (Session)Globals_Server.cCluster.Connect();
             //cSession = cluster.Connect("test");
-            Console.WriteLine("Session connected");
+            Globals_Server.logEvent("Session connected");
             Globals_Server.cSession.CreateKeyspaceIfNotExists("CassDatabase");
             //cSession.CreateKeyspace("CassDatabase", replicationInfo, true);
             //cSession.ChangeKeyspace("CassDatabase");
@@ -43,12 +43,13 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS kingdoms (id text, name text, owner text, titleHolder text, rank text, nationality text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS languages (id text, baseLanguage text, dialect int, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS nationalities (natID text, name text, PRIMARY KEY (natId))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS places (id text, name text, owner text, titleHolder text, rank text, PRIMARY KEY (id))");
+            //Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS places (id text, name text, owner text, titleHolder text, rank text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS provinces (kingdomId text, taxRate double, PRIMARY KEY (kingdomId))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS ranks (id text, langID text, name text, stature text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason text, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS traits (id text, name text, effects map<text,double>, PRIMARY KEY (id))");
+            
             Globals_Server.cMapper = new Mapper(Globals_Server.cSession);
             JominiMapper jMapper = new JominiMapper();
             Terrain testTerrain = new Terrain("terr_dust", "Quite glittery", 1.1);
@@ -67,6 +68,12 @@ namespace JominiEngine
             Nationality ni = new Nationality();
             ni = n[0];
             Console.WriteLine(ni.natID + " " + ni.name);
+
+            Terrain testT2 = new Terrain("terr_aqua", "Quite supreme", 1.3);
+            DatabaseWrite.Cass_DatabaseWrite_Terrain(testT2);
+
+            Terrain readT = DatabaseRead.Cass_DatabaseRead_terrain("terr_aqua");
+            Console.WriteLine(readT.id + " " + readT.description + " " + readT.travelCost);
             //IEnumerable<User> users = mapper.Fetch<User>();
             //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);
 

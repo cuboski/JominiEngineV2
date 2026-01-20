@@ -561,6 +561,12 @@ namespace JominiEngine
             return putClockResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_Clock(GameClock gc)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(gc);
+        }
+
+
         /// <summary>
         /// Writes a Dictionary object to the database
         /// </summary>
@@ -714,6 +720,12 @@ namespace JominiEngine
             return putTraitResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_Trait(Trait t)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(t);
+        }
+        
+
         /// <summary>
         /// Writes a BaseLanguage object to the database
         /// </summary>
@@ -793,6 +805,11 @@ namespace JominiEngine
             return putNationalityResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_Nationality(Nationality n)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(n);
+        }
+        
         /// <summary>
         /// Writes a Rank object to the database
         /// </summary>
@@ -812,6 +829,12 @@ namespace JominiEngine
 
             return putRankResult.IsSuccess;
         }
+
+        public static void Cass_DatabaseWrite_Rank(Rank r)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(r);
+        }
+        
 
         /// <summary>
         /// Writes a Position or Position_Serialised object to the database
@@ -951,8 +974,21 @@ namespace JominiEngine
             {
                 Globals_Server.logError("Write failed: Kingdom " + rKing.Key + " to bucket " + rKing.Bucket);
             }
+            
 
             return putKingResult.IsSuccess;
+        }
+
+        public static void Cass_DatabaseWrite_Kingdom(Kingdom k = null, Kingdom_Serialised ks = null)
+        {
+            if (k != null)
+            {
+                // convert Kingdom into Kingdom_Serialised
+                ks = DatabaseWrite.Kingdom_serialise(k);
+            }
+
+            Globals_Server.cMapper.InsertIfNotExists(ks);
+
         }
 
         /// <summary>
@@ -966,6 +1002,8 @@ namespace JominiEngine
             kingOut = new Kingdom_Serialised(k);
             return kingOut;
         }
+
+
 
         /// <summary>
         /// Writes a Province or Province_Serialised object to the database
@@ -1025,10 +1063,10 @@ namespace JominiEngine
             return putTerrainResult.IsSuccess;
         }
 
-        //public static bool CassDatabaseWrite_Terrain(Terrain t)
-        //{
-        //    Globals_Server.cMapper.InsertIfNotExists(t);
-        //}
+        public static void Cass_DatabaseWrite_Terrain(Terrain t)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(t);
+        }
 
         /// <summary>
         /// Writes a VictoryData object to the database
@@ -1107,6 +1145,11 @@ namespace JominiEngine
             return putArmyResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_Army(Army a)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(a);
+        }
+
         /// <summary>
         /// Writes a Siege object to the database
         /// </summary>
@@ -1126,6 +1169,12 @@ namespace JominiEngine
             return putSiegeResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_Siege(Siege s)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(s);
+        }
+        
+
         /// <summary>
         /// Writes a new faction request to the database
         /// </summary>
@@ -1143,6 +1192,11 @@ namespace JominiEngine
             }
 
             return factRes.IsSuccess;
+        }
+
+        public static void Cass_DatabaseWrite_Faction(Faction f)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(f);
         }
 
         public static bool DatabaseWrite_User(string username, Tuple<byte[], byte[]>  passHash)
