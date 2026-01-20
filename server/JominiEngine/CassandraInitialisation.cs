@@ -55,7 +55,21 @@ namespace JominiEngine
             Terrain testTerrain = new Terrain("terr_dust", "Quite glittery", 1.1);
             cMapper.InsertIfNotExists(testTerrain);
             MappingConfiguration.Global.Define<JominiMapper>();
-            //Terrain t = cMapper.Fetch<Terrain>();
+            String tt = "terr_dust";
+            Terrain[] t = cMapper.Fetch<Terrain>("WHERE id = ?", tt).ToArray();
+            Terrain ti = new Terrain();
+            ti = t[0];
+            Console.WriteLine(ti.id + " " + ti.description + " " + ti.travelCost);
+
+            Nationality testN = new Nationality("1", "Scot");
+            cMapper.InsertIfNotExists(testN);
+            String nt = "1";
+            Nationality[] n = cMapper.Fetch<Nationality>("WHERE natID = ?", nt).ToArray();
+            Nationality ni = new Nationality();
+            ni = n[0];
+            Console.WriteLine(ni.natID + " " + ni.name);
+            //IEnumerable<User> users = mapper.Fetch<User>();
+            //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);
 
             cluster.Shutdown();
 

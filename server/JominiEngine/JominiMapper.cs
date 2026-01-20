@@ -14,6 +14,7 @@ namespace JominiEngine {
 
             //Defines the mappings from tables in the cassandra db to classes in the server
             For<Terrain>().TableName("terrain");
+            For<Nationality>().TableName("nationalities");
 
         }
     }
