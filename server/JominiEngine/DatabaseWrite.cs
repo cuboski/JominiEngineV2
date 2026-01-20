@@ -1025,6 +1025,11 @@ namespace JominiEngine
             return putTerrainResult.IsSuccess;
         }
 
+        //public static bool CassDatabaseWrite_Terrain(Terrain t)
+        //{
+        //    Globals_Server.cMapper.InsertIfNotExists(t);
+        //}
+
         /// <summary>
         /// Writes a VictoryData object to the database
         /// </summary>
