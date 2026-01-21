@@ -740,6 +740,15 @@ namespace JominiEngine
             return newBaseLang;
         }
 
+        public static BaseLanguage Cass_DatabaseRead_BaseLanguage(string bLangID)
+        {
+            BaseLanguage[] retrievedBaseLanguage = Globals_Server.cMapper.Fetch<BaseLanguage>("WHERE id = ?", bLangID).ToArray();
+            BaseLanguage newBaseLanguage = new BaseLanguage();
+            newBaseLanguage = retrievedBaseLanguage[0];
+
+            return newBaseLanguage;
+        }
+
         /// <summary>
         /// Reads a Language object from the database
         /// </summary>
@@ -765,6 +774,18 @@ namespace JominiEngine
                 string toDisplay = "InitialDBload: Unable to retrieve Language " + langID;
                 Globals_Server.logError(toDisplay);
             }
+
+            return newLanguage;
+        }
+
+        public static Language Cass_DatabaseRead_Language(string langID)
+        {
+            Language_Serialised[] retrievedLanguage = Globals_Server.cMapper.Fetch<Language_Serialised>("WHERE id = ?", langID).ToArray();
+            Language_Serialised newSLanguage = new Language_Serialised();
+            newSLanguage = retrievedLanguage[0];
+
+            Language newLanguage = new Language();
+            newLanguage = DatabaseRead.Language_deserialise(newSLanguage);
 
             return newLanguage;
         }
@@ -1290,6 +1311,18 @@ namespace JominiEngine
             }
 
             return myProv;
+        }
+
+        public static Province Cass_DatabaseRead_Province(string provID)
+        {
+            Province_Serialised[] retrievedProvince = Globals_Server.cMapper.Fetch<Province_Serialised>("WHERE id = ?", provID).ToArray();
+            Province_Serialised newSProvince = new Province_Serialised();
+            newSProvince = retrievedProvince[0];
+
+            Province newProvince = new Province();
+            newProvince = DatabaseRead.Province_deserialise(newSProvince);
+
+            return newProvince;
         }
 
         /// <summary>

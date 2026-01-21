@@ -746,6 +746,11 @@ namespace JominiEngine
             return putBaseLanguageResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_BaseLanguage(BaseLanguage bl)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(bl);
+        }
+
         /// <summary>
         /// Writes a Language or Language_Serialised object to the database
         /// </summary>
@@ -771,6 +776,17 @@ namespace JominiEngine
             }
 
             return putLanguageResult.IsSuccess;
+        }
+
+        public static void Cass_DatabaseWrite_Language(Language l = null, Language_Serialised ls = null)
+        {
+            if (l != null)
+            {
+                // convert Language into Language_Serialised
+                ls = DatabaseWrite.Language_serialise(l);
+            }
+
+            Globals_Server.cMapper.InsertIfNotExists(ls);
         }
 
         /// <summary>
@@ -832,7 +848,7 @@ namespace JominiEngine
 
         public static void Cass_DatabaseWrite_Rank(Rank r)
         {
-            Globals_Server.cMapper.InsertIfNotExists(r);
+            Globals_Server.cMapper.InsertIfNotExists(r.id.ToString());
         }
         
 
@@ -1030,6 +1046,19 @@ namespace JominiEngine
 
             return putProvResult.IsSuccess;
         }
+
+        public static void Cass_DatabaseWrite_Province(Province p = null, Province_Serialised ps = null)
+        {
+            if (p != null)
+            {
+                // convert Province into Province_Serialised
+                ps = DatabaseWrite.Province_serialise(p);
+            }
+
+            Globals_Server.cMapper.InsertIfNotExists(ps);
+        }
+
+
 
         /// <summary>
         /// Serialises a Province object

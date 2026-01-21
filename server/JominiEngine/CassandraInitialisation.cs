@@ -33,10 +33,11 @@ namespace JominiEngine
             Console.WriteLine("Database alocated");
 
             //cSession.Execute("CREATE TYPE IF NOT EXISTS journal ()");
-
+            Globals_Server.cSession.Execute("CREATE TYPE IF NOT EXISTS titlename (langID text, name text)");
 
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS ailments (ailmentID text, description text, when text, effect int, minimumEffect int, PRIMARY KEY (ailmentID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS armies (armyID text, troops list<int>, leader text, owner text, days double, location text, isMaintained boolean, aggression text, combatOdds text, PRIMARY KEY (armyID))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS baselanguages (id text, name text, PRIMARY KEY (id))");
             //cSession.Execute("CREATE TABLE IF NOT EXISTS client (user text, pcID text, activeChar text, myPastEvents journal, PRIMARY KEY (user))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS factions (factionReqID text, leader text, factionName text, members map<text,text>, PaymentDue list<text>, highestStature list<text>, foundingLocation text, alliedFiefs list<text>, proposedTax int, statureBonus double, treasury int, PRIMARY KEY (factionReqID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS gameClocks (id text, seasons list<text>, currentYear int, currentSeason text, PRIMARY KEY (id))");
@@ -44,9 +45,10 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS languages (id text, baseLanguage text, dialect int, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS nationalities (natID text, name text, PRIMARY KEY (natId))");
             //Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS places (id text, name text, owner text, titleHolder text, rank text, PRIMARY KEY (id))");
+            //Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS positions (id text, 
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS provinces (kingdomId text, taxRate double, PRIMARY KEY (kingdomId))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS ranks (id text, langID text, name text, stature text, PRIMARY KEY (id))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason text, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS ranks (id text, titlenames list<titlename> , stature text, PRIMARY KEY (id))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason int, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS traits (id text, name text, effects map<text,double>, PRIMARY KEY (id))");
             
@@ -74,6 +76,20 @@ namespace JominiEngine
 
             Terrain readT = DatabaseRead.Cass_DatabaseRead_terrain("terr_aqua");
             Console.WriteLine(readT.id + " " + readT.description + " " + readT.travelCost);
+
+            //TitleName[] title = new TitleName[4];
+            //title[0] = new TitleName("lang_C1", "Prince");
+            //title[1] = new TitleName("lang_C2", "Prince");
+            //title[2] = new TitleName("lang_E1", "Prince");
+            //title[3] = new TitleName("lang_F1", "Prince");
+
+            //Rank testRank = new Rank(2, title, 4);
+            //DatabaseWrite.Cass_DatabaseWrite_Rank(testRank);
+            Siege testSiege = new Siege("Siege_1", 1390, 1, "Char_1", "Char_2", "Army_1", "Army_2", "Fef21", 15.0, 1.0, 1, 1, 16.0, "Army_3", "April_1400");
+
+            DatabaseWrite.Cass_DatabaseWrite_Siege(testSiege);
+
+
             //IEnumerable<User> users = mapper.Fetch<User>();
             //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);
 
