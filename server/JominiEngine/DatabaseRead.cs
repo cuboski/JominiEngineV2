@@ -977,9 +977,9 @@ namespace JominiEngine
 
         public static Faction Cass_DatabaseRead_Faction(string factID)
         {
-            Faction[] retrievedFaction = Globals_Server.cMapper.Fetch<Faction>("WHERE id = ?", factID).ToArray();
-            Faction newFaction = new Faction();
-            newFaction = retrievedFaction[0];
+            Faction_Simple[] retrievedFaction = Globals_Server.cMapper.Fetch<Faction_Simple>("WHERE id = ?", factID).ToArray();
+            Faction_Simple read = retrievedFaction[0];
+            Faction newFaction = new Faction(read);
 
             return newFaction;
         }
@@ -1033,9 +1033,12 @@ namespace JominiEngine
 
         public static Army Cass_DatabaseRead_Army(string armyID)
         {
-            Army[] retrievedArmy = Globals_Server.cMapper.Fetch<Army>("WHERE id = ?", armyID).ToArray();
-            Army newArmy = new Army();
-            newArmy = retrievedArmy[0];
+            Globals_Server.logEvent("in read");
+            Globals_Server.logEvent(armyID);
+            Army_Simple[] retrievedArmy = Globals_Server.cMapper.Fetch<Army_Simple>("WHERE armyID = ?", armyID).ToArray();
+            Globals_Server.logEvent("after read");
+            Army_Simple read = retrievedArmy[0];
+            Army newArmy = new Army(read);
 
             return newArmy;
         }

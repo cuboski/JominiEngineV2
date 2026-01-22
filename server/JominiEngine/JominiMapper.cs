@@ -14,9 +14,9 @@ namespace JominiEngine {
         {
 
             //Defines the mappings from tables in the cassandra db to classes in the server
-            For<Army>().TableName("armies");
+            For<Army_Simple>().TableName("armies");
             For<BaseLanguage>().TableName("baselanguages");
-            For<Faction>().TableName("factions");
+            For<Faction_Simple>().TableName("factions");
             For<GameClock>().TableName("gameclocks");
             For<Kingdom_Serialised>().TableName("kingdoms");
             For<Language>().TableName("languages");

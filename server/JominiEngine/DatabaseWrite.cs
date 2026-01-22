@@ -1176,7 +1176,9 @@ namespace JominiEngine
 
         public static void Cass_DatabaseWrite_Army(Army a)
         {
-            Globals_Server.cMapper.InsertIfNotExists(a);
+
+            Army_Simple toWrite = new Army_Simple(a);
+            Globals_Server.cMapper.InsertIfNotExists(toWrite);
         }
 
         /// <summary>
@@ -1225,7 +1227,8 @@ namespace JominiEngine
 
         public static void Cass_DatabaseWrite_Faction(Faction f)
         {
-            Globals_Server.cMapper.InsertIfNotExists(f);
+            Faction_Simple write = new Faction_Simple(f);
+            Globals_Server.cMapper.InsertIfNotExists(write);
         }
 
         public static bool DatabaseWrite_User(string username, Tuple<byte[], byte[]>  passHash)

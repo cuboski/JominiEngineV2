@@ -51,6 +51,21 @@ namespace JominiEngine
             Utility_Methods.GetCharacter(leader, out err).statureModifier += statureBonus;
         }
 
+        public Faction(Faction_Simple fact)
+        {
+            this.factionReqID = fact.factionReqID;
+            this.leader = fact.leader;
+            this.factionName = fact.factionName;
+            this.members = fact.members;
+            this.PaymentDue = fact.PaymentDue;
+            this.highestStature = fact.highestStature;
+            this.foundingLocation = fact.foundingLocation;
+            this.alliedFiefs = fact.alliedFiefs;
+            this.proposedTax = (uint)(fact.proposedTax);
+            this.statureBonus = fact.statureBonus;
+            this.treasury = (uint)(fact.treasury);
+        }
+
         public void AdjustTreasury(uint amount)
         {
             treasury += amount; 
@@ -175,5 +190,36 @@ namespace JominiEngine
 
             return Utility_Methods.GetCharacter(member, out err).statureModifier;
         }
+    }
+
+    public class Faction_Simple
+    {
+        public string factionReqID { get; set; }
+        public string leader { get; set; }
+        public string factionName { get; set; }
+        public Dictionary<string, string> members = new Dictionary<string, string>();
+        public List<string> PaymentDue = new List<string>();
+        public string[] highestStature = new string[5];
+        public string foundingLocation { get; set; }
+        public List<string> alliedFiefs = new List<string>();
+        public int proposedTax { get; set; }
+        public double statureBonus = 0;
+        public int treasury { get; set; }
+
+        public Faction_Simple(Faction fact)
+        {
+            this.factionReqID = fact.factionReqID;
+            this.leader = fact.leader;
+            this.factionName = fact.factionName;
+            this.members = fact.members;
+            this.PaymentDue = fact.PaymentDue;
+            this.highestStature = fact.highestStature;
+            this.foundingLocation = fact.foundingLocation;
+            this.alliedFiefs = fact.alliedFiefs;
+            this.proposedTax = Convert.ToInt32(fact.proposedTax);
+            this.statureBonus = fact.statureBonus;
+            this.treasury = Convert.ToInt32(fact.treasury);
+        }
+
     }
 }

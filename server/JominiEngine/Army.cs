@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Text;
 using System.IO;
+using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 namespace JominiEngine 
 {
     /// <summary>
@@ -17,17 +18,7 @@ namespace JominiEngine
 		/// Holds army ID
 		/// </summary>
 		public String armyID { get; set; }
-        /// <summary>
-        /// Holds troops in army
-        /// 0 = knights
-        /// 1 = menAtArms
-        /// 2 = lightCav
-        /// 3 = longbowmen
-        /// 4 = crossbowmen
-        /// 5 = foot
-        /// 6 = rabble
-        /// </summary>
-        public uint[] troops = new uint[7] {0, 0, 0, 0, 0, 0, 0};
+
         /// <summary>
         /// Holds army leader (ID)
         /// </summary>
@@ -56,6 +47,17 @@ namespace JominiEngine
         /// Indicates army's combat odds value (i.e. at what odds will attempt automated combat action)
         /// </summary>
         public byte combatOdds { get; set; }
+        /// <summary>
+        /// Holds troops in army
+        /// 0 = knights
+        /// 1 = menAtArms
+        /// 2 = lightCav
+        /// 3 = longbowmen
+        /// 4 = crossbowmen
+        /// 5 = foot
+        /// 6 = rabble
+        /// </summary>
+        public uint[] troops = new uint[7] { 0, 0, 0, 0, 0, 0, 0 };
 
         [ContractInvariantMethod]
         private void Invariant()
@@ -158,6 +160,40 @@ namespace JominiEngine
         public Army()
 		{
 		}
+
+
+        //Turns a simple army back into an army after leaving db
+        public Army(Army_Simple army)
+        {
+            this.armyID = army.armyID;
+            this.leader = army.leader;
+            this.owner = army.owner;
+            this.days = army.days;
+            this.location = army.location;
+            this.isMaintained = army.isMaintained;
+            this.aggression = Convert.ToByte(army.aggression);
+            this.combatOdds = Convert.ToByte(army.combatOdds);
+            if (army.troops != null)
+            {
+                if (army.troops.Length == 7)
+                {
+                    uint[] convertTroops = new uint[7];
+                    convertTroops[0] = (uint)(army.troops[0]);
+                    convertTroops[1] = (uint)(army.troops[1]);
+                    convertTroops[2] = (uint)(army.troops[2]);
+                    convertTroops[3] = (uint)(army.troops[3]);
+                    convertTroops[4] = (uint)(army.troops[4]);
+                    convertTroops[5] = (uint)(army.troops[5]);
+                    convertTroops[6] = (uint)(army.troops[6]);
+
+                    this.troops = convertTroops;
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect troops length supplied to constructor");
+                }
+            }
+        }
 
         /// <summary>
         /// Performs functions associated with creating a new army
@@ -1744,6 +1780,86 @@ namespace JominiEngine
                 }
             }
             return null;
+        }
+    }
+
+    //New simple army for storing in db
+    public class Army_Simple
+    {
+        /// <summary>
+		/// Holds army ID
+		/// </summary>
+		public String armyID { get; set; }
+        
+        /// <summary>
+        /// Holds army leader (ID)
+        /// </summary>
+        public string leader { get; set; }
+        /// <summary>
+        /// Holds army owner (ID)
+        /// </summary>
+        public string owner { get; set; }
+        /// <summary>
+        /// Holds army's remaining days in season
+        /// </summary>
+        public double days { get; set; }
+        /// <summary>
+        /// Holds army location (fiefID)
+        /// </summary>
+        public string location { get; set; }
+        /// <summary>
+        /// Indicates whether army is being actively maintained by owner
+        /// </summary>
+        public bool isMaintained { get; set; }
+        /// <summary>
+        /// Indicates army's aggression level (automated response to combat)
+        /// </summary>
+        public string aggression { get; set; }
+        /// <summary>
+        /// Indicates army's combat odds value (i.e. at what odds will attempt automated combat action)
+        /// </summary>
+        public string combatOdds { get; set; }
+        /// <summary>
+        /// Holds troops in army
+        /// 0 = knights
+        /// 1 = menAtArms
+        /// 2 = lightCav
+        /// 3 = longbowmen
+        /// 4 = crossbowmen
+        /// 5 = foot
+        /// 6 = rabble
+        /// </summary>
+        public int[] troops = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
+        public Army_Simple (Army army)
+        {
+            this.armyID = army.armyID;
+            this.leader = army.leader;
+            this.owner = army.owner;
+            this.days = army.days;
+            this.location = army.location;
+            this.isMaintained = army.isMaintained;
+            this.aggression = army.aggression.ToString();
+            this.combatOdds = army.combatOdds.ToString();
+            if (army.troops != null)
+            {
+                if (army.troops.Length == 7)
+                {
+                    int[] convertTroops = new int[7];
+                    convertTroops[0] = Convert.ToInt32(army.troops[0]);
+                    convertTroops[1] = Convert.ToInt32(army.troops[1]);
+                    convertTroops[2] = Convert.ToInt32(army.troops[2]);
+                    convertTroops[3] = Convert.ToInt32(army.troops[3]);
+                    convertTroops[4] = Convert.ToInt32(army.troops[4]);
+                    convertTroops[5] = Convert.ToInt32(army.troops[5]);
+                    convertTroops[6] = Convert.ToInt32(army.troops[6]);
+                    
+                    this.troops = convertTroops;
+                }
+                else
+                {
+                    Console.WriteLine("Incorrect troops length supplied to constructor");
+                }
+            }
         }
     }
 }
