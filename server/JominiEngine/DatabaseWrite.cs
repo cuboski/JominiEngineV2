@@ -563,7 +563,8 @@ namespace JominiEngine
 
         public static void Cass_DatabaseWrite_Clock(GameClock gc)
         {
-            Globals_Server.cMapper.InsertIfNotExists(gc);
+            GameClock_Simple gcs = new GameClock_Simple(gc);
+            Globals_Server.cMapper.InsertIfNotExists(gcs);
         }
 
 
@@ -722,7 +723,8 @@ namespace JominiEngine
 
         public static void Cass_DatabaseWrite_Trait(Trait t)
         {
-            Globals_Server.cMapper.InsertIfNotExists(t);
+            Trait_Simple tr = new Trait_Simple(t);
+            Globals_Server.cMapper.InsertIfNotExists(tr);
         }
         
 
@@ -848,7 +850,8 @@ namespace JominiEngine
 
         public static void Cass_DatabaseWrite_Rank(Rank r)
         {
-            Globals_Server.cMapper.InsertIfNotExists(r.id.ToString());
+            Rank_Simple rs = new Rank_Simple(r);
+            Globals_Server.cMapper.InsertIfNotExists(rs);
         }
         
 

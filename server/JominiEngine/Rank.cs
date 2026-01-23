@@ -51,6 +51,21 @@ namespace JominiEngine
 
         }
 
+        public Rank(Rank_Simple rank)
+        {
+            this.id = Convert.ToByte(rank.id);
+
+            TitleName[] titles = new TitleName[rank.langID.Length];
+            for (int i = 0; i < rank.langID.Length; i++)
+            {
+                titles[i].langID = rank.langID[i];
+                titles[i].name = rank.name[i];
+            }
+            this.title = titles;
+
+            this.stature = Convert.ToByte(rank.stature);
+        }
+
         /// <summary>
         /// Constructor for Rank using Position_Serialised object
         /// For use when de-serialising
@@ -446,5 +461,52 @@ namespace JominiEngine
             this.name = nam;
         }
 			
+    }
+
+    public class Rank_Simple
+    {
+
+        /// <summary>
+        /// Holds rank ID
+        /// </summary>
+        public string id { get; set; }
+        /// <summary>
+        /// Holds Language ID or "generic"
+        /// </summary>
+        public string[] langID { get; set; }
+        /// <summary>
+        /// Holds title name associated with specific language
+        /// </summary>
+        public string[] name { get; set; }
+        /// <summary>
+        /// Holds base stature for this rank
+        /// </summary>
+        public string stature { get; set; }
+
+        public Rank_Simple()
+        {
+
+        }
+
+        public Rank_Simple(Rank rank)
+        {
+            this.id = rank.id.ToString();
+            string[] langs = new string[rank.title.Length];
+            for (int i = 0; i < rank.title.Length; i++)
+            {
+                langs[i] = rank.title[i].langID;
+            }
+            this.langID = langs;
+            
+            string[] names = new string[rank.title.Length];
+            for (int i = 0; i < rank.title.Length; i++)
+            {
+                names[i] = rank.title[i].name;
+            }
+            this.name = names;
+            this.stature = rank.stature.ToString();
+        }
+
+
     }
 }

@@ -1830,6 +1830,12 @@ namespace JominiEngine
         /// 6 = rabble
         /// </summary>
         public int[] troops = new int[7] { 0, 0, 0, 0, 0, 0, 0 };
+
+        //Used implicitly when getting object from database
+        public Army_Simple ()
+        {
+
+        }
         public Army_Simple (Army army)
         {
             this.armyID = army.armyID;

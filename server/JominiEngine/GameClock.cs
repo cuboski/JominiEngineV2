@@ -60,6 +60,14 @@ namespace JominiEngine
             this.currentSeason = s;
         }
 
+        public GameClock(GameClock_Simple clock)
+        {
+            this.id = clock.id;
+            this.seasons = clock.seasons;
+            this.currentYear = (uint)(clock.currentYear);
+            this.currentSeason = Convert.ToByte(clock.currentSeason);
+        }
+
         /// <summary>
         /// Constructor for GameClock taking no parameters.
         /// For use when de-serialising.
@@ -110,6 +118,41 @@ namespace JominiEngine
             {
                 this.currentSeason++;
             }
+        }
+    }
+
+    public class GameClock_Simple
+    {
+
+        /// <summary>
+		/// Holds clock ID
+		/// </summary>
+		public String id { get; set; }
+        /// <summary>
+        /// Holds seasons
+        /// </summary>
+        public string[] seasons = new string[4] { "Spring", "Summer", "Autumn", "Winter" };
+        /// <summary>
+        /// Holds current year
+        /// </summary>
+        public int currentYear { get; set; }
+        /// <summary>
+        /// Holds current season
+        /// </summary>
+        public string currentSeason { get; set; }
+
+        //Used implicitly when getting object from database
+        public GameClock_Simple() 
+        { 
+
+        }
+
+        public GameClock_Simple(GameClock clock)
+        {
+            this.id = clock.id;
+            this.seasons = clock.seasons;
+            this.currentYear = Convert.ToInt32(clock.currentYear);
+            this.currentSeason = clock.currentSeason.ToString();
         }
     }
 }

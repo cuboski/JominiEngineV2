@@ -39,7 +39,7 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS armies (armyID text, leader text, owner text, days double, location text, isMaintained boolean, aggression text, combatOdds text, troops list<int>, PRIMARY KEY (armyID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS baselanguages (id text, name text, PRIMARY KEY (id))");
             //cSession.Execute("CREATE TABLE IF NOT EXISTS client (user text, pcID text, activeChar text, myPastEvents journal, PRIMARY KEY (user))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS factions (factionReqID text, leader text, factionName text, members map<text,text>, PaymentDue list<text>, highestStature list<text>, foundingLocation text, alliedFiefs list<text>, proposedTax int, statureBonus double, treasury int, PRIMARY KEY (factionReqID))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS factions (factionReqID text, leader text, factionName text, members text, PaymentDue list<text>, highestStature list<text>, foundingLocation text, alliedFiefs list<text>, proposedTax int, statureBonus double, treasury int, PRIMARY KEY (factionReqID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS gameClocks (id text, seasons list<text>, currentYear int, currentSeason text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS kingdoms (id text, name text, owner text, titleHolder text, rank text, nationality text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS languages (id text, baseLanguage text, dialect int, PRIMARY KEY (id))");
@@ -50,7 +50,7 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS ranks (id text, langID list<text>, name list<text>, stature text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason int, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS traits (id text, name text, effects map<text,double>, PRIMARY KEY (id))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS traits (id text, name text, effects text, PRIMARY KEY (id))");
             
             Globals_Server.cMapper = new Mapper(Globals_Server.cSession);
             JominiMapper jMapper = new JominiMapper();
@@ -77,17 +77,11 @@ namespace JominiEngine
             Terrain readT = DatabaseRead.Cass_DatabaseRead_terrain("terr_aqua");
             Console.WriteLine(readT.id + " " + readT.description + " " + readT.travelCost);
 
-            //TitleName[] title = new TitleName[4];
-            //title[0] = new TitleName("lang_C1", "Prince");
-            //title[1] = new TitleName("lang_C2", "Prince");
-            //title[2] = new TitleName("lang_E1", "Prince");
-            //title[3] = new TitleName("lang_F1", "Prince");
-
-            //Rank testRank = new Rank(2, title, 4);
-            //DatabaseWrite.Cass_DatabaseWrite_Rank(testRank);
+            
             //Siege testSiege = new Siege("Siege_1", 1390, 1, "Char_1", "Char_2", "Army_1", "Army_2", "Fef21", 15.0, 1.0, 1, 1, 16.0, "Army_3", "April_1400");
 
             //DatabaseWrite.Cass_DatabaseWrite_Siege(testSiege);
+            
             uint[] a = new uint[7] { 1, 2, 3, 4, 5, 6, 7 };
             Army testArmy = new Army("Army_1", "Char_1", "Char_2", 10.0, "Arm12", false, 1, 9, a);
             DatabaseWrite.Cass_DatabaseWrite_Army(testArmy);
@@ -98,6 +92,45 @@ namespace JominiEngine
             String aa = "Army_1";
             Army readA = DatabaseRead.Cass_DatabaseRead_Army(aa);
             Console.WriteLine(readA.armyID + " " + readA.leader);
+
+            Dictionary<Globals_Game.Stats, double> effects = new Dictionary<Globals_Game.Stats, double>();
+            effects.Add(Globals_Game.Stats.BATTLE, 0.88);
+            Trait testTrait = new Trait("trait_11", "fun", effects);
+            DatabaseWrite.Cass_DatabaseWrite_Trait(testTrait);
+
+            Trait readTr = DatabaseRead.Cass_DatabaseRead_Trait("trait_11");
+            Console.WriteLine(readTr.id + " " + readTr.name);
+
+            BaseLanguage testBl = new BaseLanguage("lang_aa", "French");
+            DatabaseWrite.Cass_DatabaseWrite_BaseLanguage(testBl);
+
+            BaseLanguage readBl = DatabaseRead.Cass_DatabaseRead_BaseLanguage("aaa");
+            Console.WriteLine(readBl.id + " " + readBl.name);
+
+            Language_Serialised testL = new Language_Serialised("lang_aa12", "lang_aa", 1);
+            Language testLl = new Language(testL);
+            testLl.baseLanguage = testBl;
+            DatabaseWrite.Cass_DatabaseWrite_Language(testLl);
+
+            Language readL = DatabaseRead.Cass_DatabaseRead_Language("lang_aa12");
+            Console.WriteLine(readL.id + " " + readL.dialect);
+
+            //Faction testFaction = new Faction("Fact_a", "Char_1", "Here", 10);
+            //DatabaseWrite.Cass_DatabaseWrite_Faction(testFaction);
+
+            //Faction readTf = DatabaseRead.Cass_DatabaseRead_Faction("Fact_a");
+            //Console.WriteLine(readTf.factionReqID + " " + readTf.leader);
+            TitleName[] title = new TitleName[4];
+            title[0] = new TitleName("lang_C1", "Prince");
+            title[1] = new TitleName("lang_C2", "Prince");
+            title[2] = new TitleName("lang_E1", "Prince");
+            title[3] = new TitleName("lang_F1", "Prince");
+
+            Rank testRank = new Rank(2, title, 4);
+            DatabaseWrite.Cass_DatabaseWrite_Rank(testRank);
+
+            Rank readR = DatabaseRead.Cass_DatabaseRead_Rank("2");
+            Console.WriteLine(readR.id + " " + readR.stature);
 
             //IEnumerable<User> users = mapper.Fetch<User>();
             //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);

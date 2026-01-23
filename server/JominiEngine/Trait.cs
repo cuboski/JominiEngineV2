@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace JominiEngine
 {
@@ -69,6 +70,14 @@ namespace JominiEngine
 
         }
 
+        public Trait(Trait_Simple trait)
+        {
+            this.id = trait.id;
+            this.name = trait.name;
+            this.effects = JsonConvert.DeserializeObject<Dictionary<Globals_Game.Stats, double>>(trait.effects);
+
+        }
+
         /// <summary>
         /// Constructor for Trait taking no parameters.
         /// For use when de-serialising.
@@ -76,5 +85,35 @@ namespace JominiEngine
         public Trait()
 		{
 		}
+    }
+
+    public class Trait_Simple
+    {
+        /// <summary>
+        /// Holds trait ID
+		/// </summary>
+		public String id { get; set; }
+        /// <summary>
+        /// Holds strait name
+        /// </summary>
+        public String name { get; set; }
+        /// <summary>
+        /// Holds serialized dictionary as a string for trait effects
+        /// </summary>
+        public string effects { get; set; }
+
+        //Used implicitly when getting object from database
+        public Trait_Simple()
+        {
+
+        }
+
+        public Trait_Simple(Trait trait)
+        {
+            this.id = trait.id;
+            this.name = trait.name;
+            this.effects = JsonConvert.SerializeObject(trait.effects);
+        }
+
     }
 }

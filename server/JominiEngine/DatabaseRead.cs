@@ -461,9 +461,9 @@ namespace JominiEngine
 
         public static GameClock Cass_DatabaseRead_GameClock(string clockID)
         {
-            GameClock[] retrievedClock = Globals_Server.cMapper.Fetch<GameClock>("WHERE id = ?", clockID).ToArray();
-            GameClock newClock = new GameClock();
-            newClock = retrievedClock[0];
+            GameClock_Simple[] retrievedClock = Globals_Server.cMapper.Fetch<GameClock_Simple>("WHERE id = ?", clockID).ToArray();
+            GameClock_Simple gc = retrievedClock[0];
+            GameClock newClock = new GameClock(gc);
 
             return newClock;
         }
@@ -709,9 +709,9 @@ namespace JominiEngine
 
         public static Trait Cass_DatabaseRead_Trait(string traitID)
         {
-            Trait[] retrievedTrait = Globals_Server.cMapper.Fetch<Trait>("WHERE id = ?", traitID).ToArray();
-            Trait newTrait = new Trait();
-            newTrait = retrievedTrait[0];
+            Trait_Simple[] retrievedTrait = Globals_Server.cMapper.Fetch<Trait_Simple>("WHERE id = ?", traitID).ToArray();
+            Trait_Simple tr = retrievedTrait[0];
+            Trait newTrait = new Trait(tr);
 
             return newTrait;
         }
@@ -785,9 +785,22 @@ namespace JominiEngine
             newSLanguage = retrievedLanguage[0];
 
             Language newLanguage = new Language();
-            newLanguage = DatabaseRead.Language_deserialise(newSLanguage);
+            newLanguage = DatabaseRead.Temp_Language_deserialise(newSLanguage);
 
             return newLanguage;
+        }
+
+        //while Globals_game not ready use this instead
+        public static Language Temp_Language_deserialise(Language_Serialised ls)
+        {
+            Language langOut = null;
+
+            // create Language from Language_Serialised
+            langOut = new Language(ls);
+
+            langOut.baseLanguage = Cass_DatabaseRead_BaseLanguage(ls.baseLanguage);
+
+            return langOut;
         }
 
         /// <summary>
@@ -799,7 +812,7 @@ namespace JominiEngine
         {
             Language langOut = null;
 
-            // create NonPlayerCharacter from NonPlayerCharacter_Serialised
+            // create Language from Language_Serialised
             langOut = new Language(ls);
 
             // insert BaseLanguage
@@ -832,6 +845,15 @@ namespace JominiEngine
             return newNat;
         }
 
+        public static Nationality Cass_DatabaseRead_Nationality(string natID)
+        {
+            Nationality[] retrievedNationality = Globals_Server.cMapper.Fetch<Nationality>("WHERE natID = ?", natID).ToArray();
+            Nationality newNationality = new Nationality();
+            newNationality = retrievedNationality[0];
+
+            return newNationality;
+        }
+
         /// <summary>
         /// Reads a Rank object from the database
         /// </summary>
@@ -858,9 +880,9 @@ namespace JominiEngine
 
         public static Rank Cass_DatabaseRead_Rank(string rankID)
         {
-            Rank[] retrievedRank = Globals_Server.cMapper.Fetch<Rank>("WHERE id = ?", rankID).ToArray();
-            Rank newRank = new Rank();
-            newRank = retrievedRank[0];
+            Rank_Simple[] retrievedRank = Globals_Server.cMapper.Fetch<Rank_Simple>("WHERE id = ?", rankID).ToArray();
+            Rank_Simple read = retrievedRank[0];
+            Rank newRank = new Rank(read);
 
             return newRank;
         }
@@ -977,7 +999,7 @@ namespace JominiEngine
 
         public static Faction Cass_DatabaseRead_Faction(string factID)
         {
-            Faction_Simple[] retrievedFaction = Globals_Server.cMapper.Fetch<Faction_Simple>("WHERE id = ?", factID).ToArray();
+            Faction_Simple[] retrievedFaction = Globals_Server.cMapper.Fetch<Faction_Simple>("WHERE factionReqID = ?", factID).ToArray();
             Faction_Simple read = retrievedFaction[0];
             Faction newFaction = new Faction(read);
 

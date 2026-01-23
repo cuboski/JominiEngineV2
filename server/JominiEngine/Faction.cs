@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace JominiEngine
 {
@@ -56,7 +57,7 @@ namespace JominiEngine
             this.factionReqID = fact.factionReqID;
             this.leader = fact.leader;
             this.factionName = fact.factionName;
-            this.members = fact.members;
+            this.members = JsonConvert.DeserializeObject<Dictionary<string, string>>(fact.members);
             this.PaymentDue = fact.PaymentDue;
             this.highestStature = fact.highestStature;
             this.foundingLocation = fact.foundingLocation;
@@ -197,7 +198,7 @@ namespace JominiEngine
         public string factionReqID { get; set; }
         public string leader { get; set; }
         public string factionName { get; set; }
-        public Dictionary<string, string> members = new Dictionary<string, string>();
+        public string members {  get; set; }
         public List<string> PaymentDue = new List<string>();
         public string[] highestStature = new string[5];
         public string foundingLocation { get; set; }
@@ -206,12 +207,17 @@ namespace JominiEngine
         public double statureBonus = 0;
         public int treasury { get; set; }
 
+        //Used implicitly when getting object from database
+        public Faction_Simple()
+        {
+
+        }
         public Faction_Simple(Faction fact)
         {
             this.factionReqID = fact.factionReqID;
             this.leader = fact.leader;
             this.factionName = fact.factionName;
-            this.members = fact.members;
+            this.members = JsonConvert.SerializeObject(fact.members);
             this.PaymentDue = fact.PaymentDue;
             this.highestStature = fact.highestStature;
             this.foundingLocation = fact.foundingLocation;
