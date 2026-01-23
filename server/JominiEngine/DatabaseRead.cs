@@ -916,6 +916,16 @@ namespace JominiEngine
             return newPos;
         }
 
+        public static Position Cass_DatabaseRead_Position(string posID)
+        {
+            Position_Simple[] retrievedRank = Globals_Server.cMapper.Fetch<Position_Simple>("WHERE id = ?", posID).ToArray();
+            Position_Simple read = retrievedRank[0];
+            Position_Serialised newPosSer = new Position_Serialised(read);
+            Position newPosition = new Position(newPosSer);
+            newPosition.nationality = Cass_DatabaseRead_Nationality(read.nationality);
+            return newPosition;
+        }
+
         /// <summary>
         /// Deserialises a Position object
         /// </summary>

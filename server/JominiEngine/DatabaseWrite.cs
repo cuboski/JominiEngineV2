@@ -881,6 +881,17 @@ namespace JominiEngine
             return putPosResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_Position(Position p = null, Position_Serialised ps = null)
+        {
+            if (p != null)
+            {
+                // convert Position into Position_Serialised
+                ps = DatabaseWrite.Position_serialise(p);
+            }
+            Position_Simple pss = new Position_Simple(ps);
+            Globals_Server.cMapper.InsertIfNotExists(pss);
+        }
+
         /// <summary>
         /// serialises a Position object
         /// </summary>

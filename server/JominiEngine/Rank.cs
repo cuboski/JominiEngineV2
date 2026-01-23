@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 using ProtoBuf;
+using ProtoMessageClient;
 namespace JominiEngine
 {
     /// <summary>
@@ -406,6 +407,23 @@ namespace JominiEngine
             this.nationality = nat;
         }
 
+        public Position_Serialised(Position_Simple pos)
+        {
+            this.id = Convert.ToByte(pos.id);
+
+            TitleName[] titles = new TitleName[pos.langID.Length];
+            for (int i = 0; i < pos.langID.Length; i++)
+            {
+                titles[i].langID = pos.langID[i];
+                titles[i].name = pos.name[i];
+            }
+            this.title = titles;
+
+            this.stature = Convert.ToByte(pos.stature);
+            this.officeHolder = pos.officeHolder;
+            this.nationality = pos.nationality;
+        }
+
         /// <summary>
         /// Constructor for Position_Serialised taking no parameters.
         /// For use when de-serialising.
@@ -461,6 +479,60 @@ namespace JominiEngine
             this.name = nam;
         }
 			
+    }
+
+    public class Position_Simple
+    {
+        /// <summary>
+        /// Holds rank ID
+        /// </summary>
+        public string id { get; set; }
+        /// <summary>
+        /// Holds Language ID or "generic"
+        /// </summary>
+        public string[] langID { get; set; }
+        /// <summary>
+        /// Holds title name associated with specific language
+        /// </summary>
+        public string[] name { get; set; }
+        /// <summary>
+        /// Holds base stature for this rank
+        /// </summary>
+        public string stature { get; set; }
+        /// <summary>
+        /// Holds ID of the office holder
+        /// </summary>
+        public string officeHolder { get; set; }
+        /// <summary>
+        /// Holds ID of Nationality associated with the position
+        /// </summary>
+        public string nationality { get; set; }
+        public Position_Simple()
+        {
+
+        }
+
+        public Position_Simple(Position_Serialised pos)
+        {
+
+            this.id = pos.id.ToString();
+            string[] langs = new string[pos.title.Length];
+            for (int i = 0; i < pos.title.Length; i++)
+            {
+                langs[i] = pos.title[i].langID;
+            }
+            this.langID = langs;
+
+            string[] names = new string[pos.title.Length];
+            for (int i = 0; i < pos.title.Length; i++)
+            {
+                names[i] = pos.title[i].name;
+            }
+            this.name = names;
+            this.stature = pos.stature.ToString();
+            this.officeHolder = pos.officeHolder;
+            this.nationality = pos.nationality;
+        }
     }
 
     public class Rank_Simple

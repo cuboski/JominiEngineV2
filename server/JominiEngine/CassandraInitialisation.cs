@@ -63,7 +63,7 @@ namespace JominiEngine
             ti = t[0];
             Console.WriteLine(ti.id + " " + ti.description + " " + ti.travelCost);
 
-            Nationality testN = new Nationality("1", "Scot");
+            Nationality testN = new Nationality("abc", "Scot");
             Globals_Server.cMapper.InsertIfNotExists(testN);
             String nt = "1";
             Nationality[] n = Globals_Server.cMapper.Fetch<Nationality>("WHERE natID = ?", nt).ToArray();
@@ -131,6 +131,12 @@ namespace JominiEngine
 
             Rank readR = DatabaseRead.Cass_DatabaseRead_Rank("2");
             Console.WriteLine(readR.id + " " + readR.stature);
+
+            Position testPosition = new Position(3, title, 5, "Char_5", testN);
+            DatabaseWrite.Cass_DatabaseWrite_Position(testPosition);
+
+            Position readP = DatabaseRead.Cass_DatabaseRead_Position("3");
+            Console.WriteLine(readP.id + " " + readP.stature + " " + readP.officeHolder);
 
             //IEnumerable<User> users = mapper.Fetch<User>();
             //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);
