@@ -229,6 +229,25 @@ namespace JominiEngine
         public Siege()
 		{
 		}
+
+        public Siege(Siege_Simple siege)
+        {
+            this.siegeID = siege.siegeID;
+            this.startYear = (uint)(siege.startYear);
+            this.startSeason = Convert.ToByte(siege.startSeason);
+            this.besiegingPlayer = siege.besiegingPlayer;
+            this.defendingPlayer = siege.defendingPlayer;
+            this.besiegerArmy = siege.besiegerArmy;
+            this.defenderGarrison = siege.defenderGarrison;
+            this.besiegedFief = siege.besiegedFief;
+            this.days = siege.days;
+            this.startKeepLevel = siege.startKeepLevel;
+            this.totalCasualtiesAttacker = siege.totalCasualtiesAttacker;
+            this.totalCasualtiesDefender = siege.totalCasualtiesDefender;
+            this.totalDays = siege.totalDays;
+            this.defenderAdditional = siege.defenderAdditional;
+            this.endDate = siege.endDate;
+        }
 		
         /// <summary>
         /// Gets the fief being besieged
@@ -1372,6 +1391,96 @@ namespace JominiEngine
                 }
             }
 
+        }
+
+    }
+
+    public class Siege_Simple
+    {
+        /// <summary>
+        /// Holds siege ID
+        /// </summary>
+        public String siegeID { get; set; }
+        /// <summary>
+        /// Holds year the siege started
+        /// </summary>
+        public int startYear { get; set; }
+        /// <summary>
+        /// Holds season the siege started
+        /// </summary>
+        public string startSeason { get; set; }
+        /// <summary>
+        /// Holds besieging player (charID)
+        /// </summary>
+        public String besiegingPlayer { get; set; }
+        /// <summary>
+        /// Holds defending player (charID)
+        /// </summary>
+        public String defendingPlayer { get; set; }
+        /// <summary>
+        /// Holds besieging army (armyID)
+        /// </summary>
+        public String besiegerArmy { get; set; }
+        /// <summary>
+        /// Holds defending garrison (armyID)
+        /// </summary>
+        public String defenderGarrison { get; set; }
+        /// <summary>
+        /// Holds fief being besieged (fiefID)
+        /// </summary>
+        public String besiegedFief { get; set; }
+        /// <summary>
+        /// Holds days left in current season
+        /// </summary>
+        public double days { get; set; }
+        /// <summary>
+        /// Holds the keep level at the start of the siege
+        /// </summary>
+        public double startKeepLevel { get; set; }
+        /// <summary>
+        /// Holds total casualties suffered so far by attacker
+        /// </summary>
+        public int totalCasualtiesAttacker { get; set; }
+        /// <summary>
+        /// Holds total casualties suffered so far by defender
+        /// </summary>
+        public int totalCasualtiesDefender { get; set; }
+        /// <summary>
+        /// Holds total duration of siege so far (days)
+        /// </summary>
+        public double totalDays { get; set; }
+        /// <summary>
+        /// Holds additional defending army (armyID)
+        /// </summary>
+        public String defenderAdditional { get; set; }
+        /// <summary>
+        /// Holds season and year the siege ended
+        /// </summary>
+        public String endDate { get; set; }
+
+        //Used implicitly when getting object from database
+        public Siege_Simple()
+        {
+
+        }
+
+        public Siege_Simple(Siege siege)
+        {
+            this.siegeID = siege.siegeID;
+            this.startYear = Convert.ToInt32(siege.startYear);
+            this.startSeason = siege.startSeason.ToString();
+            this.besiegingPlayer = siege.besiegingPlayer;
+            this.defendingPlayer = siege.defendingPlayer;
+            this.besiegerArmy = siege.besiegerArmy;
+            this.defenderGarrison = siege.defenderGarrison;
+            this.besiegedFief = siege.besiegedFief;
+            this.days = siege.days;
+            this.startKeepLevel = siege.startKeepLevel;
+            this.totalCasualtiesAttacker = siege.totalCasualtiesAttacker;
+            this.totalCasualtiesDefender = siege.totalCasualtiesDefender;
+            this.totalDays = siege.totalDays;
+            this.defenderAdditional = siege.defenderAdditional;
+            this.endDate = siege.endDate;
         }
 
     }

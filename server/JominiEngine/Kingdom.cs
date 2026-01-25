@@ -194,4 +194,12 @@ namespace JominiEngine
         }
     }
 
+    public class Kingdom_Simple : Place_Simple
+    {
+        public Kingdom_Simple()
+        {
+
+        }
+    }
+
 }

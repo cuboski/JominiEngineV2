@@ -1216,7 +1216,8 @@ namespace JominiEngine
 
         public static void Cass_DatabaseWrite_Siege(Siege s)
         {
-            Globals_Server.cMapper.InsertIfNotExists(s);
+            Siege_Simple si = new Siege_Simple(s);
+            Globals_Server.cMapper.InsertIfNotExists(si);
         }
         
 

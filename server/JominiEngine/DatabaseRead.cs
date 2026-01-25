@@ -974,9 +974,9 @@ namespace JominiEngine
 
         public static Siege Cass_DatabaseRead_Siege(string siegeID)
         {
-            Siege[] retrievedSiege = Globals_Server.cMapper.Fetch<Siege>("WHERE id = ?", siegeID).ToArray();
-            Siege newSiege = new Siege();
-            newSiege = retrievedSiege[0];
+            Siege_Simple[] retrievedSiege = Globals_Server.cMapper.Fetch<Siege_Simple>("WHERE siegeID = ?", siegeID).ToArray();
+            Siege_Simple read = retrievedSiege[0];
+            Siege newSiege = new Siege(read);
 
             return newSiege;
         }

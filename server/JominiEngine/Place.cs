@@ -286,6 +286,94 @@ namespace JominiEngine
             this.rank = r;
 
         }
+
+        public Place_Serialised()
+        {
+
+        }
+        
+        public Place_Serialised(Fief_Simple fss = null, Province_Simple pss = null, Kingdom_Simple kss = null)
+        {
+            Place_Simple placeToUse = null;
+
+            if (kss != null)
+            {
+                placeToUse = kss;
+            }
+            else if (pss != null)
+            {
+                placeToUse = pss;
+            }
+            else if (fss != null)
+            {
+                placeToUse = fss;
+            }
+
+            if (placeToUse != null)
+            {
+                this.id = placeToUse.id;
+                this.name = placeToUse.name;
+                this.owner = placeToUse.owner;
+                this.titleHolder = placeToUse.titleHolder;
+                this.rank = Convert.ToByte(placeToUse.rank);
+            }
+        }
+    }
+
+    public class Place_Simple
+    {
+        /// <summary>
+        /// Holds place ID
+        /// </summary>
+        public string id { get; set; }
+        /// <summary>
+        /// Holds place name
+        /// </summary>
+        public string name { get; set; }
+        /// <summary>
+        /// Holds place owner (id)
+        /// </summary>
+        public string owner { get; set; }
+        /// <summary>
+        /// Holds place title holder (id)
+        /// </summary>
+        public string titleHolder { get; set; }
+        /// <summary>
+        /// Holds place rank (id)
+        /// </summary>
+        public string rank { get; set; }
+
+        public Place_Simple()
+        {
+
+        }
+
+        public Place_Simple(Fief_Serialised fs = null, Province_Serialised ps = null, Kingdom_Serialised ks = null)
+        {
+            Place_Serialised placeToUse = null;
+
+            if (ks != null)
+            {
+                placeToUse = ks;
+            }
+            else if (ps != null)
+            {
+                placeToUse = ps;
+            }
+            else if (fs != null)
+            {
+                placeToUse = fs;
+            }
+
+            if (placeToUse != null)
+            {
+                this.id = placeToUse.id;
+                this.name = placeToUse.name;
+                this.owner = placeToUse.owner;
+                this.titleHolder = placeToUse.titleHolder;
+                this.rank = placeToUse.rank.ToString();
+            }
+        }
     }
 
 }

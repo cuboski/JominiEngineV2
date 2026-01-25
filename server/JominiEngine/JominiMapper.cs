@@ -24,7 +24,7 @@ namespace JominiEngine {
             For<Position_Simple>().TableName("positions");
             //For<Province>().TableName("provinces");
             For<Rank_Simple>().TableName("ranks");
-            //For<Siege>().TableName("sieges");
+            For<Siege_Simple>().TableName("sieges");
             For<Terrain>().TableName("terrain");
             For<Trait_Simple>().TableName("traits");
 

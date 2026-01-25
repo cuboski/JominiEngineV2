@@ -48,7 +48,7 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS positions (id text, langID list<text>, name list<text>, stature text, officeHolder text, nationality text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS provinces (kingdomId text, taxRate double, PRIMARY KEY (kingdomId))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS ranks (id text, langID list<text>, name list<text>, stature text, PRIMARY KEY (id))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason int, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason text, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS traits (id text, name text, effects text, PRIMARY KEY (id))");
             
@@ -77,10 +77,6 @@ namespace JominiEngine
             Terrain readT = DatabaseRead.Cass_DatabaseRead_terrain("terr_aqua");
             Console.WriteLine(readT.id + " " + readT.description + " " + readT.travelCost);
 
-            
-            //Siege testSiege = new Siege("Siege_1", 1390, 1, "Char_1", "Char_2", "Army_1", "Army_2", "Fef21", 15.0, 1.0, 1, 1, 16.0, "Army_3", "April_1400");
-
-            //DatabaseWrite.Cass_DatabaseWrite_Siege(testSiege);
             
             uint[] a = new uint[7] { 1, 2, 3, 4, 5, 6, 7 };
             Army testArmy = new Army("Army_1", "Char_1", "Char_2", 10.0, "Arm12", false, 1, 9, a);
@@ -137,6 +133,12 @@ namespace JominiEngine
 
             Position readP = DatabaseRead.Cass_DatabaseRead_Position("3");
             Console.WriteLine(readP.id + " " + readP.stature + " " + readP.officeHolder);
+
+            Siege testSiege = new Siege("Siege_1", 1390, 1, "Char_1", "Char_2", "Army_1", "Army_2", "Fef21", 15.0, 1.0, 1, 1, 16.0, "Army_3", "April_1400");
+            DatabaseWrite.Cass_DatabaseWrite_Siege(testSiege);
+
+            Siege readSi = DatabaseRead.Cass_DatabaseRead_Siege("Siege_1");
+            Console.WriteLine(readSi.siegeID + " " + readSi.startYear + " " + readSi.besiegingPlayer);
 
             //IEnumerable<User> users = mapper.Fetch<User>();
             //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);

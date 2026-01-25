@@ -288,4 +288,12 @@ namespace JominiEngine
 		{
 		}
 	}
+
+    public class Province_Simple : Place_Simple
+    {
+        public Province_Simple()
+        {
+
+        }
+    }
 }

@@ -3336,7 +3336,166 @@ namespace JominiEngine {
         /// Constructor for Fief_Serialised taking no parameters.
         /// For use when de-serialising.
         /// </summary>
-        public Fief_Serialised() {
+        public Fief_Serialised()
+        {
+
+        }
+
+        public Fief_Serialised(Fief_Simple fief) : base(fss: fief)
+        {
+
+        }
+    }
+    public class Fief_Simple : Place_Simple
+    {
+        /// <summary>
+		/// Holds fief's Province object (provinceID)
+		/// </summary>
+		public String province { get; set; }
+        /// <summary>
+        /// Holds fief population
+        /// </summary>
+        public int population { get; set; }
+        /// <summary>
+        /// Holds fief field level
+        /// </summary>
+        public Double fields { get; set; }
+        /// <summary>
+        /// Holds fief industry level
+        /// </summary>
+        public Double industry { get; set; }
+        /// <summary>
+        /// Holds no. trrops in fief
+        /// </summary>
+        public int troops { get; set; }
+        /// <summary>
+        /// Holds fief tax rate
+        /// </summary>
+        public Double taxRate { get; set; }
+        /// <summary>
+        /// Holds fief tax rate (next season)
+        /// </summary>
+        public Double taxRateNext { get; set; }
+        /// <summary>
+        /// Holds expenditure on officials (next season)
+        /// </summary>
+        public int officialsSpendNext { get; set; }
+        /// <summary>
+        /// Holds expenditure on garrison (next season)
+        /// </summary>
+        public int garrisonSpendNext { get; set; }
+        /// <summary>
+        /// Holds expenditure on infrastructure (next season)
+        /// </summary>
+        public int infrastructureSpendNext { get; set; }
+        /// <summary>
+        /// Holds expenditure on keep (next season)
+        /// </summary>
+        public int keepSpendNext { get; set; }
+        /// <summary>
+        /// Holds key data for current season
+        /// 0 = loyalty
+        /// 1 = GDP
+        /// 2 = tax rate
+        /// 3 = official expenditure
+        /// 4 = garrison expenditure
+        /// 5 = infrastructure expenditure
+        /// 6 = keep expenditure
+        /// 7 = keep level
+        /// 8 = income
+        /// 9 = family expenses
+        /// 10 = total expenses
+        /// 11 = overlord taxes
+        /// 12 = overlord tax rate
+        /// 13 = bottom line
+        /// </summary>
+        public double[] keyStatsCurrent = new double[14];
+        /// <summary>
+        /// Holds key data for previous season
+        /// </summary>
+        public double[] keyStatsPrevious = new double[14];
+        /// <summary>
+		/// Holds fief keep level
+		/// </summary>
+		public Double keepLevel { get; set; }
+        /// <summary>
+        /// Holds fief loyalty
+        /// </summary>
+        public Double loyalty { get; set; }
+        /// <summary>
+        /// Holds fief status (code)
+        /// </summary>
+        public string status { get; set; }
+        /// <summary>
+        /// Holds fief language (ID)
+        /// </summary>
+        public string language { get; set; }
+        /// <summary>
+        /// Holds terrain object (terrainCode)
+		/// </summary>
+		public String terrain { get; set; }
+        /// <summary>
+        /// Holds list of characters present in fief (charIDs)
+        /// </summary>
+        public List<String> charactersInFief = new List<String>();
+        /// <summary>
+        /// Characters in gaol
+        /// </summary>
+        public List<string> gaol = new List<string>();
+        /// <summary>
+        /// Holds list of characters banned from keep (charIDs)
+        /// </summary>
+        public List<string> barredCharacters = new List<string>();
+        /// <summary>
+        /// Holds nationalitie banned from keep (IDs)
+        /// </summary>
+        public List<string> barredNationalities = new List<string>();
+        /// <summary>
+		/// Holds fief ancestral owner (charID)
+		/// </summary>
+		public String ancestralOwner { get; set; }
+        /// <summary>
+        /// Holds fief bailiff (charID)
+        /// </summary>
+        public String bailiff { get; set; }
+        /// <summary>
+        /// Number of days the bailiff has been resident in the fief (this season)
+        /// </summary>
+        public Double bailiffDaysInFief { get; set; }
+        /// <summary>
+        /// Holds fief treasury
+        /// </summary>
+        public int treasury { get; set; }
+        /// <summary>
+        /// Holds armies present in the fief (armyIDs)
+        /// </summary>
+        public List<string> armies = new List<string>();
+        /// <summary>
+        /// Identifies if recruitment has occurred in the fief
+        /// </summary>
+        public bool hasRecruited { get; set; }
+        /// <summary>
+        /// Identifies if pillage has occurred in the fief in the current season
+        /// </summary>
+        public bool isPillaged { get; set; }
+        /// <summary>
+        /// Holds troop detachments in the fief awaiting transfer
+        /// String[] contains from (charID), to (charID), size, days left when detached
+        /// </summary>
+        public string troopTransfers { get; set; }
+        /// <summary>
+        /// Siege (siegeID) of active siege
+        /// </summary>
+        public String siege { get; set; }
+        //Used implicitly when getting object from database
+        public Fief_Simple()
+        {
+
+        }
+
+        public Fief_Simple(Fief_Serialised fief) : base(fs: fief)
+        {
+
         }
     }
 }
