@@ -1016,8 +1016,9 @@ namespace JominiEngine
                 // convert Kingdom into Kingdom_Serialised
                 ks = DatabaseWrite.Kingdom_serialise(k);
             }
+            Kingdom_Simple kss = new Kingdom_Simple(ks);
 
-            Globals_Server.cMapper.InsertIfNotExists(ks);
+            Globals_Server.cMapper.InsertIfNotExists(kss);
 
         }
 
@@ -1068,8 +1069,10 @@ namespace JominiEngine
                 // convert Province into Province_Serialised
                 ps = DatabaseWrite.Province_serialise(p);
             }
+            // convert Province_Serialised into Province_Simple
+            Province_Simple pss = new Province_Simple(ps);
 
-            Globals_Server.cMapper.InsertIfNotExists(ps);
+            Globals_Server.cMapper.InsertIfNotExists(pss);
         }
 
 
@@ -1155,6 +1158,18 @@ namespace JominiEngine
             }
 
             return putFiefResult.IsSuccess;
+        }
+
+        public static void Cass_DatabaseWrite_Fief(Fief f = null, Fief_Serialised fs = null)
+        {
+            if (f != null)
+            {
+                // convert Fief into Fief_Serialised
+                fs = DatabaseWrite.Fief_serialise(f);
+            }
+            Fief_Simple fss = new Fief_Simple(fs);
+
+            Globals_Server.cMapper.InsertIfNotExists(fss);
         }
 
         /// <summary>

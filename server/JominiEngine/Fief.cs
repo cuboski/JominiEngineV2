@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using ProtoMessageClient;
 namespace JominiEngine {
     /// <summary>
     /// Class storing data on fief
@@ -3343,7 +3345,35 @@ namespace JominiEngine {
 
         public Fief_Serialised(Fief_Simple fief) : base(fss: fief)
         {
-
+            this.province = fief.province;
+            this.population = fief.population;
+            this.fields = fief.fields;
+            this.industry = fief.industry;
+            this.troops = (uint)(fief.troops);
+            this.taxRate = fief.taxRate;
+            this.taxRateNext = fief.taxRateNext;
+            this.officialsSpendNext = (uint)(fief.officialsSpendNext);
+            this.garrisonSpendNext = (uint)(fief.garrisonSpendNext);
+            this.infrastructureSpendNext = (uint)(fief.officialsSpendNext);
+            this.keyStatsCurrent = fief.keyStatsCurrent;
+            this.keyStatsPrevious = fief.keyStatsPrevious;
+            this.keepLevel = fief.keepLevel;
+            this.loyalty = fief.loyalty;
+            this.status = Convert.ToChar(fief.status);
+            this.language = fief.language;
+            this.terrain = fief.terrain;
+            this.charactersInFief = fief.charactersInFief;
+            this.barredCharacters = fief.barredCharacters;
+            this.barredNationalities = fief.barredNationalities;
+            this.ancestralOwner = fief.ancestralOwner;
+            this.bailiff = fief.bailiff;
+            this.bailiffDaysInFief = fief.bailiffDaysInFief;
+            this.treasury = fief.treasury;
+            this.armies = fief.armies;
+            this.hasRecruited = fief.hasRecruited;
+            this.isPillaged = fief.isPillaged;
+            this.troopTransfers = JsonConvert.DeserializeObject<Dictionary<string, ProtoDetachment>>(fief.troopTransfers);
+            this.siege = fief.siege;
         }
     }
     public class Fief_Simple : Place_Simple
@@ -3495,7 +3525,35 @@ namespace JominiEngine {
 
         public Fief_Simple(Fief_Serialised fief) : base(fs: fief)
         {
-
+            this.province = fief.province;
+            this.population = fief.population;
+            this.fields = fief.fields;
+            this.industry = fief.industry;
+            this.troops = Convert.ToInt32(fief.troops);
+            this.taxRate = fief.taxRate;
+            this.taxRateNext = fief.taxRateNext;
+            this.officialsSpendNext = Convert.ToInt32(fief.officialsSpendNext);
+            this.garrisonSpendNext = Convert.ToInt32(fief.garrisonSpendNext);
+            this.infrastructureSpendNext = Convert.ToInt32(fief.officialsSpendNext);
+            this.keyStatsCurrent = fief.keyStatsCurrent;
+            this.keyStatsPrevious = fief.keyStatsPrevious;
+            this.keepLevel = fief.keepLevel;
+            this.loyalty = fief.loyalty;
+            this.status = fief.status.ToString();
+            this.language = fief.language;
+            this.terrain = fief.terrain;
+            this.charactersInFief = fief.charactersInFief;
+            this.barredCharacters = fief.barredCharacters;
+            this.barredNationalities = fief.barredNationalities;
+            this.ancestralOwner = fief.ancestralOwner;
+            this.bailiff = fief.bailiff;
+            this.bailiffDaysInFief = fief.bailiffDaysInFief;
+            this.treasury = fief.treasury;
+            this.armies = fief.armies;
+            this.hasRecruited = fief.hasRecruited;
+            this.isPillaged = fief.isPillaged;
+            this.troopTransfers = JsonConvert.SerializeObject(fief.troopTransfers);
+            this.siege = fief.siege;
         }
     }
 }

@@ -192,13 +192,28 @@ namespace JominiEngine
 
             this.nationality = nat;
         }
+
+        public Kingdom_Serialised(Kingdom_Simple king) : base(kss:king)
+        {
+            this.nationality = king.nationality;
+        }
     }
 
     public class Kingdom_Simple : Place_Simple
     {
+        /// <summary>
+        /// Holds nationality (ID)
+        /// </summary>
+        public String nationality { get; set; }
+
         public Kingdom_Simple()
         {
 
+        }
+
+        public Kingdom_Simple(Kingdom_Serialised king) : base(ks:king)
+        {
+            this.nationality = king.nationality;
         }
     }
 

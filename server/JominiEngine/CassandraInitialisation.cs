@@ -40,13 +40,14 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS baselanguages (id text, name text, PRIMARY KEY (id))");
             //cSession.Execute("CREATE TABLE IF NOT EXISTS client (user text, pcID text, activeChar text, myPastEvents journal, PRIMARY KEY (user))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS factions (factionReqID text, leader text, factionName text, members text, PaymentDue list<text>, highestStature list<text>, foundingLocation text, alliedFiefs list<text>, proposedTax int, statureBonus double, treasury int, PRIMARY KEY (factionReqID))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS fiefs (id text, name text, owner text, titleHolder text, rank text, province text, population int, fields double, industry double, troops int, taxrate double, taxratenext double, officialSpendNext int, garrisonSpendNext int, infrastructureSpendNext int, keepSpendNext int, keyStatsCurrent list<double>, keyStatsPrevious list<double>, keepLevel double, loyalty double, status text, language text, terrain text, charactersInFief list<text>, barredCharacters list<text>, barredNationalities list<text>, ancestralOwner text, bailiff text, bailiffDaysInFief double, treasury int, armies list<text>, hasRecruited boolean, isPillaged boolean, troopTransfer text, siege text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS gameClocks (id text, seasons list<text>, currentYear int, currentSeason text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS kingdoms (id text, name text, owner text, titleHolder text, rank text, nationality text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS languages (id text, baseLanguage text, dialect int, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS nationalities (natID text, name text, PRIMARY KEY (natId))");
             //Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS places (id text, name text, owner text, titleHolder text, rank text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS positions (id text, langID list<text>, name list<text>, stature text, officeHolder text, nationality text, PRIMARY KEY (id))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS provinces (kingdomId text, taxRate double, PRIMARY KEY (kingdomId))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS provinces (id text, name text, owner text, titleHolder text, rank text, kingdomId text, taxRate double, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS ranks (id text, langID list<text>, name list<text>, stature text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason text, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
@@ -139,6 +140,12 @@ namespace JominiEngine
 
             Siege readSi = DatabaseRead.Cass_DatabaseRead_Siege("Siege_1");
             Console.WriteLine(readSi.siegeID + " " + readSi.startYear + " " + readSi.besiegingPlayer);
+
+            //Fief testFief = new Fief("Fif17", "Noveria", "Char_1", "Char_2");
+            //DatabaseWrite.Cass_DatabaseWrite_Fief(testFief);
+
+            //Fief readFi = DatabaseRead.Cass_DatabaseRead_Fief("Fif12");
+            //Console.WriteLine(readFi.id + " " + readFi.loyalty + " " + readFi.bailiff);
 
             //IEnumerable<User> users = mapper.Fetch<User>();
             //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);

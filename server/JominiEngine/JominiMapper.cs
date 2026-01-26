@@ -17,12 +17,13 @@ namespace JominiEngine {
             For<Army_Simple>().TableName("armies");
             For<BaseLanguage>().TableName("baselanguages");
             For<Faction_Simple>().TableName("factions");
+            For<Fief_Simple>().TableName("fiefs");
             For<GameClock_Simple>().TableName("gameclocks");
-            For<Kingdom_Serialised>().TableName("kingdoms");
+            For<Kingdom_Simple>().TableName("kingdoms");
             For<Language_Serialised>().TableName("languages");
             For<Nationality>().TableName("nationalities");
             For<Position_Simple>().TableName("positions");
-            //For<Province>().TableName("provinces");
+            For<Province_Simple>().TableName("provinces");
             For<Rank_Simple>().TableName("ranks");
             For<Siege_Simple>().TableName("sieges");
             For<Terrain>().TableName("terrain");

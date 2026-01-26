@@ -280,6 +280,12 @@ namespace JominiEngine
             this.kingdom = king;
         }
 
+        public Province_Serialised(Province_Simple prov) : base(pss: prov)
+        {
+            this.taxRate = prov.taxRate;
+            this.kingdom = prov.kingdom;
+        }
+
         /// <summary>
         /// Constructor for Province_Serialised taking no parameters.
         /// For use when de-serialising.
@@ -291,9 +297,23 @@ namespace JominiEngine
 
     public class Province_Simple : Place_Simple
     {
+        /// <summary>
+		/// Holds province tax rate
+		/// </summary>
+		public Double taxRate { get; set; }
+        /// <summary>
+        /// Holds province kingdom (ID)
+        /// </summary>
+        public String kingdom { get; set; }
         public Province_Simple()
         {
 
+        }
+
+        public Province_Simple(Province_Serialised prov) : base(ps: prov)
+        {
+            this.taxRate = prov.taxRate;
+            this.kingdom = prov.kingdom;
         }
     }
 }

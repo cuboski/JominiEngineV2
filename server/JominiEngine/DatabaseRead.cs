@@ -922,6 +922,7 @@ namespace JominiEngine
             Position_Simple read = retrievedRank[0];
             Position_Serialised newPosSer = new Position_Serialised(read);
             Position newPosition = new Position(newPosSer);
+            //will be better to use deserialise once full database in operation
             newPosition.nationality = Cass_DatabaseRead_Nationality(read.nationality);
             return newPosition;
         }
@@ -1253,12 +1254,12 @@ namespace JominiEngine
 
         public static Kingdom Cass_DatabaseRead_Kingdom(string kingID)
         {
-            Kingdom_Serialised[] retrievedKingdom = Globals_Server.cMapper.Fetch<Kingdom_Serialised>("WHERE id = ?", kingID).ToArray();
-            Kingdom_Serialised newSKingdom = new Kingdom_Serialised();
-            newSKingdom = retrievedKingdom[0];
+            Kingdom_Simple[] retrievedKingdom = Globals_Server.cMapper.Fetch<Kingdom_Simple>("WHERE id = ?", kingID).ToArray();
+            Kingdom_Simple newSKingdom = retrievedKingdom[0];
+            Kingdom_Serialised newSerKingdom = new Kingdom_Serialised(newSKingdom);
 
             Kingdom newKingdom = new Kingdom();
-            newKingdom = DatabaseRead.Kingdom_deserialise(newSKingdom);
+            newKingdom = DatabaseRead.Kingdom_deserialise(newSerKingdom);
 
             return newKingdom;
         }
@@ -1350,12 +1351,11 @@ namespace JominiEngine
 
         public static Province Cass_DatabaseRead_Province(string provID)
         {
-            Province_Serialised[] retrievedProvince = Globals_Server.cMapper.Fetch<Province_Serialised>("WHERE id = ?", provID).ToArray();
-            Province_Serialised newSProvince = new Province_Serialised();
-            newSProvince = retrievedProvince[0];
-
+            Province_Simple[] retrievedProvince = Globals_Server.cMapper.Fetch<Province_Simple>("WHERE id = ?", provID).ToArray();
+            Province_Simple newSProvince = retrievedProvince[0];
+            Province_Serialised newSerProvince = new Province_Serialised();
             Province newProvince = new Province();
-            newProvince = DatabaseRead.Province_deserialise(newSProvince);
+            newProvince = DatabaseRead.Province_deserialise(newSerProvince);
 
             return newProvince;
         }
@@ -1483,6 +1483,17 @@ namespace JominiEngine
             }
 
             return myFief;
+        }
+
+        public static Fief Cass_DatabaseRead_Fief(string fiefID)
+        {
+            Fief_Simple[] retrievedFief = Globals_Server.cMapper.Fetch<Fief_Simple>("WHERE id = ?", fiefID).ToArray();
+            Fief_Simple read = retrievedFief[0];
+            Fief_Serialised serialised = new Fief_Serialised(read);
+            Fief newFief = new Fief();
+            newFief = Fief_deserialise(serialised);
+
+            return newFief;
         }
 
         /// <summary>
