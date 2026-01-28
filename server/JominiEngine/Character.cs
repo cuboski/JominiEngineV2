@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 namespace JominiEngine
 {
     /// <summary>
@@ -434,7 +435,6 @@ namespace JominiEngine
 				this.charID = charToUse.charID;
 				this.firstName = charToUse.firstName;
                 this.familyName = charToUse.familyName;
-                this.purse = charToUse.purse;
                 this.birthDate = charToUse.birthDate;
 				this.isMale = charToUse.isMale;
 				this.nationality = null;
@@ -7143,11 +7143,12 @@ namespace JominiEngine
 		/// </summary>
 		/// <param name="pc">PlayerCharacter object to use as source</param>
 		/// <param name="npc">NonPlayerCharacter object to use as source</param>
-		public Character_Serialised(PlayerCharacter pc = null, NonPlayerCharacter npc = null)
+		public Character_Serialised(PlayerCharacter pc = null, NonPlayerCharacter npc = null, PlayerCharacter_Simple pcss = null, NonPlayerCharacter_Simple npcss = null)
 		{
 			Character charToUse = null;
+            Character_Simple charSimpleToUse = null;
 
-			if (pc != null)
+            if (pc != null)
 			{
 				charToUse = pc;
 			}
@@ -7155,8 +7156,16 @@ namespace JominiEngine
 			{
 				charToUse = npc;
 			}
+            else if (pcss != null)
+            {
+                charSimpleToUse = pcss;
+            }
+            else if (npcss != null)
+            {
+                charSimpleToUse = npcss;
+            }
 
-			if (charToUse != null)
+            if (charToUse != null)
 			{
 				this.charID = charToUse.charID;
 				this.familyName = charToUse.familyName;
@@ -7199,7 +7208,47 @@ namespace JominiEngine
                 this.captorID = charToUse.captorID;
                 this.ransom = charToUse.ransomDemand;
             }
-		}
+
+            if (charSimpleToUse != null)
+            {
+                this.charID = charSimpleToUse.charID;
+                this.familyName = charSimpleToUse.familyName;
+                this.firstName = charSimpleToUse.firstName;
+                //this.purse = (uint)charToUse.purse;
+                Tuple<uint, byte> bd = new Tuple<uint, byte>((uint)charSimpleToUse.birthDate.Item1, Convert.ToByte(charSimpleToUse.birthDate.Item2));
+                this.birthDate = bd;
+                this.isMale = charSimpleToUse.isMale;
+                this.nationality = charSimpleToUse.nationality;
+                this.isAlive = charSimpleToUse.isAlive;
+                this.maxHealth = charSimpleToUse.maxHealth;
+                this.virility = charSimpleToUse.virility;
+                this.goTo = charSimpleToUse.goTo;
+                this.language = charSimpleToUse.language;
+                this.days = charSimpleToUse.days;
+                this.statureModifier = charSimpleToUse.statureModifier;
+                this.management = charSimpleToUse.management;
+                this.combat = charSimpleToUse.combat;
+                this.traits = new Tuple<String, int>[charSimpleToUse.traits.Length];
+                for (int i = 0; i < charSimpleToUse.traits.Length; i++)
+                {
+                    this.traits[i] = new Tuple<string, int>(charSimpleToUse.traits[i].Item1, charSimpleToUse.traits[i].Item2);
+                }
+                this.inKeep = charSimpleToUse.inKeep;
+                this.isPregnant = charSimpleToUse.isPregnant;
+                this.location = charSimpleToUse.location;
+                this.spouse = charSimpleToUse.spouse;
+                this.father = charSimpleToUse.father;
+                this.mother = charSimpleToUse.mother;
+                this.familyID = charSimpleToUse.familyID;
+                this.myTitles = charSimpleToUse.myTitles;
+                this.armyID = charSimpleToUse.armyID;
+                this.ailments = JsonConvert.DeserializeObject<Dictionary<string, Ailment>>(charSimpleToUse.ailments);
+                this.fiancee = charSimpleToUse.fiancee;
+                this.captorID = charSimpleToUse.captorID;
+                this.ransom = charSimpleToUse.ransom;
+            }
+        }
+        
 
         /// <summary>
         /// Constructor for Character_Serialised taking seperate values.
@@ -7507,6 +7556,186 @@ namespace JominiEngine
 
 	}
 
+    public class Character_Simple
+    {
+        /// <summary>
+		/// Holds character ID
+		/// </summary>
+		public string charID { get; set; }
+        /// <summary>
+        /// Holds character's first name
+        /// </summary>
+        public String firstName { get; set; }
+        /// <summary>
+        /// Holds character's family name
+        /// </summary>
+        public String familyName { get; set; }
+        /// <summary>
+        /// Holds the Purse Value, amount of gold on the character
+        /// </summary>
+        public int purse { get; set; }
+        /// <summary>
+        /// Tuple holding character's year and season of birth
+        /// </summary>
+        public Tuple<int, string> birthDate { get; set; }
+        /// <summary>
+		/// Holds if character male
+		/// </summary>
+		public bool isMale { get; set; }
+        /// <summary>
+        /// Holds character nationality (ID)
+        /// </summary>
+        public String nationality { get; set; }
+        /// <summary>
+        /// bool indicating whether character is alive
+        /// </summary>
+        public bool isAlive { get; set; }
+        /// <summary>
+		/// Holds character maximum health
+		/// </summary>
+		public Double maxHealth { get; set; }
+        /// <summary>
+        /// Holds character virility
+        /// </summary>
+        public Double virility { get; set; }
+        /// <summary>
+        /// Queue of Fiefs (fiefID) to auto-travel to
+        /// </summary>
+        public List<String> goTo { get; set; }
+        /// <summary>
+        /// Holds character language and dialect
+        /// </summary>
+        public string language { get; set; }
+        /// <summary>
+        /// Holds character's remaining days in season
+        /// </summary>
+        public double days { get; set; }
+        /// <summary>
+        /// Holds character's stature
+        /// </summary>
+        public Double statureModifier { get; set; }
+        /// <summary>
+        /// Holds character's management rating
+        /// </summary>
+        public Double management { get; set; }
+        /// <summary>
+        /// Holds character's combat rating
+        /// </summary>
+        public Double combat { get; set; }
+        /// <summary>
+        /// Array holding character's traits (ID)
+        /// </summary>
+        public Tuple<String, int>[] traits { get; set; }
+        /// <summary>
+        /// bool indicating if character is in the keep
+        /// </summary>
+        public bool inKeep { get; set; }
+        /// <summary>
+        /// Holds character pregnancy status
+        /// </summary>
+        public bool isPregnant { get; set; }
+        /// <summary>
+        /// Holds current location (Fief ID)
+        /// </summary>
+        public String location { get; set; }
+        /// <summary>
+        /// Holds spouse (Character ID)
+        /// </summary>
+        public String spouse { get; set; }
+        /// <summary>
+        /// Holds father (Character ID)
+        /// </summary>
+        public String father { get; set; }
+        /// <summary>
+        /// Holds mother (Character ID)
+        /// </summary>
+        public String mother { get; set; }
+        /// <summary>
+        /// Holds charID of head of family with which character associated
+		/// </summary>
+		public String familyID { get; set; }
+        /// <summary>
+        /// Holds chaacter's fiancee (charID)
+        /// </summary>
+        public string fiancee { get; set; }
+        /// <summary>
+        /// Holds character's titles (fiefIDs)
+        /// </summary>
+        public List<String> myTitles { get; set; }
+        /// <summary>
+        /// Holds armyID of army character is leading
+        /// </summary>
+        public String armyID { get; set; }
+        /// <summary>
+        /// Holds ailments effecting character's health
+        /// </summary>
+        public string ailments { get; set; }
+        /// <summary>
+        /// Holds captor charID
+        /// </summary>
+        public string captorID { get; set; }
+        /// <summary>
+        /// Holds jentry id of ransom demand
+        /// </summary>
+        public string ransom { get; set; }
+        public Character_Simple()
+        {
+
+        }
+
+        public Character_Simple(PlayerCharacter_Serialised pcs = null, NonPlayerCharacter_Serialised npcs = null)
+        {
+            Character_Serialised charToUse = null;
+
+            if (pcs != null)
+            {
+                charToUse = pcs;
+            }
+            else if (npcs != null)
+            {
+                charToUse = npcs;
+            }
+
+            if (charToUse != null)
+            {
+                this.charID = charToUse.charID;
+                this.familyName = charToUse.familyName;
+                this.firstName = charToUse.firstName;
+                Tuple<int, string> bd = new Tuple<int, string> (Convert.ToInt32(charToUse.birthDate.Item1), charToUse.birthDate.Item2.ToString());
+                this.birthDate = bd;
+                this.isMale = charToUse.isMale;
+                this.nationality = charToUse.nationality;
+                this.isAlive = charToUse.isAlive;
+                this.maxHealth = charToUse.maxHealth;
+                this.virility = charToUse.virility;
+                this.goTo = charToUse.goTo;
+                this.language = charToUse.language;
+                this.days = charToUse.days;
+                this.statureModifier = charToUse.statureModifier;
+                this.management = charToUse.management;
+                this.combat = charToUse.combat;
+                this.traits = new Tuple<String, int>[charToUse.traits.Length];
+                for (int i = 0; i < charToUse.traits.Length; i++)
+                {
+                    this.traits[i] = new Tuple<string, int>(charToUse.traits[i].Item1, charToUse.traits[i].Item2);
+                }
+                this.inKeep = charToUse.inKeep;
+                this.isPregnant = charToUse.isPregnant;
+                this.location = charToUse.location;
+                this.spouse = charToUse.spouse;
+                this.father = charToUse.father;
+                this.mother = charToUse.mother;
+                this.familyID = charToUse.familyID;
+                this.myTitles = charToUse.myTitles;
+                this.armyID = charToUse.armyID;
+                this.ailments = JsonConvert.SerializeObject(charToUse.ailments);
+                this.fiancee = charToUse.fiancee;
+                this.captorID = charToUse.captorID;
+                this.ransom = charToUse.ransom;
+            }
+        }
+    }
+
 	/// <summary>
 	/// Class used to convert PlayerCharacter to/from serialised format (JSON)
 	/// </summary>
@@ -7756,6 +7985,20 @@ namespace JominiEngine
             this.mySieges = myS;
         }
 
+        public PlayerCharacter_Serialised(PlayerCharacter_Simple pcss) : base(pcss: pcss)
+        {
+            this.isOutlawed = pcss.isOutlawed;
+            this.purse = (uint)(pcss.purse);
+            this.myNPCs = pcss.myNPCs;
+            this.ownedFiefs = pcss.ownedFiefs;
+            this.ownedProvinces = pcss.ownedProvinces;
+            this.homeFief = pcss.homeFief;
+            this.ancestralHomeFief = pcss.ancestralHomeFief;
+            this.playerID = pcss.playerID;
+            this.myArmies = pcss.myArmies;
+            this.mySieges = pcss.mySieges;
+        }
+
         //TODO change serialised class to serialise method
         /// <summary>
         /// Constructor for PlayerCharacter_Serialised taking no parameters.
@@ -7763,8 +8006,68 @@ namespace JominiEngine
         /// </summary>
         public PlayerCharacter_Serialised()
 		{
+
 		}
 	}
+
+    public class PlayerCharacter_Simple : Character_Simple
+    {
+        /// <summary>
+		/// Holds character outlawed status
+		/// </summary>
+		public bool isOutlawed { get; set; }
+        /// <summary>
+        /// Holds character's employees and family (charID)
+        /// </summary>
+        public List<String> myNPCs = new List<String>();
+        /// <summary>
+        /// Holds character's owned fiefs (id)
+        /// </summary>
+        public List<String> ownedFiefs = new List<String>();
+        /// <summary>
+        /// Holds character's owned provinces (id)
+        /// </summary>
+        public List<string> ownedProvinces = new List<string>();
+        /// <summary>
+        /// Holds character's home fief (fiefID)
+        /// </summary>
+        public String homeFief { get; set; }
+        /// <summary>
+        /// Holds character's ancestral home fief (fiefID)
+        /// </summary>
+        public String ancestralHomeFief { get; set; }
+        /// <summary>
+        /// Holds ID of player who is currently playing this PlayerCharacter
+        /// </summary>
+        public String playerID { get; set; }
+        /// <summary>
+        /// Holds character's armies (Army objects)
+        /// </summary>
+        public List<String> myArmies = new List<String>();
+        /// <summary>
+        /// Holds character's sieges (Siege objects)
+        /// </summary>
+        public List<string> mySieges = new List<string>();
+
+        public PlayerCharacter_Simple()
+        {
+
+        }
+
+        public PlayerCharacter_Simple(PlayerCharacter_Serialised pcs) : base(pcs: pcs)
+        {
+            this.isOutlawed = pcs.isOutlawed;
+            this.purse = Convert.ToInt32(pcs.purse);
+            this.myNPCs = pcs.myNPCs;
+            this.ownedFiefs = pcs.ownedFiefs;
+            this.ownedProvinces = pcs.ownedProvinces;
+            this.homeFief = pcs.homeFief;
+            this.ancestralHomeFief = pcs.ancestralHomeFief;
+            this.playerID = pcs.playerID;
+            this.myArmies = pcs.myArmies;
+            this.mySieges = pcs.mySieges;
+        }
+    }
 
 	/// <summary>
 	/// Class used to convert NonPlayerCharacter to/from serialised format (JSON)
@@ -7824,10 +8127,10 @@ namespace JominiEngine
             String id,
             String firstNam,
             String famNam,
-            Tuple<uint, byte> dob, 
-            bool isM, 
+            Tuple<uint, byte> dob,
+            bool isM,
             string nat,
-            bool alive, 
+            bool alive,
             Double mxHea,
             Double vir,
             List<string> go,
@@ -7837,8 +8140,8 @@ namespace JominiEngine
             Double mngmnt,
             Double cbt,
             Tuple<string, int>[] trt,
-            bool inK, 
-            bool preg, 
+            bool inK,
+            bool preg,
             String famID,
             String sp,
             String fath,
@@ -7847,9 +8150,9 @@ namespace JominiEngine
             string fia,
             uint sal,
             bool inEnt,
-            bool isH, 
+            bool isH,
             Dictionary<string, Ailment> ails = null,
-            string loc = null, 
+            string loc = null,
             String aID = null,
             String empl = null
             )
@@ -7881,6 +8184,18 @@ namespace JominiEngine
             this.isHeir = isH;
         }
 
+        public NonPlayerCharacter_Serialised(NonPlayerCharacter_Simple npcss) : base(npcss: npcss)
+        {
+            if (!String.IsNullOrWhiteSpace(npcss.employer))
+            {
+                this.employer = npcss.employer;
+            }
+            this.salary = (uint)(npcss.salary);
+            this.lastOffer = JsonConvert.DeserializeObject<Dictionary<string, uint>>(npcss.lastOffer);
+            this.inEntourage = npcss.inEntourage;
+            this.isHeir = npcss.isHeir;
+        }
+
         /// <summary>
         /// Constructor for NonPlayerCharacter_Serialised taking no parameters.
         /// For use when de-serialising.
@@ -7890,5 +8205,45 @@ namespace JominiEngine
 		}
 
 	}
+
+    public class NonPlayerCharacter_Simple : Character_Simple
+    {
+        /// <summary>
+		/// Holds NPC's employer (charID)
+		/// </summary>
+		public String employer { get; set; }
+        /// <summary>
+        /// Holds NPC's wage
+        /// </summary>
+        public int salary { get; set; }
+        /// <summary>
+        /// Holds last wage offer from individual PCs
+        /// </summary>
+        public string lastOffer { get; set; }
+        /// <summary>
+        /// Denotes if in employer's entourage
+        /// </summary>
+        public bool inEntourage { get; set; }
+        /// <summary>
+        /// Denotes if is player's heir
+        /// </summary>
+        public bool isHeir { get; set; }
+        public NonPlayerCharacter_Simple()
+        {
+
+        }
+
+        public NonPlayerCharacter_Simple(NonPlayerCharacter_Serialised npcs) : base(npcs: npcs)
+        {
+            if (!String.IsNullOrWhiteSpace(npcs.employer))
+            {
+                this.employer = npcs.employer;
+            }
+            this.salary = Convert.ToInt32(npcs.salary);
+            this.lastOffer = JsonConvert.SerializeObject(npcs.lastOffer);
+            this.inEntourage = npcs.inEntourage;
+            this.isHeir = npcs.isHeir;
+        }
+    }
 
 }

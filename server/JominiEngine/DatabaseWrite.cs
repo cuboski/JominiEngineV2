@@ -931,6 +931,17 @@ namespace JominiEngine
             return putNPCresult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_NonPlayerCharacter(NonPlayerCharacter npc = null, NonPlayerCharacter_Serialised npcs = null)
+        {
+            if (npc != null)
+            {
+                // convert NonPlayerCharacter into NonPlayerCharacter_Serialised
+                npcs = DatabaseWrite.NPC_serialise(npc);
+            }
+            NonPlayerCharacter_Simple npcss = new NonPlayerCharacter_Simple(npcs);
+            Globals_Server.cMapper.InsertIfNotExists(npcss);
+        }
+
         /// <summary>
         /// Serialises a NonPlayerCharacter object
         /// </summary>
@@ -968,6 +979,17 @@ namespace JominiEngine
             }
 
             return putPCresult.IsSuccess;
+        }
+
+        public static void Cass_DatabaseWrite_PlayerCharacter(PlayerCharacter pc = null, PlayerCharacter_Serialised pcs = null)
+        {
+            if (pc != null)
+            {
+                // convert PlayerCharacter into PlayerCharacter_Serialised
+                pcs = DatabaseWrite.PC_serialise(pc);
+            }
+            PlayerCharacter_Simple pcss = new PlayerCharacter_Simple(pcs);
+            Globals_Server.cMapper.InsertIfNotExists(pcss);
         }
 
         /// <summary>

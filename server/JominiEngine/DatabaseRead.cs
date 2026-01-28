@@ -1066,10 +1066,7 @@ namespace JominiEngine
 
         public static Army Cass_DatabaseRead_Army(string armyID)
         {
-            Globals_Server.logEvent("in read");
-            Globals_Server.logEvent(armyID);
             Army_Simple[] retrievedArmy = Globals_Server.cMapper.Fetch<Army_Simple>("WHERE armyID = ?", armyID).ToArray();
-            Globals_Server.logEvent("after read");
             Army_Simple read = retrievedArmy[0];
             Army newArmy = new Army(read);
 
@@ -1109,6 +1106,40 @@ namespace JominiEngine
             }
 
             return myNPC;
+        }
+
+        public static NonPlayerCharacter Cass_DatabaseRead_NonPlayerCharacter(string npcID)
+        {
+            NonPlayerCharacter_Simple[] retrievedNPC = Globals_Server.cMapper.Fetch<NonPlayerCharacter_Simple>("WHERE charID = ?", npcID).ToArray();
+            NonPlayerCharacter_Simple read = retrievedNPC[0];
+            NonPlayerCharacter_Serialised newNonPlayerCharacterSer = new NonPlayerCharacter_Serialised(read);
+            // if NonPlayerCharacter_Serialised goTo queue contains entries, store for later processing
+            if (newNonPlayerCharacterSer.goTo.Count > 0)
+            {
+                Globals_Game.goToList.Add(newNonPlayerCharacterSer);
+            }
+            NonPlayerCharacter newNonPlayerCharacter = Temp_NPC_Deserialise(newNonPlayerCharacterSer);
+            return newNonPlayerCharacter;
+        }
+
+        public static NonPlayerCharacter Temp_NPC_Deserialise(NonPlayerCharacter_Serialised npcs)
+        {
+            // create NonPlayerCharacter from NonPlayerCharacter_Serialised
+            NonPlayerCharacter npcFull = new NonPlayerCharacter(npcs);
+
+            npcFull.language = DatabaseRead.Cass_DatabaseRead_Language(npcs.language);
+
+            npcFull.nationality = DatabaseRead.Cass_DatabaseRead_Nationality(npcs.nationality);
+
+            if (npcs.traits.Length > 0)
+            {
+                for (int i = 0; i < npcs.traits.Length; i++)
+                {
+                    npcFull.traits[i] = new Tuple<Trait, int>(DatabaseRead.Cass_DatabaseRead_Trait(npcs.traits[i].Item1), npcs.traits[i].Item2);
+                }
+            }
+
+            return npcFull;
         }
 
         /// <summary>
@@ -1173,6 +1204,58 @@ namespace JominiEngine
             }
 
             return myPC;
+        }
+
+        public static PlayerCharacter Cass_DatabaseRead_PlayerCharacter(string pcID)
+        {
+            PlayerCharacter_Simple[] retrievedNPC = Globals_Server.cMapper.Fetch<PlayerCharacter_Simple>("WHERE charID = ?", pcID).ToArray();
+            PlayerCharacter_Simple read = retrievedNPC[0];
+            PlayerCharacter_Serialised newPlayerCharacterSer = new PlayerCharacter_Serialised(read);
+            // if PlayerCharacter_Serialised goTo queue contains entries, store for later processing
+            if (newPlayerCharacterSer.goTo.Count > 0)
+            {
+                Globals_Game.goToList.Add(newPlayerCharacterSer);
+            }
+            PlayerCharacter newPlayerCharacter = Temp_PC_Deserialise(newPlayerCharacterSer);
+            return newPlayerCharacter;
+        }
+
+        public static PlayerCharacter Temp_PC_Deserialise(PlayerCharacter_Serialised pcs)
+        {
+            // create NonPlayerCharacter from NonPlayerCharacter_Serialised
+            PlayerCharacter pcFull = new PlayerCharacter(pcs);
+
+            pcFull.language = DatabaseRead.Cass_DatabaseRead_Language(pcs.language);
+
+            pcFull.nationality = DatabaseRead.Cass_DatabaseRead_Nationality(pcs.nationality);
+
+            if (pcs.traits.Length > 0)
+            {
+                for (int i = 0; i < pcs.traits.Length; i++)
+                {
+                    pcFull.traits[i] = new Tuple<Trait, int>(DatabaseRead.Cass_DatabaseRead_Trait(pcs.traits[i].Item1), pcs.traits[i].Item2);
+                }
+            }
+
+            // insert employees/family
+            if (pcs.myNPCs.Count > 0)
+            {
+                for (int i = 0; i < pcs.myNPCs.Count; i++)
+                {
+                    pcFull.myNPCs[i] = DatabaseRead.Cass_DatabaseRead_NonPlayerCharacter(pcs.myNPCs[i]);
+                }
+            }
+
+            // insert armies
+            if (pcs.myArmies.Count > 0)
+            {
+                for (int i = 0; i < pcs.myArmies.Count; i++)
+                {
+                    pcFull.myArmies[i] = DatabaseRead.Cass_DatabaseRead_Army(pcs.myArmies[i]);
+                }
+            }
+
+            return pcFull;
         }
 
         /// <summary>

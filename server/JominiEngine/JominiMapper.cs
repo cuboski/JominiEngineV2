@@ -22,6 +22,8 @@ namespace JominiEngine {
             For<Kingdom_Simple>().TableName("kingdoms");
             For<Language_Serialised>().TableName("languages");
             For<Nationality>().TableName("nationalities");
+            For<NonPlayerCharacter_Simple>().TableName("nonplayercharacters");
+            For<PlayerCharacter_Simple>().TableName("playercharacters");
             For<Position_Simple>().TableName("positions");
             For<Province_Simple>().TableName("provinces");
             For<Rank_Simple>().TableName("ranks");
