@@ -29,7 +29,7 @@ namespace JominiEngine
         /// <summary>
         /// Dictionary holding edge costs, for use when calculating shortest path
         /// </summary>
-        public Dictionary<TaggedEdge<Fief, string>, double> costs { get; set; }
+        private Dictionary<TaggedEdge<Fief, string>, double> costs { get; set; }
 
 		/// <summary>
         /// Constructor for HexMapGraph
@@ -67,14 +67,6 @@ namespace JominiEngine
         public HexMapGraph()
 		{
 		}
-
-        public HexMapGraph(HexMapGraph_Simple hmg)
-        {
-            this.mapID = hmg.mapID;
-            this.myMap = JsonConvert.DeserializeObject<AdjacencyGraph<Fief, TaggedEdge<Fief, string>>>(hmg.myMap);
-            this.costs = JsonConvert.DeserializeObject<Dictionary<TaggedEdge<Fief, string>, double>>(hmg.costs);
-
-        }
 
         /// <summary>
         /// Adds hex (vertex) and route (edge) in one operation.
@@ -486,36 +478,6 @@ namespace JominiEngine
                 
             }
             this.myMap = tmpGraph;
-        }
-    }
-
-    public class HexMapGraph_Simple
-    {
-        /// <summary>
-		/// Holds map ID
-		/// </summary>
-		public String mapID { get; set; }
-        /// <summary>
-        /// Holds map object AdjacencyGraph (from QuickGraph library), 
-        /// specifying edge type (tagged)
-        /// </summary>
-        public string myMap { get; set; }
-        /// <summary>
-        /// Dictionary holding edge costs, for use when calculating shortest path
-        /// </summary>
-        public string costs { get; set; }
-
-        public HexMapGraph_Simple()
-        {
-
-        }
-
-        public HexMapGraph_Simple(HexMapGraph hmg)
-        {
-            this.mapID = hmg.mapID;
-            this.myMap = JsonConvert.SerializeObject(hmg.myMap);
-            this.costs = JsonConvert.SerializeObject(hmg.costs);
-
         }
     }
 

@@ -20,7 +20,6 @@ namespace JominiEngine {
             For<Fief_Simple>().TableName("fiefs");
             For<GameClock_Simple>().TableName("gameclocks");
             For<HeldStrings>().TableName("heldStrings");
-            For<HexMapGraph_Simple>().TableName("hexmapgraphs");
             For<Journal_Simple>().TableName("journals");
             //For<JournalEntry_Simple>().TableName("journalentries");
             For<Kingdom_Simple>().TableName("kingdoms");

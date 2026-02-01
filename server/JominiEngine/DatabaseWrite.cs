@@ -641,9 +641,9 @@ namespace JominiEngine
             return putJournalResult.IsSuccess;
         }
 
-        public static void Cass_DatabaseWrite_Journal(Journal j)
+        public static void Cass_DatabaseWrite_Journal(string key, Journal j)
         {
-            Journal_Simple js = new Journal_Simple(j);
+            Journal_Simple js = new Journal_Simple(key, j);
             Globals_Server.cMapper.InsertIfNotExists(js);
         }
 
@@ -1373,8 +1373,8 @@ namespace JominiEngine
                 // convert HexMapGraph into edges
                 edges = DatabaseWrite.EdgeCollection_serialise(map.myMap.Edges.ToList());
             }
-
-            Globals_Server.cMapper.InsertIfNotExists(edges);
+            HeldStrings heldEdges = new HeldStrings("mapEdges", JsonConvert.SerializeObject(edges));
+            Globals_Server.cMapper.InsertIfNotExists(heldEdges);
         }
 
         /// <summary>

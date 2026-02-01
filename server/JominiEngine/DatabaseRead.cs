@@ -436,6 +436,125 @@ namespace JominiEngine
 
         }
 
+        public static void Cass_DatabaseRead_keyLists()
+        {
+            // populate nationalityKeys
+
+            HeldStrings[] natKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "nationalityKeys").ToArray();
+            HeldStrings readN = natKeys[0];
+
+            Globals_Game.nationalityKeys = JsonConvert.DeserializeObject<List<string>>(readN.value);
+
+
+            // populate traitKeys
+
+            HeldStrings[] traitKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "traitKeys").ToArray();
+            HeldStrings readT = traitKeys[0];
+
+            Globals_Game.traitKeys = JsonConvert.DeserializeObject<List<string>>(readT.value);
+
+            // populate langKeys
+
+            HeldStrings[] langKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "langKeys").ToArray();
+            HeldStrings readL = langKeys[0];
+
+            Globals_Game.langKeys = JsonConvert.DeserializeObject<List<string>>(readL.value);
+
+            // populate baseLangKeys
+
+            HeldStrings[] baseLangKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "baseLangKeys").ToArray();
+            HeldStrings readBl = baseLangKeys[0];
+
+            Globals_Game.baseLangKeys = JsonConvert.DeserializeObject<List<string>>(readBl.value);
+
+            // populate rankKeys
+
+            HeldStrings[] rankKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "rankKeys").ToArray();
+            HeldStrings readR = rankKeys[0];
+
+            Globals_Game.rankKeys = JsonConvert.DeserializeObject<List<byte>>(readR.value);
+
+            // populate positionKeys
+
+            HeldStrings[] positionKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "positionKeys").ToArray();
+            HeldStrings readP = positionKeys[0];
+
+            Globals_Game.positionKeys = JsonConvert.DeserializeObject<List<byte>>(readP.value);
+
+
+
+            // populate npcKeys
+
+            HeldStrings[] npcKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "npcKeys").ToArray();
+            HeldStrings readNPC = npcKeys[0];
+
+            Globals_Game.npcKeys = JsonConvert.DeserializeObject<List<string>>(readNPC.value);
+
+            // populate pcKeys
+
+            HeldStrings[] pcKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "pcKeys").ToArray();
+            HeldStrings readPC = pcKeys[0];
+
+            Globals_Game.pcKeys = JsonConvert.DeserializeObject<List<string>>(readPC.value);
+
+            // populate kingKeys
+
+            HeldStrings[] kingKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "kingKeys").ToArray();
+            HeldStrings readK = kingKeys[0];
+
+            Globals_Game.kingKeys = JsonConvert.DeserializeObject<List<string>>(readK.value);
+
+            // populate provKeys
+
+            HeldStrings[] provKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "provKeys").ToArray();
+            HeldStrings readPr = provKeys[0];
+
+            Globals_Game.provKeys = JsonConvert.DeserializeObject<List<string>>(readPr.value);
+
+            // populate terrKeys
+
+            HeldStrings[] terrKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "terrKeys").ToArray();
+            HeldStrings readTer = terrKeys[0];
+
+            Globals_Game.terrKeys = JsonConvert.DeserializeObject<List<string>>(readTer.value);
+
+            // populate victoryDataKeys
+
+            HeldStrings[] victoryDataKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "victoryDataKeys").ToArray();
+            HeldStrings readV = victoryDataKeys[0];
+
+            Globals_Game.victoryDataKeys = JsonConvert.DeserializeObject<List<string>>(readV.value);
+
+            // populate fiefKeys
+
+            HeldStrings[] fiefKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "fiefKeys").ToArray();
+            HeldStrings readFi = fiefKeys[0];
+
+            Globals_Game.fiefKeys = JsonConvert.DeserializeObject<List<string>>(readFi.value);
+
+            // populate armyKeys
+
+            HeldStrings[] armyKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "armyKeys").ToArray();
+            HeldStrings readA = armyKeys[0];
+
+            Globals_Game.armyKeys = JsonConvert.DeserializeObject<List<string>>(readA.value);
+
+            // populate siegeKeys
+
+            HeldStrings[] siegeKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "siegeKeys").ToArray();
+            HeldStrings readS = siegeKeys[0];
+
+            Globals_Game.siegeKeys = JsonConvert.DeserializeObject<List<string>>(readS.value);
+
+            // populate clientKeys
+
+            HeldStrings[] clientKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "clientKeys").ToArray();
+            HeldStrings readCl = clientKeys[0];
+
+            Globals_Server.client_keys = JsonConvert.DeserializeObject<List<string>>(readCl.value);
+
+        }
+
         /// <summary>
         /// Reads a GameClock object from the database
         /// </summary>
@@ -1839,6 +1958,17 @@ namespace JominiEngine
             return newPC;
         }
 
+        public static PlayerCharacter Cass_DatabaseRead_PcVariable(string charVarID)
+        {
+            HeldStrings[] retrievedPcV = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", charVarID).ToArray();
+            HeldStrings read = retrievedPcV[0];
+            PlayerCharacter newPC = null;
+            newPC = Globals_Game.pcMasterList[read.value];
+
+            return newPC;
+
+        }
+
         /// <summary>
         /// Reads a bool variable from the database
         /// </summary>
@@ -1914,6 +2044,22 @@ namespace JominiEngine
                 string toDisplay = "InitialDBload: Unable to retrieve map edges " + mapEdgesID;
                 Globals_Server.logError(toDisplay);
             }
+
+            return newMap;
+        }
+
+        public static HexMapGraph Cass_DatabaseRead_map(string mapEdgesID)
+        {
+            HeldStrings[] retrievedEdges = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", mapEdgesID).ToArray();
+            HeldStrings read = retrievedEdges[0];
+
+            List<TaggedEdge<string, string>> edgesList = JsonConvert.DeserializeObject<List<TaggedEdge<string, string>>>(read.value);
+            HexMapGraph newMap = new HexMapGraph();
+
+            TaggedEdge<Fief, string>[] edgesArray = DatabaseRead.EdgeCollection_deserialise(edgesList);
+
+            // create map from edges collection
+            newMap = new HexMapGraph("map001", edgesArray);
 
             return newMap;
         }

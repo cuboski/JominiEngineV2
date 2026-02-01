@@ -41,12 +41,7 @@ namespace JominiEngine
 
         public Journal(Journal_Simple journal)
         {
-            SortedList<uint, JournalEntry> jes = new SortedList<uint, JournalEntry>();
-            foreach (KeyValuePair<uint, JournalEntry> je in journal.entries)
-            {
-
-                jes.Add((uint)(je.Key), DatabaseRead.Cass_DatabaseRead_JournalEntry(je.Value.jEntryID));
-            }
+            this.entries = JsonConvert.DeserializeObject<SortedList<uint, JournalEntry>>(journal.entries);
             this.areNewEntries = journal.areNewEntries;
             this.priority = Convert.ToByte(journal.priority);
         }
@@ -493,18 +488,6 @@ namespace JominiEngine
 
         }
 
-        public JournalEntry(JournalEntry_Simple journalEntry)
-        {
-            this.jEntryID = (uint)(journalEntry.jEntryID);
-            this.year = (uint)(journalEntry.year);
-            this.season = Convert.ToByte(journalEntry.season);
-            this.personae = journalEntry.personae;
-            this.type = journalEntry.type;
-            this.location = journalEntry.location;
-            this.viewed = journalEntry.viewed;
-            this.replied = journalEntry.replied;
-            this.entryDetails = JsonConvert.DeserializeObject<ProtoClient>(journalEntry.entryDetails);
-        }
         /// <summary>
         /// Returns a string containing the details of a JournalEntry
         /// </summary>
@@ -1136,12 +1119,12 @@ namespace JominiEngine
 
     public class Journal_Simple
     {
-        //added to journal so that it can be stored using mapping
+        //added id for database storage
         public string id { get; set; }
         /// <summary>
         /// Holds entries
         /// </summary>
-        public SortedList<int, int> entries = new SortedList<int, int>();
+        public string entries { get; set; }
         /// <summary>
         /// Indicates presence of new (unread) entries
         /// </summary>
@@ -1155,72 +1138,12 @@ namespace JominiEngine
 
         }
 
-        public Journal_Simple(Journal journal)
+        public Journal_Simple(string key, Journal journal)
         {
-            SortedList<int, int> jes = new SortedList<int, int>();
-            foreach(KeyValuePair<uint, JournalEntry> je in journal.entries)
-            {
-                jes.Add(Convert.ToInt32(je.Key), Convert.ToInt32(je.Value.jEntryID));
-            }
+            this.id = key;
+            this.entries = JsonConvert.SerializeObject(journal.entries);
             this.areNewEntries = journal.areNewEntries;
             this.priority = journal.priority.ToString();
-        }
-    }
-
-    public class JournalEntry_Simple
-    {
-        /// <summary>
-        /// Holds JournalEntry ID
-        /// </summary>
-        public int jEntryID { get; set; }
-        /// <summary>
-        /// Holds event year
-        /// </summary>
-        public int year { get; set; }
-        /// <summary>
-        /// Holds event season
-        /// </summary>
-        public string season { get; set; }
-        /// <summary>
-        /// Holds main objects (IDs) associated with event and their role
-        /// </summary>
-        public String[] personae { get; set; }
-        /// <summary>
-        /// Holds type of event (e.g. battle, birth)
-        /// </summary>
-        public String type { get; set; }
-        /// <summary>
-        /// Holds location of event (fiefID)
-        /// </summary>
-        public String location { get; set; }
-        /// <summary>
-        /// Indicates whether entry has been viewed
-        /// </summary>
-        public bool viewed { get; set; }
-        /// <summary>
-        /// Indicates whether entry has been replied to (e.g. for Proposals)
-        /// </summary>
-        public bool replied { get; set; }
-        /// <summary>
-        /// Holds ProtoMessage containing details of event. More flexible than strings.
-        /// </summary>
-        public string entryDetails { get; set; }
-        public JournalEntry_Simple()
-        {
-
-        }
-
-        public JournalEntry_Simple(JournalEntry journalEntry)
-        {
-            this.jEntryID = Convert.ToInt32(journalEntry.jEntryID);
-            this.year = Convert.ToInt32(journalEntry.year);
-            this.season = journalEntry.season.ToString();
-            this.personae = journalEntry.personae;
-            this.type = journalEntry.type;
-            this.location = journalEntry.location;
-            this.viewed = journalEntry.viewed;
-            this.replied = journalEntry.replied;
-            this.entryDetails = JsonConvert.SerializeObject(journalEntry.entryDetails);
         }
     }
 }
