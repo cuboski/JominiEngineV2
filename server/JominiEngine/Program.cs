@@ -180,16 +180,17 @@ namespace JominiEngine
                 using (Globals_Server.LogFile = new System.IO.StreamWriter("LogFile.txt"))
                 {
                     Globals_Server.logEvent("Before");
-                    CassandraInitialisation.ConnectDb();
+                    CassandraInitialisation.ConnectDb(FRESH_DATABASE);
                     Globals_Server.logEvent("After");
-                    Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig"); //, "home/JominiEngine/server/JominiEngine/app.config");
-                    Globals_Server.rClient = Globals_Server.rCluster.CreateClient();
+                    //Globals_Server.rCluster = RiakCluster.FromConfig("riakConfig"); //, "home/JominiEngine/server/JominiEngine/app.config");
+                    // Globals_Server.rClient = Globals_Server.rCluster.CreateClient();
                     Globals_Server.LogFile.AutoFlush = true;
                     Globals_Server.logEvent("Server start");
 
                     Game game = new Game();
                     SetUpForDemo();
 
+                    /*
                     if (Globals_Server.rClient.Ping().IsSuccess)
                     {
                         Console.WriteLine("Database connection successful");
@@ -202,9 +203,11 @@ namespace JominiEngine
                     {
                         Console.WriteLine("Could not connect to database :( ");
                     }
+                    */
+                    
+
 
                     //testCaptives();
-
 
 
                     Server server = new Server();

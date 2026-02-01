@@ -12,7 +12,7 @@ namespace JominiEngine
 {
     public static class CassandraInitialisation
     {
-        public static void ConnectDb()
+        public static void ConnectDb(bool FRESH_DATABASE)
         {
             
             Globals_Server.cCluster = Cluster.Builder().AddContactPoints("127.0.0.1").Build();
@@ -31,6 +31,10 @@ namespace JominiEngine
             //cSession.ChangeKeyspace("CassDatabase");
             Globals_Server.cSession.ChangeKeyspace("CassDatabase");
             Console.WriteLine("Database alocated");
+
+            DatabaseWrite.CASS_WIPE_DATABASE(FRESH_DATABASE);
+            DatabaseWrite.DatabaseWriteAll("testBucket");
+            DatabaseRead.DatabaseReadAll("testBucket");
 
             //cSession.Execute("CREATE TYPE IF NOT EXISTS journal ()");
             //Globals_Server.cSession.Execute("CREATE TYPE IF NOT EXISTS titlename (langID text, name text)");
@@ -158,7 +162,7 @@ namespace JominiEngine
             //IEnumerable<User> users = mapper.Fetch<User>();
             //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);
 
-            Globals_Server.cCluster.Shutdown();
+            Globals_Server.cCluster.Shutdown(); // should put somewhere else
 
 
             //var terrains = new Table<Terrain>(cSession);

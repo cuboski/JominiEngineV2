@@ -24,26 +24,26 @@ namespace JominiEngine
         public static void DatabaseWriteAll(string gameID)
         {
 			// ========= test
-			DatabaseWrite.DatabaseWrite_Test(gameID);
+			//DatabaseWrite.DatabaseWrite_Test(gameID);
 
             // ========= write CLOCK
-            DatabaseWrite.DatabaseWrite_Clock(gameID, Globals_Game.clock);
+            DatabaseWrite.Cass_DatabaseWrite_Clock(Globals_Game.clock);
 
             // ========= write GLOBALS_SERVER/GAME DICTIONARIES
-            DatabaseWrite.DatabaseWrite_Dictionary(gameID, "combatValues", Globals_Server.combatValues);
-            DatabaseWrite.DatabaseWrite_Dictionary(gameID, "recruitRatios", Globals_Server.recruitRatios);
-            DatabaseWrite.DatabaseWrite_Dictionary(gameID, "battleProbabilities", Globals_Server.battleProbabilities);
-            DatabaseWrite.DatabaseWrite_Dictionary(gameID, "gameTypes", Globals_Server.gameTypes);
-            DatabaseWrite.DatabaseWrite_Dictionary(gameID, "ownershipChallenges", Globals_Game.ownershipChallenges);
+            DatabaseWrite.Cass_DatabaseWrite_Dictionary("combatValues", Globals_Server.combatValues);
+            DatabaseWrite.Cass_DatabaseWrite_Dictionary("recruitRatios", Globals_Server.recruitRatios);
+            DatabaseWrite.Cass_DatabaseWrite_Dictionary("battleProbabilities", Globals_Server.battleProbabilities);
+            DatabaseWrite.Cass_DatabaseWrite_Dictionary("gameTypes", Globals_Server.gameTypes);
+            DatabaseWrite.Cass_DatabaseWrite_Dictionary("ownershipChallenges", Globals_Game.ownershipChallenges);
 
 			Console.WriteLine ("Finished writing dictionaries");
             // convert jEntryPriorities prior to writing
             Dictionary<string, byte> jEntryPriorities_serialised = DatabaseWrite.JentryPriorities_serialise(Globals_Game.jEntryPriorities);
-            DatabaseWrite.DatabaseWrite_Dictionary(gameID, "jEntryPriorities", jEntryPriorities_serialised);
+            DatabaseWrite.Cass_DatabaseWrite_Dictionary("jEntryPriorities", jEntryPriorities_serialised);
 
             // ========= write JOURNALS
-            DatabaseWrite.DatabaseWrite_Journal(gameID, "serverScheduledEvents", Globals_Game.scheduledEvents);
-            DatabaseWrite.DatabaseWrite_Journal(gameID, "serverPastEvents", Globals_Game.pastEvents);
+            DatabaseWrite.Cass_DatabaseWrite_Journal("serverScheduledEvents", Globals_Game.scheduledEvents);
+            DatabaseWrite.Cass_DatabaseWrite_Journal("serverPastEvents", Globals_Game.pastEvents);
 
 			Console.WriteLine ("Finished writing journals");
             // ========= write GLOBALS_GAME/CLIENT/SERVER CHARACTER VARIABLES
@@ -51,72 +51,72 @@ namespace JominiEngine
             // Globals_Game.sysAdmin
             if (Globals_Game.sysAdmin != null)
             {
-                DatabaseWrite.DatabaseWrite_String(gameID, "sysAdmin", Globals_Game.sysAdmin.charID);
+                DatabaseWrite.Cass_DatabaseWrite_String("sysAdmin", Globals_Game.sysAdmin.charID);
             }
             // Globals_Game.kingOne
             if (Globals_Game.kingOne != null)
             {
-                DatabaseWrite.DatabaseWrite_String(gameID, "kingOne", Globals_Game.kingOne.charID);
+                DatabaseWrite.Cass_DatabaseWrite_String("kingOne", Globals_Game.kingOne.charID);
             }
             // Globals_Game.kingTwo
             if (Globals_Game.kingTwo != null)
             {
-                DatabaseWrite.DatabaseWrite_String(gameID, "kingTwo", Globals_Game.kingTwo.charID);
+                DatabaseWrite.Cass_DatabaseWrite_String("kingTwo", Globals_Game.kingTwo.charID);
             }
             // Globals_Game.princeOne
             if (Globals_Game.princeOne != null)
             {
-                DatabaseWrite.DatabaseWrite_String(gameID, "princeOne", Globals_Game.princeOne.charID);
+                DatabaseWrite.Cass_DatabaseWrite_String("princeOne", Globals_Game.princeOne.charID);
             }
             // Globals_Game.princeTwo
             if (Globals_Game.princeTwo != null)
             {
-                DatabaseWrite.DatabaseWrite_String(gameID, "princeTwo", Globals_Game.princeTwo.charID);
+                DatabaseWrite.Cass_DatabaseWrite_String("princeTwo", Globals_Game.princeTwo.charID);
             }
             // Globals_Game.heraldOne
             if (Globals_Game.heraldOne != null)
             {
-                DatabaseWrite.DatabaseWrite_String(gameID, "heraldOne", Globals_Game.heraldOne.charID);
+                DatabaseWrite.Cass_DatabaseWrite_String("heraldOne", Globals_Game.heraldOne.charID);
             }
             // Globals_Game.heraldTwo
             if (Globals_Game.heraldTwo != null)
             {
-                DatabaseWrite.DatabaseWrite_String(gameID, "heraldTwo", Globals_Game.heraldTwo.charID);
+                DatabaseWrite.Cass_DatabaseWrite_String("heraldTwo", Globals_Game.heraldTwo.charID);
             }
 			Console.WriteLine ("Finished writing important people");
             // ========= write GLOBALS_GAME/CLIENT/SERVER newID VARIABLES
             // newCharID
-            DatabaseWrite.DatabaseWrite_newID(gameID, "newCharID", Globals_Game.newCharID);
+            DatabaseWrite.Cass_DatabaseWrite_newID("newCharID", Globals_Game.newCharID);
             // newArmyID
-            DatabaseWrite.DatabaseWrite_newID(gameID, "newArmyID", Globals_Game.newArmyID);
+            DatabaseWrite.Cass_DatabaseWrite_newID("newArmyID", Globals_Game.newArmyID);
             // newDetachmentID
-            DatabaseWrite.DatabaseWrite_newID(gameID, "newDetachmentID", Globals_Game.newDetachmentID);
+            DatabaseWrite.Cass_DatabaseWrite_newID("newDetachmentID", Globals_Game.newDetachmentID);
             // newAilmentID
-            DatabaseWrite.DatabaseWrite_newID(gameID, "newAilmentID", Globals_Game.newAilmentID);
+            DatabaseWrite.Cass_DatabaseWrite_newID("newAilmentID", Globals_Game.newAilmentID);
             // newSiegeID
-            DatabaseWrite.DatabaseWrite_newID(gameID, "newSiegeID", Globals_Game.newSiegeID);
+            DatabaseWrite.Cass_DatabaseWrite_newID("newSiegeID", Globals_Game.newSiegeID);
             // newJournalEntryID
-            DatabaseWrite.DatabaseWrite_newID(gameID, "newJournalEntryID", Globals_Game.newJournalEntryID);
+            DatabaseWrite.Cass_DatabaseWrite_newID("newJournalEntryID", Globals_Game.newJournalEntryID);
             // gameType
-            DatabaseWrite.DatabaseWrite_newID(gameID, "gameType", Globals_Game.gameType);
+            DatabaseWrite.Cass_DatabaseWrite_newID("gameType", Globals_Game.gameType);
             // duration
-            DatabaseWrite.DatabaseWrite_newID(gameID, "duration", Globals_Game.duration);
+            DatabaseWrite.Cass_DatabaseWrite_newID("duration", Globals_Game.duration);
             // startYear
-            DatabaseWrite.DatabaseWrite_newID(gameID, "startYear", Globals_Game.startYear);
+            DatabaseWrite.Cass_DatabaseWrite_newID("startYear", Globals_Game.startYear);
             // newGameID
-            DatabaseWrite.DatabaseWrite_newID(gameID, "newGameID", Globals_Server.newGameID);
+            DatabaseWrite.Cass_DatabaseWrite_newID("newGameID", Globals_Server.newGameID);
             // newOwnChallengeID
-            DatabaseWrite.DatabaseWrite_newID(gameID, "newOwnChallengeID", Globals_Game.newOwnChallengeID);
+            DatabaseWrite.Cass_DatabaseWrite_newID("newOwnChallengeID", Globals_Game.newOwnChallengeID);
 			Console.WriteLine ("Finished writing new IDs");
             // ========= write GLOBALS_GAME/CLIENT/SERVER BOOL VARIABLES
             // Globals_Game.loadFromDatabase
-            DatabaseWrite.DatabaseWrite_Bool(gameID, "loadFromDatabase", Globals_Game.loadFromDatabase);
+            DatabaseWrite.Cass_DatabaseWrite_Bool("loadFromDatabase", Globals_Game.loadFromDatabase);
             // Globals_Game.loadFromCSV
-            DatabaseWrite.DatabaseWrite_Bool(gameID, "loadFromCSV", Globals_Game.loadFromCSV);
+            DatabaseWrite.Cass_DatabaseWrite_Bool("loadFromCSV", Globals_Game.loadFromCSV);
             // Globals_Game.writeToDatabase
-            DatabaseWrite.DatabaseWrite_Bool(gameID, "writeToDatabase", Globals_Game.writeToDatabase);
+            DatabaseWrite.Cass_DatabaseWrite_Bool("writeToDatabase", Globals_Game.writeToDatabase);
             // Globals_Game.statureCapInForce
-            DatabaseWrite.DatabaseWrite_Bool(gameID, "statureCapInForce", Globals_Game.statureCapInForce);
+            DatabaseWrite.Cass_DatabaseWrite_Bool("statureCapInForce", Globals_Game.statureCapInForce);
 			Console.WriteLine ("Finished writing bools");
             // ========= write TRAITS
             // clear existing key list
@@ -128,7 +128,7 @@ namespace JominiEngine
             // write each object in traitMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Trait> pair in Globals_Game.traitMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Trait(gameID, pair.Value);
+                bool success = DatabaseWrite.Cass_DatabaseWrite_Trait(pair.Value);
                 if (success)
                 {
                     //Globals_Game.traitKeys.Add(pair.Key);
@@ -136,7 +136,7 @@ namespace JominiEngine
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "traitKeys", Globals_Game.traitKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("traitKeys", Globals_Game.traitKeys);
 
             // ========= write BASELANGUAGES
             // clear existing key list
@@ -148,15 +148,16 @@ namespace JominiEngine
             // write each object in baseLanguageMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, BaseLanguage> pair in Globals_Game.baseLanguageMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_BaseLanguage(gameID, pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_BaseLanguage(pair.Value);
+                //if (success)
+               // {
                     //Globals_Game.baseLangKeys.Add(pair.Key);
-                }
+               // }
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "baseLangKeys", Globals_Game.baseLangKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("baseLangKeys", Globals_Game.baseLangKeys);
 
             // ========= write LANGUAGES
             // clear existing key list
@@ -168,15 +169,16 @@ namespace JominiEngine
             // write each object in languageMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Language> pair in Globals_Game.languageMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Language(gameID, l: pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Language(l: pair.Value);
+                //if (success)
+                //{
                     //Globals_Game.langKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "langKeys", Globals_Game.langKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("langKeys", Globals_Game.langKeys);
 
             // ========= write NATIONALITY OBJECTS
             // clear existing key list
@@ -188,15 +190,16 @@ namespace JominiEngine
             // write each object in nationalityMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Nationality> pair in Globals_Game.nationalityMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Nationality(gameID, pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Nationality(pair.Value);
+                //if (success)
+                //{
                     //Globals_Game.nationalityKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "nationalityKeys", Globals_Game.nationalityKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("nationalityKeys", Globals_Game.nationalityKeys);
 			Console.WriteLine ("Finished writing nationalities");
             // ========= write RANKS
             // clear existing key list
@@ -208,15 +211,16 @@ namespace JominiEngine
             // write each object in rankMasterList, whilst also repopulating key list
             foreach (KeyValuePair<byte, Rank> pair in Globals_Game.rankMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Rank(gameID, pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Rank(pair.Value);
+                //if (success)
+                //{
                     //Globals_Game.rankKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "rankKeys", Globals_Game.rankKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("rankKeys", Globals_Game.rankKeys);
 			Console.WriteLine ("Finished writing ranks");
             // ========= write POSITIONS
             // clear existing key list
@@ -228,15 +232,16 @@ namespace JominiEngine
             // write each object in positionMasterList, whilst also repopulating key list
             foreach (KeyValuePair<byte, Position> pair in Globals_Game.positionMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Position(gameID, p: pair.Value);
-                if (success)
-                {
+                //bool success =
+                DatabaseWrite.Cass_DatabaseWrite_Position(p: pair.Value);
+                //if (success)
+                //{
                    // Globals_Game.positionKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "positionKeys", Globals_Game.positionKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("positionKeys", Globals_Game.positionKeys);
 			Console.WriteLine ("Finished writing positions");
             // ========= write NPCs
             // clear existing key list
@@ -248,15 +253,16 @@ namespace JominiEngine
             // write each object in npcMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, NonPlayerCharacter> pair in Globals_Game.npcMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_NPC(gameID, npc: pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_NonPlayerCharacter(npc: pair.Value);
+                //if (success)
+                //{
                     //Globals_Game.npcKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "npcKeys", Globals_Game.npcKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("npcKeys", Globals_Game.npcKeys);
 			Console.WriteLine ("Finished writing npcs");
             // ========= write PCs
             // clear existing key list
@@ -268,15 +274,16 @@ namespace JominiEngine
             // write each object in pcMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, PlayerCharacter> pair in Globals_Game.pcMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_PC(gameID, pc: pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_PlayerCharacter(pc: pair.Value);
+                //if (success)
+                //{
                    // Globals_Game.pcKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "pcKeys", Globals_Game.pcKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("pcKeys", Globals_Game.pcKeys);
 			Console.WriteLine ("Finished writing PCs");
             // ========= write KINGDOMS
             // clear existing key list
@@ -288,15 +295,16 @@ namespace JominiEngine
             // write each object in kingdomMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Kingdom> pair in Globals_Game.kingdomMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Kingdom(gameID, k: pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Kingdom(k: pair.Value);
+                //if (success)
+                //{
                    // Globals_Game.kingKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "kingKeys", Globals_Game.kingKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("kingKeys", Globals_Game.kingKeys);
 			Console.WriteLine ("Finished writing kingdoms");
             // ========= write PROVINCES
             // clear existing key list
@@ -308,15 +316,16 @@ namespace JominiEngine
             // write each object in provinceMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Province> pair in Globals_Game.provinceMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Province(gameID, p: pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Province(p: pair.Value);
+                //if (success)
+                //{
                    // Globals_Game.provKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "provKeys", Globals_Game.provKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("provKeys", Globals_Game.provKeys);
 			Console.WriteLine ("Finished writing provinces");
             // ========= write TERRAINS
             // clear existing key list
@@ -328,15 +337,16 @@ namespace JominiEngine
             // write each object in terrainMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Terrain> pair in Globals_Game.terrainMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Terrain(gameID, pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Terrain(pair.Value);
+                //if (success)
+                //{
                    // Globals_Game.terrKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "terrKeys", Globals_Game.terrKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("terrKeys", Globals_Game.terrKeys);
 			Console.WriteLine ("Finished writing terrains");
             // ========= write VICTORYDATA OBJECTS
             // clear existing key list
@@ -348,17 +358,18 @@ namespace JominiEngine
             // write each object in victoryData, whilst also repopulating key list
             foreach (KeyValuePair<string, VictoryData> pair in Globals_Game.victoryData)
             {
-                bool success = DatabaseWrite.DatabaseWrite_VictoryData(gameID, pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_VictoryData(pair.Value);
+                //if (success)
+                //{
                     // Globals_Game.victoryDataKeys.Add(pair.Key);
-                }
+                //}
             }
 
             Globals_Game.victoryData.Clear();
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "victoryDataKeys", Globals_Game.victoryDataKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("victoryDataKeys", Globals_Game.victoryDataKeys);
 			Console.WriteLine ("Finished writing victory data");
             // ========= write FIEFS
             // clear existing key list
@@ -370,15 +381,16 @@ namespace JominiEngine
             // write each object in fiefMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Fief> pair in Globals_Game.fiefMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Fief(gameID, f: pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Fief(f: pair.Value);
+                //if (success)
+                //{
                     //Globals_Game.fiefKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "fiefKeys", Globals_Game.fiefKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("fiefKeys", Globals_Game.fiefKeys);
 			Console.WriteLine ("Finished writing fiefs");
             // ========= write ARMIES
             // clear existing key list
@@ -390,15 +402,16 @@ namespace JominiEngine
             // write each object in armyMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Army> pair in Globals_Game.armyMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Army(gameID, pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Army(pair.Value);
+                //if (success)
+                //{
                     //Globals_Game.armyKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "armyKeys", Globals_Game.armyKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("armyKeys", Globals_Game.armyKeys);
 			Console.WriteLine ("Finished writing armies");
             // ========= write SIEGES
             // clear existing key list
@@ -410,30 +423,66 @@ namespace JominiEngine
             // write each object in siegeMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Siege> pair in Globals_Game.siegeMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Siege(gameID, pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Siege(pair.Value);
+                //if (success)
+                //{
                     //Globals_Game.siegeKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "siegeKeys", Globals_Game.siegeKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("siegeKeys", Globals_Game.siegeKeys);
 			Console.WriteLine ("Finished writing sieges");
 
             // ======== write clients
             // write clients
             foreach (KeyValuePair<string, Client> pair in Globals_Server.Clients)
             {
-                bool success = DatabaseWrite_Client(gameID, pair.Value);
-                if (success)
-                {
+                //bool success = Cass_DatabaseWrite_Client(pair.Value);
+
+
+
+
+
+
+
+
+
+                //if (success)
+                //{
                     //Globals_Server.client_keys.Add(pair.Key);
-                }
+                //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
 
             DatabaseWrite_KeyList(gameID, "clientKeys", Globals_Server.client_keys);
 			Console.WriteLine ("Finished writing clients");
+
+
+
+
+
+
+
+
 
             // ========= write FACTIONS
             // clear existing key list
@@ -445,32 +494,33 @@ namespace JominiEngine
             // write each object in siegeMasterList, whilst also repopulating key list
             foreach (KeyValuePair<string, Faction> pair in Globals_Game.factionMasterList)
             {
-                bool success = DatabaseWrite.DatabaseWrite_Faction(pair.Value);
-                if (success)
-                {
+                //bool success = 
+                DatabaseWrite.Cass_DatabaseWrite_Faction(pair.Value);
+                //if (success)
+                //{
                     //Globals_Game.factionKeys.Add(pair.Key);
-                }
+                //}
             }
 
             // write key list to database
-            DatabaseWrite.DatabaseWrite_KeyList(gameID, "factionKeys", Globals_Game.factionKeys);
+            DatabaseWrite.Cass_DatabaseWrite_KeyList("factionKeys", Globals_Game.factionKeys);
             Console.WriteLine("Finished writing factions");
             // ========= write MAP (edges collection)
-            DatabaseWrite.DatabaseWrite_MapEdges(gameID, map: Globals_Game.gameMap);
+            DatabaseWrite.Cass_DatabaseWrite_MapEdges(map: Globals_Game.gameMap);
 
             foreach (KeyValuePair<string, Client> pair in Globals_Server.Clients)
             {
-                DatabaseWrite.DatabaseWrite_Journal(gameID, pair.Value.username+"_journal", pair.Value.myPastEvents);
+                DatabaseWrite.Cass_DatabaseWrite_Journal(pair.Value.username+"_journal", pair.Value.myPastEvents);
                 // Globals_Client.myPlayerCharacter
                 if (pair.Value.myPlayerCharacter != null)
                 {
-                    DatabaseWrite.DatabaseWrite_String(gameID, pair.Value.username+"_playerChar", pair.Value.myPlayerCharacter.charID);
+                    DatabaseWrite.Cass_DatabaseWrite_String( pair.Value.username+"_playerChar", pair.Value.myPlayerCharacter.charID);
                 }
 
                 // Globals_Client.showMessages
-                DatabaseWrite.DatabaseWrite_Bool(gameID, pair.Value.username+"_showMessages", pair.Value.showMessages);
+                DatabaseWrite.Cass_DatabaseWrite_Bool(pair.Value.username+"_showMessages", pair.Value.showMessages);
                 // Globals_Client.showDebugMessages
-                DatabaseWrite.DatabaseWrite_Bool(gameID, pair.Value.username+"_showDebugMessages", pair.Value.showDebugMessages);
+                DatabaseWrite.Cass_DatabaseWrite_Bool(pair.Value.username+"_showDebugMessages", pair.Value.showDebugMessages);
             }
 			Console.WriteLine ("Finished writing map");
 
@@ -760,10 +810,12 @@ namespace JominiEngine
             return putTraitResult.IsSuccess;
         }
 
-        public static void Cass_DatabaseWrite_Trait(Trait t)
+        public static bool Cass_DatabaseWrite_Trait(Trait t)
         {
             Trait_Simple tr = new Trait_Simple(t);
             Globals_Server.cMapper.InsertIfNotExists(tr);
+
+            return true;
         }
         
 
@@ -1427,6 +1479,33 @@ namespace JominiEngine
                 }
             }
             
+        }
+
+        internal static void CASS_WIPE_DATABASE(bool FRESH_DATABASE)
+        {
+            if (!FRESH_DATABASE)
+                return;
+
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS ailments");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS armies");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS baselanguages");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS factions");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS fiefs");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS gameClocks");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS heldStrings");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS journals");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS kingdoms");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS languages");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS nationalities");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS nonplayercharacters");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS playercharacters");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS positions");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS provinces");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS ranks");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS sieges");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS terrain");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS traits");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS victorydata");
         }
     }
 }

@@ -680,7 +680,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "fiefKeys", fiefKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("fiefKeys", fiefKeyList);
                 }
 
                 else
@@ -696,7 +696,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "provKeys", provKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("provKeys", provKeyList);
                 }
 
                 else
@@ -712,7 +712,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "kingKeys", kingKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("kingKeys", kingKeyList);
                 }
 
                 else
@@ -728,7 +728,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "pcKeys", pcKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("pcKeys", pcKeyList);
                 }
 
                 else
@@ -744,7 +744,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "npcKeys", npcKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("npcKeys", npcKeyList);
                 }
 
                 else
@@ -760,7 +760,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "traitKeys", traitKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("traitKeys", traitKeyList);
                 }
 
                 else
@@ -776,7 +776,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "armyKeys", armyKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("armyKeys", armyKeyList);
                 }
 
                 else
@@ -792,7 +792,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "langKeys", langKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("langKeys", langKeyList);
                 }
 
                 else
@@ -808,7 +808,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "baseLangKeys", baseLangKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("baseLangKeys", baseLangKeyList);
                 }
 
                 else
@@ -824,7 +824,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "nationalityKeys", natKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("nationalityKeys", natKeyList);
                 }
 
                 else
@@ -840,7 +840,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "rankKeys", rankKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("rankKeys", rankKeyList);
                 }
 
                 else
@@ -856,7 +856,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "positionKeys", posKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("positionKeys", posKeyList);
                 }
 
                 else
@@ -872,7 +872,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "siegeKeys", siegeKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("siegeKeys", siegeKeyList);
                 }
 
                 else
@@ -888,7 +888,7 @@ namespace JominiEngine
                 if (toDatabase)
                 {
                     // save keylist to database
-                    DatabaseWrite.DatabaseWrite_KeyList(bucketID, "terrKeys", terrKeyList);
+                    DatabaseWrite.Cass_DatabaseWrite_KeyList("terrKeys", terrKeyList);
                 }
 
                 else
@@ -907,7 +907,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Trait> thisEntry in traitMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Trait(bucketID, thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Trait(thisEntry.Value);
                     }
                 }
                 // save to game
@@ -925,7 +925,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, BaseLanguage> thisEntry in baseLanguageMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_BaseLanguage(bucketID, thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_BaseLanguage(thisEntry.Value);
                     }
                 }
                 // save to game
@@ -943,7 +943,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Nationality> thisEntry in nationalityMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Nationality(bucketID, thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Nationality(thisEntry.Value);
                     }
                 }
                 // save to game
@@ -961,7 +961,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<byte, Rank> thisEntry in rankMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Rank(bucketID, thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Rank(thisEntry.Value);
                     }
                 }
                 // save to game
@@ -979,7 +979,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Terrain> thisEntry in terrainMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Terrain(bucketID, thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Terrain(thisEntry.Value);
                     }
                 }
                 // save to game
@@ -997,7 +997,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Language_Serialised> thisEntry in languageMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Language(bucketID, ls: thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Language(ls: thisEntry.Value);
                     }
                 }
                 // save to game
@@ -1023,7 +1023,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<byte, Position_Serialised> thisEntry in positionMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Position(bucketID, ps: thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Position(ps: thisEntry.Value);
                     }
                 }
                 // save to game
@@ -1061,7 +1061,7 @@ namespace JominiEngine
                     {
                         foreach (KeyValuePair<string, Army> thisEntry in armyMasterList)
                         {
-                            DatabaseWrite.DatabaseWrite_Army(bucketID, thisEntry.Value);
+                            DatabaseWrite.Cass_DatabaseWrite_Army(thisEntry.Value);
                         }
                     }
                     // save to game
@@ -1079,7 +1079,7 @@ namespace JominiEngine
                     {
                         foreach (KeyValuePair<string, Siege> thisEntry in siegeMasterList)
                         {
-                            DatabaseWrite.DatabaseWrite_Siege(bucketID, thisEntry.Value);
+                            DatabaseWrite.Cass_DatabaseWrite_Siege(thisEntry.Value);
                         }
                     }
                     // save to game
@@ -1097,7 +1097,7 @@ namespace JominiEngine
                     {
                         foreach (KeyValuePair<string, NonPlayerCharacter_Serialised> thisEntry in npcMasterList)
                         {
-                            DatabaseWrite.DatabaseWrite_NPC(bucketID, npcs: thisEntry.Value);
+                            DatabaseWrite.Cass_DatabaseWrite_NonPlayerCharacter(npcs: thisEntry.Value);
                         }
                     }
                     // save to game
@@ -1123,7 +1123,7 @@ namespace JominiEngine
                     {
                         foreach (KeyValuePair<string, PlayerCharacter_Serialised> thisEntry in pcMasterList)
                         {
-                            DatabaseWrite.DatabaseWrite_PC(bucketID, pcs: thisEntry.Value);
+                            DatabaseWrite.Cass_DatabaseWrite_PlayerCharacter(pcs: thisEntry.Value);
                         }
                     }
                     // save to game
@@ -1149,7 +1149,7 @@ namespace JominiEngine
                     {
                         foreach (KeyValuePair<string, Kingdom_Serialised> thisEntry in kingdomMasterList)
                         {
-                            DatabaseWrite.DatabaseWrite_Kingdom(bucketID, ks: thisEntry.Value);
+                            DatabaseWrite.Cass_DatabaseWrite_Kingdom(ks: thisEntry.Value);
                         }
                     }
                     // save to game
@@ -1175,7 +1175,7 @@ namespace JominiEngine
                     {
                         foreach (KeyValuePair<string, Province_Serialised> thisEntry in provinceMasterList)
                         {
-                            DatabaseWrite.DatabaseWrite_Province(bucketID, ps: thisEntry.Value);
+                            DatabaseWrite.Cass_DatabaseWrite_Province(ps: thisEntry.Value);
                         }
                     }
                     // save to game
@@ -1201,7 +1201,7 @@ namespace JominiEngine
                     {
                         foreach (KeyValuePair<string, Fief_Serialised> thisEntry in fiefMasterList)
                         {
-                            DatabaseWrite.DatabaseWrite_Fief(bucketID, fs: thisEntry.Value);
+                            DatabaseWrite.Cass_DatabaseWrite_Fief(fs: thisEntry.Value);
                         }
                     }
                     // save to game
@@ -3439,7 +3439,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Army> thisEntry in armyMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Army(bucketID, thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Army(thisEntry.Value);
                     }
                 }
                 // save to game
@@ -3457,7 +3457,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Siege> thisEntry in siegeMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Siege(bucketID, thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Siege(thisEntry.Value);
                     }
                 }
                 // save to game
@@ -3475,7 +3475,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, NonPlayerCharacter_Serialised> thisEntry in npcMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_NPC(bucketID, npcs: thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_NonPlayerCharacter(npcs: thisEntry.Value);
                     }
                 }
                 // save to game
@@ -3517,7 +3517,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, PlayerCharacter_Serialised> thisEntry in pcMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_PC(bucketID, pcs: thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_PlayerCharacter(pcs: thisEntry.Value);
                     }
                 }
                 // save to game
@@ -3559,7 +3559,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Kingdom_Serialised> thisEntry in kingdomMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Kingdom(bucketID, ks: thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Kingdom(ks: thisEntry.Value);
                     }
                 }
                 // save to game
@@ -3585,7 +3585,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Province_Serialised> thisEntry in provinceMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Province(bucketID, ps: thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Province(ps: thisEntry.Value);
                     }
                 }
                 // save to game
@@ -3611,7 +3611,7 @@ namespace JominiEngine
                 {
                     foreach (KeyValuePair<string, Fief_Serialised> thisEntry in fiefMasterList)
                     {
-                        DatabaseWrite.DatabaseWrite_Fief(bucketID, fs: thisEntry.Value);
+                        DatabaseWrite.Cass_DatabaseWrite_Fief(fs: thisEntry.Value);
                     }
                 }
                 // save to game
@@ -3716,7 +3716,7 @@ namespace JominiEngine
             if (toDatabase)
             {
                 // save to database
-                DatabaseWrite.DatabaseWrite_MapEdges(bucketID, edges: mapEdges);
+                DatabaseWrite.Cass_DatabaseWrite_MapEdges(edges: mapEdges);
             }
 
             else

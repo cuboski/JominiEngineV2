@@ -18,65 +18,65 @@ namespace JominiEngine
         {
 
             // ========= load KEY LISTS (to ensure efficient retrieval of specific game objects)
-            DatabaseRead.DatabaseRead_keyLists(gameID);
+            DatabaseRead.Cass_DatabaseRead_keyLists();
 
             // ========= load CLOCK
-            Globals_Game.clock = DatabaseRead.DatabaseRead_clock(gameID, "gameClock");
+            Globals_Game.clock = DatabaseRead.Cass_DatabaseRead_GameClock("gameClock");
 
             // ========= load GLOBAL_SERVER/GAME DICTIONARIES
-            Globals_Server.combatValues = DatabaseRead.DatabaseRead_dictStringUint(gameID, "combatValues");
-            Globals_Server.recruitRatios = DatabaseRead.DatabaseRead_dictStringDouble(gameID, "recruitRatios");
-            Globals_Server.battleProbabilities = DatabaseRead.DatabaseRead_dictStringDouble(gameID, "battleProbabilities");
-            Globals_Server.gameTypes = DatabaseRead.DatabaseRead_dictIntString(gameID, "gameTypes");
-            Globals_Game.jEntryPriorities = DatabaseRead.DatabaseRead_dictStringByte(gameID, "jEntryPriorities");
-            Globals_Game.ownershipChallenges = DatabaseRead.DatabaseRead_dictStringOwnCh(gameID, "ownershipChallenges");
+            Globals_Server.combatValues = DatabaseRead.Cass_DatabaseRead_dictStringUint("combatValues");
+            Globals_Server.recruitRatios = DatabaseRead.Cass_DatabaseRead_dictStringDouble("recruitRatios");
+            Globals_Server.battleProbabilities = DatabaseRead.Cass_DatabaseRead_dictStringDouble("battleProbabilities");
+            Globals_Server.gameTypes = DatabaseRead.Cass_DatabaseRead_dictIntString("gameTypes");
+            Globals_Game.jEntryPriorities = DatabaseRead.Cass_DatabaseRead_dictStringByte("jEntryPriorities");
+            Globals_Game.ownershipChallenges = DatabaseRead.Cass_DatabaseRead_dictStringOwnCh("ownershipChallenges");
 
             // ========= load GLOBAL_GAME/SERVER newID VARIABLES
             // newCharID
-            Globals_Game.newCharID = DatabaseRead.DatabaseRead_newIDs(gameID, "newCharID");
+            Globals_Game.newCharID = DatabaseRead.Cass_DatabaseRead_newIDs("newCharID");
             // newArmyID
-            Globals_Game.newArmyID = DatabaseRead.DatabaseRead_newIDs(gameID, "newArmyID");
+            Globals_Game.newArmyID = DatabaseRead.Cass_DatabaseRead_newIDs("newArmyID");
             // newDetachmentID
-            Globals_Game.newDetachmentID = DatabaseRead.DatabaseRead_newIDs(gameID, "newDetachmentID");
+            Globals_Game.newDetachmentID = DatabaseRead.Cass_DatabaseRead_newIDs("newDetachmentID");
             // newAilmentID
-            Globals_Game.newAilmentID = DatabaseRead.DatabaseRead_newIDs(gameID, "newAilmentID");
+            Globals_Game.newAilmentID = DatabaseRead.Cass_DatabaseRead_newIDs("newAilmentID");
             // newSiegeID
-            Globals_Game.newSiegeID = DatabaseRead.DatabaseRead_newIDs(gameID, "newSiegeID");
+            Globals_Game.newSiegeID = DatabaseRead.Cass_DatabaseRead_newIDs("newSiegeID");
             // newJournalEntryID
-            Globals_Game.newJournalEntryID = DatabaseRead.DatabaseRead_newIDs(gameID, "newJournalEntryID");
+            Globals_Game.newJournalEntryID = DatabaseRead.Cass_DatabaseRead_newIDs("newJournalEntryID");
             // gameType
-            Globals_Game.gameType = DatabaseRead.DatabaseRead_newIDs(gameID, "currentVictoryType");
+            Globals_Game.gameType = DatabaseRead.Cass_DatabaseRead_newIDs("currentVictoryType");
             // duration
-            Globals_Game.duration = DatabaseRead.DatabaseRead_newIDs(gameID, "duration");
+            Globals_Game.duration = DatabaseRead.Cass_DatabaseRead_newIDs("duration");
             // startYear
-            Globals_Game.startYear = DatabaseRead.DatabaseRead_newIDs(gameID, "startYear");
+            Globals_Game.startYear = DatabaseRead.Cass_DatabaseRead_newIDs("startYear");
             // newGameID
-            Globals_Server.newGameID = DatabaseRead.DatabaseRead_newIDs(gameID, "newGameID");
+            Globals_Server.newGameID = DatabaseRead.Cass_DatabaseRead_newIDs("newGameID");
             // newOwnChallengeID
-            Globals_Game.newOwnChallengeID = DatabaseRead.DatabaseRead_newIDs(gameID, "newOwnChallengeID");
+            Globals_Game.newOwnChallengeID = DatabaseRead.Cass_DatabaseRead_newIDs("newOwnChallengeID");
 
             // ========= load JOURNALS
-            Globals_Game.scheduledEvents = DatabaseRead.DatabaseRead_journal(gameID, "serverScheduledEvents");
-            Globals_Game.pastEvents = DatabaseRead.DatabaseRead_journal(gameID, "serverPastEvents");
+            Globals_Game.scheduledEvents = DatabaseRead.Cass_DatabaseRead_Journal("serverScheduledEvents");
+            Globals_Game.pastEvents = DatabaseRead.Cass_DatabaseRead_Journal("serverPastEvents");
 
             // ========= load victoryData
             foreach (string element in Globals_Game.victoryDataKeys)
             {
-                VictoryData vicData = DatabaseRead.DatabaseRead_victoryData(gameID, element);
+                VictoryData vicData = DatabaseRead.Cass_DatabaseRead_VictoryData(element);
                 // add VictoryData to Globals_Game.victoryData
                 Globals_Game.victoryData.Add(vicData.playerID, vicData);
             }
 
             // ========= read GLOBALS_GAME/CLIENT/SERVER BOOL VARIABLES
-            Globals_Game.loadFromDatabase = DatabaseRead.DatabaseRead_bool(gameID, "loadFromDatabase");
-            Globals_Game.loadFromCSV = DatabaseRead.DatabaseRead_bool(gameID, "loadFromCSV");
-            Globals_Game.writeToDatabase = DatabaseRead.DatabaseRead_bool(gameID, "writeToDatabase");
-            Globals_Game.statureCapInForce = DatabaseRead.DatabaseRead_bool(gameID, "statureCapInForce");
+            Globals_Game.loadFromDatabase = DatabaseRead.Cass_DatabaseRead_Bool("loadFromDatabase");
+            Globals_Game.loadFromCSV = DatabaseRead.Cass_DatabaseRead_Bool("loadFromCSV");
+            Globals_Game.writeToDatabase = DatabaseRead.Cass_DatabaseRead_Bool("writeToDatabase");
+            Globals_Game.statureCapInForce = DatabaseRead.Cass_DatabaseRead_Bool("statureCapInForce");
 
             // ========= load TRAITS
             foreach (string element in Globals_Game.traitKeys)
             {
-                Trait trait = DatabaseRead.DatabaseRead_trait(gameID, element);
+                Trait trait = DatabaseRead.Cass_DatabaseRead_Trait(element);
                 // add Trait to traitMasterList
                 Globals_Game.traitMasterList.Add(trait.id, trait);
             }
@@ -84,7 +84,7 @@ namespace JominiEngine
             // ========= load BASELANGUAGES
             foreach (string element in Globals_Game.baseLangKeys)
             {
-                BaseLanguage bLang = DatabaseRead.DatabaseRead_baseLanguage(gameID, element);
+                BaseLanguage bLang = DatabaseRead.Cass_DatabaseRead_BaseLanguage(element);
                 // add BaseLanguage to baseLanguageMasterList
                 Globals_Game.baseLanguageMasterList.Add(bLang.id, bLang);
             }
@@ -92,7 +92,7 @@ namespace JominiEngine
             // ========= load LANGUAGES
             foreach (string element in Globals_Game.langKeys)
             {
-                Language lang = DatabaseRead.DatabaseRead_language(gameID, element);
+                Language lang = DatabaseRead.Cass_DatabaseRead_Language(element);
                 // add Language to languageMasterList
                 Globals_Game.languageMasterList.Add(lang.id, lang);
             }
@@ -100,7 +100,7 @@ namespace JominiEngine
             // ========= load NATIONALITY OBJECTS
             foreach (string element in Globals_Game.nationalityKeys)
             {
-                Nationality nat = DatabaseRead.DatabaseRead_nationality(gameID, element);
+                Nationality nat = DatabaseRead.Cass_DatabaseRead_Nationality(element);
                 // add Nationality to nationalityMasterList
                 Globals_Game.nationalityMasterList.Add(nat.natID, nat);
             }
@@ -108,7 +108,7 @@ namespace JominiEngine
             // ========= load RANKS
             foreach (byte element in Globals_Game.rankKeys)
             {
-                Rank rank = DatabaseRead.DatabaseRead_rank(gameID, element.ToString());
+                Rank rank = DatabaseRead.Cass_DatabaseRead_Rank(element.ToString());
                 // add Rank to rankMasterList
                 Globals_Game.rankMasterList.Add(rank.id, rank);
             }
@@ -116,7 +116,7 @@ namespace JominiEngine
             // ========= load POSITIONS
             foreach (byte element in Globals_Game.positionKeys)
             {
-                Position pos = DatabaseRead.DatabaseRead_position(gameID, element.ToString());
+                Position pos = DatabaseRead.Cass_DatabaseRead_Position(element.ToString());
                 // add Position to positionMasterList
                 Globals_Game.positionMasterList.Add(pos.id, pos);
             }
@@ -124,7 +124,7 @@ namespace JominiEngine
             // ========= load SIEGES
             foreach (string element in Globals_Game.siegeKeys)
             {
-                Siege s = DatabaseRead.DatabaseRead_Siege(gameID, element);
+                Siege s = DatabaseRead.Cass_DatabaseRead_Siege(element);
                 // add Siege to siegeMasterList
                 Globals_Game.siegeMasterList.Add(s.siegeID, s);
             }
@@ -132,7 +132,7 @@ namespace JominiEngine
             // ========= load ARMIES
             foreach (string element in Globals_Game.armyKeys)
             {
-                Army a = DatabaseRead.DatabaseRead_Army(gameID, element);
+                Army a = DatabaseRead.Cass_DatabaseRead_Army(element);
                 // add Army to armyMasterList
                 Globals_Game.armyMasterList.Add(a.armyID, a);
             }
@@ -140,7 +140,7 @@ namespace JominiEngine
             // ========= load NPCs
             foreach (string element in Globals_Game.npcKeys)
             {
-                NonPlayerCharacter npc = DatabaseRead.DatabaseRead_NPC(gameID, element);
+                NonPlayerCharacter npc = DatabaseRead.Cass_DatabaseRead_NonPlayerCharacter(element);
                 // add NPC to npcMasterList
                 Globals_Game.npcMasterList.Add(npc.charID, npc);
             }
@@ -148,7 +148,7 @@ namespace JominiEngine
             // ========= load PCs
             foreach (string element in Globals_Game.pcKeys)
             {
-                PlayerCharacter pc = DatabaseRead.DatabaseRead_PC(gameID, element);
+                PlayerCharacter pc = DatabaseRead.Cass_DatabaseRead_PlayerCharacter(element);
                 // add PC to pcMasterList
                 Globals_Game.pcMasterList.Add(pc.charID, pc);
             }
@@ -156,7 +156,7 @@ namespace JominiEngine
             // ========= load KINGDOMS
             foreach (string element in Globals_Game.kingKeys)
             {
-                Kingdom king = DatabaseRead.DatabaseRead_Kingdom(gameID, element);
+                Kingdom king = DatabaseRead.Cass_DatabaseRead_Kingdom(element);
                 // add Kingdom to kingdomMasterList
                 Globals_Game.kingdomMasterList.Add(king.id, king);
             }
@@ -164,7 +164,7 @@ namespace JominiEngine
             // ========= load PROVINCES
             foreach (string element in Globals_Game.provKeys)
             {
-                Province prov = DatabaseRead.DatabaseRead_Province(gameID, element);
+                Province prov = DatabaseRead.Cass_DatabaseRead_Province(element);
                 // add Province to provinceMasterList
                 Globals_Game.provinceMasterList.Add(prov.id, prov);
             }
@@ -172,7 +172,7 @@ namespace JominiEngine
             // ========= load TERRAINS
             foreach (string element in Globals_Game.terrKeys)
             {
-                Terrain terr = DatabaseRead.DatabaseRead_terrain(gameID, element);
+                Terrain terr = DatabaseRead.Cass_DatabaseRead_terrain(element);
                 // add Terrain to terrainMasterList
                 Globals_Game.terrainMasterList.Add(terr.id, terr);
             }
@@ -180,15 +180,44 @@ namespace JominiEngine
             // ========= load FIEFS
             foreach (string element in Globals_Game.fiefKeys)
             {
-                Fief f = DatabaseRead.DatabaseRead_Fief(gameID, element);
+                Fief f = DatabaseRead.Cass_DatabaseRead_Fief(element);
                 // add Fief to fiefMasterList
                 Globals_Game.fiefMasterList.Add(f.id, f);
             }
             // ========== load CLIENTS
             foreach (string username in Globals_Server.client_keys)
             {
+
+
+
+
+
+
+
+
+
+
+
+
+
                 Client c = DatabaseRead_Client(gameID, username);
                 Globals_Server.Clients.Add(c.username, c);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
             // ========= process any CHARACTER goTo QUEUES containing entries
             if (Globals_Game.goToList.Count > 0)
@@ -201,16 +230,16 @@ namespace JominiEngine
             }
 
             // ========= read GLOBALS_GAME CHARACTER VARIABLES
-            Globals_Game.sysAdmin = DatabaseRead.DatabaseRead_PcVariable(gameID, "sysAdmin");
-            Globals_Game.kingOne = DatabaseRead.DatabaseRead_PcVariable(gameID, "kingOne");
-            Globals_Game.kingTwo = DatabaseRead.DatabaseRead_PcVariable(gameID, "kingTwo");
-            Globals_Game.princeOne = DatabaseRead.DatabaseRead_PcVariable(gameID, "princeOne");
-            Globals_Game.princeTwo = DatabaseRead.DatabaseRead_PcVariable(gameID, "princeTwo");
-            Globals_Game.heraldOne = DatabaseRead.DatabaseRead_PcVariable(gameID, "heraldOne");
-            Globals_Game.heraldTwo = DatabaseRead.DatabaseRead_PcVariable(gameID, "heraldTwo");
+            Globals_Game.sysAdmin = DatabaseRead.Cass_DatabaseRead_PcVariable("sysAdmin");
+            Globals_Game.kingOne = DatabaseRead.Cass_DatabaseRead_PcVariable("kingOne");
+            Globals_Game.kingTwo = DatabaseRead.Cass_DatabaseRead_PcVariable("kingTwo");
+            Globals_Game.princeOne = DatabaseRead.Cass_DatabaseRead_PcVariable("princeOne");
+            Globals_Game.princeTwo = DatabaseRead.Cass_DatabaseRead_PcVariable("princeTwo");
+            Globals_Game.heraldOne = DatabaseRead.Cass_DatabaseRead_PcVariable("heraldOne");
+            Globals_Game.heraldTwo = DatabaseRead.Cass_DatabaseRead_PcVariable("heraldTwo");
 
             // ========= load MAP
-            Globals_Game.gameMap = DatabaseRead.DatabaseRead_map(gameID, "mapEdges");
+            Globals_Game.gameMap = DatabaseRead.Cass_DatabaseRead_map("mapEdges");
         }
 
 		public static void DatabaseRead_Test(string gameID) {
