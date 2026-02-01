@@ -108,7 +108,7 @@ namespace JominiEngine
         public static IRiakClient rClient;
 
 
-
+        //new cassandra variants of the old riak implementation
         public static ICluster cCluster;
 
         public static ISession cSession;

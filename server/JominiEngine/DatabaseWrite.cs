@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using ProtoBuf;
+using ProtoMessageClient;
 using QuickGraph;
 using RiakClient;
 using RiakClient.Models;
-using ProtoBuf;
-using Newtonsoft.Json.Serialization;
-using ProtoMessageClient;
-using System.Windows.Forms;
 
 namespace JominiEngine
 {
@@ -541,7 +542,13 @@ namespace JominiEngine
 
             return putListResult.IsSuccess;
 		}
-		
+
+        public static void Cass_DatabaseWrite_KeyList<T>(string key, List<T> kl)
+        {
+            HeldStrings heldKList = new HeldStrings(key, JsonConvert.SerializeObject(kl));
+            Globals_Server.cMapper.InsertIfNotExists(heldKList);
+        }
+
         /// <summary>
         /// Writes a GameClock object to the database
         /// </summary>
@@ -588,6 +595,12 @@ namespace JominiEngine
             return putDictResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_Dictionary<T>(string key, T dictionary)
+        {
+            HeldStrings heldDictionary = new HeldStrings(key, JsonConvert.SerializeObject(dictionary));
+            Globals_Server.cMapper.InsertIfNotExists(heldDictionary);
+        }
+
         /// <summary>
         /// Serialises jEntryPriorities Dictionary
         /// </summary>
@@ -628,6 +641,12 @@ namespace JominiEngine
             return putJournalResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_Journal(Journal j)
+        {
+            Journal_Simple js = new Journal_Simple(j);
+            Globals_Server.cMapper.InsertIfNotExists(js);
+        }
+
         public static bool DatabaseWrite_Client(string gameID, Client client)
         {
             Client_Serialized clientSer = new Client_Serialized(client);
@@ -662,6 +681,14 @@ namespace JominiEngine
             return putStringResult.IsSuccess;
         }
 
+        //stores string in db table heldStrings
+        public static void Cass_DatabaseWrite_String(string key, string newString)
+        {
+            newString = "\"" + newString + "\"";
+            HeldStrings heldID = new HeldStrings(key, newString);
+            Globals_Server.cMapper.InsertIfNotExists(heldID);
+        }
+
         /// <summary>
         /// Writes a newID variable to the database
         /// </summary>
@@ -680,6 +707,12 @@ namespace JominiEngine
             }
 
             return putCharVarResult.IsSuccess;
+        }
+        //stores id in db table heldStrings
+        public static void Cass_DatabaseWrite_newID( string key, uint newID)
+        {
+            HeldStrings heldID  = new HeldStrings(key, newID.ToString());
+            Globals_Server.cMapper.InsertIfNotExists(heldID);
         }
 
         /// <summary>
@@ -700,6 +733,12 @@ namespace JominiEngine
             }
 
             return putBoolResult.IsSuccess;
+        }
+
+        public static void Cass_DatabaseWrite_Bool(string key, bool thisBool)
+        {
+            HeldStrings heldID = new HeldStrings(key, thisBool.ToString());
+            Globals_Server.cMapper.InsertIfNotExists(heldID);
         }
 
         /// <summary>
@@ -1156,6 +1195,11 @@ namespace JominiEngine
             return putVictoryDataResult.IsSuccess;
         }
 
+        public static void Cass_DatabaseWrite_VictoryData(VictoryData vicDat)
+        {
+            Globals_Server.cMapper.InsertIfNotExists(vicDat);
+        }
+
         /// <summary>
         /// Writes a Fief or Fief_Serialised object to the database
         /// </summary>
@@ -1320,6 +1364,17 @@ namespace JominiEngine
             }
 
             return putMapResultE.IsSuccess;
+        }
+
+        public static void Cass_DatabaseWrite_MapEdges(HexMapGraph map = null, List<TaggedEdge<string, string>> edges = null)
+        {
+            if (map != null)
+            {
+                // convert HexMapGraph into edges
+                edges = DatabaseWrite.EdgeCollection_serialise(map.myMap.Edges.ToList());
+            }
+
+            Globals_Server.cMapper.InsertIfNotExists(edges);
         }
 
         /// <summary>

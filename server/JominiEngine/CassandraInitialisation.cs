@@ -42,6 +42,10 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS factions (factionReqID text, leader text, factionName text, members text, PaymentDue list<text>, highestStature list<text>, foundingLocation text, alliedFiefs list<text>, proposedTax int, statureBonus double, treasury int, PRIMARY KEY (factionReqID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS fiefs (id text, name text, owner text, titleHolder text, rank text, province text, population int, fields double, industry double, troops int, taxrate double, taxratenext double, officialSpendNext int, garrisonSpendNext int, infrastructureSpendNext int, keepSpendNext int, keyStatsCurrent list<double>, keyStatsPrevious list<double>, keepLevel double, loyalty double, status text, language text, terrain text, charactersInFief list<text>, barredCharacters list<text>, barredNationalities list<text>, ancestralOwner text, bailiff text, bailiffDaysInFief double, treasury int, armies list<text>, hasRecruited boolean, isPillaged boolean, troopTransfer text, siege text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS gameClocks (id text, seasons list<text>, currentYear int, currentSeason text, PRIMARY KEY (id))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS heldStrings (id text, value text, PRIMARY KEY (id))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS hexmapgraphs (mapID text, myMap text, costs text, PRIMARY KEY (mapID))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS journals (id text, entries map<int, int>, areNewEntries boolean, priority text, PRIMARY KEY (id))");
+            //Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS journalentries
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS kingdoms (id text, name text, owner text, titleHolder text, rank text, nationality text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS languages (id text, baseLanguage text, dialect int, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS nationalities (natID text, name text, PRIMARY KEY (natId))");
@@ -54,8 +58,11 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS sieges (siegeID text, startYear int, startSeason text, besiegingPlayer text, defendingPlayer text, besiegerArmy text, defenderGarrison text, besiegedFief text, days double, startKeepLevel double, totalCasualtiesAttacker int, totalCasualtiesDefender int, totalDays double, defenderAdditional text, endDate text, PRIMARY KEY (siegeID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS traits (id text, name text, effects text, PRIMARY KEY (id))");
-            
-            Globals_Server.cMapper = new Mapper(Globals_Server.cSession);
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS victorydata (playerid text, playercharacterid text, startstature double, currentstature double, startpopulation double, currentpopulation double, startfiefs double, currentfiefs double, startmoney double, currentmoney double, PRIMARY KEY (playerid))");
+
+
+
+           Globals_Server.cMapper = new Mapper(Globals_Server.cSession);
             JominiMapper jMapper = new JominiMapper();
             Terrain testTerrain = new Terrain("terr_dust", "Quite glittery", 1.1);
             Globals_Server.cMapper.InsertIfNotExists(testTerrain);

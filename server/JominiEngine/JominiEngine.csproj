@@ -299,6 +299,7 @@
     <Compile Include="Birth.cs" />
     <Compile Include="CassandraInitialisation.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="HeldStrings.cs" />
     <Compile Include="JominiMapper.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ClientSerializer.cs" />

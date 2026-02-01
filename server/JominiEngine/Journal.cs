@@ -1136,6 +1136,8 @@ namespace JominiEngine
 
     public class Journal_Simple
     {
+        //added to journal so that it can be stored using mapping
+        public string id { get; set; }
         /// <summary>
         /// Holds entries
         /// </summary>

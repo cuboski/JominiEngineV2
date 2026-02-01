@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using QuickGraph;
 using RiakClient.Models;
 
@@ -492,6 +493,15 @@ namespace JominiEngine
             return newDict;
         }
 
+        public static Dictionary<string, uint[]> Cass_DatabaseRead_dictStringUint(string dictID)
+        {
+            HeldStrings[] retrieveddictStringUint = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", dictID).ToArray();
+            HeldStrings read = retrieveddictStringUint[0];
+
+            return JsonConvert.DeserializeObject<Dictionary<string, uint[]>>(read.value);
+
+        }
+
         /// <summary>
         /// Reads a Dictionary(string, double[]) from the database
         /// </summary>
@@ -514,6 +524,15 @@ namespace JominiEngine
             }
 
             return newDict;
+        }
+
+        public static Dictionary<string, double[]> Cass_DatabaseRead_dictStringDouble(string dictID)
+        {
+            HeldStrings[] retrieveddictStringdouble = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", dictID).ToArray();
+            HeldStrings read = retrieveddictStringdouble[0];
+
+            return JsonConvert.DeserializeObject<Dictionary<string, double[]>>(read.value);
+
         }
 
         /// <summary>
@@ -540,6 +559,15 @@ namespace JominiEngine
             return newDict;
         }
 
+        public static Dictionary<uint, string> Cass_DatabaseRead_dictIntString(string dictID)
+        {
+            HeldStrings[] retrieveddictIntString = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", dictID).ToArray();
+            HeldStrings read = retrieveddictIntString[0];
+
+            return JsonConvert.DeserializeObject<Dictionary<uint, string>>(read.value);
+
+        }
+
         /// <summary>
         /// Reads a Dictionary(string, byte) from the database
         /// </summary>
@@ -564,6 +592,19 @@ namespace JominiEngine
             }
 
             return dictOut;
+        }
+
+        public static Dictionary<string[], byte> Cass_DatabaseRead_dictStringByte(string dictID)
+        {
+            HeldStrings[] retrieveddictStringByte = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", dictID).ToArray();
+            HeldStrings read = retrieveddictStringByte[0];
+
+            Dictionary<string, byte> tempDict = JsonConvert.DeserializeObject<Dictionary<string, byte>>(read.value);
+
+            Dictionary<string[], byte> deSerDSB = JentryPriorities_deserialise(tempDict);
+
+            return deSerDSB;
+
         }
 
         /// <summary>
@@ -611,6 +652,15 @@ namespace JominiEngine
             return dictOut;
         }
 
+        public static Dictionary<string, OwnershipChallenge> Cass_DatabaseRead_dictStringOwnCh(string dictID)
+        {
+            HeldStrings[] retrieveddictStringOwnCh = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", dictID).ToArray();
+            HeldStrings read = retrieveddictStringOwnCh[0];
+
+            return JsonConvert.DeserializeObject<Dictionary<string, OwnershipChallenge>>(read.value);
+
+        }
+
         /// <summary>
         /// Reads a newID variable from the database
         /// </summary>
@@ -633,6 +683,14 @@ namespace JominiEngine
             }
 
             return newIDout;
+        }
+
+        public static uint Cass_DatabaseRead_newIDs(string newID)
+        {
+            HeldStrings[] retrievedId = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", newID).ToArray();
+            HeldStrings read = retrievedId[0];
+            
+            return UInt32.Parse(read.value);
         }
 
         /// <summary>
@@ -659,6 +717,16 @@ namespace JominiEngine
             return newJournal;
         }
 
+        public static Journal Cass_DatabaseRead_Journal(string journalID)
+        {
+            Journal_Simple[] retrievedJournal = Globals_Server.cMapper.Fetch<Journal_Simple>("WHERE id = ?", journalID).ToArray();
+            Journal_Simple read = retrievedJournal[0];
+            Journal newJournal = new Journal(read);
+
+            return newJournal;
+        }
+
+
         /// <summary>
         /// Reads a VictoryData object from the database
         /// </summary>
@@ -681,6 +749,14 @@ namespace JominiEngine
             }
 
             return newVictoryData;
+        }
+
+        public static VictoryData Cass_DatabaseRead_VictoryData(string vicDataID)
+        {
+            VictoryData[] retrievedVData = Globals_Server.cMapper.Fetch<VictoryData>("WHERE playerid = ?", vicDataID).ToArray();
+            VictoryData read = retrievedVData[0];
+
+            return read;
         }
 
         /// <summary>
@@ -1785,6 +1861,14 @@ namespace JominiEngine
             }
 
             return newBool;
+        }
+
+        public static bool Cass_DatabaseRead_Bool(string boolID)
+        {
+            HeldStrings[] retrievedBool = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", boolID).ToArray();
+            HeldStrings read = retrievedBool[0];
+
+            return Convert.ToBoolean(read.value);
         }
 
         public static List<string> DatabaseRead_List(string gameID, string listID)

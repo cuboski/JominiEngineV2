@@ -19,6 +19,10 @@ namespace JominiEngine {
             For<Faction_Simple>().TableName("factions");
             For<Fief_Simple>().TableName("fiefs");
             For<GameClock_Simple>().TableName("gameclocks");
+            For<HeldStrings>().TableName("heldStrings");
+            For<HexMapGraph_Simple>().TableName("hexmapgraphs");
+            For<Journal_Simple>().TableName("journals");
+            //For<JournalEntry_Simple>().TableName("journalentries");
             For<Kingdom_Simple>().TableName("kingdoms");
             For<Language_Serialised>().TableName("languages");
             For<Nationality>().TableName("nationalities");
@@ -30,6 +34,7 @@ namespace JominiEngine {
             For<Siege_Simple>().TableName("sieges");
             For<Terrain>().TableName("terrain");
             For<Trait_Simple>().TableName("traits");
+            For<VictoryData>().TableName("victorydata");
 
         }
     }
