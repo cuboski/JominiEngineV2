@@ -33,8 +33,9 @@ namespace JominiEngine
             Console.WriteLine("Database alocated");
 
             DatabaseWrite.CASS_WIPE_DATABASE(FRESH_DATABASE);
-            DatabaseWrite.DatabaseWriteAll("testBucket");
-            DatabaseRead.DatabaseReadAll("testBucket");
+
+            Globals_Server.cMapper = new Mapper(Globals_Server.cSession);
+
 
             //cSession.Execute("CREATE TYPE IF NOT EXISTS journal ()");
             //Globals_Server.cSession.Execute("CREATE TYPE IF NOT EXISTS titlename (langID text, name text)");
@@ -45,16 +46,16 @@ namespace JominiEngine
             //cSession.Execute("CREATE TABLE IF NOT EXISTS client (user text, pcID text, activeChar text, myPastEvents journal, PRIMARY KEY (user))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS factions (factionReqID text, leader text, factionName text, members text, PaymentDue list<text>, highestStature list<text>, foundingLocation text, alliedFiefs list<text>, proposedTax int, statureBonus double, treasury int, PRIMARY KEY (factionReqID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS fiefs (id text, name text, owner text, titleHolder text, rank text, province text, population int, fields double, industry double, troops int, taxrate double, taxratenext double, officialSpendNext int, garrisonSpendNext int, infrastructureSpendNext int, keepSpendNext int, keyStatsCurrent list<double>, keyStatsPrevious list<double>, keepLevel double, loyalty double, status text, language text, terrain text, charactersInFief list<text>, barredCharacters list<text>, barredNationalities list<text>, ancestralOwner text, bailiff text, bailiffDaysInFief double, treasury int, armies list<text>, hasRecruited boolean, isPillaged boolean, troopTransfer text, siege text, PRIMARY KEY (id))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS gameClocks (id text, seasons list<text>, currentYear int, currentSeason text, PRIMARY KEY (id))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS gameclocks (id text, seasons text, currentYear int, currentSeason text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS heldStrings (id text, value text, PRIMARY KEY (id))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS journals (id text, entries map<int, int>, areNewEntries boolean, priority text, PRIMARY KEY (id))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS journalsimple (id text, jentries text, areNewEntries boolean, priority text, PRIMARY KEY (id))");
             //Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS journalentries
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS kingdoms (id text, name text, owner text, titleHolder text, rank text, nationality text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS languages (id text, baseLanguage text, dialect int, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS nationalities (natID text, name text, PRIMARY KEY (natId))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS nonplayercharacters (charID text, firstname text, familyName text, purse int, birthdate tuple<int, string>, isMale boolean, nationalities text, isAlive boolean, maxHealth double, virility double, goTo list<text>, language text, days double, statureModifier double, management double, combat double, traits list<tuple<text, int>>, inKeep boolean, isPregnant boolean, location text, spouse text, father text, mother text, familyID text, fiancee text, mtTitles list<text>, armyID text, ailments text, captorID text, ransom text, employer text, salary int, lastOffer text, inEntourage boolean, isHeir boolean, PRIMARY KEY (charID))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS nonplayercharacters (charID text, firstname text, familyName text, purse int, birthdate text, isMale boolean, nationalities text, isAlive boolean, maxHealth double, virility double, goTo list<text>, language text, days double, statureModifier double, management double, combat double, traits text, inKeep boolean, isPregnant boolean, location text, spouse text, father text, mother text, familyID text, fiancee text, mtTitles list<text>, armyID text, ailments text, captorID text, ransom text, employer text, salary int, lastOffer text, inEntourage boolean, isHeir boolean, PRIMARY KEY (charID))");
             //Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS places (id text, name text, owner text, titleHolder text, rank text, PRIMARY KEY (id))");
-            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS playercharacters (charID text, firstname text, familyName text, purse int, birthdate tuple<int, string>, isMale boolean, nationalities text, isAlive boolean, maxHealth double, virility double, goTo list<text>, language text, days double, statureModifier double, management double, combat double, traits list<tuple<text, int>>, inKeep boolean, isPregnant boolean, location text, spouse text, father text, mother text, familyID text, fiancee text, mtTitles list<text>, armyID text, ailments text, captorID text, ransom text, isOutlawed boolean, myNPCs list<text>, ownedFiefs list<text>, ownedProvinces list<text>, homeFief text, ancestralHomeFief text, playerID text, myarmies list<text>, mySieges list<text>, PRIMARY KEY (charID))");
+            Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS playercharacters (charID text, firstname text, familyName text, purse int, birthdate text, isMale boolean, nationalities text, isAlive boolean, maxHealth double, virility double, goTo list<text>, language text, days double, statureModifier double, management double, combat double, traits text, inKeep boolean, isPregnant boolean, location text, spouse text, father text, mother text, familyID text, fiancee text, mtTitles list<text>, armyID text, ailments text, captorID text, ransom text, isOutlawed boolean, myNPCs list<text>, ownedFiefs list<text>, ownedProvinces list<text>, homeFief text, ancestralHomeFief text, playerID text, myarmies list<text>, mySieges list<text>, PRIMARY KEY (charID))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS positions (id text, langID list<text>, name list<text>, stature text, officeHolder text, nationality text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS provinces (id text, name text, owner text, titleHolder text, rank text, kingdomId text, taxRate double, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS ranks (id text, langID list<text>, name list<text>, stature text, PRIMARY KEY (id))");
@@ -62,14 +63,15 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS terrain (id text, description text, travelCost double, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS traits (id text, name text, effects text, PRIMARY KEY (id))");
             Globals_Server.cSession.Execute("CREATE TABLE IF NOT EXISTS victorydata (playerid text, playercharacterid text, startstature double, currentstature double, startpopulation double, currentpopulation double, startfiefs double, currentfiefs double, startmoney double, currentmoney double, PRIMARY KEY (playerid))");
+            
+
+            //JominiMapper jMapper = new JominiMapper();
+            
+            MappingConfiguration.Global.Define<JominiMapper>();
 
 
-
-           Globals_Server.cMapper = new Mapper(Globals_Server.cSession);
-            JominiMapper jMapper = new JominiMapper();
             Terrain testTerrain = new Terrain("terr_dust", "Quite glittery", 1.1);
             Globals_Server.cMapper.InsertIfNotExists(testTerrain);
-            MappingConfiguration.Global.Define<JominiMapper>();
             String tt = "terr_dust";
             Terrain[] t = Globals_Server.cMapper.Fetch<Terrain>("WHERE id = ?", tt).ToArray();
             Terrain ti = new Terrain();
@@ -78,10 +80,10 @@ namespace JominiEngine
 
             Nationality testN = new Nationality("abc", "Scot");
             Globals_Server.cMapper.InsertIfNotExists(testN);
-            String nt = "1";
+            String nt = "abc";
             Nationality[] n = Globals_Server.cMapper.Fetch<Nationality>("WHERE natID = ?", nt).ToArray();
-            Nationality ni = new Nationality();
-            ni = n[0];
+            Console.WriteLine(n);
+            Nationality ni = n[0];
             Console.WriteLine(ni.natID + " " + ni.name);
 
             Terrain testT2 = new Terrain("terr_aqua", "Quite supreme", 1.3);
@@ -113,7 +115,7 @@ namespace JominiEngine
             BaseLanguage testBl = new BaseLanguage("lang_aa", "French");
             DatabaseWrite.Cass_DatabaseWrite_BaseLanguage(testBl);
 
-            BaseLanguage readBl = DatabaseRead.Cass_DatabaseRead_BaseLanguage("aaa");
+            BaseLanguage readBl = DatabaseRead.Cass_DatabaseRead_BaseLanguage("lang_aa");
             Console.WriteLine(readBl.id + " " + readBl.name);
 
             Language_Serialised testL = new Language_Serialised("lang_aa12", "lang_aa", 1);
@@ -162,7 +164,7 @@ namespace JominiEngine
             //IEnumerable<User> users = mapper.Fetch<User>();
             //IEnumerable<User> users = mapper.Fetch<User>("WHERE name = ?", someName);
 
-            Globals_Server.cCluster.Shutdown(); // should put somewhere else
+            //Globals_Server.cCluster.Shutdown(); // should put somewhere else
 
 
             //var terrains = new Table<Terrain>(cSession);

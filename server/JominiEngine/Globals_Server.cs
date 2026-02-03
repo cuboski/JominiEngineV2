@@ -115,6 +115,7 @@ namespace JominiEngine
 
         public static IMapper cMapper;
 
+
         //public static IQueryProvider cProvider;
 
 

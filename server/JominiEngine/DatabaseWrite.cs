@@ -23,10 +23,11 @@ namespace JominiEngine
         /// <param name="gameID">ID of game (used for database bucket)</param>
         public static void DatabaseWriteAll(string gameID)
         {
-			// ========= test
-			//DatabaseWrite.DatabaseWrite_Test(gameID);
+            // ========= test
+            //DatabaseWrite.DatabaseWrite_Test(gameID);
 
             // ========= write CLOCK
+            //Console.WriteLine(Globals_Game.clock.id);
             DatabaseWrite.Cass_DatabaseWrite_Clock(Globals_Game.clock);
 
             // ========= write GLOBALS_SERVER/GAME DICTIONARIES
@@ -98,7 +99,7 @@ namespace JominiEngine
             // newJournalEntryID
             DatabaseWrite.Cass_DatabaseWrite_newID("newJournalEntryID", Globals_Game.newJournalEntryID);
             // gameType
-            DatabaseWrite.Cass_DatabaseWrite_newID("gameType", Globals_Game.gameType);
+            DatabaseWrite.Cass_DatabaseWrite_newID("currentVictoryType", Globals_Game.gameType);
             // duration
             DatabaseWrite.Cass_DatabaseWrite_newID("duration", Globals_Game.duration);
             // startYear
@@ -473,8 +474,8 @@ namespace JominiEngine
 
             }
 
-            DatabaseWrite_KeyList(gameID, "clientKeys", Globals_Server.client_keys);
-			Console.WriteLine ("Finished writing clients");
+            //DatabaseWrite_KeyList(gameID, "clientKeys", Globals_Server.client_keys);
+			//Console.WriteLine ("Finished writing clients");
 
 
 
@@ -693,8 +694,24 @@ namespace JominiEngine
 
         public static void Cass_DatabaseWrite_Journal(string key, Journal j)
         {
+            /*
             Journal_Simple js = new Journal_Simple(key, j);
-            Globals_Server.cMapper.InsertIfNotExists(js);
+            Console.WriteLine("1");
+            Console.WriteLine(j.entries + " " + j.areNewEntries + " " + j.priority);
+            Console.WriteLine("2");
+            Console.WriteLine(js.id + " " + js.jentries + " " + js.areNewEntries + " " + js.priority);
+            Console.WriteLine("3");
+            if (js.id is string)
+                Console.WriteLine("4");
+            if (js.jentries is string)
+                Console.WriteLine("5");
+            if (js.areNewEntries is bool)
+                Console.WriteLine("6");
+            if (js.priority is string)
+                Console.WriteLine("7");
+            */
+            HeldStrings journal = new HeldStrings(key, JsonConvert.SerializeObject(j));
+            Globals_Server.cMapper.InsertIfNotExists(journal);
         }
 
         public static bool DatabaseWrite_Client(string gameID, Client client)
@@ -735,6 +752,7 @@ namespace JominiEngine
         public static void Cass_DatabaseWrite_String(string key, string newString)
         {
             newString = "\"" + newString + "\"";
+            Console.WriteLine(key);
             HeldStrings heldID = new HeldStrings(key, newString);
             Globals_Server.cMapper.InsertIfNotExists(heldID);
         }
@@ -1029,7 +1047,8 @@ namespace JominiEngine
                 // convert NonPlayerCharacter into NonPlayerCharacter_Serialised
                 npcs = DatabaseWrite.NPC_serialise(npc);
             }
-            NonPlayerCharacter_Simple npcss = new NonPlayerCharacter_Simple(npcs);
+            //NonPlayerCharacter_Simple npcss = new NonPlayerCharacter_Simple(npcs);
+            HeldStrings npcss = new HeldStrings(npcs.charID, JsonConvert.SerializeObject(npcs));
             Globals_Server.cMapper.InsertIfNotExists(npcss);
         }
 
@@ -1079,7 +1098,8 @@ namespace JominiEngine
                 // convert PlayerCharacter into PlayerCharacter_Serialised
                 pcs = DatabaseWrite.PC_serialise(pc);
             }
-            PlayerCharacter_Simple pcss = new PlayerCharacter_Simple(pcs);
+            //PlayerCharacter_Simple pcss = new PlayerCharacter_Simple(pcs);
+            HeldStrings pcss = new HeldStrings(pcs.charID, JsonConvert.SerializeObject(pcs));
             Globals_Server.cMapper.InsertIfNotExists(pcss);
         }
 
@@ -1183,7 +1203,8 @@ namespace JominiEngine
                 ps = DatabaseWrite.Province_serialise(p);
             }
             // convert Province_Serialised into Province_Simple
-            Province_Simple pss = new Province_Simple(ps);
+            //Province_Simple pss = new Province_Simple(ps);
+            HeldStrings pss = new HeldStrings(ps.id, JsonConvert.SerializeObject(ps));
 
             Globals_Server.cMapper.InsertIfNotExists(pss);
         }
@@ -1285,7 +1306,8 @@ namespace JominiEngine
                 // convert Fief into Fief_Serialised
                 fs = DatabaseWrite.Fief_serialise(f);
             }
-            Fief_Simple fss = new Fief_Simple(fs);
+            //Fief_Simple fss = new Fief_Simple(fs);
+            HeldStrings fss = new HeldStrings(fs.id, JsonConvert.SerializeObject(fs));
 
             Globals_Server.cMapper.InsertIfNotExists(fss);
         }
@@ -1491,7 +1513,7 @@ namespace JominiEngine
             Globals_Server.cSession.Execute("DROP TABLE IF EXISTS baselanguages");
             Globals_Server.cSession.Execute("DROP TABLE IF EXISTS factions");
             Globals_Server.cSession.Execute("DROP TABLE IF EXISTS fiefs");
-            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS gameClocks");
+            Globals_Server.cSession.Execute("DROP TABLE IF EXISTS gameclocks");
             Globals_Server.cSession.Execute("DROP TABLE IF EXISTS heldStrings");
             Globals_Server.cSession.Execute("DROP TABLE IF EXISTS journals");
             Globals_Server.cSession.Execute("DROP TABLE IF EXISTS kingdoms");

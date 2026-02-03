@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
+using Newtonsoft.Json;
 
 namespace JominiEngine
 {
@@ -63,7 +64,7 @@ namespace JominiEngine
         public GameClock(GameClock_Simple clock)
         {
             this.id = clock.id;
-            this.seasons = clock.seasons;
+            this.seasons = JsonConvert.DeserializeObject<string[]>(clock.seasons);
             this.currentYear = (uint)(clock.currentYear);
             this.currentSeason = Convert.ToByte(clock.currentSeason);
         }
@@ -127,11 +128,11 @@ namespace JominiEngine
         /// <summary>
 		/// Holds clock ID
 		/// </summary>
-		public String id { get; set; }
+		public string id { get; set; }
         /// <summary>
         /// Holds seasons
         /// </summary>
-        public string[] seasons = new string[4] { "Spring", "Summer", "Autumn", "Winter" };
+        public string seasons { get; set; }
         /// <summary>
         /// Holds current year
         /// </summary>
@@ -149,8 +150,9 @@ namespace JominiEngine
 
         public GameClock_Simple(GameClock clock)
         {
+            
             this.id = clock.id;
-            this.seasons = clock.seasons;
+            this.seasons = JsonConvert.SerializeObject(clock.seasons);
             this.currentYear = Convert.ToInt32(clock.currentYear);
             this.currentSeason = clock.currentSeason.ToString();
         }

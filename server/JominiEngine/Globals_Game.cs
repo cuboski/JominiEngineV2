@@ -545,7 +545,7 @@ namespace JominiEngine
                         // call observer's update method to perform the required actions
                         // based on the string passed
                         // Ensure not adding same entry twice in the event that the player has more than one interest in event
-                        if (!Globals_Server.Clients[pc.playerID].myPastEvents.entries.ContainsValue(jEvent))
+                        if (!Globals_Server.Clients[pc.playerID].myPastEvents.jentries.ContainsValue(jEvent))
                         {
                             Globals_Server.Clients[pc.playerID].myPastEvents.AddNewEntry(jEvent);
                         }
@@ -1073,7 +1073,7 @@ namespace JominiEngine
             bool proceed = true;
 
             // iterate through scheduled events
-            foreach (KeyValuePair<uint, JournalEntry> jEntry in Globals_Game.scheduledEvents.entries)
+            foreach (KeyValuePair<uint, JournalEntry> jEntry in Globals_Game.scheduledEvents.jentries)
             {
                 proceed = true;
 

@@ -17,33 +17,42 @@ namespace JominiEngine
         /// <summary>
         /// Holds entries
         /// </summary>
-        public SortedList<uint, JournalEntry> entries = new SortedList<uint, JournalEntry>();
+        public SortedList<uint, JournalEntry> jentries = new SortedList<uint, JournalEntry>();
         /// <summary>
         /// Indicates presence of new (unread) entries
         /// </summary>
-        public bool areNewEntries = false;
+        public bool areNewEntries { get; set; }
         /// <summary>
         /// Priority level of new (unread) entries
         /// </summary>
-        public byte priority = 0;
+        public byte priority { get; set; }
 
         /// <summary>
         /// Constructor for Journal
         /// </summary>
         /// <param name="entList">SortedList(uint, JournalEntry) holding entries</param>
-        public Journal(SortedList<uint, JournalEntry> entList = null)
+        public Journal(SortedList<uint, JournalEntry> entList)
         {
-            if (entList != null)
-            {
-                this.entries = entList;
-            }
+            //if (entList != null)
+            //{
+            //    this.jentries = entList;
+            //}
+            this.jentries = entList;
+            areNewEntries = false;
+            priority = 0;
         }
 
         public Journal(Journal_Simple journal)
         {
-            this.entries = JsonConvert.DeserializeObject<SortedList<uint, JournalEntry>>(journal.entries);
+            this.jentries = JsonConvert.DeserializeObject<SortedList<uint, JournalEntry>>(journal.jentries);
             this.areNewEntries = journal.areNewEntries;
             this.priority = Convert.ToByte(journal.priority);
+        }
+
+        public Journal()
+        {
+            areNewEntries = false;
+            priority = 0;
         }
 
         /// <summary>
@@ -54,7 +63,7 @@ namespace JominiEngine
         {
             bool areUnviewed = false;
 
-            foreach (KeyValuePair <uint, JournalEntry> thisEntry in this.entries)
+            foreach (KeyValuePair <uint, JournalEntry> thisEntry in this.jentries)
             {
                 if (!thisEntry.Value.viewed)
                 {
@@ -101,7 +110,7 @@ namespace JominiEngine
             switch (scope)
             {
                 case "seas":
-                    foreach (KeyValuePair<uint, JournalEntry> jEntry in this.entries)
+                    foreach (KeyValuePair<uint, JournalEntry> jEntry in this.jentries)
                     {
                         // year and season must match
                         if (jEntry.Value.year == yr)
@@ -114,7 +123,7 @@ namespace JominiEngine
                     }
                     break;
                 case "yr":
-                    foreach (KeyValuePair<uint, JournalEntry> jEntry in this.entries)
+                    foreach (KeyValuePair<uint, JournalEntry> jEntry in this.jentries)
                     {
                         // year must match
                         if (jEntry.Value.year == yr)
@@ -124,7 +133,7 @@ namespace JominiEngine
                     }
                     break;
                 default:
-                    foreach (KeyValuePair<uint, JournalEntry> jEntry in this.entries)
+                    foreach (KeyValuePair<uint, JournalEntry> jEntry in this.jentries)
                     {
                         // get all events
                         matchingEntries.Add(jEntry.Key, jEntry.Value);
@@ -143,7 +152,7 @@ namespace JominiEngine
         {
             SortedList<uint, JournalEntry> foundEntries = new SortedList<uint,JournalEntry>();
 
-            foreach (KeyValuePair<uint, JournalEntry> jEntry in this.entries)
+            foreach (KeyValuePair<uint, JournalEntry> jEntry in this.jentries)
             {
                 if (!jEntry.Value.viewed)
                 {
@@ -166,7 +175,7 @@ namespace JominiEngine
             List<JournalEntry> foundEntries = new List<JournalEntry>();
             bool entryFound = false;
 
-            foreach (KeyValuePair<uint, JournalEntry> jEntry in this.entries)
+            foreach (KeyValuePair<uint, JournalEntry> jEntry in this.jentries)
             {
                 // get entries of specified type
                 if (jEntry.Value.type.Equals(entryType))
@@ -219,9 +228,9 @@ namespace JominiEngine
                 try
                 {
                     // add entry
-                    this.entries.Add(jEntry.jEntryID, jEntry);
+                    this.jentries.Add(jEntry.jEntryID, jEntry);
 
-                    if (this.entries.ContainsKey(jEntry.jEntryID))
+                    if (this.jentries.ContainsKey(jEntry.jEntryID))
                     {
                         success = true;
                     }
@@ -1124,7 +1133,7 @@ namespace JominiEngine
         /// <summary>
         /// Holds entries
         /// </summary>
-        public string entries { get; set; }
+        public string jentries { get; set; }
         /// <summary>
         /// Indicates presence of new (unread) entries
         /// </summary>
@@ -1133,6 +1142,7 @@ namespace JominiEngine
         /// Priority level of new (unread) entries
         /// </summary>
         public string priority = "0";
+
         public Journal_Simple()
         {
 
@@ -1141,7 +1151,7 @@ namespace JominiEngine
         public Journal_Simple(string key, Journal journal)
         {
             this.id = key;
-            this.entries = JsonConvert.SerializeObject(journal.entries);
+            this.jentries = JsonConvert.SerializeObject(journal.jentries);
             this.areNewEntries = journal.areNewEntries;
             this.priority = journal.priority.ToString();
         }

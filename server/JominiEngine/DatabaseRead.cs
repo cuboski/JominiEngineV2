@@ -21,7 +21,7 @@ namespace JominiEngine
             DatabaseRead.Cass_DatabaseRead_keyLists();
 
             // ========= load CLOCK
-            Globals_Game.clock = DatabaseRead.Cass_DatabaseRead_GameClock("gameClock");
+            Globals_Game.clock = DatabaseRead.Cass_DatabaseRead_GameClock("clock_1");
 
             // ========= load GLOBAL_SERVER/GAME DICTIONARIES
             Globals_Server.combatValues = DatabaseRead.Cass_DatabaseRead_dictStringUint("combatValues");
@@ -200,8 +200,8 @@ namespace JominiEngine
 
 
 
-                Client c = DatabaseRead_Client(gameID, username);
-                Globals_Server.Clients.Add(c.username, c);
+                //Client c = DatabaseRead_Client(gameID, username);
+                //Globals_Server.Clients.Add(c.username, c);
 
 
 
@@ -577,10 +577,10 @@ namespace JominiEngine
 
             // populate clientKeys
 
-            HeldStrings[] clientKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "clientKeys").ToArray();
-            HeldStrings readCl = clientKeys[0];
+            //HeldStrings[] clientKeys = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", "clientKeys").ToArray();
+            //HeldStrings readCl = clientKeys[0];
 
-            Globals_Server.client_keys = JsonConvert.DeserializeObject<List<string>>(readCl.value);
+            //Globals_Server.client_keys = JsonConvert.DeserializeObject<List<string>>(readCl.value);
 
         }
 
@@ -611,6 +611,7 @@ namespace JominiEngine
         public static GameClock Cass_DatabaseRead_GameClock(string clockID)
         {
             GameClock_Simple[] retrievedClock = Globals_Server.cMapper.Fetch<GameClock_Simple>("WHERE id = ?", clockID).ToArray();
+            //Console.WriteLine(retrievedClock.Length);
             GameClock_Simple gc = retrievedClock[0];
             GameClock newClock = new GameClock(gc);
 
@@ -867,11 +868,19 @@ namespace JominiEngine
 
         public static Journal Cass_DatabaseRead_Journal(string journalID)
         {
+            /*
             Journal_Simple[] retrievedJournal = Globals_Server.cMapper.Fetch<Journal_Simple>("WHERE id = ?", journalID).ToArray();
             Journal_Simple read = retrievedJournal[0];
             Journal newJournal = new Journal(read);
+            */
+            HeldStrings[] retrievedJournal = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", journalID).ToArray();
+            HeldStrings read = retrievedJournal[0];
 
-            return newJournal;
+            Console.WriteLine(read.value);
+
+            Journal newJ = JsonConvert.DeserializeObject<Journal>(read.value);
+
+            return newJ;
         }
 
 
@@ -1334,10 +1343,17 @@ namespace JominiEngine
 
         public static NonPlayerCharacter Cass_DatabaseRead_NonPlayerCharacter(string npcID)
         {
+            /*
             NonPlayerCharacter_Simple[] retrievedNPC = Globals_Server.cMapper.Fetch<NonPlayerCharacter_Simple>("WHERE charID = ?", npcID).ToArray();
             NonPlayerCharacter_Simple read = retrievedNPC[0];
             NonPlayerCharacter_Serialised newNonPlayerCharacterSer = new NonPlayerCharacter_Serialised(read);
+            */
+            HeldStrings[] retrievednpc = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", npcID).ToArray();
+            HeldStrings read = retrievednpc[0];
+            NonPlayerCharacter_Serialised newNonPlayerCharacterSer = JsonConvert.DeserializeObject<NonPlayerCharacter_Serialised>(read.value);
+
             // if NonPlayerCharacter_Serialised goTo queue contains entries, store for later processing
+
             if (newNonPlayerCharacterSer.goTo.Count > 0)
             {
                 Globals_Game.goToList.Add(newNonPlayerCharacterSer);
@@ -1432,9 +1448,15 @@ namespace JominiEngine
 
         public static PlayerCharacter Cass_DatabaseRead_PlayerCharacter(string pcID)
         {
+            /*
             PlayerCharacter_Simple[] retrievedNPC = Globals_Server.cMapper.Fetch<PlayerCharacter_Simple>("WHERE charID = ?", pcID).ToArray();
             PlayerCharacter_Simple read = retrievedNPC[0];
             PlayerCharacter_Serialised newPlayerCharacterSer = new PlayerCharacter_Serialised(read);
+            */
+
+            HeldStrings[] retrievedpc = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", pcID).ToArray();
+            HeldStrings read = retrievedpc[0];
+            PlayerCharacter_Serialised newPlayerCharacterSer = JsonConvert.DeserializeObject<PlayerCharacter_Serialised>(read.value);
             // if PlayerCharacter_Serialised goTo queue contains entries, store for later processing
             if (newPlayerCharacterSer.goTo.Count > 0)
             {
@@ -1658,11 +1680,17 @@ namespace JominiEngine
 
         public static Province Cass_DatabaseRead_Province(string provID)
         {
+            /*
             Province_Simple[] retrievedProvince = Globals_Server.cMapper.Fetch<Province_Simple>("WHERE id = ?", provID).ToArray();
             Province_Simple newSProvince = retrievedProvince[0];
             Province_Serialised newSerProvince = new Province_Serialised();
-            Province newProvince = new Province();
-            newProvince = DatabaseRead.Province_deserialise(newSerProvince);
+            */
+
+            HeldStrings[] retrievedProvince = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", provID).ToArray();
+            HeldStrings read = retrievedProvince[0];
+            Province_Serialised newSerProvince = JsonConvert.DeserializeObject<Province_Serialised>(read.value);
+
+            Province newProvince = DatabaseRead.Province_deserialise(newSerProvince);
 
             return newProvince;
         }
@@ -1794,11 +1822,17 @@ namespace JominiEngine
 
         public static Fief Cass_DatabaseRead_Fief(string fiefID)
         {
+            /*
             Fief_Simple[] retrievedFief = Globals_Server.cMapper.Fetch<Fief_Simple>("WHERE id = ?", fiefID).ToArray();
             Fief_Simple read = retrievedFief[0];
             Fief_Serialised serialised = new Fief_Serialised(read);
-            Fief newFief = new Fief();
-            newFief = Fief_deserialise(serialised);
+            */
+
+            HeldStrings[] retrievedFief = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", fiefID).ToArray();
+            HeldStrings read = retrievedFief[0];
+            Fief_Serialised serialised = JsonConvert.DeserializeObject<Fief_Serialised>(read.value);
+
+            Fief newFief = Fief_deserialise(serialised);
 
             return newFief;
         }
@@ -1989,10 +2023,18 @@ namespace JominiEngine
 
         public static PlayerCharacter Cass_DatabaseRead_PcVariable(string charVarID)
         {
-            HeldStrings[] retrievedPcV = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", charVarID).ToArray();
-            HeldStrings read = retrievedPcV[0];
+            Console.WriteLine(charVarID);
             PlayerCharacter newPC = null;
-            newPC = Globals_Game.pcMasterList[read.value];
+            HeldStrings[] retrievedPcV = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", charVarID).ToArray();
+            Console.WriteLine(retrievedPcV.Length);
+            if (retrievedPcV.Length > 0)
+            {
+                HeldStrings read = retrievedPcV[0];
+                if (Globals_Game.pcMasterList.ContainsKey(read.id))
+                {
+                    newPC = Globals_Game.pcMasterList[read.id];
+                }
+            }
 
             return newPC;
 

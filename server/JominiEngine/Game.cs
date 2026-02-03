@@ -1069,7 +1069,7 @@ namespace JominiEngine {
 
                 // remove processed events from Globals_Game.scheduledEvents
                 for (var i = 0; i < entriesForRemoval.Count; i++) {
-                    Globals_Game.scheduledEvents.entries.Remove(entriesForRemoval[i].jEntryID);
+                    Globals_Game.scheduledEvents.jentries.Remove(entriesForRemoval[i].jEntryID);
                 }
             }
         }
@@ -2345,7 +2345,7 @@ namespace JominiEngine {
         public static ProtoMessage AcceptRejectProposal(uint jEntryID, bool accept, Client client) {
             // Attempt to get Journal entry
             JournalEntry jEntry = null;
-            client.myPastEvents.entries.TryGetValue(jEntryID, out jEntry);
+            client.myPastEvents.jentries.TryGetValue(jEntryID, out jEntry);
             if (jEntry == null) {
                 return new ProtoMessage(DisplayMessages.JournalEntryUnrecognised);
             }
@@ -2960,7 +2960,7 @@ namespace JominiEngine {
 
         public static ProtoMessage ViewJournalEntry(uint journalID, Client client) {
             JournalEntry jEntry = null;
-            client.myPastEvents.entries.TryGetValue(journalID, out jEntry);
+            client.myPastEvents.jentries.TryGetValue(journalID, out jEntry);
             if (jEntry == null) {
                 var error = new ProtoMessage();
                 error.ResponseType = DisplayMessages.ErrorGenericMessageInvalid;
@@ -3227,7 +3227,7 @@ namespace JominiEngine {
 
         public static ProtoMessage RespondRansom(uint jEntryID, bool pay, Client client) {
             JournalEntry jEntry = null;
-            Globals_Game.pastEvents.entries.TryGetValue(jEntryID, out jEntry);
+            Globals_Game.pastEvents.jentries.TryGetValue(jEntryID, out jEntry);
             if (jEntry == null) {
                 var error = new ProtoMessage();
                 error.ResponseType = DisplayMessages.JournalEntryUnrecognised;

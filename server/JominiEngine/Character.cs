@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using ProtoMessageClient;
 namespace JominiEngine
 {
     /// <summary>
@@ -997,7 +998,7 @@ namespace JominiEngine
             // remove birth events from Globals_Game.scheduledEvents
             foreach (JournalEntry jEntry in births)
             {
-                Globals_Game.scheduledEvents.entries.Remove(jEntry.jEntryID);
+                Globals_Game.scheduledEvents.jentries.Remove(jEntry.jEntryID);
             }
 
             isPregnant = false;
@@ -1084,7 +1085,7 @@ namespace JominiEngine
                 success = Globals_Game.AddPastEvent(newEntry);
 
                 // delete marriage entry in Globals_Game.scheduledEvents
-                Globals_Game.scheduledEvents.entries.Remove(jEntry.jEntryID);
+                Globals_Game.scheduledEvents.jentries.Remove(jEntry.jEntryID);
 
                 // remove fiancee entries
                 if (bride != null)
@@ -2829,10 +2830,10 @@ namespace JominiEngine
                     // create entry
                     JournalEntry birth = new JournalEntry(Globals_Game.GetNextJournalEntryID(), birthYear, birthSeason, birthPersonae, "birth",null);
                     // add entry
-                    Globals_Game.scheduledEvents.entries.Add(birth.jEntryID, birth);
+                    Globals_Game.scheduledEvents.jentries.Add(birth.jEntryID, birth);
 
                     // check has been added
-                    if (Globals_Game.scheduledEvents.entries.ContainsKey(birth.jEntryID))
+                    if (Globals_Game.scheduledEvents.jentries.ContainsKey(birth.jEntryID))
                     {
                         success = true;
 
@@ -7215,8 +7216,8 @@ namespace JominiEngine
                 this.familyName = charSimpleToUse.familyName;
                 this.firstName = charSimpleToUse.firstName;
                 //this.purse = (uint)charToUse.purse;
-                Tuple<uint, byte> bd = new Tuple<uint, byte>((uint)charSimpleToUse.birthDate.Item1, Convert.ToByte(charSimpleToUse.birthDate.Item2));
-                this.birthDate = bd;
+                //Tuple<uint, byte> bd = new Tuple<uint, byte>((uint)charSimpleToUse.birthDate.Item1, Convert.ToByte(charSimpleToUse.birthDate.Item2));
+                this.birthDate = JsonConvert.DeserializeObject<Tuple<uint, byte>>(charSimpleToUse.birthDate);
                 this.isMale = charSimpleToUse.isMale;
                 this.nationality = charSimpleToUse.nationality;
                 this.isAlive = charSimpleToUse.isAlive;
@@ -7228,11 +7229,12 @@ namespace JominiEngine
                 this.statureModifier = charSimpleToUse.statureModifier;
                 this.management = charSimpleToUse.management;
                 this.combat = charSimpleToUse.combat;
-                this.traits = new Tuple<String, int>[charSimpleToUse.traits.Length];
-                for (int i = 0; i < charSimpleToUse.traits.Length; i++)
-                {
-                    this.traits[i] = new Tuple<string, int>(charSimpleToUse.traits[i].Item1, charSimpleToUse.traits[i].Item2);
-                }
+                this.traits = JsonConvert.DeserializeObject<Tuple<String, int>[]>(charSimpleToUse.traits);
+                //new Tuple<String, int>[charSimpleToUse.traits.Length];
+                //for (int i = 0; i < charSimpleToUse.traits.Length; i++)
+                //
+                //    this.traits[i] = new Tuple<string, int>(charSimpleToUse.traits[i].Item1, charSimpleToUse.traits[i].Item2);
+                //}
                 this.inKeep = charSimpleToUse.inKeep;
                 this.isPregnant = charSimpleToUse.isPregnant;
                 this.location = charSimpleToUse.location;
@@ -7577,7 +7579,7 @@ namespace JominiEngine
         /// <summary>
         /// Tuple holding character's year and season of birth
         /// </summary>
-        public Tuple<int, string> birthDate { get; set; }
+        public string birthDate { get; set; }
         /// <summary>
 		/// Holds if character male
 		/// </summary>
@@ -7625,7 +7627,7 @@ namespace JominiEngine
         /// <summary>
         /// Array holding character's traits (ID)
         /// </summary>
-        public Tuple<String, int>[] traits { get; set; }
+        public string traits { get; set; }
         /// <summary>
         /// bool indicating if character is in the keep
         /// </summary>
@@ -7701,8 +7703,9 @@ namespace JominiEngine
                 this.charID = charToUse.charID;
                 this.familyName = charToUse.familyName;
                 this.firstName = charToUse.firstName;
-                Tuple<int, string> bd = new Tuple<int, string> (Convert.ToInt32(charToUse.birthDate.Item1), charToUse.birthDate.Item2.ToString());
-                this.birthDate = bd;
+
+                //Tuple<int, string> bd = new Tuple<int, string> (Convert.ToInt32(charToUse.birthDate.Item1), charToUse.birthDate.Item2.ToString());
+                this.birthDate = JsonConvert.SerializeObject(charToUse.birthDate);
                 this.isMale = charToUse.isMale;
                 this.nationality = charToUse.nationality;
                 this.isAlive = charToUse.isAlive;
@@ -7714,11 +7717,12 @@ namespace JominiEngine
                 this.statureModifier = charToUse.statureModifier;
                 this.management = charToUse.management;
                 this.combat = charToUse.combat;
-                this.traits = new Tuple<String, int>[charToUse.traits.Length];
-                for (int i = 0; i < charToUse.traits.Length; i++)
-                {
-                    this.traits[i] = new Tuple<string, int>(charToUse.traits[i].Item1, charToUse.traits[i].Item2);
-                }
+                this.traits = JsonConvert.SerializeObject(charToUse.traits);
+                //new Tuple<String, int>[charToUse.traits.Length];
+                //for (int i = 0; i < charToUse.traits.Length; i++)
+                //{
+                //    this.traits[i] = new Tuple<string, int>(charToUse.traits[i].Item1, charToUse.traits[i].Item2);
+                //}
                 this.inKeep = charToUse.inKeep;
                 this.isPregnant = charToUse.isPregnant;
                 this.location = charToUse.location;

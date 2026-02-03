@@ -190,6 +190,8 @@ namespace JominiEngine
                     Game game = new Game();
                     SetUpForDemo();
 
+                    DatabaseWrite.DatabaseWriteAll("testBucket");
+                    DatabaseRead.DatabaseReadAll("testBucket");
                     /*
                     if (Globals_Server.rClient.Ping().IsSuccess)
                     {
@@ -204,7 +206,7 @@ namespace JominiEngine
                         Console.WriteLine("Could not connect to database :( ");
                     }
                     */
-                    
+
 
 
                     //testCaptives();
