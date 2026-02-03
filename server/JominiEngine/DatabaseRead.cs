@@ -188,35 +188,8 @@ namespace JominiEngine
             foreach (string username in Globals_Server.client_keys)
             {
 
-
-
-
-
-
-
-
-
-
-
-
-
-                //Client c = DatabaseRead_Client(gameID, username);
-                //Globals_Server.Clients.Add(c.username, c);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                Client c = Cass_DatabaseRead_Client(username);
+                Globals_Server.Clients.Add(c.username, c);
 
             }
             // ========= process any CHARACTER goTo QUEUES containing entries
@@ -263,6 +236,16 @@ namespace JominiEngine
                 Globals_Server.logError("Failed to read client: " + clientID);
                 return null;
             }
+        }
+
+        public static Client Cass_DatabaseRead_Client(string clientID)
+        {
+            HeldStrings[] retrievedClient = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", clientID).ToArray();
+            HeldStrings read = retrievedClient[0];
+            Client_Serialized newClientSer = JsonConvert.DeserializeObject<Client_Serialized>(read.value);
+            Client client = newClientSer.deserialise();
+
+            return client;
         }
 
         /// <summary>
@@ -876,10 +859,11 @@ namespace JominiEngine
             HeldStrings[] retrievedJournal = Globals_Server.cMapper.Fetch<HeldStrings>("WHERE id = ?", journalID).ToArray();
             HeldStrings read = retrievedJournal[0];
 
-            Console.WriteLine(read.value);
 
-            Journal newJ = JsonConvert.DeserializeObject<Journal>(read.value);
+            //Console.WriteLine(read.value);
 
+            Journal_Simple newJs = JsonConvert.DeserializeObject<Journal_Simple>(read.value);
+            Journal newJ = new Journal(newJs);
             return newJ;
         }
 

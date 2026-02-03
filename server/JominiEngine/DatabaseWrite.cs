@@ -440,15 +440,8 @@ namespace JominiEngine
             // write clients
             foreach (KeyValuePair<string, Client> pair in Globals_Server.Clients)
             {
-                //bool success = Cass_DatabaseWrite_Client(pair.Value);
-
-
-
-
-
-
-
-
+                //bool success = 
+                Cass_DatabaseWrite_Client(pair.Value);
 
                 //if (success)
                 //{
@@ -456,33 +449,10 @@ namespace JominiEngine
                 //}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             }
 
-            //DatabaseWrite_KeyList(gameID, "clientKeys", Globals_Server.client_keys);
-			//Console.WriteLine ("Finished writing clients");
-
-
-
-
-
-
-
+            Cass_DatabaseWrite_KeyList("clientKeys", Globals_Server.client_keys);
+			Console.WriteLine ("Finished writing clients");
 
 
             // ========= write FACTIONS
@@ -710,7 +680,8 @@ namespace JominiEngine
             if (js.priority is string)
                 Console.WriteLine("7");
             */
-            HeldStrings journal = new HeldStrings(key, JsonConvert.SerializeObject(j));
+            Journal_Simple js = new Journal_Simple(key, j);
+            HeldStrings journal = new HeldStrings(key, JsonConvert.SerializeObject(js));
             Globals_Server.cMapper.InsertIfNotExists(journal);
         }
 
@@ -725,6 +696,14 @@ namespace JominiEngine
             }
 
             return putStringResult.IsSuccess;
+        }
+
+        public static void Cass_DatabaseWrite_Client(Client client)
+        {
+            Client_Serialized clientSer = new Client_Serialized(client);
+
+            HeldStrings c = new HeldStrings(client.username, JsonConvert.SerializeObject(clientSer));
+            Globals_Server.cMapper.InsertIfNotExists(c);
         }
         /// <summary>
         /// Writes a string variable to the database
