@@ -52,37 +52,44 @@ namespace JominiEngine
             // Globals_Game.sysAdmin
             if (Globals_Game.sysAdmin != null)
             {
+                Console.WriteLine(Globals_Game.sysAdmin.charID + " 0");
                 DatabaseWrite.Cass_DatabaseWrite_String("sysAdmin", Globals_Game.sysAdmin.charID);
             }
             // Globals_Game.kingOne
             if (Globals_Game.kingOne != null)
             {
+                Console.WriteLine(Globals_Game.kingOne.charID + " 2");
                 DatabaseWrite.Cass_DatabaseWrite_String("kingOne", Globals_Game.kingOne.charID);
             }
             // Globals_Game.kingTwo
             if (Globals_Game.kingTwo != null)
             {
+                Console.WriteLine(Globals_Game.kingTwo.charID + " 3");
                 DatabaseWrite.Cass_DatabaseWrite_String("kingTwo", Globals_Game.kingTwo.charID);
             }
             // Globals_Game.princeOne
             if (Globals_Game.princeOne != null)
             {
+                Console.WriteLine(Globals_Game.princeOne.charID + " 4");
                 DatabaseWrite.Cass_DatabaseWrite_String("princeOne", Globals_Game.princeOne.charID);
             }
             // Globals_Game.princeTwo
             if (Globals_Game.princeTwo != null)
             {
+                Console.WriteLine(Globals_Game.princeTwo.charID + " 1");
                 DatabaseWrite.Cass_DatabaseWrite_String("princeTwo", Globals_Game.princeTwo.charID);
             }
             // Globals_Game.heraldOne
             if (Globals_Game.heraldOne != null)
             {
+                Console.WriteLine(Globals_Game.heraldOne.charID + " 1");
                 DatabaseWrite.Cass_DatabaseWrite_String("heraldOne", Globals_Game.heraldOne.charID);
             }
             // Globals_Game.heraldTwo
             if (Globals_Game.heraldTwo != null)
             {
-                DatabaseWrite.Cass_DatabaseWrite_String("heraldTwo", Globals_Game.heraldTwo.charID);
+                Console.WriteLine(Globals_Game.heraldTwo.charID + " a");
+               DatabaseWrite.Cass_DatabaseWrite_String("heraldTwo", Globals_Game.heraldTwo.charID);
             }
 			Console.WriteLine ("Finished writing important people");
             // ========= write GLOBALS_GAME/CLIENT/SERVER newID VARIABLES

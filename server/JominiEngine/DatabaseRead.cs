@@ -203,6 +203,8 @@ namespace JominiEngine
             }
 
             // ========= read GLOBALS_GAME CHARACTER VARIABLES
+
+            Console.WriteLine();
             Globals_Game.sysAdmin = DatabaseRead.Cass_DatabaseRead_PcVariable("sysAdmin");
             Globals_Game.kingOne = DatabaseRead.Cass_DatabaseRead_PcVariable("kingOne");
             Globals_Game.kingTwo = DatabaseRead.Cass_DatabaseRead_PcVariable("kingTwo");
@@ -2014,9 +2016,10 @@ namespace JominiEngine
             if (retrievedPcV.Length > 0)
             {
                 HeldStrings read = retrievedPcV[0];
-                if (Globals_Game.pcMasterList.ContainsKey(read.id))
+                Console.WriteLine(read.value);
+                if (Globals_Game.pcMasterList.ContainsKey(read.value))
                 {
-                    newPC = Globals_Game.pcMasterList[read.id];
+                    newPC = Globals_Game.pcMasterList[read.value];
                 }
             }
 
