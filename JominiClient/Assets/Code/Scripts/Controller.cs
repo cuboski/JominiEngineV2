@@ -94,7 +94,7 @@ public class Controller : MonoBehaviour {
     {
         tclient = new TextTestClient();
         GenerateColourList();
-        string reas;
+        //string reas;
         //Login("helen", "potato", out reas);
     }
 

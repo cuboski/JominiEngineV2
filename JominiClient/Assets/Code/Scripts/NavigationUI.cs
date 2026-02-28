@@ -28,6 +28,8 @@ public class NavigationUI : Controller
     public Text textEventMessage;
     public GameObject eventBox;
 
+    bool firstTurn = true;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -65,6 +67,7 @@ public class NavigationUI : Controller
         if(reply.ResponseType == DisplayMessages.Success) {
             viewingListSelectAction = ViewingList.Journal;
             GoToScene(SceneName.ViewingList);
+            DecisionTreeAI.TakeTurn();
         }
     }
 
@@ -118,5 +121,10 @@ public class NavigationUI : Controller
     void Update()
     {
         lblRealTime.text = DateTime.Now.ToString("HH:mm:ss");
+        if (firstTurn)
+        {
+            DecisionTreeAI.TakeTurn();
+            firstTurn = false;
+        }
     }
 }

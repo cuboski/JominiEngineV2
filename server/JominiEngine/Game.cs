@@ -1343,6 +1343,7 @@ namespace JominiEngine {
             switch (type) {
                 case "Entourage": {
                         Console.WriteLine("Request Entourage");
+                        Console.WriteLine(client.myPlayerCharacter.charID + "       HERE         HERE");
                         foreach (var entourageChar in client.myPlayerCharacter.myEntourage) {
                             //  listOfChars.Add(entourageChar.firstName);
                             listOfChars.Add(new ProtoCharacterOverview(entourageChar));
