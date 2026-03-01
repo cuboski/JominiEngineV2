@@ -49,6 +49,7 @@ public class AssignBailif : Controller
     private void BtnAppointBailiff(string charID)
     {
         ProtoMessage reply = AppointBailiff(charID, fiefToViewID, tclient);
+        Debug.Log(fiefToViewID);
         if (reply.ResponseType == DisplayMessages.Success)
         {
             GoToScene(SceneName.ViewFief);

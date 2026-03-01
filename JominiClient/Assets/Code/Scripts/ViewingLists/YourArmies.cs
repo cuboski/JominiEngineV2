@@ -108,7 +108,9 @@ public class YourArmies : Controller
 
     private void DisplayMessageToUser(string message)
     {
-        lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
+        Debug.Log(message);
+        // this crashes for some reason
+        //lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
     }
 
     private void BtnViewArmy(string armyID)

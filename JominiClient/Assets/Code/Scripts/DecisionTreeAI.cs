@@ -69,28 +69,67 @@ public static class DecisionTreeAI
         Debug.Log(AlnwickDirect);
         //ProtoGenericArray<ProtoCharacterOverview> entourage = (ProtoGenericArray<ProtoCharacterOverview>)Controller.ListEntourageMembers();
         //Debug.Log(entourage);
+        ProtoGenericArray<ProtoCharacterOverview> npcs = Controller.GetNPCList("Family Employ", Controller.tclient);
+        Debug.Log(npcs);
         //check for null bailiff
         //make list of appointed characters
 
         //ProtoCharacterOverview[] entMembers = entourage.fields;
+        ProtoCharacterOverview[] npcMembers = npcs.fields;
         //Debug.Log(entMembers);
+        Debug.Log(npcMembers);
         string id = "";
         bool found = false;
         int i = 0;
-        /*
-        while (i < entMembers.Length && found == false)
+        
+        while (i < npcMembers.Length && found == false)
         {
-            ProtoCharacterOverview memToCheck = entMembers[i];
-            if (memToCheck.isMale)
+            ProtoCharacterOverview memToCheck = npcMembers[i];
+            if (memToCheck.isMale && memToCheck.charID != "Char_126")
             {   
                 id = memToCheck.charID;
+                Debug.Log(id);
                 found = true;
                 
             }
             i++;
         }
-        ProtoMessage appointed = Controller.AppointBailiff(id, "Alnwick", Controller.tclient);
-        */
+        ProtoMessage appointed = Controller.AppointBailiff(id, "ENU02", Controller.tclient);
+        if (appointed.ResponseType == DisplayMessages.Success)
+        {
+            Controller.GoToScene(Controller.SceneName.ViewFief);
+        }
+        else
+        {
+            Debug.Log("ERROR: Response type: " + appointed.ResponseType.ToString());
+        }
+        if (found == false)
+        {
+            Debug.Log("HERE         HERE");
+        }
+        else
+        {   ProtoFief AlnwickDirectAfter = new ProtoFief();
+            ProtoGenericArray<ProtoFief> allFiefs = Controller.ViewMyFiefs(Controller.tclient);
+            ProtoFief[] fiefs = allFiefs.fields;
+            for (int j = 0; j < fiefs.Length; j++)
+            {
+                if (fiefs[j].fiefID == "ENU02")
+                {
+                    AlnwickDirectAfter = fiefs[j];
+                }
+                
+            }
+            Debug.Log(AlnwickDirectAfter);
+            if (AlnwickDirectAfter.bailiff != null)
+            {
+                
+            }
+            else
+            {
+                Debug.Log("EMPTY           EMPTY");
+            }
+            
+        }
         return true;
     }
 

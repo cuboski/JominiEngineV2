@@ -95,7 +95,9 @@ public class ViewCharacter : Controller
                 {
 
                 }
-                if (temp.employer != null) {
+                if (temp != null)
+                {
+                    if (temp.employer != null) {
                     if(temp.employer.charID.Equals(protoClient.playerChar.charID)) { // This NPC is employed by you.
                         btnFireNPC.interactable = true; // Can only fire NPCs you employ.
 
@@ -118,6 +120,12 @@ public class ViewCharacter : Controller
                     txtOffer.interactable = true;
                     btnHireNPC.interactable = true;
                 }
+                }
+                else
+                {
+                    Debug.Log("HERE               HERE " + fullName);
+                }
+                
             }
 
             if(currentlyViewedCharacter is ProtoNPC && currentlyViewedCharacter.location == protoClient.playerChar.location) {
