@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ProtoMessageClient;
 using UnityEngine;
 
@@ -33,12 +34,112 @@ public static class DecisionTreeAI
     public static void TakeTurn()
     {
         bool done = testActions();
+        int split = DecideDayDivision();
+        if (split == 0)
+        {
+            FiefFocused();
+        }
+        else if (split == 1)
+        {
+            ArmyFocused();
+        }
+        else
+        {
+            SplitFocus(45, 45);
+        }
     }
 
     public static int DecideDayDivision()
     {
         //different int depending on outcome
-        return 0;
+        // 0 = 90 days of fief managment
+        // 1 = 90 days of army mangement
+        // 2 = 45 day split
+        int splitNum = 0;
+        
+        ProtoGenericArray<ProtoFief> allFiefs = Controller.ViewMyFiefs(Controller.tclient);
+        ProtoFief[] fiefs = allFiefs.fields;
+        bool noSiege = false;
+        List<string> siegeIDs = new List<string>();
+        for (int i = 0; i < fiefs.Length; i++)
+        {
+            if(fiefs[i].siege != null)
+            {
+                siegeIDs.Add(fiefs[i].siege);
+            }
+            else
+            {
+                noSiege = true;
+            }
+                
+        }
+        if (noSiege)
+        {
+            double sumIncome = 0;
+            double expenses = 0;
+
+            for (int j = 0; j < fiefs.Length; j++)
+            {
+                sumIncome += (fiefs[j].keyStatsCurrent[1] * fiefs[j].taxRate);
+                expenses += fiefs[j].keyStatsCurrent[3];
+                expenses += fiefs[j].keyStatsCurrent[4];
+                expenses += fiefs[j].keyStatsCurrent[5];
+                expenses += fiefs[j].keyStatsCurrent[6];
+            }
+
+            sumIncome  /= fiefs.Length;
+            expenses /= fiefs.Length;
+
+            if (sumIncome > 2 * expenses)
+            {
+                splitNum = 2;
+            }
+
+        }
+        else
+        {
+            ProtoCharacter Eustace = Controller.GetCharacterDetails("Char_126", Controller.tclient);
+            int defenderSize = 0;
+            int attackerSize = 0;
+            bool playerArmyInvolved = false;
+            for (int k = 0; k < siegeIDs.Count; k++)
+            {
+                ProtoSiegeDisplay currSiege = (ProtoSiegeDisplay)Controller.ViewSiege(siegeIDs[k], Controller.tclient);
+                //defenderSize += currSiege.defenderGarrison;
+                ProtoArmy currDef = (ProtoArmy)Controller.GetArmyDetails(currSiege.defenderGarrison, Controller.tclient);
+                if (currDef.armyID == Eustace.armyID)
+                {
+                    playerArmyInvolved = true;
+                }
+                ProtoArmy currAtt = (ProtoArmy)Controller.GetArmyDetails(currSiege.besiegerArmy, Controller.tclient);
+                for (int l = 0; l < 7; l++)
+                {
+                    defenderSize += Convert.ToInt32(currDef.troops[l]);
+                    attackerSize += Convert.ToInt32(currAtt.troops[l]);
+                }
+            }
+            if (playerArmyInvolved == false)
+            {
+                ProtoArmy playArmy = (ProtoArmy)Controller.GetArmyDetails(Eustace.armyID, Controller.tclient);
+                for (int m = 0; m < 7; m++)
+                {
+                    defenderSize += Convert.ToInt32(playArmy.troops[m]);
+                }
+            }
+
+            if (attackerSize > defenderSize)
+            {
+                splitNum = 1;
+            }
+            else
+            {
+                splitNum = 2;
+            }
+             
+
+        }
+
+        return splitNum;
     }
 
     public static void FiefFocused()
@@ -53,8 +154,8 @@ public static class DecisionTreeAI
 
     public static void SplitFocus(int fiefSplit, int armySplit)
     {
-        int fiefDays;
-        int armyDays; 
+        int fiefDays = fiefSplit;
+        int armyDays = armySplit; 
     }
 
     public static bool testActions()
