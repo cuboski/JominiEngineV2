@@ -21,6 +21,7 @@ public class LogIn : Controller
 
     //public bool launchWithAIAgent = true;
     public bool launchWithAIAgent = false;
+    public DecisionTreeAI agent;
 
     // Start is called before the first frame update
     void Start()
@@ -44,9 +45,11 @@ public class LogIn : Controller
 
         //might need to move
         Debug.Log(launchWithAIAgent);
+        agent = new DecisionTreeAI();
         if(launchWithAIAgent)
         {
-           DecisionTreeAI.agentSetup();
+            //agent.agentSetup();
+            DecisionTreeAI.agentSetup();
         }
     }
 

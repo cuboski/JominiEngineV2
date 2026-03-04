@@ -3,17 +3,30 @@ using System.Collections.Generic;
 using ProtoMessageClient;
 using UnityEngine;
 
-public static class DecisionTreeAI
+
+//public class AgentGameData
+//{
+
+//}
+
+public class DecisionTreeAI
 {
     //Call login
     //"acc2", "pass2"
-
 
     //somesort of bool to check if to launch ai
 
     //A data structure to remember important info
 
     //might need to create a new client
+
+    //public int daySplit { get; set; }
+    public static Dictionary<string, bool> isBailiff = new Dictionary<string, bool>();
+
+    public DecisionTreeAI()
+    {
+        
+    }
 
     public static void agentSetup()
     {
@@ -80,7 +93,7 @@ public static class DecisionTreeAI
 
             for (int j = 0; j < fiefs.Length; j++)
             {
-                sumIncome += (fiefs[j].keyStatsCurrent[1] * fiefs[j].taxRate);
+                sumIncome += fiefs[j].keyStatsCurrent[1] * (fiefs[j].taxRate / 100);
                 expenses += fiefs[j].keyStatsCurrent[3];
                 expenses += fiefs[j].keyStatsCurrent[4];
                 expenses += fiefs[j].keyStatsCurrent[5];
@@ -145,6 +158,105 @@ public static class DecisionTreeAI
     public static void FiefFocused()
     {
         int days = 90;
+        bool alreadyIncreased = false;
+
+        bool fiefUnrest = false;
+
+        ProtoCharacter Eustace = Controller.GetCharacterDetails("Char_126", Controller.tclient);
+        ProtoFief currFief = new ProtoFief();
+        ProtoGenericArray<ProtoFief> allFiefs = Controller.ViewMyFiefs(Controller.tclient);
+        ProtoFief[] fiefs = allFiefs.fields;
+        for (int i = 0; i < fiefs.Length; i++)
+        {
+            if (fiefs[i].fiefID == Eustace.location)
+            {
+                currFief = fiefs[i];
+            }
+            
+        }
+
+        if (currFief.bailiff != null)
+        {
+            double sumIncome = 0;
+            double expenses = 0;
+
+            sumIncome += currFief.keyStatsCurrent[1] * (currFief.taxRate / 100);
+            expenses += currFief.keyStatsCurrent[3];
+            expenses += currFief.keyStatsCurrent[4];
+            expenses += currFief.keyStatsCurrent[5];
+            expenses += currFief.keyStatsCurrent[6];
+
+            if (sumIncome > expenses)
+            {
+                if (!alreadyIncreased)
+                {
+                    if (!fiefUnrest)
+                    {
+                        currFief.taxRateNext += 10;
+                        if (currFief.taxRateNext > 100)
+                        {
+                            currFief.taxRateNext = 100;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                string newFief = "";
+                System.Random random = new System.Random();
+                while (!newFief.Equals(currFief.fiefID))
+                {
+                    int newFiefNum = random.Next(0, fiefs.Length);
+                    newFief = fiefs[newFiefNum].fiefID;
+                }
+                
+            }
+        }
+        else
+        {
+            ProtoGenericArray<ProtoCharacterOverview> npcs = Controller.GetNPCList("Family Employ", Controller.tclient);
+            ProtoCharacterOverview[] npcMembers = npcs.fields;
+
+            string id = "";
+            bool found = false;
+            int i = 0;
+
+            for (int m = 0; m < npcMembers.Length; m++)
+            {
+                
+            }
+            
+            while (i < npcMembers.Length && found == false)
+            {
+                ProtoCharacterOverview memToCheck = npcMembers[i];
+                bool alreadyBailiff = false;
+                foreach (var posBailiff in isBailiff)
+                {
+                    if (posBailiff.Value == true)
+                    {
+                        alreadyBailiff = true;
+                    }
+                }
+                if (memToCheck.isMale && memToCheck.charID != "Char_126" && !alreadyBailiff)
+                {   
+                    id = memToCheck.charID;
+                    //Debug.Log(id);
+                    found = true;
+                    
+                }
+                i++;
+            }
+
+            if (!id.Equals(""))
+            {
+                ProtoMessage appointed = Controller.AppointBailiff(id, currFief.fiefID, Controller.tclient);
+                isBailiff.Remove(id);
+                isBailiff.Add(id, true);
+            }
+            
+
+        }
+
     }
 
     public static void ArmyFocused()
@@ -234,7 +346,7 @@ public static class DecisionTreeAI
         return true;
     }
 
-    //public static void Main()
+    //public void Main()
     //{
         //bool test = testActions();
     //}

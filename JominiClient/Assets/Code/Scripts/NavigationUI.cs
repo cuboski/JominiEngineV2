@@ -70,7 +70,7 @@ public class NavigationUI : Controller
         if(reply.ResponseType == DisplayMessages.Success) {
             viewingListSelectAction = ViewingList.Journal;
             GoToScene(SceneName.ViewingList);
-            //DecisionTreeAI.TakeTurn();
+            DecisionTreeAI.TakeTurn();
         }
     }
 
