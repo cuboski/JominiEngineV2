@@ -23,6 +23,14 @@ public class DecisionTreeAI
     //public int daySplit { get; set; }
     public static Dictionary<string, bool> isBailiff = new Dictionary<string, bool>();
 
+    public static int officialSpendThisTurn = 0;
+    public static int garrisonSpendThisTurn = 0;
+    public static int infrasteuctureSpendThisTurn = 0;
+    public static int keepSpendThisTurn = 0;
+
+    public static int changeLimit = 4000;
+    public static int changeAmount = 2000;
+
     public DecisionTreeAI()
     {
         
@@ -47,6 +55,7 @@ public class DecisionTreeAI
     public static void TakeTurn()
     {
         bool done = testActions();
+        // check here                                           /////
         int split = DecideDayDivision();
         if (split == 0)
         {
@@ -162,6 +171,11 @@ public class DecisionTreeAI
 
         bool fiefUnrest = false;
 
+        officialSpendThisTurn = 0;
+        garrisonSpendThisTurn = 0;
+        infrasteuctureSpendThisTurn = 0;
+        keepSpendThisTurn = 0;
+
         ProtoCharacter Eustace = Controller.GetCharacterDetails("Char_126", Controller.tclient);
         ProtoFief currFief = new ProtoFief();
         ProtoGenericArray<ProtoFief> allFiefs = Controller.ViewMyFiefs(Controller.tclient);
@@ -173,6 +187,11 @@ public class DecisionTreeAI
                 currFief = fiefs[i];
             }
             
+        }
+
+        if (currFief.treasury < 0 && currFief.fiefID != "ENU02")
+        {
+            Controller.TransferFunds("ENU02", currFief.fiefID, 120000, Controller.tclient);
         }
 
         if (currFief.bailiff != null)
@@ -198,6 +217,14 @@ public class DecisionTreeAI
                             currFief.taxRateNext = 100;
                         }
                     }
+                    else
+                    {
+                        TryAdjustExpenses(currFief);
+                    }
+                }
+                else
+                {
+                    TryAdjustExpenses(currFief); 
                 }
             }
             else
@@ -209,7 +236,7 @@ public class DecisionTreeAI
                     int newFiefNum = random.Next(0, fiefs.Length);
                     newFief = fiefs[newFiefNum].fiefID;
                 }
-                
+                ProtoMessage movement = Controller.TravelTo("Char_126", newFief, Controller.tclient);
             }
         }
         else
@@ -221,10 +248,10 @@ public class DecisionTreeAI
             bool found = false;
             int i = 0;
 
-            for (int m = 0; m < npcMembers.Length; m++)
-            {
+            //for (int m = 0; m < npcMembers.Length; m++)
+            //{
                 
-            }
+            //}
             
             while (i < npcMembers.Length && found == false)
             {
@@ -257,6 +284,40 @@ public class DecisionTreeAI
 
         }
 
+    }
+
+    public static void TryAdjustExpenses(ProtoFief currFief)
+    {
+        if ((currFief.keyStatsCurrent[4] - garrisonSpendThisTurn) > changeLimit)
+        {
+            currFief.keyStatsNext[4] -= changeAmount;
+            garrisonSpendThisTurn += changeAmount;
+        }
+        else
+        {
+            if ((currFief.keyStatsCurrent[6] - keepSpendThisTurn) > changeLimit)
+            {
+                currFief.keyStatsNext[6] -= changeAmount;
+                keepSpendThisTurn += changeAmount;
+            }
+            else
+            {
+                if ((currFief.keyStatsCurrent[3] - officialSpendThisTurn) > changeLimit)
+                {
+                    currFief.keyStatsNext[3] -= changeAmount;
+                    officialSpendThisTurn += changeAmount;
+                }
+                else
+                {
+                    if ((currFief.keyStatsCurrent[5] - infrasteuctureSpendThisTurn) > changeLimit)
+                    {
+                        currFief.keyStatsNext[5] -= changeAmount;
+                        infrasteuctureSpendThisTurn += changeAmount;
+                    }
+                }
+            }
+
+        }
     }
 
     public static void ArmyFocused()

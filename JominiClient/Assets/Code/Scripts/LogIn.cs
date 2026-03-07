@@ -19,8 +19,8 @@ public class LogIn : Controller
     [SerializeField] private Button btnOption;
     [SerializeField] private Text lblBuildVersion;
 
-    //public bool launchWithAIAgent = true;
-    public bool launchWithAIAgent = false;
+    public bool launchWithAIAgent = true;
+    //public bool launchWithAIAgent = false;
     public DecisionTreeAI agent;
 
     // Start is called before the first frame update
