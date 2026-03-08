@@ -54,9 +54,11 @@ public class DecisionTreeAI
 
     public static void TakeTurn()
     {
-        bool done = testActions();
-        // check here                                           /////
+        //bool done = testActions();
+        
         int split = DecideDayDivision();
+        //For now split = 0
+        split = 0;
         if (split == 0)
         {
             FiefFocused();
@@ -176,113 +178,132 @@ public class DecisionTreeAI
         infrasteuctureSpendThisTurn = 0;
         keepSpendThisTurn = 0;
 
-        ProtoCharacter Eustace = Controller.GetCharacterDetails("Char_126", Controller.tclient);
-        ProtoFief currFief = new ProtoFief();
-        ProtoGenericArray<ProtoFief> allFiefs = Controller.ViewMyFiefs(Controller.tclient);
-        ProtoFief[] fiefs = allFiefs.fields;
-        for (int i = 0; i < fiefs.Length; i++)
+        int failedActions = 0;
+        int decisions = 0;
+
+        while (days >= 6 && failedActions < 3 && decisions < 50)
         {
-            if (fiefs[i].fiefID == Eustace.location)
+            decisions++;
+            ProtoCharacter Eustace = Controller.GetCharacterDetails("Char_126", Controller.tclient);
+            ProtoFief currFief = new ProtoFief();
+            ProtoGenericArray<ProtoFief> allFiefs = Controller.ViewMyFiefs(Controller.tclient);
+            ProtoFief[] fiefs = allFiefs.fields;
+            for (int i = 0; i < fiefs.Length; i++)
             {
-                currFief = fiefs[i];
-            }
-            
-        }
-
-        if (currFief.treasury < 0 && currFief.fiefID != "ENU02")
-        {
-            Controller.TransferFunds("ENU02", currFief.fiefID, 120000, Controller.tclient);
-        }
-
-        if (currFief.bailiff != null)
-        {
-            double sumIncome = 0;
-            double expenses = 0;
-
-            sumIncome += currFief.keyStatsCurrent[1] * (currFief.taxRate / 100);
-            expenses += currFief.keyStatsCurrent[3];
-            expenses += currFief.keyStatsCurrent[4];
-            expenses += currFief.keyStatsCurrent[5];
-            expenses += currFief.keyStatsCurrent[6];
-
-            if (sumIncome > expenses)
-            {
-                if (!alreadyIncreased)
+                if (fiefs[i].fiefID == Eustace.location)
                 {
-                    if (!fiefUnrest)
+                    currFief = fiefs[i];
+                }
+                
+            }
+
+            if (currFief.treasury < 0 && currFief.fiefID != "ENU02")
+            {
+                Controller.TransferFunds("ENU02", currFief.fiefID, 120000, Controller.tclient);
+            }
+
+            if (currFief.bailiff != null)
+            {
+                Debug.Log("Has Bailiff");
+                double sumIncome = 0;
+                double expenses = 0;
+
+                sumIncome += currFief.keyStatsCurrent[1] * (currFief.taxRate / 100);
+                expenses += currFief.keyStatsCurrent[3];
+                expenses += currFief.keyStatsCurrent[4];
+                expenses += currFief.keyStatsCurrent[5];
+                expenses += currFief.keyStatsCurrent[6];
+
+                if (sumIncome > expenses)
+                {
+                    Debug.Log("Try fix income");
+                    if (!alreadyIncreased)
                     {
-                        currFief.taxRateNext += 10;
-                        if (currFief.taxRateNext > 100)
+                        if (!fiefUnrest)
                         {
-                            currFief.taxRateNext = 100;
+                            Debug.Log("Try update tax");
+                            currFief.keyStatsNext[2] += 10;
+                            if (currFief.keyStatsNext[2] > 100)
+                            {
+                                currFief.keyStatsNext[2] = 100;
+                            }
+                            ProtoMessage changeEx = Controller.AdjustExpenditure(currFief.fiefID, currFief.keyStatsNext, Controller.tclient);
+                        }
+                        else
+                        {
+                            TryAdjustExpenses(currFief);
                         }
                     }
                     else
                     {
-                        TryAdjustExpenses(currFief);
+                        TryAdjustExpenses(currFief); 
                     }
                 }
                 else
                 {
-                    TryAdjustExpenses(currFief); 
+                    Debug.Log("Try new fief");
+                    string newFief = "";
+                    System.Random random = new System.Random();
+                    while (!newFief.Equals(currFief.fiefID))
+                    {
+                        int newFiefNum = random.Next(0, fiefs.Length);
+                        newFief = fiefs[newFiefNum].fiefID;
+                    }
+                    ProtoMessage movement = Controller.TravelTo("Char_126", newFief, Controller.tclient);
                 }
             }
             else
             {
-                string newFief = "";
-                System.Random random = new System.Random();
-                while (!newFief.Equals(currFief.fiefID))
-                {
-                    int newFiefNum = random.Next(0, fiefs.Length);
-                    newFief = fiefs[newFiefNum].fiefID;
-                }
-                ProtoMessage movement = Controller.TravelTo("Char_126", newFief, Controller.tclient);
-            }
-        }
-        else
-        {
-            ProtoGenericArray<ProtoCharacterOverview> npcs = Controller.GetNPCList("Family Employ", Controller.tclient);
-            ProtoCharacterOverview[] npcMembers = npcs.fields;
+                Debug.Log("No Bailiff");
+                ProtoGenericArray<ProtoCharacterOverview> npcs = Controller.GetNPCList("Family Employ", Controller.tclient);
+                ProtoCharacterOverview[] npcMembers = npcs.fields;
 
-            string id = "";
-            bool found = false;
-            int i = 0;
+                string id = "";
+                bool found = false;
+                int i = 0;
 
-            //for (int m = 0; m < npcMembers.Length; m++)
-            //{
-                
-            //}
-            
-            while (i < npcMembers.Length && found == false)
-            {
-                ProtoCharacterOverview memToCheck = npcMembers[i];
-                bool alreadyBailiff = false;
-                foreach (var posBailiff in isBailiff)
-                {
-                    if (posBailiff.Value == true)
-                    {
-                        alreadyBailiff = true;
-                    }
-                }
-                if (memToCheck.isMale && memToCheck.charID != "Char_126" && !alreadyBailiff)
-                {   
-                    id = memToCheck.charID;
-                    //Debug.Log(id);
-                    found = true;
+                //for (int m = 0; m < npcMembers.Length; m++)
+                //{
                     
+                //}
+                
+                while (i < npcMembers.Length && found == false)
+                {
+                    ProtoCharacterOverview memToCheck = npcMembers[i];
+                    bool alreadyBailiff = false;
+                    foreach (var posBailiff in isBailiff)
+                    {
+                        if (posBailiff.Value == true)
+                        {
+                            alreadyBailiff = true;
+                        }
+                    }
+                    if (memToCheck.isMale && memToCheck.charID != "Char_126" && !alreadyBailiff)
+                    {   
+                        id = memToCheck.charID;
+                        //Debug.Log(id);
+                        found = true;
+                        
+                    }
+                    i++;
                 }
-                i++;
-            }
 
-            if (!id.Equals(""))
-            {
-                ProtoMessage appointed = Controller.AppointBailiff(id, currFief.fiefID, Controller.tclient);
-                isBailiff.Remove(id);
-                isBailiff.Add(id, true);
-            }
-            
+                if (!id.Equals(""))
+                {
+                    ProtoMessage appointed = Controller.AppointBailiff(id, currFief.fiefID, Controller.tclient);
+                    isBailiff.Remove(id);
+                    isBailiff.Add(id, true);
+                }
+                else
+                {
+                    failedActions++;
+                }
+                
 
+            }
         }
+
+        
 
     }
 
@@ -318,6 +339,7 @@ public class DecisionTreeAI
             }
 
         }
+        ProtoMessage changeEx = Controller.AdjustExpenditure(currFief.fiefID, currFief.keyStatsNext, Controller.tclient);
     }
 
     public static void ArmyFocused()

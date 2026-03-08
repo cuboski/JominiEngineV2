@@ -75,6 +75,14 @@ public class ViewCharacter : Controller
             if (!string.IsNullOrWhiteSpace(currentlyViewedCharacter.armyID)) { // Viewed char is leading an army.
                 btnViewArmy.interactable = true;
             }
+            if (currentlyViewedCharacter != null)
+            {
+                
+            }
+            else
+            {
+                Debug.Log(" THEY ARE NULL");
+            }
             if(currentlyViewedCharacter is ProtoNPC || currentlyViewedCharacter is ProtoCharacter) {
                 var temp = currentlyViewedCharacter as ProtoNPC;
 
