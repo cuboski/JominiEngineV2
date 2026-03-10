@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using ProtoMessageClient;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 //public class AgentGameData
@@ -30,6 +31,8 @@ public class DecisionTreeAI
 
     public static int changeLimit = 4000;
     public static int changeAmount = 2000;
+
+    public static double lastCheckDays = 0;
 
     public DecisionTreeAI()
     {
@@ -168,7 +171,7 @@ public class DecisionTreeAI
 
     public static void FiefFocused()
     {
-        int days = 90;
+        double days = 90;
         bool alreadyIncreased = false;
 
         bool fiefUnrest = false;
@@ -180,11 +183,20 @@ public class DecisionTreeAI
 
         int failedActions = 0;
         int decisions = 0;
+        lastCheckDays = 0;
+        bool failedOne = false;
+        bool failedTwo = false;
 
-        while (days >= 6 && failedActions < 3 && decisions < 50)
+
+        while (days > 0 && failedActions < 3 && decisions < 50)
         {
             decisions++;
             ProtoCharacter Eustace = Controller.GetCharacterDetails("Char_126", Controller.tclient);
+            if (Eustace.days < lastCheckDays)
+            {
+                days -= (lastCheckDays - Eustace.days);
+                lastCheckDays = Eustace.days;
+            }
             ProtoFief currFief = new ProtoFief();
             ProtoGenericArray<ProtoFief> allFiefs = Controller.ViewMyFiefs(Controller.tclient);
             ProtoFief[] fiefs = allFiefs.fields;
@@ -202,7 +214,7 @@ public class DecisionTreeAI
                 Controller.TransferFunds("ENU02", currFief.fiefID, 120000, Controller.tclient);
             }
 
-            if (currFief.bailiff != null)
+            if (currFief.bailiff != null || failedOne)
             {
                 Debug.Log("Has Bailiff");
                 double sumIncome = 0;
@@ -214,7 +226,7 @@ public class DecisionTreeAI
                 expenses += currFief.keyStatsCurrent[5];
                 expenses += currFief.keyStatsCurrent[6];
 
-                if (sumIncome > expenses)
+                if (sumIncome > expenses && !failedTwo)
                 {
                     Debug.Log("Try fix income");
                     if (!alreadyIncreased)
@@ -231,12 +243,20 @@ public class DecisionTreeAI
                         }
                         else
                         {
-                            TryAdjustExpenses(currFief);
+                            if (!TryAdjustExpenses(currFief))
+                            {
+                                failedActions++;
+                                failedTwo = true;
+                            }
                         }
                     }
                     else
                     {
-                        TryAdjustExpenses(currFief); 
+                        if (TryAdjustExpenses(currFief))
+                        {
+                            failedActions++;
+                            failedTwo = true;
+                        }
                     }
                 }
                 else
@@ -296,19 +316,53 @@ public class DecisionTreeAI
                 }
                 else
                 {
-                    failedActions++;
+                    bool foundHire = false;
+                    bool notOwned = false;
+                    ProtoCharacterOverview[] charsInFief = currFief.charactersInFief;
+                    int foundChar = 0;
+
+                    int j = 0;
+                    while (j < charsInFief.Length && foundHire == false)
+                    {
+                        
+                        for (int k = 0; k < npcMembers.Length; k++)
+                        {
+                            if (!(npcMembers[k].charID == charsInFief[j].charID))
+                            {
+                                notOwned = true;
+                            }
+                        }
+                        
+                        if (foundHire == false && notOwned == true)
+                        {
+                            foundHire = true;
+                            foundChar = j;
+                        }
+                        j++;
+                        
+                        
+                    }
+                    if (foundHire == true)
+                    {
+                        ProtoMessage hired = Controller.HireNPC(charsInFief[foundChar].charID, "10000", Controller.tclient);
+                    }
+                    else
+                    {
+                        failedActions++;
+                        failedOne = true;
+                    }
+                    
                 }
                 
 
             }
         }
 
-        
-
     }
 
-    public static void TryAdjustExpenses(ProtoFief currFief)
+    public static bool TryAdjustExpenses(ProtoFief currFief)
     {
+        bool madeChange = true; 
         if ((currFief.keyStatsCurrent[4] - garrisonSpendThisTurn) > changeLimit)
         {
             currFief.keyStatsNext[4] -= changeAmount;
@@ -335,11 +389,17 @@ public class DecisionTreeAI
                         currFief.keyStatsNext[5] -= changeAmount;
                         infrasteuctureSpendThisTurn += changeAmount;
                     }
+                    else
+                    {
+                        madeChange = false;
+
+                    }
                 }
             }
 
         }
         ProtoMessage changeEx = Controller.AdjustExpenditure(currFief.fiefID, currFief.keyStatsNext, Controller.tclient);
+        return madeChange;
     }
 
     public static void ArmyFocused()
