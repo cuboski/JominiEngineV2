@@ -41,6 +41,7 @@ public class DecisionTreeAI
 
     public static void agentSetup()
     {
+        /*
         string username = "acc2";
         string password = "pass2";
          if(Controller.Login(username, password, out string reason)) {
@@ -52,6 +53,8 @@ public class DecisionTreeAI
             Debug.Log(reason);
             //lblErrorMessage.text = "[" + DateTime.Now.ToString("HH:mm:ss") + "] " + reason;
         }
+        */
+
 
     }
 
@@ -234,12 +237,16 @@ public class DecisionTreeAI
                         if (!fiefUnrest)
                         {
                             Debug.Log("Try update tax");
+                            Debug.Log(currFief.keyStatsNext[2]);
                             currFief.keyStatsNext[2] += 10;
+                            Debug.Log(currFief.keyStatsNext[2]);
                             if (currFief.keyStatsNext[2] > 100)
                             {
                                 currFief.keyStatsNext[2] = 100;
                             }
-                            ProtoMessage changeEx = Controller.AdjustExpenditure(currFief.fiefID, currFief.keyStatsNext, Controller.tclient);
+                            double[] newEx = {currFief.keyStatsNext[2], currFief.keyStatsNext[3], currFief.keyStatsNext[4], currFief.keyStatsNext[5], currFief.keyStatsNext[6]};
+                            ProtoMessage changeEx = Controller.AdjustExpenditure(currFief.fiefID, newEx, Controller.tclient);
+                            alreadyIncreased = true;
                         }
                         else
                         {
@@ -398,7 +405,8 @@ public class DecisionTreeAI
             }
 
         }
-        ProtoMessage changeEx = Controller.AdjustExpenditure(currFief.fiefID, currFief.keyStatsNext, Controller.tclient);
+        double[] newEx = {currFief.keyStatsNext[2], currFief.keyStatsNext[3], currFief.keyStatsNext[4], currFief.keyStatsNext[5], currFief.keyStatsNext[6]};
+        ProtoMessage changeEx = Controller.AdjustExpenditure(currFief.fiefID, newEx, Controller.tclient);
         return madeChange;
     }
 
