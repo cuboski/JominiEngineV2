@@ -190,8 +190,10 @@ public class DecisionTreeAI
         bool failedOne = false;
         bool failedTwo = false;
 
+        bool hasMoved = false;
 
-        while (days > 0 && failedActions < 3 && decisions < 50)
+
+        while (days > 0 && failedActions < 3 && decisions < 50 && !hasMoved)
         {
             decisions++;
             ProtoCharacter Eustace = Controller.GetCharacterDetails("Char_126", Controller.tclient);
@@ -214,12 +216,13 @@ public class DecisionTreeAI
 
             if (currFief.treasury < 0 && currFief.fiefID != "ENU02")
             {
+                Debug.Log("AGENT ACTION: Tranfering funds");
                 Controller.TransferFunds("ENU02", currFief.fiefID, 120000, Controller.tclient);
             }
 
             if (currFief.bailiff != null || failedOne)
             {
-                Debug.Log("Has Bailiff");
+                //Debug.Log("Has Bailiff");
                 double sumIncome = 0;
                 double expenses = 0;
 
@@ -231,12 +234,12 @@ public class DecisionTreeAI
 
                 if (sumIncome > expenses && !failedTwo)
                 {
-                    Debug.Log("Try fix income");
+                    //Debug.Log("Try fix income");
                     if (!alreadyIncreased)
                     {
                         if (!fiefUnrest)
                         {
-                            Debug.Log("Try update tax");
+                            Debug.Log("AGENT ACTION: Increasing tax 10%");
                             Debug.Log(currFief.keyStatsNext[2]);
                             currFief.keyStatsNext[2] += 10;
                             Debug.Log(currFief.keyStatsNext[2]);
@@ -268,20 +271,38 @@ public class DecisionTreeAI
                 }
                 else
                 {
-                    Debug.Log("Try new fief");
+                    Debug.Log("AGENT ACTION: Move to new fief");
                     string newFief = "";
                     System.Random random = new System.Random();
-                    while (!newFief.Equals(currFief.fiefID))
+                    
+                    do
                     {
                         int newFiefNum = random.Next(0, fiefs.Length);
                         newFief = fiefs[newFiefNum].fiefID;
                     }
+                    while (newFief.Equals(currFief.fiefID));
+                    //string userMessageOnSceneLoad = "a";
                     ProtoMessage movement = Controller.TravelTo("Char_126", newFief, Controller.tclient);
+                    hasMoved = true;
+                    /*
+                    if(movement.ResponseType == DisplayMessages.Success) {
+                        userMessageOnSceneLoad = Eustace.firstName + " has arrived in " + newFief;
+                    }
+                    else if(movement.ResponseType == DisplayMessages.CharacterDaysJourney) {
+                        userMessageOnSceneLoad = Eustace.firstName + "only had enough days left in the season to make it as far as ";
+                    }
+                    if (newFief.Equals(""))
+                    {
+                        newFief = "b";
+                    }
+                    numMovesThisTurn++;
+                    Debug.Log(userMessageOnSceneLoad + " " + numMovesThisTurn + newFief);
+                    */
                 }
             }
             else
             {
-                Debug.Log("No Bailiff");
+                //Debug.Log("No Bailiff");
                 ProtoGenericArray<ProtoCharacterOverview> npcs = Controller.GetNPCList("Family Employ", Controller.tclient);
                 ProtoCharacterOverview[] npcMembers = npcs.fields;
 
@@ -317,6 +338,7 @@ public class DecisionTreeAI
 
                 if (!id.Equals(""))
                 {
+                    Debug.Log("AGENT ACTION: Apointing Bailiff");
                     ProtoMessage appointed = Controller.AppointBailiff(id, currFief.fiefID, Controller.tclient);
                     isBailiff.Remove(id);
                     isBailiff.Add(id, true);
@@ -324,9 +346,10 @@ public class DecisionTreeAI
                 else
                 {
                     bool foundHire = false;
-                    bool notOwned = false;
+                    bool notOwned = true;
                     ProtoCharacterOverview[] charsInFief = currFief.charactersInFief;
                     int foundChar = 0;
+                    int attemptNum = 0;
 
                     int j = 0;
                     while (j < charsInFief.Length && foundHire == false)
@@ -334,9 +357,9 @@ public class DecisionTreeAI
                         
                         for (int k = 0; k < npcMembers.Length; k++)
                         {
-                            if (!(npcMembers[k].charID == charsInFief[j].charID))
+                            if ((npcMembers[k].charID == charsInFief[j].charID))
                             {
-                                notOwned = true;
+                                notOwned = false;
                             }
                         }
                         
@@ -351,7 +374,9 @@ public class DecisionTreeAI
                     }
                     if (foundHire == true)
                     {
-                        ProtoMessage hired = Controller.HireNPC(charsInFief[foundChar].charID, "10000", Controller.tclient);
+                        attemptNum++;  
+                        Debug.Log("AGENT ACTION: Hiring NPC " + charsInFief[foundChar].charID + " " + attemptNum);
+                        ProtoMessage hired = Controller.HireNPC(charsInFief[foundChar].charID, "20000", Controller.tclient);
                     }
                     else
                     {
@@ -369,6 +394,7 @@ public class DecisionTreeAI
 
     public static bool TryAdjustExpenses(ProtoFief currFief)
     {
+        Debug.Log("AGENT ACTION: Adjusting expenses");
         bool madeChange = true; 
         if ((currFief.keyStatsCurrent[4] - garrisonSpendThisTurn) > changeLimit)
         {
