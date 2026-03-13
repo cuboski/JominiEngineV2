@@ -34,6 +34,10 @@ public class DecisionTreeAI
 
     public static double lastCheckDays = 0;
 
+    public static int expensesChangedThisSeason = 0;
+
+    public static bool hasHired = false;
+
     public DecisionTreeAI()
     {
         
@@ -184,6 +188,8 @@ public class DecisionTreeAI
         infrasteuctureSpendThisTurn = 0;
         keepSpendThisTurn = 0;
 
+        
+        expensesChangedThisSeason = 0;
         int failedActions = 0;
         int decisions = 0;
         lastCheckDays = 0;
@@ -192,8 +198,11 @@ public class DecisionTreeAI
 
         bool hasMoved = false;
 
+        string season = Controller.SeasonToString(Controller.protoClient.Season);
+        string year = Controller.protoClient.Year.ToString();
 
-        while (days > 0 && failedActions < 3 && decisions < 50 && !hasMoved)
+
+        while (days > 0 && failedActions < 3 && decisions < 5 && !hasMoved)
         {
             decisions++;
             ProtoCharacter Eustace = Controller.GetCharacterDetails("Char_126", Controller.tclient);
@@ -216,7 +225,7 @@ public class DecisionTreeAI
 
             if (currFief.treasury < 0 && currFief.fiefID != "ENU02")
             {
-                Debug.Log("AGENT ACTION: Tranfering funds");
+                Debug.Log("AGENT ACTION: Tranfering funds " + season + " " + year);
                 Controller.TransferFunds("ENU02", currFief.fiefID, 120000, Controller.tclient);
             }
 
@@ -239,7 +248,7 @@ public class DecisionTreeAI
                     {
                         if (!fiefUnrest)
                         {
-                            Debug.Log("AGENT ACTION: Increasing tax 10%");
+                            Debug.Log("AGENT ACTION: Increasing tax 10% " + season + " " + year);
                             Debug.Log(currFief.keyStatsNext[2]);
                             currFief.keyStatsNext[2] += 10;
                             Debug.Log(currFief.keyStatsNext[2]);
@@ -253,7 +262,7 @@ public class DecisionTreeAI
                         }
                         else
                         {
-                            if (!TryAdjustExpenses(currFief))
+                            if (!TryAdjustExpenses(currFief, season, year))
                             {
                                 failedActions++;
                                 failedTwo = true;
@@ -262,7 +271,7 @@ public class DecisionTreeAI
                     }
                     else
                     {
-                        if (TryAdjustExpenses(currFief))
+                        if (TryAdjustExpenses(currFief, season, year))
                         {
                             failedActions++;
                             failedTwo = true;
@@ -271,18 +280,21 @@ public class DecisionTreeAI
                 }
                 else
                 {
-                    Debug.Log("AGENT ACTION: Move to new fief");
+                    
                     string newFief = "";
+                    string fiefName = "";
                     System.Random random = new System.Random();
                     
                     do
                     {
                         int newFiefNum = random.Next(0, fiefs.Length);
                         newFief = fiefs[newFiefNum].fiefID;
+                        fiefName = fiefs[newFiefNum].FiefName;
                     }
                     while (newFief.Equals(currFief.fiefID));
                     //string userMessageOnSceneLoad = "a";
                     ProtoMessage movement = Controller.TravelTo("Char_126", newFief, Controller.tclient);
+                    Debug.Log("AGENT ACTION: Move to new fief " + season + " " + year + " next season they will be performing actions in " + fiefName);
                     hasMoved = true;
                     /*
                     if(movement.ResponseType == DisplayMessages.Success) {
@@ -338,7 +350,7 @@ public class DecisionTreeAI
 
                 if (!id.Equals(""))
                 {
-                    Debug.Log("AGENT ACTION: Apointing Bailiff");
+                    Debug.Log("AGENT ACTION: Apointing Bailiff " + season + " " + year);
                     ProtoMessage appointed = Controller.AppointBailiff(id, currFief.fiefID, Controller.tclient);
                     isBailiff.Remove(id);
                     isBailiff.Add(id, true);
@@ -372,11 +384,12 @@ public class DecisionTreeAI
                         
                         
                     }
-                    if (foundHire == true)
+                    if (foundHire == true && hasHired == false)
                     {
                         attemptNum++;  
-                        Debug.Log("AGENT ACTION: Hiring NPC " + charsInFief[foundChar].charID + " " + attemptNum);
+                        Debug.Log("AGENT ACTION: Hiring NPC " + charsInFief[foundChar].charID + " " + season + " " + year);
                         ProtoMessage hired = Controller.HireNPC(charsInFief[foundChar].charID, "20000", Controller.tclient);
+                        hasHired = true;
                     }
                     else
                     {
@@ -392,9 +405,9 @@ public class DecisionTreeAI
 
     }
 
-    public static bool TryAdjustExpenses(ProtoFief currFief)
+    public static bool TryAdjustExpenses(ProtoFief currFief, string season, string year)
     {
-        Debug.Log("AGENT ACTION: Adjusting expenses");
+        
         bool madeChange = true; 
         if ((currFief.keyStatsCurrent[4] - garrisonSpendThisTurn) > changeLimit)
         {
@@ -431,6 +444,11 @@ public class DecisionTreeAI
             }
 
         }
+        if (madeChange)
+        {
+            expensesChangedThisSeason++;
+            Debug.Log("AGENT ACTION: Adjusting expenses, has adjusted " + expensesChangedThisSeason + " time(s)  in " + season + " " + year);
+        }
         double[] newEx = {currFief.keyStatsNext[2], currFief.keyStatsNext[3], currFief.keyStatsNext[4], currFief.keyStatsNext[5], currFief.keyStatsNext[6]};
         ProtoMessage changeEx = Controller.AdjustExpenditure(currFief.fiefID, newEx, Controller.tclient);
         return madeChange;
@@ -438,7 +456,7 @@ public class DecisionTreeAI
 
     public static void ArmyFocused()
     {
-        int days = 90;
+        //int days = 90;
     }
 
     public static void SplitFocus(int fiefSplit, int armySplit)
