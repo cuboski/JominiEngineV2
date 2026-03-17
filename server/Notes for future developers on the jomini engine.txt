@@ -1,0 +1,33 @@
+Database features that could be fixed/improved by anyone working on the Jomini Engine in the future (as of early 2026)
+
+Currently there is only one Keyspace to store one ongoing game (each Keyspace would store all game and player data for that game)
+
+Read and writes have been thoroughly tested but there aren't any formal error checks/logs for the new Cassandra functions
+
+
+Some data has been written into the database as full tables some have been stored as strings as they had complex types that couldn't be easily stored in Cassandra
+
+The types stored as strings are: 
+
+Journal 
+
+Npc 
+
+Pc 
+
+Province 
+
+fief 
+
+It is up to future user to decide which option they prefer.
+
+Journal creation modified for serialisation the write function and serialisation worked but read couldn't deserialise for an unknown reason so it is the only non working data.  
+
+
+Modified Alnwick and london treasury amounts for user study. 
+
+Alnwick was 360000 now 600000. 
+
+London was 247000 now 700000. 
+
+Commented out display message in yourArmies as it was causing error 

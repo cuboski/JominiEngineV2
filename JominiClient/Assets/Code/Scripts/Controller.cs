@@ -27,7 +27,7 @@ public class Controller : MonoBehaviour {
     public static ProtoSiegeDisplay sc;
     public static ProtoGenericArray<ProtoSiegeOverview> sl;
     
-    public static string ipAddress = "137.195.207.115";
+    public static string ipAddress = "172.24.48.1";
     // server ip = 139.162.225.87
     public static string buildVersion = "0.1.0a";
 

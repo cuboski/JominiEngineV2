@@ -249,9 +249,9 @@ public class DecisionTreeAI
                         if (!fiefUnrest)
                         {
                             Debug.Log("AGENT ACTION: Increasing tax 10% " + season + " " + year);
-                            Debug.Log(currFief.keyStatsNext[2]);
+                            //Debug.Log(currFief.keyStatsNext[2]);
                             currFief.keyStatsNext[2] += 10;
-                            Debug.Log(currFief.keyStatsNext[2]);
+                            //Debug.Log(currFief.keyStatsNext[2]);
                             if (currFief.keyStatsNext[2] > 100)
                             {
                                 currFief.keyStatsNext[2] = 100;
