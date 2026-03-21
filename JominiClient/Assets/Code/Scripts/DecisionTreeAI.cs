@@ -93,21 +93,18 @@ public class DecisionTreeAI
         
         ProtoGenericArray<ProtoFief> allFiefs = Controller.ViewMyFiefs(Controller.tclient);
         ProtoFief[] fiefs = allFiefs.fields;
-        bool noSiege = false;
+        bool Siege = false;
         List<string> siegeIDs = new List<string>();
         for (int i = 0; i < fiefs.Length; i++)
         {
             if(fiefs[i].siege != null)
             {
                 siegeIDs.Add(fiefs[i].siege);
-            }
-            else
-            {
-                noSiege = true;
+                Siege = true;
             }
                 
         }
-        if (noSiege)
+        if (!Siege)
         {
             double sumIncome = 0;
             double expenses = 0;
