@@ -109,7 +109,7 @@ public class YourArmies : Controller
     private void DisplayMessageToUser(string message)
     {
         Debug.Log(message);
-        // this crashes for some reason
+        // this crashes for some reason so is commented out
         //lblMessageForUser.text = "[" + DateTime.Now.ToString("h:mm:ss tt") + "] " + message;
     }
 
