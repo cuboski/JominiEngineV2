@@ -225,6 +225,7 @@ public class DecisionTreeAI
                 Debug.Log("AGENT ACTION: Tranfering funds " + season + " " + year);
                 Controller.TransferFunds("ENU02", currFief.fiefID, 120000, Controller.tclient);
             }
+            fiefUnrest = false;
 
             if (currFief.bailiff != null || failedOne)
             {
@@ -238,11 +239,15 @@ public class DecisionTreeAI
                 expenses += currFief.keyStatsCurrent[5];
                 expenses += currFief.keyStatsCurrent[6];
 
-                if (sumIncome > expenses && !failedTwo)
+                if (sumIncome < expenses && !failedTwo)
                 {
                     //Debug.Log("Try fix income");
                     if (!alreadyIncreased)
                     {
+                        if (currFief.status.Equals('u') || currFief.status.Equals('r'))
+                        {
+                            fiefUnrest = true;
+                        }
                         if (!fiefUnrest)
                         {
                             Debug.Log("AGENT ACTION: Increasing tax 10% " + season + " " + year);
