@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using UnityEngine.WSA;
 
 public class LogIn : Controller
 {
@@ -17,6 +18,10 @@ public class LogIn : Controller
     [SerializeField] private Button btnQuit;
     [SerializeField] private Button btnOption;
     [SerializeField] private Text lblBuildVersion;
+
+    public bool launchWithAIAgent = true;
+    //public bool launchWithAIAgent = false;
+    public DecisionTreeAI agent;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +42,15 @@ public class LogIn : Controller
         }
 
         lblBuildVersion.text = "Client Version: " + buildVersion;
+
+        //might need to move
+        Debug.Log(launchWithAIAgent);
+        agent = new DecisionTreeAI();
+        if(launchWithAIAgent)
+        {
+            //agent.agentSetup();
+            DecisionTreeAI.agentSetup();
+        }
     }
 
     private void BtnLogIn()
@@ -58,7 +72,8 @@ public class LogIn : Controller
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
-        Application.Quit();
+        //make sure this is the correct version
+        UnityEngine.Application.Quit();
     }
 
     private void BtnOption()

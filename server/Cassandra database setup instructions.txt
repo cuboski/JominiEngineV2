@@ -1,0 +1,23 @@
+Cassandra database setup instructions
+
+While most of the setup instructions for the Jomini engine are the same as the video in the main readme the Cassandra DB needs a few different things to the Riak setup.
+
+The version of Ubuntu which I used for Cassandra is Ubuntu 24.04
+
+I used Java 11 jdk as the Java version for Cassandra
+
+Follow this tutorial:
+
+https://greenwebpage.com/community/how-to-install-apache-cassandra-on-ubuntu-24-04/#post-13551-_heading=h.4i7ojhp 
+
+I needed to install pyenv to be able to install cqlsh as for me it needed python 3.11 which I couldn't get another way but this might not be needed by everyone
+
+https://github.com/pyenv/pyenv?tab=readme-ov-file  
+
+When using cqlsh commands end with the line with ;. 
+
+The two lines of code i found I needed to run every time I wanted to start the server were:
+
+sudo systemctl status Cassandra
+and
+cqlsh

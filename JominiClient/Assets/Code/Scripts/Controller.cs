@@ -15,6 +15,7 @@ using static Controller;
 public class Controller : MonoBehaviour { 
     ////Other value
     public static TextTestClient tclient;
+    //public static TextTestClient agentClient;
     public static ProtoFief mf;
     public static ProtoGenericArray<ProtoArmyOverview> ma;
     public static ProtoGenericArray<ProtoDetachment> dl;
@@ -93,8 +94,9 @@ public class Controller : MonoBehaviour {
     public static void Initialise()
     {
         tclient = new TextTestClient();
+        //agentClient = new TextTestClient();
         GenerateColourList();
-        string reas;
+        //string reas;
         //Login("helen", "potato", out reas);
     }
 
@@ -114,6 +116,7 @@ public class Controller : MonoBehaviour {
         Debug.Log("Controller Log In Called");
         DateTime current = DateTime.Now;
         tclient.LogInAndConnect(username, password, ipAddress);
+        //agentClient.LogInAndConnect("acc2", "pass2", ipAddress);
         while (!tclient.IsConnectedAndLoggedIn())
         {
             Debug.Log("Sleeping Login Thread");
@@ -169,6 +172,7 @@ public class Controller : MonoBehaviour {
 
                 globalString = "You have been disconnected.";
                 tclient.LogOut();
+                //agentClient.LogOut();
                 GoToScene(SceneName.LogIn);
                 return null;
             }

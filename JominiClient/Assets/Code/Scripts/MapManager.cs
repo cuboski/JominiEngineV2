@@ -60,6 +60,9 @@ public class MapManager : Controller
         CreateMap();
         fiefToViewID = protoClient.activeChar.location;
         UpdateFiefPanel();
+        //Debug.Log("Called MANY !!!!!!!!!!!!!!!!A");
+        //DecisionTreeAI.TakeTurn();
+        //Debug.Log("Called MANY !!!!!!!!!!!!!!!!");
     }
 
 

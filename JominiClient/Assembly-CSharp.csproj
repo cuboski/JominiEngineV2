@@ -66,9 +66,11 @@
     <Compile Include="Assets\Code\Scripts\ViewingLists\Records\FactionMember.cs" />
     <Compile Include="Assets\Code\Scripts\Controller.cs" />
     <Compile Include="Assets\Code\Scripts\NavigationUI.cs" />
+    <Compile Include="Assets\Code\Scripts\DecisionTreeAI.cs" />
     <Compile Include="Assets\Code\Scripts\ViewingLists\ViewCharacters.cs" />
     <Compile Include="Assets\Code\Scripts\EntourageManager.cs" />
     <Compile Include="Assets\Code\Scripts\ViewingLists\AssignBailif.cs" />
+    <Compile Include="Assets\Code\Scripts\TestCassandra.cs" />
     <Compile Include="Assets\Code\Scripts\TestTextClient.cs" />
     <Compile Include="Assets\Code\Scripts\CameraZoomContoller.cs" />
     <Compile Include="Assets\Code\Scripts\ViewSiege.cs" />

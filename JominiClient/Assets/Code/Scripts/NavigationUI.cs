@@ -28,6 +28,7 @@ public class NavigationUI : Controller
     public Text textEventMessage;
     public GameObject eventBox;
 
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -46,7 +47,10 @@ public class NavigationUI : Controller
         string season = SeasonToString(protoClient.Season);
         lblGameDate.text = season + "\n" + protoClient.Year.ToString();
         lblBuildVersion.text = "Client Version: " + buildVersion;
+        
     }
+
+    
 
     // This function returns true for a test communication
     private void BtnTest() {
@@ -61,10 +65,12 @@ public class NavigationUI : Controller
     }
 
     private void BtnEndSeason() {
+        Debug.Log("NEW SEASON --------------");
         ProtoMessage reply = SeasonUpdate(tclient);
         if(reply.ResponseType == DisplayMessages.Success) {
             viewingListSelectAction = ViewingList.Journal;
             GoToScene(SceneName.ViewingList);
+            DecisionTreeAI.TakeTurn();
         }
     }
 

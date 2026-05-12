@@ -1212,6 +1212,7 @@ namespace JominiEngine
                         {
                             // de-serialise 
                             newObject = DatabaseRead.Fief_deserialise(thisEntry.Value);
+                            Console.WriteLine(newObject.Treasury + "TREASURE ???????????????????????????????????????");
 
                             // add to Globals_Game masterList
                             Globals_Game.fiefMasterList.Add(newObject.id, newObject);
@@ -1341,6 +1342,8 @@ namespace JominiEngine
                     Convert.ToDouble(fiefData[26]),
                     Convert.ToDouble(fiefData[27])
                 };
+
+                Console.WriteLine("   " + finCurr[0] + " DATA IS HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! " + finCurr[1] + " " + finCurr[8] + " " + fiefData[48]);
 
                 // previous
                 double[] finPrev = new double[] {

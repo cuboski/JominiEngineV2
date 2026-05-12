@@ -149,7 +149,7 @@ public partial class TextTestClient
         private NetConnection connection;
         private string user;
         private string pass;
-        private IPAddress ip = NetUtility.Resolve("10.130.61.3");
+        private IPAddress ip = NetUtility.Resolve("172.24.48.1");
         private int port = 8080;
         private NetEncryption encryptionAlg = null;
         /// <summary>
