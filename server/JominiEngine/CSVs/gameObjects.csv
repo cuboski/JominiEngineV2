@@ -325,7 +325,7 @@ province,SLO00,Lowlands,11,0.00,Char_40,Char_40,S0000
 province,SMA00,Marches,11,0.00,Char_40,Char_40,S0000
 province,EMN00,Man,17,0.00,Char_47,Char_47,E0000
 pc,Char_1,Henry,de Nonant,1145,,true,Eng,true,5.00,3.00,lang_C2,90,0,4.00,3.66,true,false,Char_1,Char_1190,,,,false,500,EDV08,EDV08,EDV08,,someGuy001
-pc,Char_18,Simon,de Beauchamp,1150,,true,Eng,true,5.00,6.00,lang_C2,90,0,8.00,4.33,true,false,Char_18,Char_579,,,,false,500,ECG05,ECG05,ECG05,,
+pc,Char_18,Simon,de Beauchamp,1150,,true,Eng,true,5.00,6.00,lang_C2,90,0,8.00,4.33,true,false,Char_18,Char_579,,,,false,500,ECG05,ECG05,ECG05,,ai_fsm
 pc,Char_19,Simon,d'Avranches,1169,,true,Eng,true,6.00,6.00,lang_C2,90,0,4.00,3.66,true,false,Char_19,,,,,false,500,EKE06,EKE06,EKE06,,
 pc,Char_20,Geoffrey,de Say,1155,,true,Eng,true,5.00,8.00,lang_C2,90,0,1.00,3.33,true,false,Char_20,Char_672,,,,false,500,EKE01,EKE01,EKE01,,
 pc,Char_21,Reginald,de Mohun,1183,,true,Eng,true,7.00,5.00,lang_C2,90,0,1.00,6.00,true,false,Char_21,Char_1194,,,,false,500,ESM02,ESM02,ESM02,,

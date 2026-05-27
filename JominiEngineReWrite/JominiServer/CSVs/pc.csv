@@ -1,6 +1,6 @@
 ID,First Name,Last Name,Birth Year,Birth Season,IsMale,Nationality,IsAlive,MaxHealth,Virtility,Language,DaysLeft,Stature,Managment rating,Combat Rating,InKeep,IsPregnant,Family ID,Spouse,Father,Mother,Fiancee,IsOutlawed,CharacterPurse,Home Fief,Ancestral Home,Location,Army ID,Client ID
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Char_1,Henry,de Nonant,1145,0,TRUE,Eng,TRUE,5,3,lang_C2,90,0,4,3.66,TRUE,FALSE,Char_1,Char_1190,,,,FALSE,500,EDV08,EDV08,EDV08,,
+Char_1,Henry,de Nonant,1145,0,TRUE,Eng,TRUE,5,3,lang_C2,90,0,4,3.66,TRUE,FALSE,Char_1,Char_1190,,,,FALSE,500,EDV08,EDV08,EDV08,,ai_fsm
 Char_18,Simon,de Beauchamp,1150,0,TRUE,Eng,TRUE,5,6,lang_C2,90,0,8,4.33,TRUE,FALSE,Char_18,Char_579,,,,FALSE,500,ECG05,ECG05,ECG05,,
 Char_19,Simon,d'Avranches,1169,0,TRUE,Eng,TRUE,6,6,lang_C2,90,0,4,3.66,TRUE,FALSE,Char_19,,,,,FALSE,500,EKE06,EKE06,EKE06,,
 Char_20,Geoffrey,de Say,1155,0,TRUE,Eng,TRUE,5,8,lang_C2,90,0,1,3.33,TRUE,FALSE,Char_20,Char_672,,,,FALSE,500,EKE01,EKE01,EKE01,,

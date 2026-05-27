@@ -8,19 +8,19 @@
     ".NETStandard,Version=v2.1": []
   },
   "packageFolders": {
-    "C:\\Users\\chris\\.nuget\\packages\\": {}
+    "C:\\Users\\Terry\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chris\\Desktop\\Dissertation\\JominiEngine_AI_Agent\\JominiClient\\Assembly-CSharp.csproj",
+      "projectUniqueName": "C:\\Users\\Terry\\Documents\\GitHub\\JominiEngine_AI_Agent\\JominiClient\\Assembly-CSharp.csproj",
       "projectName": "Assembly-CSharp",
-      "projectPath": "C:\\Users\\chris\\Desktop\\Dissertation\\JominiEngine_AI_Agent\\JominiClient\\Assembly-CSharp.csproj",
-      "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chris\\Desktop\\Dissertation\\JominiEngine_AI_Agent\\JominiClient\\Temp\\obj\\Debug\\Assembly-CSharp\\",
+      "projectPath": "C:\\Users\\Terry\\Documents\\GitHub\\JominiEngine_AI_Agent\\JominiClient\\Assembly-CSharp.csproj",
+      "packagesPath": "C:\\Users\\Terry\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Terry\\Documents\\GitHub\\JominiEngine_AI_Agent\\JominiClient\\Temp\\obj\\Debug\\Assembly-CSharp\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Terry\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -62,7 +62,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -27,7 +27,7 @@ namespace JominiEngine
         /******Server Settings  ******/
         private readonly int port = 8080;
         //private readonly string host_name = "localhost";
-        private readonly string host_name = "172.24.48.1";
+        private readonly string host_name = "10.130.61.5";
         //private readonly string host_name = "139.162.225.87";
         private readonly int max_connections = 2000;
         // Used in the NetPeerConfiguration to identify application
@@ -83,6 +83,8 @@ namespace JominiEngine
             LogInManager.StoreNewUser("acc3", "pass3");
             LogInManager.StoreNewUser("acc4", "pass4");
             LogInManager.StoreNewUser("acc5", "pass5");
+            LogInManager.StoreNewUser("ai_fsm", "ai_fsm_pass");
+            LogInManager.StoreNewUser("ai_qlearn", "ai_qlearn_pass");
 
             // test account for the religion system
             //LogInManager.StoreNewUser("faithTest", "faithtest");
