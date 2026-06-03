@@ -3,137 +3,137 @@ using ProtoMessageClient;
 
 namespace JominiAI
 {
-
     public static class FSMActionExecutor
     {
-
         public static ProtoMessage Convert(
-            MainActions action,
-            string[] arguments,
-            GameState gameState)
+            MainActions action, string[] arguments, GameState gameState)
         {
-            if (arguments == null)
-                arguments = Array.Empty<string>();
+            arguments ??= Array.Empty<string>();
 
             switch (action)
             {
-
                 case MainActions.ArmyRecruit:
-                {
-                    if (arguments.Length < 2)
+                    Require(action, arguments, 2);
+                    return new ProtoRecruit
                     {
-                        Console.WriteLine(
-                            "[FSMActionExecutor] ArmyRecruit needs 2 arguments " + "(armyID, amount)");
-                        return CreateNoOp();
-                    }
-
-                    string armyID = arguments[0];
-                    uint amount   = uint.TryParse(arguments[1], out uint a) ? a : 10u;
-
-                    ProtoRecruit protoRecruit = new ProtoRecruit
-                    {
-                        armyID    = armyID,
-                        amount    = amount,
+                        ActionType = Actions.RecruitTroops,
+                        armyID = arguments[0],
+                        amount = uint.TryParse(arguments[1], out var amt) ? amt : 10u,
                         isConfirm = true
                     };
-                    protoRecruit.ActionType = Actions.RecruitTroops;
-
-                    Console.WriteLine(
-                        $"[FSMActionExecutor] ArmyRecruit  " + $"Actions.RecruitTroops, armyID={armyID}, amount={amount}");
-                    return protoRecruit;
-                }
-
-
-                case MainActions.ArmyAttack:
-                {
-                    if (arguments.Length < 2)
-                    {
-                        Console.WriteLine(
-                            "[FSMActionExecutor]  ArmyAttack needs 2 arguments " + "(myArmyID, targetArmyID)");
-                        return CreateNoOp();
-                    }
-
-                    string myArmyID     = arguments[0];
-                    string targetArmyID = arguments[1];
-
-                    ProtoMessage msg = new ProtoMessage
-                    {
-                        ActionType    = Actions.Attack,
-                        Message       = myArmyID,
-                        MessageFields = new[] { targetArmyID }
-                    };
-
-                    Console.WriteLine(
-                        $"[FSMActionExecutor] ArmyAttack → " + $"Actions.Attack, myArmy={myArmyID}, target={targetArmyID}");
-                    return msg;
-                }
-
 
                 case MainActions.ArmyMaintain:
-                {
-                    if (arguments.Length < 1)
-                    {
-                        Console.WriteLine(
-                            "[FSMActionExecutor] ArmyMaintain needs 1 argument " + "(armyID)");
-                        return CreateNoOp();
-                    }
+                    Require(action, arguments, 1);
+                    return Msg(Actions.MaintainArmy, arguments[0]);
 
-                    string armyID = arguments[0];
-
-                    ProtoMessage msg = new ProtoMessage
+                case MainActions.ArmyAttack:
+                    Require(action, arguments, 2);
+                    return new ProtoMessage
                     {
-                        ActionType    = Actions.MaintainArmy,
-                        Message       = armyID,
-                        MessageFields = null
+                        ActionType = Actions.Attack,
+                        Message = arguments[0],
+                        MessageFields = new[] { arguments[1] }
                     };
 
-                    Console.WriteLine(
-                        $"[FSMActionExecutor] ArmyMaintain → " + $"Actions.MaintainArmy, armyID={armyID}");
-                    return msg;
-                }
+                case MainActions.ArmyPillageCurrentFief:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.PillageFief, arguments[0]);
 
+                case MainActions.ArmyDisband:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.DisbandArmy, arguments[0]);
+
+                case MainActions.SiegeBesiegeCurrentFief:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.BesiegeFief, arguments[0]);
+
+                case MainActions.SiegeStorm:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.SiegeRoundStorm, arguments[0]);
+
+                case MainActions.SiegeReduction:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.SiegeRoundReduction, arguments[0]);
+
+                case MainActions.SiegeNegotiation:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.SiegeRoundNegotiate, arguments[0]);
+
+                case MainActions.SiegeEnd:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.EndSiege, arguments[0]);
+
+                case MainActions.NPCappointBaillif:
+                    Require(action, arguments, 2);
+                    return new ProtoMessage
+                    {
+                        ActionType = Actions.AppointBailiff,
+                        Message = arguments[0],
+                        MessageFields = new[] { arguments[1] }
+                    };
+
+                case MainActions.NPCremoveBaillif:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.RemoveBailiff, arguments[0]);
+
+                case MainActions.NPCfire:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.FireNPC, arguments[0]);
+
+                case MainActions.NPChire:
+                    Require(action, arguments, 2);
+                    return new ProtoMessage
+                    {
+                        ActionType = Actions.HireNPC,
+                        Message = arguments[0],
+                        MessageFields = new[] { arguments[1] }
+                    };
 
                 case MainActions.NPCcamp:
-                {
-                    if (arguments.Length < 2)
+                    Require(action, arguments, 2);
+                    return new ProtoMessage
                     {
-                        Console.WriteLine(
-                            "[FSMActionExecutor] NPCcamp needs 2 arguments " + "(charID, days)");
-                        return CreateNoOp();
-                    }
-
-                    string charID = arguments[0];
-                    string days   = arguments[1];
-
-                    ProtoMessage msg = new ProtoMessage
-                    {
-                        ActionType    = Actions.Camp,
-                        Message       = charID,
-                        MessageFields = new[] { days }
+                        ActionType = Actions.Camp,
+                        Message = arguments[0],
+                        MessageFields = new[] { arguments[1] }
                     };
 
-                    Console.WriteLine(
-                        $"[FSMActionExecutor] NPCcamp → " +  $"Actions.Camp, charID={charID}, days={days}");
-                    return msg;
-                }
+                case MainActions.FiefAutoAdjustExpenditure:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.AdjustExpenditure, arguments[0]);
 
+                case MainActions.FiefTransferFunds:
+                    Require(action, arguments, 3);
+                    return new ProtoTransfer
+                    {
+                        ActionType = Actions.TransferFunds,
+                        fiefFrom = arguments[0],
+                        fiefTo = arguments[1],
+                        amount = int.TryParse(arguments[2], out var tr) ? tr : 0
+                    };
+
+                case MainActions.KidnapReleaseCaptive:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.ReleaseCaptive, arguments[0]);
 
                 default:
-                    Console.WriteLine(
-                        $"[FSMActionExecutor] No conversion defined for {action}. ");
-                    return CreateNoOp();
+                    Console.WriteLine($"[FSMActionExecutor] No mapping for {action} : no-op.");
+                    return NoOp();
             }
         }
 
+        private static ProtoMessage Msg(Actions type, string message) =>
+            new ProtoMessage { ActionType = type, Message = message };
 
-        private static ProtoMessage CreateNoOp()
+        private static ProtoMessage NoOp() =>
+            new ProtoMessage { ActionType = Actions.ViewMyFiefs, Message = string.Empty };
+
+        private static void Require(MainActions action, string[] args, int count)
         {
-            return new ProtoMessage
-            {
-                ActionType    = Actions.ViewMyFiefs,
-                Message       = string.Empty,
-                MessageFields = Array.Empty<string>()
-            };
+            if (args.Length < count)
+                Console.WriteLine(
+                    $"[FSMActionExecutor] {action} needs {count} arg(s) " +
+                    $"but got {args.Length}.");
         }
     }
 }

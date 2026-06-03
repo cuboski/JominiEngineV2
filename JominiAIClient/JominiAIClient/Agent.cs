@@ -67,20 +67,25 @@ namespace JominiAI
 		KidnapRespondRansom, // Needs KidnapCharacter to work
 	}
 
-	/// <summary>
-	///		Contain the functions and variables used by most agents
-	/// </summary>
 	public abstract class Agent : Player
 	{
 		/// <summary>
-		///     Return the next action for the agent to execute. Each agent will use a different algorithm to find the action.
+		///     Return the next action for the agent to execute given a pre-built semantic state.
+		///     Each concrete agent implements its own decision algorithm.
 		/// </summary>
-		/// <returns>The next action to execute</returns>
-		public abstract MainActions findNextAction(GameState gameState, out string[] arguments);
+		public abstract MainActions findNextAction(AgentState state, out string[] arguments);
+
+		/// <summary>
+		///     Build a semantic AgentState from the raw server-fetched GameState.
+		///     Handlers and display code use this instead of working with the raw struct directly.
+		/// </summary>
+		public AgentState BuildState(GameState gs)
+			=> AgentState.Build(gs, expenditureAdjustedThisSeasonFiefIDs, estimateNPCacceptableSalary);
 
 		protected List<String> nationalities = new List<String>() { "Oth", "Eng", "Fr", "Sco" };
 
-		private HashSet<MainActions> FailedActions = new HashSet<MainActions>(); // When failing to execute an action, it is added to this set. Is reinitialized when the agent succesfuly execute an action.
+		protected HashSet<MainActions> FailedActions = new HashSet<MainActions>(); // When failing to execute an action, it is added to this set. Is reinitialized when the agent succesfuly execute an action.
+		private string _lastTravelCostQueryLocation = null; // Cached location — travel costs are only re-queried when the PC moves to a new fief.
 		protected HashSet<string> fiefSpiedThisSeasonIDs = new HashSet<string>();
 		protected HashSet<string> charSpiedThisSeasonIDs = new HashSet<string>();
 		protected HashSet<string> armySpiedThisSeasonIDs = new HashSet<string>();
@@ -113,27 +118,27 @@ namespace JominiAI
 		///		Filled with the maximum possible day cost for each action.
 		/// </summary>
 		protected Dictionary<MainActions, double> maxDaysToDoAction = new Dictionary<MainActions, double>{
-			{MainActions.ArmyRecruit, 5},  
-			{MainActions.ArmyMaintain, 0},  
-			{MainActions.ArmyPickUp, 30},  
-			{MainActions.ArmyDropOff, 30},   
-			{MainActions.ArmyDisband, 0},  
-			{MainActions.ArmyAppointLeader, 0}, 
-			{MainActions.ArmyPillageCurrentFief, 15},  
+			{MainActions.ArmyRecruit, 5},
+			{MainActions.ArmyMaintain, 0},
+			{MainActions.ArmyPickUp, 30},
+			{MainActions.ArmyDropOff, 30},
+			{MainActions.ArmyDisband, 0},
+			{MainActions.ArmyAppointLeader, 0},
+			{MainActions.ArmyPillageCurrentFief, 15},
 			{MainActions.ArmyAdjustCombatValues, 0},
 			{MainActions.ArmyAttack, 1},
 
-			{MainActions.SiegeBesiegeCurrentFief, 0},  
-			{MainActions.SiegeStorm, 10},  
-			{MainActions.SiegeNegotiation, 10},  
-			{MainActions.SiegeReduction, 10},  
-			{MainActions.SiegeEnd, 0},  
+			{MainActions.SiegeBesiegeCurrentFief, 0},
+			{MainActions.SiegeStorm, 10},
+			{MainActions.SiegeNegotiation, 10},
+			{MainActions.SiegeReduction, 10},
+			{MainActions.SiegeEnd, 0},
 
 			{MainActions.NPCmoveDirection, 0}, // Calculed in function of the location as it changes a lot depending on the terrain type
 			{MainActions.NPCmoveToFief, 0}, // Calculed in function of the location as it changes a lot depending on the route
-			{MainActions.NPCmarryPC, 0},  
-			{MainActions.NPCmarryChild, 0},  
-			{MainActions.NPCacceptRejectProposal, 0},  
+			{MainActions.NPCmarryPC, 0},
+			{MainActions.NPCmarryChild, 0},
+			{MainActions.NPCacceptRejectProposal, 0},
 			{MainActions.NPCtryForChild, 1},
 			{MainActions.NPChire, 0},
 			{MainActions.NPCfire, 0},
@@ -144,23 +149,23 @@ namespace JominiAI
 			{MainActions.NPCtryEnterKeep, 0},
 			{MainActions.NPCexitKeep, 0},
 			{MainActions.NPCcamp, 1}, // *nb days camped* => Minimum 1
-			{MainActions.NPCaddToEntourage, 0},  
-			{MainActions.NPCremoveFromEntourage, 0},  
-			{MainActions.NPCappointHeir, 0},  
-			{MainActions.NPCappointBaillif, 0},  
-			{MainActions.NPCremoveBaillif, 0},  
-			
-			{MainActions.FiefAutoAdjustExpenditure, 0},  
-			{MainActions.FiefTransferFunds, 0},  
-			{MainActions.FiefTransferFundsToPlayer, 0},  
-			{MainActions.FiefGrantFiefTitle, 0},  
+			{MainActions.NPCaddToEntourage, 0},
+			{MainActions.NPCremoveFromEntourage, 0},
+			{MainActions.NPCappointHeir, 0},
+			{MainActions.NPCappointBaillif, 0},
+			{MainActions.NPCremoveBaillif, 0},
 
-			{MainActions.SpyFief, 10},  
-			{MainActions.SpyCharacter, 10},  
-			{MainActions.SpyArmy, 10},  
+			{MainActions.FiefAutoAdjustExpenditure, 0},
+			{MainActions.FiefTransferFunds, 0},
+			{MainActions.FiefTransferFundsToPlayer, 0},
+			{MainActions.FiefGrantFiefTitle, 0},
 
-			{MainActions.KidnapCharacter, 10},  
-			{MainActions.KidnapRansomCaptive, 0},  
+			{MainActions.SpyFief, 10},
+			{MainActions.SpyCharacter, 10},
+			{MainActions.SpyArmy, 10},
+
+			{MainActions.KidnapCharacter, 10},
+			{MainActions.KidnapRansomCaptive, 0},
 			{MainActions.KidnapReleaseCaptive, 0},
 			{MainActions.KidnapExecuteCaptive, 0},
 			{MainActions.KidnapRespondRansom, 0},
@@ -168,7 +173,7 @@ namespace JominiAI
 
 		public Agent(string username, string password) : base(username, password)
 		{
-			
+
 		}
 
 		/// <summary>
@@ -194,7 +199,7 @@ namespace JominiAI
 					firstGS = gameState.deepCopy();
 					firstGSinitialized = true;
 				}
-				
+
 				Console.WriteLine("\n<----------------------------------------------->");
 				RedProtoPlayerCharacter currentPC = gameState.myPC;
 				RedProtoFief currenFief = gameState.getCurrentFief();
@@ -258,14 +263,10 @@ namespace JominiAI
 			}
 		}
 
-		/// <summary>
-		///     
-		/// </summary>
-		/// <param name=""></param>
-		/// <returns>The current GameState</returns>
 		public GameState playOneAction(GameState gameState, out MainActions actionChosen, out string[] actionArguments, out bool executionSuccess, out bool endOfSeason, double maxEstimationNbDays = 0)
         {
-			MainActions nextAction = findNextAction(gameState, out string[] arguments);
+			AgentState state = BuildState(gameState);
+			MainActions nextAction = findNextAction(state, out string[] arguments);
 
 			actionChosen = nextAction;
 			actionArguments = arguments;
@@ -279,7 +280,10 @@ namespace JominiAI
 				if (ExecuteAction(nextAction, arguments, gameState, out gameState))
 				{
 					executionSuccess = true;
-					FailedActions = new HashSet<MainActions>();
+					// Camping only burns time — it doesn't fix the underlying condition that caused
+					// other actions to fail, so don't clear the failure memory on a camp-only success.
+					if (nextAction != MainActions.NPCcamp)
+						FailedActions = new HashSet<MainActions>();
 				}
                 else
                 {
@@ -298,20 +302,47 @@ namespace JominiAI
 		public GameState ObtainCurrentGSandUpdateAgentLists(GameState previousGS = new GameState())
 		{
 			GameState currentGS = ObtainCurrentGameState(previousGS);
+
+			// Travel costs only re-queried when the PC moves to a new fief
 			RedProtoFief currentFief = currentGS.getCurrentFief();
+			string currentFiefID = currentFief?.fiefID;
 
+			bool locationChanged = currentFiefID != _lastTravelCostQueryLocation;
+			if (locationChanged)
+			{
+				_lastTravelCostQueryLocation = currentFiefID;
 
-			// Update availableDirections list
-			dayCostToTravelToAdjacentFiefs = new Dictionary<MoveDirections, double>();
-			string[] availableTravelDirections = GetAvailableTravelDirections().MessageFields;
-			if(availableTravelDirections != null)
-				foreach (string availableTravelDirection in availableTravelDirections)
+				dayCostToTravelToAdjacentFiefs = new Dictionary<MoveDirections, double>();
+				string[] availableTravelDirections = GetAvailableTravelDirections().MessageFields;
+
+				if (availableTravelDirections != null)
+					foreach (string availableTravelDirection in availableTravelDirections)
+					{
+						if (!Enum.TryParse(availableTravelDirection, out MoveDirections moveDirection))
+							continue; // Skip unparseable directions rather than crashing
+
+						var response = getTravelDayCost("", availableTravelDirection);
+						double travelDayCost = 1.0;
+						if (response != null && !string.IsNullOrEmpty(response.Message))
+							double.TryParse(response.Message, out travelDayCost);
+
+						dayCostToTravelToAdjacentFiefs[moveDirection] = travelDayCost;
+					}
+
+				dayCostToTravelToKnownFiefs = new Dictionary<string, double>();
+				foreach (RedProtoFief knownFief in currentGS.myFiefs.Concat(currentGS.notMyFiefs))
 				{
-					if (!Enum.TryParse(availableTravelDirection, out MoveDirections moveDirection))
-						throw new Exception("Couldn't parse the string '" + availableTravelDirection + "' to create a MainActions");
-					double travelDayCost = double.Parse(getTravelDayCost("", availableTravelDirection).Message);
-					dayCostToTravelToAdjacentFiefs.Add(moveDirection, travelDayCost);
+					if (knownFief == null || string.IsNullOrWhiteSpace(knownFief.fiefID)) continue;
+					if (knownFief.fiefID.Equals(currentGS.myPC.location)) continue;
+
+					var response = getTravelDayCost(knownFief.fiefID);
+					double travelDayCost = 1.0;
+					if (response != null && !string.IsNullOrEmpty(response.Message))
+						double.TryParse(response.Message, out travelDayCost);
+
+					dayCostToTravelToKnownFiefs[knownFief.fiefID] = travelDayCost;
 				}
+			}
 
 			// Add new ennemies
 			foreach (RedProtoSiegeDisplay siegeAgainstMe in currentGS.siegeOnMyFiefs)
@@ -368,11 +399,6 @@ namespace JominiAI
 							charToUnbarIDs.Add(myNPCorPC.charID); // Add
 							break;
 						}
-
-			dayCostToTravelToKnownFiefs = new Dictionary<string, double>();
-			foreach (RedProtoFief knownFief in currentGS.myFiefs.Concat(currentGS.notMyFiefs))
-				if (!knownFief.fiefID.Equals(currentGS.myPC.location))
-					dayCostToTravelToKnownFiefs.Add(knownFief.fiefID, double.Parse(getTravelDayCost(knownFief.fiefID).Message));
 
 			fiefVisitedThisSeasonIDs.Add(currentFief.fiefID);
 
@@ -447,7 +473,7 @@ namespace JominiAI
 						if(!isNowMyNPC)
 						currentGS.notMyNPCs.Add(RedDeepCopier.DeepCopyRedProtoNPC(previousNotMyNpc));
 					}
-						
+
 				}
 
 				foreach (RedProtoPlayerCharacter previousNotMyPc in previousGS.notMyPCs)
@@ -499,7 +525,7 @@ namespace JominiAI
 			currentGS.enemyPCids = new HashSet<String>();
 			currentGS.allyPCids = new HashSet<String>();
 
-			
+
 			ProtoGenericArray<ProtoPlayer> playersArray = (ProtoGenericArray<ProtoPlayer>)GetPlayers();
 			currentGS.ExistingPlayers = new List<RedProtoPlayer>();
 			if (playersArray != null)
@@ -569,24 +595,19 @@ namespace JominiAI
 
 			currentGS.notMyNPCs = new List<RedProtoNPC>();
 			currentGS.notMyPCs = new List<RedProtoPlayerCharacter>();
+			// Skip ViewCharacter for every person in the fief — in a capital this can be 30-50 round-trips the FSM never uses.
+			// Own PC and own NPCs were already fetched above.
 			foreach (string characterInFiefId in currentFief.characterInFiefIDs)
-            {
-				ProtoCharacter charInFief = (ProtoCharacter)ViewCharacter(characterInFiefId);
-				bool isMine = false;
-				if (charInFief.familyID != null)
-					if (charInFief.familyID.Equals(currentPC.familyID))
-						isMine = true;
-				if (charInFief is ProtoNPC)
-					if((charInFief as ProtoNPC).employer != null)
-						if ((charInFief as ProtoNPC).employer.charID.Equals(currentPC.charID))
-							isMine = true;
-				if (!isMine)
-                {
-					if (charInFief is ProtoPlayerCharacter)
-						currentGS.notMyPCs.Add(new RedProtoPlayerCharacter(charInFief as ProtoPlayerCharacter));
-					else
-						currentGS.notMyNPCs.Add(new RedProtoNPC(charInFief as ProtoNPC));
-				}
+			{
+				if (characterInFiefId.Equals(currentPC.charID))
+					continue;
+				bool isMyNPC = false;
+				foreach (RedProtoNPC owned in currentGS.myFamilyNPCs.Concat(currentGS.myEmployeeNPCs))
+					if (owned.charID.Equals(characterInFiefId)) { isMyNPC = true; break; }
+				if (isMyNPC)
+					continue;
+				// charID-only stub; details fetched on demand
+				currentGS.notMyNPCs.Add(new RedProtoNPC { charID = characterInFiefId });
 			}
 			currentGS.spiedFiefs = new Dictionary<string, RedProtoFief>();
 			currentGS.spiedCharacters = new Dictionary<string, RedProtoCharacter>();
@@ -650,32 +671,32 @@ namespace JominiAI
 
 			if (currentPC.isAlive && currentPC.days > 0)
 			{
-				if (! string.IsNullOrWhiteSpace(currentPC.captor)) 
+				if (! string.IsNullOrWhiteSpace(currentPC.captor))
 				{
 					if (gameState.hasReceivedRansomForMyPC)
-						possibleActions.Add(MainActions.KidnapRespondRansom); // MainActions.KidnapRespondRansom
+						possibleActions.Add(MainActions.KidnapRespondRansom);
 				}
 				else
 				{
-					if (dayCostToTravelToAdjacentFiefs.Values.Min() <= currentPC.days)
-						possibleActions.Add(MainActions.NPCmoveDirection); // MainActions.NPCmove
-					if(dayCostToTravelToKnownFiefs.Values.Min() <= currentPC.days)
-						possibleActions.Add(MainActions.NPCmoveToFief); // MainActions.NPCmoveToFief
-					possibleActions.Add(MainActions.NPCcamp); // MainActions.NPCcamp
+					if (dayCostToTravelToAdjacentFiefs.Count > 0 && dayCostToTravelToAdjacentFiefs.Values.Min() <= currentPC.days)
+						possibleActions.Add(MainActions.NPCmoveDirection);
+					if (dayCostToTravelToKnownFiefs.Count > 0 && dayCostToTravelToKnownFiefs.Values.Min() <= currentPC.days)
+						possibleActions.Add(MainActions.NPCmoveToFief);
+					possibleActions.Add(MainActions.NPCcamp);
 					foreach (RedProtoNPC myFamilyNPC in gameState.myFamilyNPCs)
 						if (!String.IsNullOrWhiteSpace(myFamilyNPC.familyID) && myFamilyNPC.isMale)
 							if (myFamilyNPC.familyID.Equals(currentPC.familyID))
 							{
-								possibleActions.Add(MainActions.NPCappointHeir); // MainActions.NPCappointHeir
+								possibleActions.Add(MainActions.NPCappointHeir);
 								break;
 							}
 					if (gameState.myArmies.Count > 0)
 					{
-						possibleActions.Add(MainActions.ArmyDisband); // MainActions.ArmyDisband
+						possibleActions.Add(MainActions.ArmyDisband);
 						foreach (RedProtoArmy myArmy in gameState.myArmies)
                             if (!string.IsNullOrWhiteSpace(myArmy.leaderName))
                             {
-								possibleActions.Add(MainActions.ArmyDropOff); // MainActions.ArmyDropOff
+								possibleActions.Add(MainActions.ArmyDropOff);
 								break;
 							}
 						foreach (RedProtoCharacter myPCorEmployeeNPC in gameState.myEmployeeNPCs.Concat(new RedProtoCharacter[]{ gameState.myPC }))
@@ -688,14 +709,14 @@ namespace JominiAI
 										if (currentFief.armyIDs.Contains(myArmy.armyID) && myPCorEmployeeNPC.location.Equals(currentFief.fiefID))
 											if (string.IsNullOrWhiteSpace(myArmy.leaderName))
 											{
-												possibleActions.Add(MainActions.ArmyAppointLeader); // MainActions.ArmyAppointLeader
+												possibleActions.Add(MainActions.ArmyAppointLeader);
 												break;
 											}
 											else
 											{
 												if (!myArmy.leaderName.Equals(myPCorEmployeeNPC.firstName + " " + myPCorEmployeeNPC.familyName))
 												{
-													possibleActions.Add(MainActions.ArmyAppointLeader); // MainActions.ArmyAppointLeader
+													possibleActions.Add(MainActions.ArmyAppointLeader);
 													break;
 												}
 											}
@@ -706,11 +727,11 @@ namespace JominiAI
 								if (gameState.tryGetArmyFiefID(myArmy.armyID, out string armyFiefID))
 									if(armyFiefID.Equals(currentFief.fiefID))
 									{
-										possibleActions.Add(MainActions.SiegeBesiegeCurrentFief); // MainActions.SiegeBesiegeCurrentFief
+										possibleActions.Add(MainActions.SiegeBesiegeCurrentFief);
 										if (!currentFief.isPillaged)
-											possibleActions.Add(MainActions.ArmyPillageCurrentFief); // MainActions.ArmyPillageFief
+											possibleActions.Add(MainActions.ArmyPillageCurrentFief);
 										break;
-									}	
+									}
 						}
 						if (currentFief.armyIDs != null)
 							foreach (string armyInFiefID in currentFief.armyIDs)
@@ -724,20 +745,20 @@ namespace JominiAI
 									}
                                 if (!isMine)
                                 {
-									possibleActions.Add(MainActions.ArmyAttack); // MainActions.ArmyAttack
+									possibleActions.Add(MainActions.ArmyAttack);
 									break;
 								}
 							}
 						foreach (RedProtoDetachment protoDetachment in gameState.armyDetachmentsForMe)
 							if (protoDetachment.leftFor.Equals(currentPC.charID))
 							{
-								possibleActions.Add(MainActions.ArmyPickUp); // MainActions.ArmyPickUp
+								possibleActions.Add(MainActions.ArmyPickUp);
 								break;
 							}
 						foreach (RedProtoArmy myArmy in gameState.myArmies)
 							if (!myArmy.isMaintained && homeFief.treasury >= myArmy.maintCost)
                             {
-								possibleActions.Add(MainActions.ArmyMaintain); // MainActions.ArmyMaintain
+								possibleActions.Add(MainActions.ArmyMaintain);
 								break;
 							}
 						int indivTroopCost = 2000;
@@ -747,17 +768,17 @@ namespace JominiAI
 						if(gameState.tryGetMainArmyFiefID(out string mainArmyFiefID))
 							if (mainArmyFiefID.Equals(currentFief.fiefID) && currentFief.ownerID.Equals(currentPC.charID) && !currentFief.hasRecruited && homeFief.treasury >= indivTroopCost)
 							{
-								possibleActions.Add(MainActions.ArmyRecruit); // MainActions.ArmyHire
+								possibleActions.Add(MainActions.ArmyRecruit);
 							}
-						possibleActions.Add(MainActions.ArmyAdjustCombatValues); // MainActions.ArmyAdjustCombatValues
+						possibleActions.Add(MainActions.ArmyAdjustCombatValues);
 					}
 					foreach(RedProtoSiegeDisplay mySiege in gameState.mySieges)
 					if (mySiege.besiegedFiefID.Equals(currentFief.fiefID))
 					{
-						possibleActions.Add(MainActions.SiegeStorm); // MainActions.SiegeStorm
-						possibleActions.Add(MainActions.SiegeReduction); // MainActions.SiegeReduction
-						possibleActions.Add(MainActions.SiegeNegotiation); // MainActions.SiegeNegotiation
-						possibleActions.Add(MainActions.SiegeEnd); // MainActions.SiegeEnd
+						possibleActions.Add(MainActions.SiegeStorm);
+						possibleActions.Add(MainActions.SiegeReduction);
+						possibleActions.Add(MainActions.SiegeNegotiation);
+						possibleActions.Add(MainActions.SiegeEnd);
 					}
 					if (gameState.myFiefs.Count > 0)
 					{
@@ -777,17 +798,17 @@ namespace JominiAI
 										break;
 							}
 							if (canBeBarred)
-								possibleActions.Add(MainActions.NPCbarCharacters); // MainActions.NPCbarCharacters
+								possibleActions.Add(MainActions.NPCbarCharacters);
 						}
 						foreach (RedProtoFief myFief in gameState.myFiefs)
 						{
 							if(!possibleActions.Contains(MainActions.FiefAutoAdjustExpenditure) && myFief.treasury < 0)
-								possibleActions.Add(MainActions.FiefAutoAdjustExpenditure); // MainActions.AutoAdjustExpenditure
+								possibleActions.Add(MainActions.FiefAutoAdjustExpenditure);
 							if (!possibleActions.Contains(MainActions.FiefTransferFunds) && gameState.notMyFiefs.Count > 0 || gameState.myFiefs.Count >= 2)
-								possibleActions.Add(MainActions.FiefTransferFunds); // MainActions.FiefTransferFunds
+								possibleActions.Add(MainActions.FiefTransferFunds);
 							if (!possibleActions.Contains(MainActions.NPCunbarCharacters) && myFief.barredCharactersId != null)
 								if (myFief.barredCharactersId.Length > 0)
-									possibleActions.Add(MainActions.NPCunbarCharacters); // MainActions.NPCunbarCharacters
+									possibleActions.Add(MainActions.NPCunbarCharacters);
 							if (!possibleActions.Contains(MainActions.NPCbarNationalities) || !possibleActions.Contains(MainActions.NPCbarNationalities))
 							{
 								bool hasBaredAllNationalities = true;
@@ -796,49 +817,49 @@ namespace JominiAI
 										if (myFief.barredNationalities.Contains(nationality))
 										{
 											if (!possibleActions.Contains(MainActions.NPCbarNationalities))
-												possibleActions.Add(MainActions.NPCunbarNationalities); // MainActions.NPCunbarNationalities
+												possibleActions.Add(MainActions.NPCunbarNationalities);
 										}
 										else
 											hasBaredAllNationalities = false;
 								if (!possibleActions.Contains(MainActions.NPCbarNationalities) && !hasBaredAllNationalities)
-									possibleActions.Add(MainActions.NPCbarNationalities); // MainActions.NPCbarNationalities
+									possibleActions.Add(MainActions.NPCbarNationalities);
 							}
 						}
 						if (gameState.ExistingPlayers.Count > 2 && homeFief.treasury > 0)
-							possibleActions.Add(MainActions.FiefTransferFundsToPlayer); // MainActions.TransferFundsToPlayer
+							possibleActions.Add(MainActions.FiefTransferFundsToPlayer);
 						if (gameState.notMyFiefs.Count > 0)
                         {
 							foreach (RedProtoFief myFief in gameState.myFiefs)
 								if (myFief.ancestralOwnerId == null || currentPC.titles.Contains("King"))
-									possibleActions.Add(MainActions.FiefGrantFiefTitle); // MainActions.FiefGrantFiefTitle
-						}	
+									possibleActions.Add(MainActions.FiefGrantFiefTitle);
+						}
 					}
 					if (gameState.myEmployeeNPCs.Count > 0)
                     {
-						possibleActions.Add(MainActions.NPCfire); // MainActions.NPCfire
+						possibleActions.Add(MainActions.NPCfire);
 						foreach (RedProtoNPC myNpc in gameState.myFamilyNPCs.Concat(gameState.myEmployeeNPCs))
 							if (myNpc.inEntourage)
 							{
-								possibleActions.Add(MainActions.NPCremoveFromEntourage); // MainActions.NPCremoveFromEntourage
+								possibleActions.Add(MainActions.NPCremoveFromEntourage);
 								break;
 							}
 						foreach (RedProtoNPC myNPC in gameState.myFamilyNPCs.Concat(gameState.myEmployeeNPCs))
 							if (!myNPC.inEntourage && !string.IsNullOrWhiteSpace(myNPC.location))
 								if (myNPC.location.Equals(currentFief.fiefID))
 								{
-									possibleActions.Add(MainActions.NPCaddToEntourage); // MainActions.NPCaddToEntourage
+									possibleActions.Add(MainActions.NPCaddToEntourage);
 									break;
 								}
 						foreach (RedProtoNPC myEmployeeNpc in gameState.myEmployeeNPCs)
 							if (myEmployeeNpc.isMale && string.IsNullOrWhiteSpace(myEmployeeNpc.captor) && gameState.currentYear - myEmployeeNpc.birthYear >= 14)
 							{
-								possibleActions.Add(MainActions.NPCappointBaillif); // MainActions.NPCappointBaillif
+								possibleActions.Add(MainActions.NPCappointBaillif);
 								break;
 							}
 						foreach (RedProtoFief myFief in gameState.myFiefs)
 							if (! string.IsNullOrWhiteSpace(myFief.bailiffID))
 							{
-								possibleActions.Add(MainActions.NPCremoveBaillif); // MainActions.NPCappointBaillif
+								possibleActions.Add(MainActions.NPCremoveBaillif);
 								break;
 							}
 					}
@@ -848,34 +869,35 @@ namespace JominiAI
 							throw new Exception("Shouldn't happen");
 						if (! spouse.isPregnant && spouse.location.Equals(currentFief.fiefID) && (string.IsNullOrWhiteSpace(currentFief.siege)
 						|| currentPC.inKeep == spouse.inKeep) && spouse.days > 1)
-							possibleActions.Add(MainActions.NPCtryForChild); // MainActions.NPCtryForChild
+							possibleActions.Add(MainActions.NPCtryForChild);
 					}
 					if (gameState.receivedProposalFromThisChar != null)
-						possibleActions.Add(MainActions.NPCacceptRejectProposal); // MainActions.NPCacceptRejectProposal
+						possibleActions.Add(MainActions.NPCacceptRejectProposal);
 					foreach (RedProtoNPC notMyNPC in gameState.notMyNPCs)
-						if (!notMyNPC.isMale && string.IsNullOrWhiteSpace(notMyNPC.spouse) && string.IsNullOrWhiteSpace(notMyNPC.fiancee) && string.IsNullOrWhiteSpace(notMyNPC.captor) && !notMyNPC.familyID.Equals(currentPC.familyID)
-							& gameState.currentYear - notMyNPC.birthYear >= 14) // Check age (only if I have an estimation of the current year)
+						if (!notMyNPC.isMale && string.IsNullOrWhiteSpace(notMyNPC.spouse) && string.IsNullOrWhiteSpace(notMyNPC.fiancee) && string.IsNullOrWhiteSpace(notMyNPC.captor)
+							&& !string.IsNullOrWhiteSpace(notMyNPC.familyID) && !notMyNPC.familyID.Equals(currentPC.familyID) // stub NPCs have null familyID — skip them
+							&& gameState.currentYear - notMyNPC.birthYear >= 14 && notMyNPC.birthYear > 0) // Check age and that the NPC is fully populated
 						{
 							if (!gameState.myCharsWhoProposedThisSeason.TryGetValue(currentPCid, out bool hasCurrentPCproposed))
 								throw new Exception("Couldn't find '" + currentPCid + "', it shouldn't happen");
 							if (string.IsNullOrWhiteSpace(currentPC.spouse) && string.IsNullOrWhiteSpace(currentPC.fiancee) && !hasCurrentPCproposed)
-								possibleActions.Add(MainActions.NPCmarryPC); // MainActions.NPCmarry
+								possibleActions.Add(MainActions.NPCmarryPC);
 							foreach(RedProtoNPC myFamilyNPC in gameState.myFamilyNPCs)
                             {
 								if (!gameState.myCharsWhoProposedThisSeason.TryGetValue(myFamilyNPC.charID, out bool hasMyChildProposed))
 									throw new Exception("Couldn't find '" + myFamilyNPC.charID + "', it shouldn't happen");
 								if (myFamilyNPC.isMale && string.IsNullOrWhiteSpace(myFamilyNPC.spouse) && string.IsNullOrWhiteSpace(myFamilyNPC.fiancee) && !hasMyChildProposed)
 								{
-									possibleActions.Add(MainActions.NPCmarryChild); // MainActions.NPCmarrySon
+									possibleActions.Add(MainActions.NPCmarryChild);
 									break;
 								}
 							}
 							break;
 						}
 					if (gameState.receivedProposalFromThisChar != null && string.IsNullOrWhiteSpace(currentPC.spouse) && string.IsNullOrWhiteSpace(currentPC.fiancee))
-						possibleActions.Add(MainActions.NPCacceptRejectProposal); // MainActions.NPCacceptRejectProposal
+						possibleActions.Add(MainActions.NPCacceptRejectProposal);
 					if (currentPC.inKeep)
-						possibleActions.Add(MainActions.NPCexitKeep); // MainActions.NPCexitKeep
+						possibleActions.Add(MainActions.NPCexitKeep);
 					else
 					{
 						bool canEnterKeep = true;
@@ -896,7 +918,7 @@ namespace JominiAI
 						if (hasArmyInFief && !currentFief.ownerID.Equals(currentPC.charID))
 							canEnterKeep = false;
 						if (canEnterKeep)
-							possibleActions.Add(MainActions.NPCtryEnterKeep); // MainActions.NPCenterKeep
+							possibleActions.Add(MainActions.NPCtryEnterKeep);
 					}
 					foreach (string charInFiefId in currentFief.characterInFiefIDs)
 					{
@@ -915,11 +937,11 @@ namespace JominiAI
 							else
 							{
 								if (!possibleActions.Contains(MainActions.NPChire) && charInFief.isMale && gameState.currentYear - charInFief.birthYear >= 14 && string.IsNullOrWhiteSpace(charInFief.familyID)) // Check age (only if I have an estimation of the current year))
-										possibleActions.Add(MainActions.NPChire); // MainActions.NPChire
+										possibleActions.Add(MainActions.NPChire);
 							}
 						if (!isMine)
 							if (!possibleActions.Contains(MainActions.SpyCharacter))
-								possibleActions.Add(MainActions.SpyCharacter); // MainActions.SpyCharacter
+								possibleActions.Add(MainActions.SpyCharacter);
 						if (possibleActions.Contains(MainActions.SpyCharacter) && possibleActions.Contains(MainActions.NPChire))
 							break;
 					}
@@ -939,28 +961,28 @@ namespace JominiAI
 									}
 								if (!isMine && !armySpiedThisSeasonIDs.Contains(armyInFiefId))
 								{
-									possibleActions.Add(MainActions.SpyArmy); // MainActions.SpyArmy
+									possibleActions.Add(MainActions.SpyArmy);
 									break;
 								}
 							}
 						}
 					if (!currentFief.ownerID.Equals(currentPC.charID) && !fiefSpiedThisSeasonIDs.Contains(currentFief.fiefID))
-						possibleActions.Add(MainActions.SpyFief); // MainActions.SpyFief
+						possibleActions.Add(MainActions.SpyFief);
 					foreach (string characterIdInFief in currentFief.characterInFiefIDs)
 					{
 						if (gameState.tryGetNotMyPC(characterIdInFief, out RedProtoPlayerCharacter notMyCharacter))
 							if (string.IsNullOrWhiteSpace(notMyCharacter.captor))
 							{
-								possibleActions.Add(MainActions.KidnapCharacter); // MainActions.KidnapCharacter
+								possibleActions.Add(MainActions.KidnapCharacter);
 								break;
 							}
 					}
 					if (gameState.myCaptiveIDs.Count > 0)
 					{
-						possibleActions.Add(MainActions.KidnapReleaseCaptive); // MainActions.KidnapReleaseCaptive
-						possibleActions.Add(MainActions.KidnapExecuteCaptive); // MainActions.KidnapExecuteCaptive
+						possibleActions.Add(MainActions.KidnapReleaseCaptive);
+						possibleActions.Add(MainActions.KidnapExecuteCaptive);
 						if (myRansomedCaptiveIDs.Count < gameState.myCaptiveIDs.Count)
-							possibleActions.Add(MainActions.KidnapRansomCaptive); // MainActions.KidnapRansomCaptive
+							possibleActions.Add(MainActions.KidnapRansomCaptive);
 					}
 				}
 			}
@@ -999,7 +1021,7 @@ namespace JominiAI
 					break;
 				case MainActions.ArmyPickUp:
 					executionSuccess = PickUpTroops(arguments[0], arguments.Skip(1).ToArray()).ResponseType == DisplayMessages.ArmyMaintainConfirm;
-					if(executionSuccess) 
+					if(executionSuccess)
 						foreach(RedProtoDetachment detachmentInCurrentFief in gameState.armyDetachmentsForMe)
                             if (detachmentInCurrentFief.id.Equals(arguments[0]))
                             {
@@ -1076,7 +1098,7 @@ namespace JominiAI
 					break;
 				case MainActions.NPCacceptRejectProposal:
 					executionSuccess = AcceptRejectProposal(bool.Parse(arguments[0])).ResponseType == DisplayMessages.Success;
-					if (executionSuccess) 
+					if (executionSuccess)
 					{
 						AddAlly(gameState, gameState.receivedProposalFromThisChar.ownerName, out gameState); // The family of my wife naturally becomes an ally if not already
 					}
@@ -1125,7 +1147,11 @@ namespace JominiAI
 					executionSuccess = EnterExitKeep(arguments[0]).ResponseType == DisplayMessages.Success;
 					break;
 				case MainActions.NPCcamp:
-					executionSuccess = Camp(arguments[0], byte.Parse(arguments[1])).ResponseType == DisplayMessages.CharacterCamp;
+					var campReply = Camp(arguments[0], byte.Parse(arguments[1]));
+					executionSuccess = campReply.ResponseType == DisplayMessages.CharacterCamp
+					                || campReply.ResponseType == DisplayMessages.Success;
+					if (!executionSuccess)
+						Console.WriteLine($"  [Camp] Server rejected camp — ResponseType={campReply.ResponseType} | Msg='{campReply.Message}'");
 					break;
 				case MainActions.NPCaddToEntourage:
 					executionSuccess = AddRemoveEntourage(arguments[0]).ResponseType == DisplayMessages.Success;
@@ -1281,12 +1307,6 @@ namespace JominiAI
 			return executionSuccess;
 		}
 
-		/// <summary>
-		///     Modify the GameState accordingly in the case of the adding of an ally
-		/// </summary>
-		/// <param name="gameState"></param>
-		/// <param name="charId">ID of the char that becomes an ally</param>
-		/// <param name="gameStateWithModifs"></param>
 		private void AddAlly(GameState gameState, string charId, out GameState gameStateWithModifs)
         {
 			gameState.allyPCids.Add(charId);
@@ -1294,12 +1314,6 @@ namespace JominiAI
 			gameStateWithModifs = gameState;
 		}
 
-		/// <summary>
-		///     Modify the GameState accordingly in the case of the adding of an enemy
-		/// </summary>
-		/// <param name="gameState"></param>
-		/// <param name="charId">ID of the char that becomes an enemy</param>
-		/// <param name="gameStateWithModifs"></param>
 		private void AddEnemy(GameState gameState, string charId, out GameState gameStateWithModifs)
 		{
 			gameState.enemyPCids.Add(charId);
@@ -1310,10 +1324,6 @@ namespace JominiAI
 		/// <summary>
 		///     Search if a char can be barred from one of my fiefs
 		/// </summary>
-		/// <param name="gameState"></param>
-		/// <param name="charID"></param>
-		/// <param name="fief"></param>
-		/// <returns></returns>
 		protected bool CanBarCharFromOneOfMyFiefs(GameState gameState, string charID, out RedProtoFief fief)
 		{
 			fief = null;
@@ -1336,11 +1346,6 @@ namespace JominiAI
 			return false;
 		}
 
-		/// <summary>
-		///     Calculates my total number of troops
-		/// </summary>
-		/// <param name="gameState"></param>
-		/// <returns>My total number of troops</returns>
 		protected uint calculMyTotalNbTroops(GameState gameState)
 		{
 			uint myTotalNbTroops = 0;

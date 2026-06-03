@@ -119,7 +119,6 @@ namespace JominiAI
                 EventWaitHandle.WaitAny(waitHandles);
                 net.ctSource.Token.ThrowIfCancellationRequested();
             }
-            Console.WriteLine("Recieve from server: " + m.ActionType + " | " + m.ResponseType + " | " + m.MessageFields);
             return m;
         }
 
@@ -312,7 +311,6 @@ namespace JominiAI
 
             public void Send(ProtoMessage message, bool encrypt = true)
             {
-                Console.WriteLine("Send to server: " + message.ActionType+ " | " + message.ResponseType + " | " + message.MessageFields);
                 NetOutgoingMessage msg = client.CreateMessage();
                 MemoryStream ms = new MemoryStream();
                 try

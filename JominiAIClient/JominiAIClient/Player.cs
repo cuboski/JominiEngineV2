@@ -520,9 +520,7 @@ namespace JominiAI
         /// <returns>Returns a ProtoPlayerCharacter or a ProtoNPC if succeeds</returns>
         public ProtoMessage ViewCharacter(string charID)
         {
-            ProtoMessage msg = SendRequestToServer(Actions.ViewChar, charID, null);
-            Console.WriteLine($"Action type: {msg.ActionType}.Message: {msg.Message}.Fields {msg.MessageFields}. Response Type: {msg.ResponseType}");
-            return msg;
+            return SendRequestToServer(Actions.ViewChar, charID, null);
         }
 
         /// <summary>

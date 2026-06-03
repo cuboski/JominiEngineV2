@@ -24,8 +24,8 @@ namespace JominiAI
             //AutoEvaluation(1);
 
 
-            /*TextTestClient client = new TextTestClient();
-            client.LogInAndConnect("helen", "potato");
+            TextTestClient client = new TextTestClient();
+            client.LogInAndConnect("acc1", "pass1");
 
             while(!client.IsConnectedAndLoggedIn()) {
                 Thread.Sleep(0);
@@ -42,10 +42,10 @@ namespace JominiAI
                 Console.WriteLine($"Journal Length: {((ProtoGenericArray<ProtoJournalEntry>)journal).fields.Length}");
 
                 client.LogOut();
-            }*/
+            }
 
 
-            //RunAgent("helen", "potato", AgentTypes.RuleBased, false);
+            RunAgent("helen", "potato", AgentTypes.RuleBased, false);
             //RunAgent("helen", "potato", AgentTypes.Script);
 
             //Evaluation.Army_1();
