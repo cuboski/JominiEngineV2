@@ -106,3 +106,11 @@ C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\server\ProtoMessageClient\
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\server\ProtoMessageClient\obj\Debug\ProtoMes.03D9A993.Up2Date
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.dll
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\server\ProtoMessageClient\obj\Debug\ProtoMessageClient.pdb
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\srvbuild\ProtoMessage.cs
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\srvbuild\ProtoMessageClient.dll.config
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\srvbuild\ProtoMessageClient.dll
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\srvbuild\ProtoMessageClient.pdb
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\srvbuild2\ProtoMessage.cs
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\srvbuild2\ProtoMessageClient.dll.config
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\srvbuild2\ProtoMessageClient.dll
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\srvbuild2\ProtoMessageClient.pdb

@@ -156,7 +156,7 @@ namespace JominiAI
         /// <summary>
         /// Character's stature
         /// </summary>
-        //public double stature { get; set; }
+        public double stature { get; set; }
         /// <summary>
         /// Character's virility
         /// </summary>
@@ -268,7 +268,7 @@ namespace JominiAI
             //this.virility = c.virility;
             //this.maxHealth = c.maxHealth;
             this.health = c.health;
-            //this.stature = c.stature;
+            this.stature = c.stature;
             this.days = c.days;
             this.location = c.location;
             //this.statureModifier = c.statureModifier;

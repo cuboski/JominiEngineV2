@@ -1557,7 +1557,11 @@ namespace JominiEngine {
             this.eventDetails = j.entryDetails;
             this.viewed = j.viewed;
             this.replied = j.replied;
-            eventDetails.MessageFields = eventDetails.MessageFields.Where(e => e != null).ToArray();
+            // eventDetails or its MessageFields can be null (e.g. death/rebellion
+            // entries with no fields); .Where on a null source throws
+            // ArgumentNullException and kills the listen thread on a journal request.
+            if (eventDetails != null && eventDetails.MessageFields != null)
+                eventDetails.MessageFields = eventDetails.MessageFields.Where(e => e != null).ToArray();
             getCharacterOverviews(j);
             if (MessageFields == null) {
                 MessageFields = new string[] { "None" };

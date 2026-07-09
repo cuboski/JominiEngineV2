@@ -51,7 +51,12 @@ namespace JominiGame
         private List<PlayerCharacter> PromotedNPCs;
         private List<JournalEntry> ScheduledEvents;
 
-        public Game()
+        /// <param name="scenarioCsvPath">
+        /// Optional path to the CSV folder to load. When null the default
+        /// CSVs/ directory next to the executable is used.
+        /// Pass an absolute path or a path relative to the working directory.
+        /// </param>
+        public Game(string scenarioCsvPath = null)
         {
             // Init base game objects
             Clock = new GameClock((uint)GameSettings.START_YEAR);
@@ -61,16 +66,23 @@ namespace JominiGame
             ScheduledEvents = new();
 
             // Get directory of CSVs
-            string directory = Directory.GetCurrentDirectory();
             string path;
-            if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
+            if (scenarioCsvPath != null)
             {
-                path = Path.Combine(directory, "JominiEngine", "CSVs");
+                path = Path.IsPathRooted(scenarioCsvPath)
+                    ? scenarioCsvPath
+                    : Path.Combine(Directory.GetCurrentDirectory(), scenarioCsvPath);
             }
             else
             {
-                path = Path.Combine(directory, "CSVs");
+                string directory = Directory.GetCurrentDirectory();
+                if (Environment.OSVersion.Platform == PlatformID.Unix || Environment.OSVersion.Platform == PlatformID.MacOSX)
+                    path = Path.Combine(directory, "JominiEngine", "CSVs");
+                else
+                    path = Path.Combine(directory, "CSVs");
             }
+
+            Console.WriteLine($"[Game] Loading CSVs from: {path}");
 
             Armies = new();
 

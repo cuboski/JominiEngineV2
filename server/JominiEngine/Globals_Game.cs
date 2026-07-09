@@ -1073,7 +1073,11 @@ namespace JominiEngine
             bool proceed = true;
 
             // iterate through scheduled events
-            foreach (KeyValuePair<uint, JournalEntry> jEntry in Globals_Game.scheduledEvents.jentries)
+            // Iterate a snapshot: processing an event (birth/death/marriage) can
+            // schedule or remove other events, mutating scheduledEvents.jentries and
+            // invalidating a live enumerator ("Collection was modified"). Copying the
+            // entries first lets processing modify the real list safely.
+            foreach (KeyValuePair<uint, JournalEntry> jEntry in new List<KeyValuePair<uint, JournalEntry>>(Globals_Game.scheduledEvents.jentries))
             {
                 proceed = true;
 

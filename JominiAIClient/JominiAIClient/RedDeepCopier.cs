@@ -64,6 +64,7 @@ namespace JominiAI
 			deepCopy.location = redProtoCharacter.location;
 			deepCopy.management = redProtoCharacter.management;
 			deepCopy.combat = redProtoCharacter.combat;
+			deepCopy.stature = redProtoCharacter.stature;
 			deepCopy.isPregnant = redProtoCharacter.isPregnant;
 			deepCopy.titles = redProtoCharacter.titles != null ? (String[])redProtoCharacter.titles.Clone() : null;
 			deepCopy.armyID = redProtoCharacter.armyID;

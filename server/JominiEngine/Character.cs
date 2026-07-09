@@ -1785,23 +1785,37 @@ namespace JominiEngine
             // PLACES
 
             // fiefs
-            foreach (Fief fief in deceased.ownedFiefs)
+            // Only transfer if there is a king to receive the property. A character can
+            // die with no resolvable heir-king (king == null), which previously threw a
+            // NullReferenceException here. Iterate a copy so that when deceased == king
+            // (king inherits from himself) adding to king.ownedFiefs does not throw
+            // "Collection was modified", and skip fiefs the king already owns so the same
+            // fief is never added twice (duplicate entries inflate the king's treasury).
+            if (king != null && deceased.ownedFiefs != null)
             {
-                // ownership
-                fief.owner = king;
-                king.ownedFiefs.Add(fief);
+                if (king.ownedFiefs == null)
+                    king.ownedFiefs = new List<Fief>();
 
-                // ancestral ownership
-                if (fief.ancestralOwner == deceased)
+                foreach (Fief fief in new List<Fief>(deceased.ownedFiefs))
                 {
-                    fief.ancestralOwner = king;
-                }
-            }
+                    // ownership
+                    fief.owner = king;
+                    if (!king.ownedFiefs.Contains(fief))
+                        king.ownedFiefs.Add(fief);
 
-            // provinces
-            foreach (Province prov in deceased.ownedProvinces)
-            {
-                prov.owner = king;
+                    // ancestral ownership
+                    if (fief.ancestralOwner == deceased)
+                    {
+                        fief.ancestralOwner = king;
+                    }
+                }
+
+                // provinces
+                if (deceased.ownedProvinces != null)
+                    foreach (Province prov in deceased.ownedProvinces)
+                    {
+                        prov.owner = king;
+                    }
             }
 
 			// OWNERSHIPCHALLENGES
@@ -2942,6 +2956,11 @@ namespace JominiEngine
                 fields[2] = "daughter";
             }
             fields[3] = thisHeadOfFamily.firstName + " " + thisHeadOfFamily.familyName;
+            // fields[4] is never assigned below; leaving it null makes protobuf-net throw
+            // when this update is serialized ("element of type String was null" in a
+            // repeated field), which killed the server thread during SeasonUpdate and
+            // stopped the season from advancing. Give it an empty (non-null) value.
+            fields[4] = "";
             // mother and baby alive
             if ((!isStillborn) && (!mummyDied))
             {

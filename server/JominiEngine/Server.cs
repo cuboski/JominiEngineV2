@@ -389,6 +389,15 @@ namespace JominiEngine
 
             MemoryStream ms = new MemoryStream();
             Console.WriteLine($"\n\nSerilaize: {m.ActionType}. Msg: {m.Message}\n\n");
+            // protobuf-net throws on a null element inside a repeated field, which
+            // kills the listening thread mid-season (e.g. an unset MessageFields slot
+            // from a birth/death update). A null entry is never a valid payload, so
+            // scrub any to an empty string before serializing.
+            if (m.MessageFields != null)
+            {
+                for (int i = 0; i < m.MessageFields.Length; i++)
+                    if (m.MessageFields[i] == null) m.MessageFields[i] = "";
+            }
             Serializer.SerializeWithLengthPrefix(ms, m, PrefixStyle.Fixed32);
             msg.Write(ms.GetBuffer());
 

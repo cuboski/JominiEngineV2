@@ -3722,14 +3722,18 @@ namespace JominiEngine {
                         return ListCharsInMeetingPlace(msgIn.Message, msgIn.MessageFields[1], _client);
                     }
                 // Instruct a character to camp where they are for a number of days
+                // Note: MessageFields may start with "None" (ProtoBuf append-on-deserialize artifact
+                // from the ProtoMessage() constructor pre-fill). We iterate to find the first
+                // parseable byte value.
                 case Actions.Camp: {
-                        if (msgIn.MessageFields != null && msgIn.MessageFields.Length > 0) {
-                            try {
-                                return Camp(msgIn.Message, Convert.ToByte(msgIn.MessageFields[0]), _client);
-                            } catch (Exception e) {
-                                return new ProtoMessage(DisplayMessages.ErrorGenericMessageInvalid);
+                        if (msgIn.MessageFields != null) {
+                            foreach (string field in msgIn.MessageFields) {
+                                if (byte.TryParse(field, out byte campDays)) {
+                                    return Camp(msgIn.Message, campDays, _client);
+                                }
                             }
                         }
+                        Console.WriteLine($"[Camp] No valid days in MessageFields: [{string.Join(", ", msgIn.MessageFields ?? new string[0])}]");
                         return new ProtoMessage(DisplayMessages.ErrorGenericMessageInvalid);
                     }
                 // add or remove a character to the entourage

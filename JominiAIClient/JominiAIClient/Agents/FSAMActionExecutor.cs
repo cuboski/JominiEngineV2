@@ -76,6 +76,52 @@ namespace JominiAI
                     Require(action, arguments, 1);
                     return Msg(Actions.RemoveBailiff, arguments[0]);
 
+                // NPCmarryPC: arguments[0]=groomID, arguments[1]=brideID
+                // Note: Agent.ExecuteAction uses currentPCid as groom implicitly, so only brideID is in args there.
+                case MainActions.NPCmarryPC:
+                    Require(action, arguments, 2);
+                    return new ProtoMessage
+                    {
+                        ActionType = Actions.ProposeMarriage,
+                        Message = arguments[0],
+                        MessageFields = new[] { arguments[1] }
+                    };
+
+                // NPCmarryChild: arguments[0]=groomID (family NPC), arguments[1]=brideID
+                case MainActions.NPCmarryChild:
+                    Require(action, arguments, 2);
+                    return new ProtoMessage
+                    {
+                        ActionType = Actions.ProposeMarriage,
+                        Message = arguments[0],
+                        MessageFields = new[] { arguments[1] }
+                    };
+
+                // NPCacceptRejectProposal: arguments[0]="true"/"false"
+                case MainActions.NPCacceptRejectProposal:
+                    Require(action, arguments, 1);
+                    return new ProtoMessage
+                    {
+                        ActionType = Actions.AcceptRejectProposal,
+                        Message = arguments[0]
+                    };
+
+                // ArmyAppointLeader: arguments[0]=armyID, arguments[1]=leaderCharID
+                case MainActions.ArmyAppointLeader:
+                    Require(action, arguments, 2);
+                    return new ProtoMessage
+                    {
+                        ActionType = Actions.AppointLeader,
+                        Message = arguments[0],
+                        MessageFields = new[] { arguments[1] }
+                    };
+
+                // NPCaddToEntourage / NPCremoveFromEntourage: arguments[0]=charID
+                case MainActions.NPCaddToEntourage:
+                case MainActions.NPCremoveFromEntourage:
+                    Require(action, arguments, 1);
+                    return Msg(Actions.AddRemoveEntourage, arguments[0]);
+
                 case MainActions.NPCfire:
                     Require(action, arguments, 1);
                     return Msg(Actions.FireNPC, arguments[0]);

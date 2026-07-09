@@ -1,36 +1,40 @@
 ﻿using ProtoMessageClient;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 
 namespace JominiAI
 {
-    /// <summary>
-    /// Entry point and action loop.
-    ///
-    /// Usage:
-    ///   dotnet run                                   FSM agent (default)
-    ///   dotnet run -- --agent qlearn                 Q-learning, training mode
-    ///   dotnet run -- --agent qlearn --exploit       Q-learning, no exploration
-    ///   dotnet run -- --agent qlearn --load q.json   Q-learning, load saved table
-    ///   dotnet run -- --simulate                     FSM dry-run (no server writes)
-    /// </summary>
+    // Entry point and action loop. Flags:
+    //   dotnet run                                 -> FSM agent (default)
+    //   dotnet run -- --agent qlearn               -> Q-learning, training mode
+    //   dotnet run -- --agent qlearn --exploit     -> Q-learning, no exploration
+    //   dotnet run -- --agent qlearn --load q.json -> Q-learning, load saved table
+    //   dotnet run -- --seasons 20                 -> run 20 seasons (default 5)
+    //   dotnet run -- --simulate                   -> FSM dry-run (no server writes)
     class Program
     {
-        // StepByStep = true  → pause after every action (debugging / step-through)
-        // StepByStep = false → autonomous, visible in Unity client
+        // StepByStep = true  pauses after every action (debugging / step-through)
+        // StepByStep = false runs autonomously, visible in Unity client
         private const bool StepByStep = false;
         private const int MaxActions = 50;
+        private const int DefaultMaxSeasons = 5;
         private const int PauseMs = 1500; // 1.5 s between actions
         private const string DefaultQSavePath = "qtable.json";
 
         static void Main(string[] args)
         {
             bool simulateMode = args.Contains("--simulate");
+            bool evaluateMode = args.Contains("--evaluate");  // offline dry-run scenario suite
             bool useQLearning = ArgValue(args, "--agent")?.ToLower() == "qlearn";
             bool exploitMode = args.Contains("--exploit");
             string loadPath = ArgValue(args, "--load");
             string savePath = ArgValue(args, "--save") ?? DefaultQSavePath;
+            string evalLogPath = ArgValue(args, "--eval-log");
+            string scenarioLabel = ArgValue(args, "--scenario") ?? "Base";
+            int maxSeasons = int.TryParse(ArgValue(args, "--seasons"), out int s) && s > 0
+                ? s : DefaultMaxSeasons;
 
             Banner(useQLearning ? "JominiAI - Q-Learning Agent" : "JominiAI - FSM Agent");
 
@@ -60,6 +64,12 @@ namespace JominiAI
 
             AgentState initial = agent.BuildState(gs);
             PrintState("INITIAL STATE", initial, agent);
+
+            // Evaluation runner, active when --eval-log is passed
+            EvaluationRunner evalRunner = evalLogPath != null
+                ? new EvaluationRunner(useQLearning ? "QLearn" : "FSM", scenarioLabel)
+                : null;
+
             Pause(StepByStep && !simulateMode);
 
             if (simulateMode)
@@ -69,88 +79,217 @@ namespace JominiAI
                 return;
             }
 
-            Section($"Running up to {MaxActions} action passes  [{AgentLabel(agent)}]");
-
-            MainActions lastAction = MainActions.None;
-            string[] lastArgs = Array.Empty<string>();
-            int sameCnt = 0;
-            bool seasonEnded = false;
-
-            for (int i = 1; i <= MaxActions; i++)
+            if (evaluateMode)
             {
-                if (gs.myPC == null || gs.myPC.days <= 0 || !gs.myPC.isAlive)
+                // Offline action-correctness check. Works for both agents; the log
+                // path (if given) receives the per-scenario decisions for validation.
+                ScenarioHarness.RunDryRunScenarios(agent, evalLogPath);
+                return;
+            }
+
+            AgentState finalState = null;
+
+            for (int season = 1; season <= maxSeasons; season++)
+            {
+                Section($"Season {season}/{maxSeasons}: running up to {MaxActions} action passes  [{AgentLabel(agent)}]");
+
+                MainActions lastAction = MainActions.None;
+                string[] lastArgs = Array.Empty<string>();
+                int sameCnt = 0;
+
+                // Total times each (action, args) signature has run this season. Catches
+                // two zero-cost actions oscillating (A,B,A,B), which the adjacent-repeat
+                // check below never trips. NPCcamp is exempt (legitimate time-passing).
+                var seasonSignatureCounts = new System.Collections.Generic.Dictionary<string, int>();
+                const int MaxSameSignaturePerSeason = 5;
+
+                for (int i = 1; i <= MaxActions; i++)
+                {
+                    // < 1: a PC with less than a full day cannot take any day-costed action.
+                    // Remaining 0-cost actions loop forever (e.g. the entourage toggle), so treat
+                    // a sub-1-day PC as end-of-season instead of churning until MaxActions.
+                    if (gs.myPC == null || gs.myPC.days < 1 || !gs.myPC.isAlive)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"\n  [INFO] Turn cycle complete. Days: {gs.myPC?.days ?? 0:0.#}, Year: {gs.currentYear}");
+                        Console.ResetColor();
+                        break;
+                    }
+
+                    AgentState state = agent.BuildState(gs);
+                    PrintFacts(state, AgentLabel(agent));
+
+                    double daysBefore = gs.myPC.days;
+                    double treasuryBefore = gs.getHomeFief()?.treasury ?? 0;
+                    double totalTreasuryBefore = gs.myFiefs?.Sum(f => (double)f.treasury) ?? 0;
+
+                    GameState gsAfter;
+                    MainActions executed;
+                    string[] executedArgs;
+                    bool success, endOfSeason;
+
+                    try
+                    {
+                        gsAfter = agent.playOneAction(
+                            gs, out executed, out executedArgs, out success, out endOfSeason);
+                    }
+                    catch (Exception ex) { Error("Execution error", ex); break; }
+
+                    string ok = success ? "ok" : "fail";
+                    string eos = endOfSeason ? "  [end of season]" : "";
+                    string aStr = executedArgs?.Length > 0 ? $"({string.Join(", ", executedArgs)})" : "";
+
+                    Console.WriteLine($"  [{i:D2}] {ok} {AgentLabel(agent),-18} {executed}{aStr}{eos}");
+
+                    // Build the validation row now (before-values known). After-values are
+                    // filled once the state refreshes below; on end-of-season there is no
+                    // refresh, so after == before.
+                    ActionRecord rec = evalRunner != null ? new ActionRecord
+                    {
+                        Season = season,
+                        Index = i,
+                        AgentState = AgentLabel(agent),
+                        Action = executed.ToString(),
+                        Args = string.Join(",", executedArgs ?? Array.Empty<string>()),
+                        Success = success,
+                        DaysBefore = daysBefore,
+                        DaysAfter = daysBefore,
+                        HomeTreasuryBefore = (int)treasuryBefore,
+                        HomeTreasuryAfter = (int)treasuryBefore,
+                        TotalTreasuryBefore = totalTreasuryBefore,
+                        TotalTreasuryAfter = totalTreasuryBefore,
+                        ThreatLevel = (int)state.Military.Threat,
+                    } : null;
+
+                    if (executed != MainActions.NPCcamp && executed != MainActions.None)
+                    {
+                        string sig = executed + ":" + string.Join(",", executedArgs ?? Array.Empty<string>());
+                        seasonSignatureCounts.TryGetValue(sig, out int cnt);
+                        seasonSignatureCounts[sig] = ++cnt;
+                        if (cnt >= MaxSameSignaturePerSeason)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine($"  [ANTI-STALL] '{executed}' ran {cnt}x this season with the same args; ending season.");
+                            Console.ResetColor();
+                            if (rec != null) evalRunner.RecordAction(rec);
+                            break;
+                        }
+                    }
+
+                    // Anti-stall: identical action+args 4× in a row.
+                    // NPCcamp is exempt: repeated camping is legitimate time-passing and is
+                    // bounded by days reaching 0 (the loop guard above), not by a repeat count.
+                    if (executed != MainActions.NPCcamp && executed == lastAction && ArgsEqual(executedArgs, lastArgs))
+                    {
+                        if (++sameCnt >= 4)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine($"  [ANTI-STALL] '{executed}' repeated 4× with identical args.");
+                            Console.ResetColor();
+                            if (rec != null) evalRunner.RecordAction(rec);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        sameCnt = 0;
+                        lastAction = executed;
+                        lastArgs = executedArgs ?? Array.Empty<string>();
+                    }
+
+                    if (endOfSeason) { if (rec != null) evalRunner.RecordAction(rec); break; }
+
+                    Thread.Sleep(PauseMs);
+
+                    try { gsAfter = agent.ObtainCurrentGSandUpdateAgentLists(gsAfter); }
+                    catch (Exception ex) { if (rec != null) evalRunner.RecordAction(rec); Error("State refresh failed", ex); break; }
+
+                    PrintDelta(daysBefore, treasuryBefore, totalTreasuryBefore, gsAfter);
+
+                    // Money sanity check: time did not advance and this was not a transfer,
+                    // yet total treasury jumped a lot. Transfers move gold between fiefs (net
+                    // zero), so a large positive net jump here would mean gold was created.
+                    double daysUsedNow = daysBefore - (gsAfter.myPC?.days ?? daysBefore);
+                    double totalAfterNow = gsAfter.myFiefs?.Sum(f => (double)f.treasury) ?? totalTreasuryBefore;
+                    double netNow = totalAfterNow - totalTreasuryBefore;
+                    if (daysUsedNow == 0 && executed != MainActions.FiefTransferFunds && netNow > 50_000)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"  [CHECK] Total treasury rose {netNow:+0} on a zero-day '{executed}'. Verify no gold was created.");
+                        Console.ResetColor();
+                    }
+
+                    if (rec != null)
+                    {
+                        rec.DaysAfter          = gsAfter.myPC?.days ?? daysBefore;
+                        rec.HomeTreasuryAfter  = (int)(gsAfter.getHomeFief()?.treasury ?? treasuryBefore);
+                        rec.TotalTreasuryAfter = totalAfterNow;
+                        evalRunner.RecordAction(rec);
+                    }
+
+                    gs = gsAfter;
+                    Pause(StepByStep);
+                }
+
+                finalState = agent.BuildState(gs);
+
+                if (agent is QLearningAgent qSeason)
+                    qSeason.OnSeasonEnd(finalState);
+
+                evalRunner?.RecordSeasonEnd(finalState);
+                PrintState($"END OF SEASON {season}", finalState, agent);
+
+                if (season == maxSeasons) break;
+
+                // Reset per-season tracking, then ask the server to advance the season.
+                // The server does not auto-advance (UseAutoUpdate=false), so without this
+                // call fief income/expenses never apply and days never refresh.
+                agent.ResetSeasonState();
+
+                if (!agent.AdvanceSeason())
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"\n  [INFO] Turn cycle complete. Days: {gs.myPC?.days ?? 0}, Year: {gs.currentYear}");
+                    Console.WriteLine("  Server did not acknowledge SeasonUpdate, stopping.");
                     Console.ResetColor();
-                    seasonEnded = true;
                     break;
                 }
 
-                AgentState state = agent.BuildState(gs);
-                PrintFacts(state, AgentLabel(agent));
+                try { gs = agent.ObtainCurrentGSandUpdateAgentLists(gs); }
+                catch (Exception ex) { Error("State refresh failed after season end", ex); break; }
 
-                double daysBefore = gs.myPC.days;
-                double treasuryBefore = gs.getHomeFief()?.treasury ?? 0;
-
-                GameState gsAfter;
-                MainActions executed;
-                string[] executedArgs;
-                bool success, endOfSeason;
-
-                try
+                if (gs.myPC == null || gs.myPC.days < 1)
                 {
-                    gsAfter = agent.playOneAction(
-                        gs, out executed, out executedArgs, out success, out endOfSeason);
-                }
-                catch (Exception ex) { Error("Execution error", ex); break; }
-
-                string ok = success ? "ok" : "fail";
-                string eos = endOfSeason ? "  [end of season]" : "";
-                string aStr = executedArgs?.Length > 0 ? $"({string.Join(", ", executedArgs)})" : "";
-
-                Console.WriteLine($"  [{i:D2}] {ok} {AgentLabel(agent),-18} {executed}{aStr}{eos}");
-
-                // Anti-stall: identical action+args 4× in a row
-                if (executed == lastAction && ArgsEqual(executedArgs, lastArgs))
-                {
-                    if (++sameCnt >= 4)
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine($"  [ANTI-STALL] '{executed}' repeated 4× with identical args.");
-                        Console.ResetColor();
-                        seasonEnded = true;
-                        break;
-                    }
-                }
-                else
-                {
-                    sameCnt = 0;
-                    lastAction = executed;
-                    lastArgs = executedArgs ?? Array.Empty<string>();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("  Days did not refresh after SeasonUpdate, no further seasons.");
+                    Console.ResetColor();
+                    break;
                 }
 
-                if (endOfSeason) { seasonEnded = true; break; }
-
-                Thread.Sleep(PauseMs);
-
-                try { gsAfter = agent.ObtainCurrentGSandUpdateAgentLists(gsAfter); }
-                catch (Exception ex) { Error("State refresh failed", ex); break; }
-
-                PrintDelta(daysBefore, treasuryBefore, gsAfter);
-
-                gs = gsAfter;
-                Pause(StepByStep);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n  [INFO] Season {season + 1} starting. Days: {gs.myPC.days:0.#}, Year: {gs.currentYear}");
+                Console.ResetColor();
+                PrintState($"START OF SEASON {season + 1}", agent.BuildState(gs), agent);
             }
 
             if (agent is QLearningAgent qEnd)
             {
-                qEnd.OnSeasonEnd(agent.BuildState(gs));
                 qEnd.Save(savePath);
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"  [Q] Training summary: episodes={qEnd.EpisodeCount} | steps={qEnd.TotalSteps} | states={qEnd.TableSize} | ε={qEnd.Epsilon:F3}");
+                Console.ResetColor();
+            }
+
+            if (evalRunner != null)
+            {
+                evalRunner.PrintSummary();
+                string logDir = Path.GetDirectoryName(evalLogPath);
+                if (!string.IsNullOrEmpty(logDir)) Directory.CreateDirectory(logDir);
+                evalRunner.SaveResults(evalLogPath);
             }
 
             Console.WriteLine();
-            PrintState("FINAL STATE", agent.BuildState(gs), agent);
+            PrintState("FINAL STATE", finalState ?? agent.BuildState(gs), agent);
             Console.WriteLine();
         }
 
@@ -174,11 +313,11 @@ namespace JominiAI
                 ("6.  Under Threat, enemy present + I have army",
                  Scenario(treasury: 15_000, threat: ThreatLevel.EnemyPresent,
                           hasArmy: true, armyTroops: 100, armyID: "A1")),
-                ("7.  At War, active siege (keep level 4 → reduction)",
+                ("7.  At War, active siege (keep level 4, reduction)",
                  Scenario(treasury: 20_000, threat: ThreatLevel.ActiveCombat,
                           hasArmy: true, armyTroops: 200, armyID: "A1",
                           activeSiegeID: "Siege_1", keepLevel: 4f)),
-                ("8.  At War, enemy army here → attack",
+                ("8.  At War, enemy army here, attack",
                  Scenario(treasury: 20_000, threat: ThreatLevel.ActiveCombat,
                           hasArmy: true, armyTroops: 150, armyID: "A1",
                           enemyArmyID: "EnemyArmy_1")),
@@ -302,9 +441,13 @@ namespace JominiAI
                 ? $" | surplus: {econ.SurplusFiefID} ({econ.SurplusTransferAmount}g)" : "";
             string heir = dip.HasUnappointedHeir ? " | HEIR NEEDED" : "";
             string cover = $"{econ.FiefsWithBailiff}/{econ.FiefCount} bailiffs";
+            string bailiffCand = econ.HomeNeedsBailiff && econ.HomeBailiffCandidate != null
+                ? $" | bailiff cand: {econ.HomeBailiffCandidate} (fit {econ.HomeBailiffCandidateFit:F1})" : "";
+            string leaderCand = mil.ArmyNeedsLeader && mil.ArmyLeaderCandidateID != null
+                ? $" | leader cand: {mil.ArmyLeaderCandidateID} (combat {mil.ArmyLeaderCandidateFit:F1})" : "";
 
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"\n  [{label}] Treasury: {econ.HomeTreasury} ({econStr}) | Army: {army} | Bailiff: {bailiff} ({cover}) | Threat: {threat}{keep}{surplus}{heir}");
+            Console.WriteLine($"\n  [{label}] Treasury: {econ.HomeTreasury} ({econStr}) | Army: {army} | Bailiff: {bailiff} ({cover}) | Threat: {threat}{keep}{surplus}{heir}{bailiffCand}{leaderCand}");
             Console.ResetColor();
         }
 
@@ -318,20 +461,27 @@ namespace JominiAI
             Console.WriteLine($"  Obs vec   : [{string.Join(", ", s.Metrics.ToObservationVector().Select(v => $"{v:F2}"))}]");
         }
 
-        private static void PrintDelta(double daysBefore, double treasuryBefore, GameState gsAfter)
+        private static void PrintDelta(double daysBefore, double treasuryBefore, double totalTreasuryBefore, GameState gsAfter)
         {
             if (gsAfter.myPC == null) return;
             double daysUsed = daysBefore - gsAfter.myPC.days;
-            double treasuryAfter = gsAfter.getHomeFief()?.treasury ?? 0;
+            // Use treasuryBefore as fallback so a null home-fief never generates a false delta
+            double treasuryAfter = gsAfter.getHomeFief()?.treasury ?? treasuryBefore;
             double treasuryDelta = treasuryAfter - treasuryBefore;
+            double totalAfter = gsAfter.myFiefs?.Sum(f => (double)f.treasury) ?? totalTreasuryBefore;
+            double totalDelta = totalAfter - totalTreasuryBefore;
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write(daysUsed != 0
                 ? $"  Days used: {daysUsed:0.#} (now {gsAfter.myPC.days:0.#})"
                 : $"  Days: unchanged ({gsAfter.myPC.days:0.#})");
             Console.Write(treasuryDelta != 0
-                ? $"  | Treasury delta: {treasuryDelta:+0;-0;0} (now {treasuryAfter:0})"
-                : $"  | Treasury: unchanged ({treasuryAfter:0})");
+                ? $"  | Home: {treasuryDelta:+0;-0;0} (now {treasuryAfter:0})"
+                : $"  | Home: unchanged ({treasuryAfter:0})");
+            // Always show total so per-fief changes (not home-fief) are visible
+            Console.Write(totalDelta != 0
+                ? $"  | Total: {totalDelta:+0;-0;0} (now {totalAfter:0})"
+                : $"  | Total: unchanged ({totalAfter:0})");
             Console.WriteLine($"  | Year: {gsAfter.currentYear}");
             Console.ResetColor();
         }

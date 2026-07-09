@@ -80,12 +80,12 @@ namespace JominiAI
 		///     Handlers and display code use this instead of working with the raw struct directly.
 		/// </summary>
 		public AgentState BuildState(GameState gs)
-			=> AgentState.Build(gs, expenditureAdjustedThisSeasonFiefIDs, estimateNPCacceptableSalary);
+			=> AgentState.Build(gs, expenditureAdjustedThisSeasonFiefIDs, entouragedThisSeasonIDs, estimateNPCacceptableSalary);
 
 		protected List<String> nationalities = new List<String>() { "Oth", "Eng", "Fr", "Sco" };
 
 		protected HashSet<MainActions> FailedActions = new HashSet<MainActions>(); // When failing to execute an action, it is added to this set. Is reinitialized when the agent succesfuly execute an action.
-		private string _lastTravelCostQueryLocation = null; // Cached location — travel costs are only re-queried when the PC moves to a new fief.
+		private string _lastTravelCostQueryLocation = null; // Cached location; travel costs are only re-queried when the PC moves to a new fief.
 		protected HashSet<string> fiefSpiedThisSeasonIDs = new HashSet<string>();
 		protected HashSet<string> charSpiedThisSeasonIDs = new HashSet<string>();
 		protected HashSet<string> armySpiedThisSeasonIDs = new HashSet<string>();
@@ -95,6 +95,7 @@ namespace JominiAI
 		protected string lastOfferToNPCid = null;
 		protected uint lastOfferToNPCamount = 0;
 		protected HashSet<string> expenditureAdjustedThisSeasonFiefIDs = new HashSet<string>();
+		protected HashSet<string> entouragedThisSeasonIDs = new HashSet<string>(); // NPCs already added to the entourage this season; the inEntourage refresh is unreliable, so track locally to avoid re-adding the same NPC every pass.
 
 		protected HashSet<string> charToBarIDs = new HashSet<string>();
 		protected HashSet<string> charToUnbarIDs = new HashSet<string>();
@@ -280,7 +281,7 @@ namespace JominiAI
 				if (ExecuteAction(nextAction, arguments, gameState, out gameState))
 				{
 					executionSuccess = true;
-					// Camping only burns time — it doesn't fix the underlying condition that caused
+					// Camping only burns time, it doesn't fix the underlying condition that caused
 					// other actions to fail, so don't clear the failure memory on a camp-only success.
 					if (nextAction != MainActions.NPCcamp)
 						FailedActions = new HashSet<MainActions>();
@@ -514,6 +515,37 @@ namespace JominiAI
 		}
 
 		/// <summary>
+		///     Resets all per-season tracking state. Call between seasons so the
+		///     agent does not skip actions it already tried in the previous season.
+		/// </summary>
+		public virtual void ResetSeasonState()
+		{
+			FailedActions.Clear();
+			expenditureAdjustedThisSeasonFiefIDs.Clear();
+			entouragedThisSeasonIDs.Clear();
+			fiefSpiedThisSeasonIDs.Clear();
+			charSpiedThisSeasonIDs.Clear();
+			armySpiedThisSeasonIDs.Clear();
+			fiefVisitedThisSeasonIDs.Clear();
+			nbConsecutiveNPCmoveDirections = 0;
+			lastOfferToNPCid = null;
+			lastOfferToNPCamount = 0;
+			estimationNbDaysUsed = 0;
+		}
+
+		/// <summary>
+		///     Advance the server-side season: applies every fief's income/expenses and
+		///     refreshes each character's day allowance. The server does NOT auto-advance
+		///     seasons (UseAutoUpdate=false), so the client must request this explicitly
+		///     once the PC has spent its days. Returns true if the server acknowledged it.
+		/// </summary>
+		public bool AdvanceSeason()
+		{
+			ProtoMessage reply = SeasonUpdate();
+			return reply != null && reply.ResponseType == DisplayMessages.Success;
+		}
+
+		/// <summary>
 		///     Fill a GameState with all the relevant information currently available by requesting them to the server.
 		/// </summary>
 		/// <returns>The GameState that corresponds to the current situation</returns>
@@ -595,7 +627,7 @@ namespace JominiAI
 
 			currentGS.notMyNPCs = new List<RedProtoNPC>();
 			currentGS.notMyPCs = new List<RedProtoPlayerCharacter>();
-			// Skip ViewCharacter for every person in the fief — in a capital this can be 30-50 round-trips the FSM never uses.
+			// Skip ViewCharacter for every person in the fief; in a capital this can be 30-50 round-trips the FSM never uses.
 			// Own PC and own NPCs were already fetched above.
 			foreach (string characterInFiefId in currentFief.characterInFiefIDs)
 			{
@@ -875,7 +907,7 @@ namespace JominiAI
 						possibleActions.Add(MainActions.NPCacceptRejectProposal);
 					foreach (RedProtoNPC notMyNPC in gameState.notMyNPCs)
 						if (!notMyNPC.isMale && string.IsNullOrWhiteSpace(notMyNPC.spouse) && string.IsNullOrWhiteSpace(notMyNPC.fiancee) && string.IsNullOrWhiteSpace(notMyNPC.captor)
-							&& !string.IsNullOrWhiteSpace(notMyNPC.familyID) && !notMyNPC.familyID.Equals(currentPC.familyID) // stub NPCs have null familyID — skip them
+							&& !string.IsNullOrWhiteSpace(notMyNPC.familyID) && !notMyNPC.familyID.Equals(currentPC.familyID) // stub NPCs have null familyID, skip them
 							&& gameState.currentYear - notMyNPC.birthYear >= 14 && notMyNPC.birthYear > 0) // Check age and that the NPC is fully populated
 						{
 							if (!gameState.myCharsWhoProposedThisSeason.TryGetValue(currentPCid, out bool hasCurrentPCproposed))
@@ -1151,13 +1183,17 @@ namespace JominiAI
 					executionSuccess = campReply.ResponseType == DisplayMessages.CharacterCamp
 					                || campReply.ResponseType == DisplayMessages.Success;
 					if (!executionSuccess)
-						Console.WriteLine($"  [Camp] Server rejected camp — ResponseType={campReply.ResponseType} | Msg='{campReply.Message}'");
+						Console.WriteLine($"  [Camp] Server rejected camp. ResponseType={campReply.ResponseType} | Msg='{campReply.Message}'");
 					break;
 				case MainActions.NPCaddToEntourage:
 					executionSuccess = AddRemoveEntourage(arguments[0]).ResponseType == DisplayMessages.Success;
+					if (executionSuccess)
+						entouragedThisSeasonIDs.Add(arguments[0]); // don't re-add this NPC for the rest of the season
 					break;
 				case MainActions.NPCremoveFromEntourage:
 					executionSuccess = AddRemoveEntourage(arguments[0]).ResponseType == DisplayMessages.Success;
+					if (executionSuccess)
+						entouragedThisSeasonIDs.Remove(arguments[0]);
 					break;
 				case MainActions.NPCappointHeir:
 					executionSuccess = AppointHeir(arguments[0]).ResponseType == DisplayMessages.Success;
@@ -1172,9 +1208,10 @@ namespace JominiAI
 					executionSuccess = GrantFiefTitle(arguments[0], arguments[1]).ResponseType == DisplayMessages.Success;
 					break;
 				case MainActions.FiefAutoAdjustExpenditure:
-					executionSuccess = AutoAdjustExpenditure(arguments[0]).ResponseType == DisplayMessages.FiefExpenditureAdjusted;
-					if (executionSuccess)
-						expenditureAdjustedThisSeasonFiefIDs.Add(arguments[0]);
+					var adjResp = AutoAdjustExpenditure(arguments[0]).ResponseType;
+					executionSuccess = adjResp == DisplayMessages.FiefExpenditureAdjusted
+					                || adjResp == DisplayMessages.Success;
+					expenditureAdjustedThisSeasonFiefIDs.Add(arguments[0]); // always track to prevent retrying same fief this season
 					break;
 				case MainActions.FiefTransferFunds:
 					executionSuccess = TransferFunds(arguments[0], arguments[1], int.Parse(arguments[2])).ResponseType == DisplayMessages.Success;

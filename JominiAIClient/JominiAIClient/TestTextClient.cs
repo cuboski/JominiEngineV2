@@ -376,14 +376,14 @@ namespace JominiAI
             {
                 if (login == null || login.certificate == null)
                 {
-                    // No certificate — server is running in ALLOW_UNENCRYPT mode.
+                    // No certificate, server is running in ALLOW_UNENCRYPT mode.
                     // Proceed without encryption; ComputeAndSendHashAndKey will send Key=null,
                     // which the server accepts when compiled with ALLOW_UNENCRYPT (JominiEngine.csproj
                     // DefineConstants confirms this flag is set).
-                    Console.WriteLine("[Network] No server certificate — proceeding unencrypted (ALLOW_UNENCRYPT).");
+                    Console.WriteLine("[Network] No server certificate, proceeding unencrypted (ALLOW_UNENCRYPT).");
                     alg = null;
                     key = null;
-                    return true;   // ← was false; returning false caused client.Disconnect("Invalid Certificate")
+                    return true;   // was false; returning false caused client.Disconnect("Invalid Certificate")
                 }
                 else
                 {

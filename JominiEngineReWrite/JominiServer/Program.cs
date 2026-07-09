@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Linq;
@@ -16,6 +17,18 @@ namespace JominiServer
 
         public static void Main(string[] args)
         {
+            // Parse --scenario <name> to select a CSV folder under Scenarios/
+            string scenarioName = null;
+            for (int i = 0; i < args.Length - 1; i++)
+                if (args[i] == "--scenario") { scenarioName = args[i + 1]; break; }
+
+            string csvPath = scenarioName != null
+                ? Path.Combine(Directory.GetCurrentDirectory(), "Scenarios", scenarioName)
+                : null;   // null → Game uses default CSVs/ folder
+
+            if (scenarioName != null)
+                Console.WriteLine($"[Server] Scenario: {scenarioName}  →  {csvPath}");
+
             if (args.Length > 0 && args[0] == "--ai")
             {
                 string mode = args.Length > 1 ? args[1] : "FSM";
@@ -40,7 +53,7 @@ namespace JominiServer
             }
 
             Console.WriteLine("Jomini Engine Started2");
-            game = new JominiGame.Game();
+            game = new JominiGame.Game(csvPath);
             Server server = new(game);
             Console.WriteLine("Jomini Engine Ended");
             //_Server = new Server();

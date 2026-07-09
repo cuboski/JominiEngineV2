@@ -29,3 +29,8 @@ C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAICli
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\obj\Debug\net8.0\JominiAIClient.pdb
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\obj\Debug\net8.0\JominiAIClient.genruntimeconfig.cache
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\obj\Debug\net8.0\ref\JominiAIClient.dll
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\qbuild\JominiAIClient.exe
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\qbuild\JominiAIClient.deps.json
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\qbuild\JominiAIClient.runtimeconfig.json
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\qbuild\JominiAIClient.dll
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\qbuild\JominiAIClient.pdb
