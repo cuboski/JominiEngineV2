@@ -17,11 +17,20 @@ namespace JominiAI
     {
         public const int RecruitAmount = 50;
         public const int ConsolidateRecruit = 25; // reduced recruit while consolidating
+        // Household size cap. Employees are the pool bailiff posts are filled from, so a
+        // cap of 3 starved bailiff coverage once the realm grew past a handful of fiefs.
+        public const int MaxEmployees = 12;
+        // Minimum troops before the aggressive FSM marches on a neighbour.
+        public const int WarPartyMinTroops = 50;
     }
 
     public class FSMAgent : Agent
     {
         public FSMState CurrentState { get; private set; } = FSMState.Stable;
+
+        // When set (via --aggressive) the agent raises an army and marches on a neighbour
+        // in peacetime, so the war/siege path can actually be exercised in a solo run.
+        public bool Aggressive { get; set; } = false;
 
         private int _consolidatingSeasonsLeft = 0;
         private const int ConsolidatingSeasons = 2;
@@ -150,18 +159,77 @@ namespace JominiAI
             if (dip.HasUnappointedHeir && !Failed(MainActions.NPCappointHeir))
             { args = new[] { dip.HeirCandidateID }; return MainActions.NPCappointHeir; }
 
-            // No heir and no one eligible to appoint: father a child so a future heir can
-            // exist (the engine promotes a son of any age at death). Guarded on having no
-            // heir at all so it doesn't spam once the succession is secured.
-            if (!s.Character.HasHeir && !dip.HasUnappointedHeir
+            // Keep fathering children until the line has an heir AND a spare. A single heir is
+            // brittle: a son who dies in childhood (as one did around season 62 of a long run,
+            // leaving the lord suddenly heirless despite being alive and married) ends the
+            // succession outright. Two living sons means one death is survivable. This can't
+            // spam - a successful attempt leaves the wife pregnant, which blocks CanTryForChild
+            // for the ~3 seasons of gestation - so it fires at most once every few seasons and
+            // costs a single day, cheap insurance for the run's top priority.
+            if (dip.LivingSonCount < 2
                 && dip.CanTryForChild && !Failed(MainActions.NPCtryForChild))
             { args = Array.Empty<string>(); return MainActions.NPCtryForChild; }
 
+            // Secure the line before anything else optional: a widowed lord remarries so he
+            // can father an heir, and marriageable children are wedded. This has to sit
+            // above the war block, otherwise an aggressive lord marches every season and
+            // never remarries, which is why the war runs ended heirless.
             if (dip.HasMarriageOpportunity && !Failed(MainActions.NPCmarryPC))
             { args = new[] { dip.MarriageCandidateID }; return MainActions.NPCmarryPC; }
 
             if (dip.HasChildMarriageOpportunity && !Failed(MainActions.NPCmarryChild))
             { args = new[] { dip.ChildForMarriageID, dip.ChildMarriageCandidateID }; return MainActions.NPCmarryChild; }
+
+            // Aggressive mode: raise a war party, march on a neighbour and lay siege. Once
+            // the siege starts the FSM flips to AtWar and the siege rounds take over. Behind
+            // a flag so ordinary economic runs are unchanged; dynasty security still wins above.
+            if (Aggressive)
+            {
+                if (!mil.HasArmy)
+                {
+                    if (mil.CanBuildArmy && !Failed(MainActions.ArmyRecruit))
+                    { args = new[] { "", Thresholds.RecruitAmount.ToString() }; return MainActions.ArmyRecruit; }
+                }
+                else
+                {
+                    // Standing on a besiegeable fief with the army: lay siege.
+                    if (mil.CanBesiegeCurrent && !Failed(MainActions.SiegeBesiegeCurrentFief))
+                    { args = new[] { mil.MainArmyID }; return MainActions.SiegeBesiegeCurrentFief; }
+
+                    if (mil.ArmyNeedsMaint && !Failed(MainActions.ArmyMaintain))
+                    { args = new[] { mil.MainArmyID }; return MainActions.ArmyMaintain; }
+
+                    // Not a big enough war party yet: keep recruiting.
+                    if (mil.MainArmyTroops < Thresholds.WarPartyMinTroops && mil.ArmyCanRecruit
+                        && !Failed(MainActions.ArmyRecruit))
+                    { args = new[] { mil.MainArmyID, Thresholds.RecruitAmount.ToString() }; return MainActions.ArmyRecruit; }
+
+                    // Big enough: make the PC lead (so the army marches with him), then march.
+                    if (mil.MainArmyTroops >= Thresholds.WarPartyMinTroops)
+                    {
+                        var leadPC = new[] { mil.MainArmyID, s.Character.CharID };
+                        if (!mil.PCLeadsMainArmy && !Blocked(MainActions.ArmyAppointLeader, leadPC))
+                        { args = leadPC; return MainActions.ArmyAppointLeader; }
+
+                        if (mil.PCLeadsMainArmy)
+                        {
+                            // Must be outside the keep to march the army out of the fief.
+                            if (s.Character.InKeep && !Failed(MainActions.NPCexitKeep))
+                            { args = new[] { s.Character.CharID }; return MainActions.NPCexitKeep; }
+
+                            // A known enemy fief in reach: march straight to it.
+                            if (mil.WarTargetFiefID != null && s.Character.CurrentFiefID != mil.WarTargetFiefID
+                                && !Failed(MainActions.NPCmoveToFief))
+                            { args = new[] { mil.WarTargetFiefID }; return MainActions.NPCmoveToFief; }
+
+                            // No enemy fief known yet: march one hex outward to find a border to
+                            // besiege. Arrival on any non-owned fief trips CanBesiegeCurrent above.
+                            if (mil.WarTargetFiefID == null && mil.MarchDirection != null)
+                            { args = new[] { mil.MarchDirection }; return MainActions.NPCmoveDirection; }
+                        }
+                    }
+                }
+            }
 
             // Bailiffs: home fief first, then any other fief that needs one.
             if (econ.HomeNeedsBailiff && econ.HomeBailiffCandidate != null && !Failed(MainActions.NPCappointBaillif))
@@ -173,10 +241,11 @@ namespace JominiAI
             if (dip.HasEntourageCandidate && !Failed(MainActions.NPCaddToEntourage))
             { args = new[] { dip.EntourageCandidateID }; return MainActions.NPCaddToEntourage; }
 
-            if (mil.ArmyNeedsLeader && !Failed(MainActions.ArmyAppointLeader))
-            { args = new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID }; return MainActions.ArmyAppointLeader; }
+            var leadCand = new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID };
+            if (mil.ArmyNeedsLeader && !Blocked(MainActions.ArmyAppointLeader, leadCand))
+            { args = leadCand; return MainActions.ArmyAppointLeader; }
 
-            if (dip.HasHirableNPC && dip.EmployeeCount < 3 && !Failed(MainActions.NPChire))
+            if (dip.HasHirableNPC && dip.EmployeeCount < Thresholds.MaxEmployees && !Failed(MainActions.NPChire))
             { args = new[] { dip.HirableNPCID, dip.HireOfferAmount.ToString() }; return MainActions.NPChire; }
 
             if (!Failed(MainActions.FiefAutoAdjustExpenditure))
@@ -185,6 +254,11 @@ namespace JominiAI
 
             if (mil.ArmyNeedsMaint && !Failed(MainActions.ArmyMaintain))
             { args = new[] { mil.MainArmyID }; return MainActions.ArmyMaintain; }
+
+            // Raise a standing army if we have none (military strength, and something to
+            // defend with or press a siege later). Empty army id => the server creates one.
+            if (mil.CanBuildArmy && !Failed(MainActions.ArmyRecruit))
+            { args = new[] { "", Thresholds.RecruitAmount.ToString() }; return MainActions.ArmyRecruit; }
 
             if (mil.ArmyCanRecruit && !Failed(MainActions.ArmyRecruit))
             { args = new[] { mil.MainArmyID, Thresholds.RecruitAmount.ToString() }; return MainActions.ArmyRecruit; }
@@ -249,8 +323,9 @@ namespace JominiAI
             if (mil.ArmyNeedsMaint && !Failed(MainActions.ArmyMaintain))
             { args = new[] { mil.MainArmyID }; return MainActions.ArmyMaintain; }
 
-            if (mil.ArmyNeedsLeader && !Failed(MainActions.ArmyAppointLeader))
-            { args = new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID }; return MainActions.ArmyAppointLeader; }
+            var leadCand = new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID };
+            if (mil.ArmyNeedsLeader && !Blocked(MainActions.ArmyAppointLeader, leadCand))
+            { args = leadCand; return MainActions.ArmyAppointLeader; }
 
             if (mil.ArmyCanRecruit && !Failed(MainActions.ArmyRecruit))
             { args = new[] { mil.MainArmyID, Thresholds.RecruitAmount.ToString() }; return MainActions.ArmyRecruit; }
@@ -282,8 +357,9 @@ namespace JominiAI
             if (dip.HasReceivedProposal && !Failed(MainActions.NPCacceptRejectProposal))
             { args = new[] { "true" }; return MainActions.NPCacceptRejectProposal; }
 
-            if (mil.ArmyNeedsLeader && !Failed(MainActions.ArmyAppointLeader))
-            { args = new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID }; return MainActions.ArmyAppointLeader; }
+            var leadCand = new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID };
+            if (mil.ArmyNeedsLeader && !Blocked(MainActions.ArmyAppointLeader, leadCand))
+            { args = leadCand; return MainActions.ArmyAppointLeader; }
 
             if (mil.ActiveSiegeID != null)
             {
@@ -329,7 +405,8 @@ namespace JominiAI
             if (dip.HasUnappointedHeir && !Failed(MainActions.NPCappointHeir))
             { args = new[] { dip.HeirCandidateID }; return MainActions.NPCappointHeir; }
 
-            if (!s.Character.HasHeir && !dip.HasUnappointedHeir
+            // As in Stable: keep going until there's an heir and a spare, not just one son.
+            if (dip.LivingSonCount < 2
                 && dip.CanTryForChild && !Failed(MainActions.NPCtryForChild))
             { args = Array.Empty<string>(); return MainActions.NPCtryForChild; }
 
@@ -352,11 +429,15 @@ namespace JominiAI
             if (dip.HasEntourageCandidate && !Failed(MainActions.NPCaddToEntourage))
             { args = new[] { dip.EntourageCandidateID }; return MainActions.NPCaddToEntourage; }
 
-            if (mil.ArmyNeedsLeader && !Failed(MainActions.ArmyAppointLeader))
-            { args = new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID }; return MainActions.ArmyAppointLeader; }
+            var leadCand = new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID };
+            if (mil.ArmyNeedsLeader && !Blocked(MainActions.ArmyAppointLeader, leadCand))
+            { args = leadCand; return MainActions.ArmyAppointLeader; }
 
             if (mil.ArmyNeedsMaint && !Failed(MainActions.ArmyMaintain))
             { args = new[] { mil.MainArmyID }; return MainActions.ArmyMaintain; }
+
+            if (mil.CanBuildArmy && econ.HasRecovered && !Failed(MainActions.ArmyRecruit))
+            { args = new[] { "", Thresholds.ConsolidateRecruit.ToString() }; return MainActions.ArmyRecruit; }
 
             if (mil.ArmyCanRecruit && econ.HasRecovered && !Failed(MainActions.ArmyRecruit))
             { args = new[] { mil.MainArmyID, Thresholds.ConsolidateRecruit.ToString() }; return MainActions.ArmyRecruit; }
@@ -425,6 +506,12 @@ namespace JominiAI
         }
 
         private bool Failed(MainActions a) => FailedActions.Contains(a);
+
+        // Both a transient (this-tick) failure and a sticky (whole-season) one block an
+        // action. The sticky check is args-aware, so a leader appointment that keeps being
+        // refused for the same army/candidate is dropped for the season instead of being
+        // re-issued after every unrelated success.
+        private bool Blocked(MainActions a, string[] args) => Failed(a) || IsSignatureBlocked(a, args);
 
         private string Fingerprint(AgentState s)
         {

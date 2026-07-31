@@ -775,6 +775,16 @@ namespace JominiEngine
 
             if (success)
             {
+                // The proposal has been answered, so it is no longer outstanding. Nothing else
+                // removed it, so the groom's head of family kept the entry for good and
+                // ChecksBeforeProposal turned down every later match with
+                // CharacterProposalAlready - a character could propose exactly once, ever,
+                // whether or not the first proposal was accepted.
+                if (headOfFamilyGroom != null)
+                {
+                    headOfFamilyGroom.activeProposals.Remove(groom.charID);
+                }
+
                 string[] newFields = new string[this.entryDetails.MessageFields.Length + 2];
                 Array.Copy(this.entryDetails.MessageFields, newFields, this.entryDetails.MessageFields.Length);
                 newFields[newFields.Length - 1] = Globals_Game.clock.seasons[season] + ", " + year;

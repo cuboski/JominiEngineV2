@@ -80,11 +80,42 @@ namespace JominiAI
 		///     Handlers and display code use this instead of working with the raw struct directly.
 		/// </summary>
 		public AgentState BuildState(GameState gs)
-			=> AgentState.Build(gs, expenditureAdjustedThisSeasonFiefIDs, entouragedThisSeasonIDs, estimateNPCacceptableSalary);
+			=> AgentState.Build(gs, expenditureAdjustedThisSeasonFiefIDs, entouragedThisSeasonIDs, estimateNPCacceptableSalary, dayCostToTravelToKnownFiefs, dayCostToTravelToAdjacentFiefs, bailiffBlockedFiefIDs);
 
 		protected List<String> nationalities = new List<String>() { "Oth", "Eng", "Fr", "Sco" };
 
 		protected HashSet<MainActions> FailedActions = new HashSet<MainActions>(); // When failing to execute an action, it is added to this set. Is reinitialized when the agent succesfuly execute an action.
+
+		// FailedActions is wiped on every non-camp success so a previously blocked action
+		// can be retried once the world moves on. That is right for economy actions, but
+		// it also means an action that fails with FIXED arguments (the war party's leader
+		// appointment, say) gets re-chosen after every unrelated success and burns a slot
+		// each time until the season's anti-stall cap fires. This set remembers a failed
+		// (action, args) signature for the WHOLE season so the agent stops retrying that
+		// exact combination while still being free to try the same action with new args.
+		protected readonly HashSet<string> seasonBlockedSignatures = new HashSet<string>();
+
+		// Actions whose refusal depends on WHO or WHAT they were aimed at rather than on the
+		// action itself. A failure here blocks only that exact (action, args) for the season,
+		// leaving the agent free to try the same action on the next fief or the next man.
+		protected static readonly HashSet<MainActions> ArgumentScopedFailures = new HashSet<MainActions>
+		{
+			MainActions.NPCappointBaillif,
+			MainActions.NPChire,
+			MainActions.ArmyAppointLeader,
+			MainActions.NPCmarryPC,
+			MainActions.NPCmarryChild,
+			// Already guarded per fief by expenditureAdjustedThisSeasonFiefIDs, which is filled
+			// whether or not the adjustment took.
+			MainActions.FiefAutoAdjustExpenditure,
+		};
+
+		protected static string ActionSignature(MainActions action, string[] args)
+			=> action + "|" + string.Join(",", args ?? Array.Empty<string>());
+
+		// True once (action, args) has failed at least once this season.
+		protected bool IsSignatureBlocked(MainActions action, string[] args)
+			=> seasonBlockedSignatures.Contains(ActionSignature(action, args));
 		private string _lastTravelCostQueryLocation = null; // Cached location; travel costs are only re-queried when the PC moves to a new fief.
 		protected HashSet<string> fiefSpiedThisSeasonIDs = new HashSet<string>();
 		protected HashSet<string> charSpiedThisSeasonIDs = new HashSet<string>();
@@ -95,7 +126,42 @@ namespace JominiAI
 		protected string lastOfferToNPCid = null;
 		protected uint lastOfferToNPCamount = 0;
 		protected HashSet<string> expenditureAdjustedThisSeasonFiefIDs = new HashSet<string>();
+		// Fiefs that refused a bailiff this season. The candidate list always offered the first
+		// uncovered fief, so a single fief the server won't accept a bailiff for stood at the
+		// head of the queue and every other fief behind it went uncovered for the whole run.
+		protected HashSet<string> bailiffBlockedFiefIDs = new HashSet<string>();
+
+		// How many seasons in a row each fief has refused a bailiff. A handful of fiefs refuse
+		// every single time - the fief is listed as ours while the server disagrees about the
+		// ownership - and clearing the per-season block meant those same fiefs were tried again
+		// every season for the length of the run. In the 200-season dynasty run that was 2,656
+		// refusals, four fifths of everything the agent did.
+		//
+		// After BailiffGiveUpAfter consecutive refusals a fief is left alone, and only re-tried
+		// once every BailiffRetryEvery seasons, because ownership can legitimately change hands
+		// and a fief that refuses today may accept later. A success clears the count outright.
+		protected readonly Dictionary<string, int> bailiffRefusalCounts = new Dictionary<string, int>();
+		protected const int BailiffGiveUpAfter = 3;
+		protected const int BailiffRetryEvery = 25;
+		protected int seasonsPlayed = 0;
 		protected HashSet<string> entouragedThisSeasonIDs = new HashSet<string>(); // NPCs already added to the entourage this season; the inEntourage refresh is unreliable, so track locally to avoid re-adding the same NPC every pass.
+		protected HashSet<string> proposedThisSeasonIDs = new HashSet<string>(); // Characters who have already proposed this season. Held here rather than in the GameState so it is actually cleared between seasons.
+
+		// Foreign characters standing in a fief we have visited, keyed by charID. Their details
+		// (sex, family, birth year) are what the marriage and hiring rules test, and they don't
+		// change within a season, so they are fetched once and reused instead of once per action.
+		protected Dictionary<string, RedProtoNPC> foreignCharCache = new Dictionary<string, RedProtoNPC>();
+		// Captives per fief, likewise fetched once a season: ViewCaptives is one round-trip per
+		// fief and the realm holds ~200 of them, which dominated the run time.
+		protected Dictionary<string, HashSet<string>> captiveCache = new Dictionary<string, HashSet<string>>();
+
+		// Why the server refused the action just executed, or null if it accepted. The reply
+		// used to be thrown away, so a run could only report that something failed; the
+		// army-leader fault went undiagnosed for exactly that reason.
+		public string LastActionReason { get; protected set; }
+		// True when that refusal was a step in a negotiation (a hire bid the NPC has not yet
+		// accepted) rather than a decision the server judged invalid.
+		public bool LastActionWasNegotiation { get; protected set; }
 
 		protected HashSet<string> charToBarIDs = new HashSet<string>();
 		protected HashSet<string> charToUnbarIDs = new HashSet<string>();
@@ -289,7 +355,16 @@ namespace JominiAI
                 else
                 {
 					executionSuccess = false;
-					FailedActions.Add(nextAction);
+					// Sticky for the rest of the season: this exact (action, args) will
+					// not be retried even after an unrelated success clears FailedActions.
+					seasonBlockedSignatures.Add(ActionSignature(nextAction, arguments));
+					// Some refusals are about the arguments, not the action: one fief that won't
+					// take a bailiff says nothing about the other hundred, and one man refusing a
+					// wage says nothing about the next. Barring the whole action for those ended
+					// the season on the spot, because FailedActions only clears on a success and
+					// there was nothing left that could succeed. The signature above is enough.
+					if (!ArgumentScopedFailures.Contains(nextAction))
+						FailedActions.Add(nextAction);
 				}
 			}
 			return gameState;
@@ -303,6 +378,11 @@ namespace JominiAI
 		public GameState ObtainCurrentGSandUpdateAgentLists(GameState previousGS = new GameState())
 		{
 			GameState currentGS = ObtainCurrentGameState(previousGS);
+
+			// No living PC (dead, awaiting heir succession): skip the enrichment below,
+			// which dereferences myPC/myFiefs. The caller detects myPC == null and ends the run.
+			if (currentGS.myPC == null)
+				return currentGS;
 
 			// Travel costs only re-queried when the PC moves to a new fief
 			RedProtoFief currentFief = currentGS.getCurrentFief();
@@ -503,13 +583,12 @@ namespace JominiAI
 						currentGS.notMyArmies.Add(RedDeepCopier.DeepCopyRedProtoArmy(previousNotMyArmy));
 				}
 
-				if(previousGS.hasReceivedRansomForMyPC && ! string.IsNullOrWhiteSpace(currentGS.myPC.captor)) // Check if still captive
+				if(previousGS.hasReceivedRansomForMyPC && currentGS.myPC != null && ! string.IsNullOrWhiteSpace(currentGS.myPC.captor)) // Check if still captive
                 {
 					currentGS.hasReceivedRansomForMyPC = true;
 					currentGS.ransomJentryID = previousGS.ransomJentryID;
 				}
 
-				currentGS.myCharsWhoProposedThisSeason = previousGS.myCharsWhoProposedThisSeason;
 			}
 			return currentGS;
 		}
@@ -521,17 +600,62 @@ namespace JominiAI
 		public virtual void ResetSeasonState()
 		{
 			FailedActions.Clear();
+			seasonBlockedSignatures.Clear();
 			expenditureAdjustedThisSeasonFiefIDs.Clear();
+
+			// Carry forward the fiefs that have refused often enough to be written off, except
+			// on the periodic retry season, when they all get another chance.
+			seasonsPlayed++;
+			bailiffBlockedFiefIDs.Clear();
+			if (seasonsPlayed % BailiffRetryEvery == 0)
+				bailiffRefusalCounts.Clear();
+			else
+				foreach (var kv in bailiffRefusalCounts)
+					if (kv.Value >= BailiffGiveUpAfter)
+						bailiffBlockedFiefIDs.Add(kv.Key);
+
 			entouragedThisSeasonIDs.Clear();
 			fiefSpiedThisSeasonIDs.Clear();
 			charSpiedThisSeasonIDs.Clear();
 			armySpiedThisSeasonIDs.Clear();
 			fiefVisitedThisSeasonIDs.Clear();
+			proposedThisSeasonIDs.Clear();
+			// Marriages, deaths and births land at season boundaries, so the cached view of
+			// who is available (and who is held captive where) has to be re-read now.
+			foreignCharCache.Clear();
+			captiveCache.Clear();
 			nbConsecutiveNPCmoveDirections = 0;
 			lastOfferToNPCid = null;
 			lastOfferToNPCamount = 0;
 			estimationNbDaysUsed = 0;
 		}
+
+		/// <summary>Record that a character of mine has proposed this season.</summary>
+		protected void MarkProposed(GameState gameState, string charID)
+		{
+			proposedThisSeasonIDs.Add(charID);
+			if (gameState.myCharsWhoProposedThisSeason != null)
+				gameState.myCharsWhoProposedThisSeason[charID] = true;
+		}
+
+		/// <summary>
+		///     Drop a foreign character from the cache so their details are re-read. Needed when
+		///     we do something that changes them mid-season, e.g. betroth them: otherwise the
+		///     stale copy still looks unattached and the next family member proposes to her too.
+		/// </summary>
+		protected void InvalidateForeignChar(string charID)
+		{
+			if (!string.IsNullOrWhiteSpace(charID))
+				foreignCharCache.Remove(charID);
+		}
+
+		// Last season rollover this agent knows about. The server hands it back on every
+		// SeasonUpdate; it is how a client waiting on the rest of the table notices that the
+		// season it asked for has actually happened.
+		private uint seasonEpoch = 0;
+		// How long to wait for the other players before giving up, and how often to ask.
+		private const int SeasonWaitTimeoutMs = 300_000;
+		private const int SeasonPollMs = 500;
 
 		/// <summary>
 		///     Advance the server-side season: applies every fief's income/expenses and
@@ -541,8 +665,45 @@ namespace JominiAI
 		/// </summary>
 		public bool AdvanceSeason()
 		{
-			ProtoMessage reply = SeasonUpdate();
-			return reply != null && reply.ResponseType == DisplayMessages.Success;
+			DateTime start = DateTime.Now;
+			bool announcedWait = false;
+
+			while (true)
+			{
+				ProtoMessage reply = SeasonUpdate(seasonEpoch);
+				if (reply == null)
+					return false;
+
+				uint.TryParse(reply.Message, out uint replyEpoch);
+
+				if (reply.ResponseType == DisplayMessages.Success)
+				{
+					seasonEpoch = replyEpoch;
+					return true;
+				}
+
+				// Anything other than the "still waiting" answer is a real failure.
+				if (reply.ResponseType != DisplayMessages.None)
+					return false;
+
+				if (!announcedWait)
+				{
+					Console.ForegroundColor = ConsoleColor.DarkGray;
+					Console.WriteLine("  [SEASON] Finished; waiting for the other players to finish theirs.");
+					Console.ResetColor();
+					announcedWait = true;
+				}
+
+				if ((DateTime.Now - start).TotalMilliseconds > SeasonWaitTimeoutMs)
+				{
+					Console.ForegroundColor = ConsoleColor.Yellow;
+					Console.WriteLine($"  [SEASON] Gave up after {SeasonWaitTimeoutMs / 1000}s waiting for the other players.");
+					Console.ResetColor();
+					return false;
+				}
+
+				Thread.Sleep(SeasonPollMs);
+			}
 		}
 
 		/// <summary>
@@ -558,15 +719,39 @@ namespace JominiAI
 			currentGS.allyPCids = new HashSet<String>();
 
 
-			ProtoGenericArray<ProtoPlayer> playersArray = (ProtoGenericArray<ProtoPlayer>)GetPlayers();
+			ProtoGenericArray<ProtoPlayer> playersArray = GetPlayers() as ProtoGenericArray<ProtoPlayer>;
 			currentGS.ExistingPlayers = new List<RedProtoPlayer>();
-			if (playersArray != null)
+			if (playersArray?.fields != null)
 				foreach (ProtoPlayer protoPlayer in playersArray.fields.ToList())
 					currentGS.ExistingPlayers.Add(new RedProtoPlayer(protoPlayer));
 
 			currentGS.hasReceivedRansomForMyPC = false; // TO CONTINUE
 
-			 currentGS.myPC = new RedProtoPlayerCharacter((ProtoPlayerCharacter)ViewCharacter(currentPCid));
+			// While the player's PC is dead and no heir has succeeded yet, the server
+			// answers every request with a plain error ProtoMessage. Bail out with an
+			// empty state whose myPC is left null; callers use that to end the run
+			// gracefully instead of crashing on a failed cast further down.
+			if (!(ViewCharacter(currentPCid) is ProtoPlayerCharacter myPcProto))
+			{
+				currentGS.myFamilyNPCs = new List<RedProtoNPC>();
+				currentGS.myEmployeeNPCs = new List<RedProtoNPC>();
+				currentGS.myFiefs = new List<RedProtoFief>();
+				currentGS.myArmies = new List<RedProtoArmy>();
+				currentGS.mySieges = new List<RedProtoSiegeDisplay>();
+				currentGS.siegeOnMyFiefs = new List<RedProtoSiegeDisplay>();
+				currentGS.myCaptiveIDs = new HashSet<string>();
+				currentGS.notMyFiefs = new List<RedProtoFief>();
+				currentGS.notMyNPCs = new List<RedProtoNPC>();
+				currentGS.notMyPCs = new List<RedProtoPlayerCharacter>();
+				currentGS.notMyArmies = new List<RedProtoArmy>();
+				currentGS.notMyGarrisons = new List<RedProtoArmy>();
+				currentGS.spiedFiefs = new Dictionary<string, RedProtoFief>();
+				currentGS.spiedCharacters = new Dictionary<string, RedProtoCharacter>();
+				currentGS.spiedArmies = new Dictionary<string, RedProtoArmy>();
+				currentGS.unreadJournalEntries = new List<RedProtoJournalEntry>();
+				return currentGS;
+			}
+			currentGS.myPC = new RedProtoPlayerCharacter(myPcProto);
 			currentGS.myFamilyNPCs = new List<RedProtoNPC>();
 			ProtoCharacterOverview[] myCharArray = ((ProtoGenericArray<ProtoCharacterOverview>)GetNPCList("Family")).fields;
 			if (myCharArray != null && myCharArray.Length > 0)
@@ -605,17 +790,23 @@ namespace JominiAI
 						currentGS.siegeOnMyFiefs.Add(new RedProtoSiegeDisplay((ProtoSiegeDisplay)ViewSiege(protoSiegeOverview.siegeID)));
 					else
 						currentGS.mySieges.Add(new RedProtoSiegeDisplay((ProtoSiegeDisplay)ViewSiege(protoSiegeOverview.siegeID)));
+			// Captives change only when someone is taken or released, both of which are rare and
+			// both of which invalidate the affected fief below. Reading every fief on every
+			// action meant ~200 round-trips per decision and was most of the wall-clock time.
 			currentGS.myCaptiveIDs = new HashSet<string>();
 			foreach (RedProtoFief myFief in currentGS.myFiefs)
 			{
-				ProtoMessage reply = ViewCaptives(myFief.fiefID);
-                if (reply is ProtoGenericArray<ProtoCharacterOverview>)
-                {
-					ProtoGenericArray<ProtoCharacterOverview> protoGenericArray = (ProtoGenericArray<ProtoCharacterOverview>)reply;
-					if (protoGenericArray != null)
+				if (!captiveCache.TryGetValue(myFief.fiefID, out HashSet<string> captivesHere))
+				{
+					captivesHere = new HashSet<string>();
+					ProtoMessage reply = ViewCaptives(myFief.fiefID);
+					if (reply is ProtoGenericArray<ProtoCharacterOverview> protoGenericArray
+						&& protoGenericArray.fields != null)
 						foreach (ProtoCharacterOverview captive in protoGenericArray.fields)
-							currentGS.myCaptiveIDs.Add(captive.charID);
+							captivesHere.Add(captive.charID);
+					captiveCache[myFief.fiefID] = captivesHere;
 				}
+				currentGS.myCaptiveIDs.UnionWith(captivesHere);
 			}
 
 			RedProtoPlayerCharacter currentPC = currentGS.myPC; // getCurrentCharacter()
@@ -627,7 +818,11 @@ namespace JominiAI
 
 			currentGS.notMyNPCs = new List<RedProtoNPC>();
 			currentGS.notMyPCs = new List<RedProtoPlayerCharacter>();
-			// Skip ViewCharacter for every person in the fief; in a capital this can be 30-50 round-trips the FSM never uses.
+			// These are the people the PC can marry, marry a child to, or hire, and every one of
+			// those rules reads sex, family and birth year. Storing charID-only stubs left those
+			// fields at their defaults, so the filters silently matched nobody: a widowed lord
+			// never remarried, never fathered another child, and the line died out heirless.
+			// The details are fetched once per season and cached (see foreignCharCache).
 			// Own PC and own NPCs were already fetched above.
 			foreach (string characterInFiefId in currentFief.characterInFiefIDs)
 			{
@@ -638,8 +833,16 @@ namespace JominiAI
 					if (owned.charID.Equals(characterInFiefId)) { isMyNPC = true; break; }
 				if (isMyNPC)
 					continue;
-				// charID-only stub; details fetched on demand
-				currentGS.notMyNPCs.Add(new RedProtoNPC { charID = characterInFiefId });
+
+				if (!foreignCharCache.TryGetValue(characterInFiefId, out RedProtoNPC foreignNPC))
+				{
+					foreignNPC = ViewCharacter(characterInFiefId) is ProtoNPC foreignProto
+						? new RedProtoNPC(foreignProto)
+						: null;   // a foreign PC, or a character the server won't show us
+					foreignCharCache[characterInFiefId] = foreignNPC;
+				}
+				if (foreignNPC != null)
+					currentGS.notMyNPCs.Add(foreignNPC);
 			}
 			currentGS.spiedFiefs = new Dictionary<string, RedProtoFief>();
 			currentGS.spiedCharacters = new Dictionary<string, RedProtoCharacter>();
@@ -669,9 +872,32 @@ namespace JominiAI
 					currentGS.unreadJournalEntries.Add(new RedProtoJournalEntry(protoJournalEntry));
 					if (protoJournalEntry.year > currentGS.currentYear)
 						currentGS.currentYear = (int)protoJournalEntry.year;
-					if (protoJournalEntry.type.Equals("proposalMade"))
-						if (!protoJournalEntry.personae[3].charID.Equals(currentPC.charID))
-							currentGS.receivedProposalFromThisChar = new RedProtoCharacterOverview(protoJournalEntry.personae[2]);
+					// A proposal is ours to answer only if we are the bride's head of family.
+					// This used to be read off fixed positions in the personae array and treated
+					// "the groom is not me" as "somebody proposed to me" - so a lord who married
+					// a son off saw his OWN proposal as one addressed to him, tried to accept it,
+					// and was refused because the reply may only come from the bride's side. The
+					// entry stays unread until it is properly answered, so he tried again every
+					// pass: in the two-agent run that was 185 actions, every one of them refused.
+					//
+					// Roles are read by name rather than by index because the server drops any
+					// persona whose character it cannot resolve, which shifts every position.
+					if (protoJournalEntry.type.Equals("proposalMade") && !protoJournalEntry.replied)
+					{
+						ProtoCharacterOverview brideHead = null, bride = null;
+						foreach (ProtoCharacterOverview persona in protoJournalEntry.personae)
+						{
+							if (persona?.role == null) continue;
+							if (persona.role.Equals("headOfFamilyBride")) brideHead = persona;
+							else if (persona.role.Equals("bride")) bride = persona;
+						}
+						if (brideHead != null && bride != null
+							&& brideHead.charID.Equals(currentPC.charID))
+						{
+							currentGS.receivedProposalFromThisChar = new RedProtoCharacterOverview(bride);
+							currentGS.receivedProposalJEntryID = protoJournalEntry.jEntryID;
+						}
+					}
 				}
 			currentGS.armyDetachmentsForMe = new List<RedProtoDetachment>();
 			foreach (RedProtoArmy myArmy in currentGS.myArmies)
@@ -682,10 +908,13 @@ namespace JominiAI
 						if (detachmentFromArmy.leftFor.Equals(currentPCid))
 							currentGS.armyDetachmentsForMe.Add(new RedProtoDetachment(detachmentFromArmy));
 			}
+			// Seeded from the agent-side set, which ResetSeasonState clears; the dictionary used
+			// to be carried over from the previous GameState instead, so a character who
+			// proposed once was treated as having proposed for the rest of the run.
 			currentGS.myCharsWhoProposedThisSeason = new Dictionary<string, bool>();
-			currentGS.myCharsWhoProposedThisSeason.Add(currentPCid, false);
+			currentGS.myCharsWhoProposedThisSeason[currentPCid] = proposedThisSeasonIDs.Contains(currentPCid);
 			foreach (RedProtoNPC myFamilyNPC in currentGS.myFamilyNPCs)
-				currentGS.myCharsWhoProposedThisSeason.Add(myFamilyNPC.charID, false);
+				currentGS.myCharsWhoProposedThisSeason[myFamilyNPC.charID] = proposedThisSeasonIDs.Contains(myFamilyNPC.charID);
 
 			return currentGS;
 		}
@@ -726,7 +955,7 @@ namespace JominiAI
 					{
 						possibleActions.Add(MainActions.ArmyDisband);
 						foreach (RedProtoArmy myArmy in gameState.myArmies)
-                            if (!string.IsNullOrWhiteSpace(myArmy.leaderName))
+                            if (!string.IsNullOrWhiteSpace(myArmy.leaderID))
                             {
 								possibleActions.Add(MainActions.ArmyDropOff);
 								break;
@@ -739,14 +968,17 @@ namespace JominiAI
 								foreach (RedProtoArmy myArmy in gameState.myArmies)
 									if(currentFief.armyIDs != null)
 										if (currentFief.armyIDs.Contains(myArmy.armyID) && myPCorEmployeeNPC.location.Equals(currentFief.fiefID))
-											if (string.IsNullOrWhiteSpace(myArmy.leaderName))
+											// Compare charIDs. Matching on the leader's display name meant a man
+											// who already led the army still looked like a valid candidate, so
+											// the appointment was offered and then refused by the server.
+											if (string.IsNullOrWhiteSpace(myArmy.leaderID))
 											{
 												possibleActions.Add(MainActions.ArmyAppointLeader);
 												break;
 											}
 											else
 											{
-												if (!myArmy.leaderName.Equals(myPCorEmployeeNPC.firstName + " " + myPCorEmployeeNPC.familyName))
+												if (!myArmy.leaderID.Equals(myPCorEmployeeNPC.charID))
 												{
 													possibleActions.Add(MainActions.ArmyAppointLeader);
 													break;
@@ -1043,6 +1275,8 @@ namespace JominiAI
 			ProtoMessage protoMessage;
 			DisplayMessages respType;
 			bool executionSuccess = false;
+			LastActionReason = null;
+			LastActionWasNegotiation = false;
 			switch (actionToExecute)
 			{
 				case MainActions.ArmyRecruit:
@@ -1073,7 +1307,20 @@ namespace JominiAI
 					executionSuccess = DisbandArmy(arguments[0]).ResponseType == DisplayMessages.Success;
 					break;
 				case MainActions.ArmyAppointLeader:
-					executionSuccess = AppointLeader(arguments[0], arguments[1]).ResponseType == DisplayMessages.None;
+					// A successful appointment returns a ProtoArmy (ResponseType defaults to
+					// None); anything else is a rejection carrying the reason. Surface that
+					// reason so a failing war run says WHY the leader was refused (wrong
+					// location, not of age, already leading, unauthorised) instead of a bare
+					// "fail" - this is the single fault that keeps the war path dark.
+					ProtoMessage leaderReply = AppointLeader(arguments[0], arguments[1]);
+					executionSuccess = leaderReply.ResponseType == DisplayMessages.None;
+					if (!executionSuccess)
+					{
+						LastActionReason = leaderReply.ResponseType.ToString();
+						Console.ForegroundColor = ConsoleColor.DarkYellow;
+						Console.WriteLine($"  [WAR] AppointLeader({arguments[0]}, {arguments[1]}) refused: {leaderReply.ResponseType}");
+						Console.ResetColor();
+					}
 					break;
 				case MainActions.ArmyPillageCurrentFief:
 					executionSuccess = PillageFief(arguments[0]).ResponseType == DisplayMessages.Success;
@@ -1119,17 +1366,29 @@ namespace JominiAI
 				case MainActions.NPCmarryPC:
 					respType = Marry(currentPCid, arguments[0]).ResponseType;
 					executionSuccess = respType == DisplayMessages.Success || respType == DisplayMessages.CharacterProposalAlready;
-					if(executionSuccess)
-						gameState.myCharsWhoProposedThisSeason.Add(arguments[0], true);
+					// The proposer is the PC here, not arguments[0] (the bride). Recording the
+					// bride meant the PC was never marked as having proposed, so he re-proposed
+					// to the same woman every pass; and Add() threw once the key was present.
+					if (executionSuccess)
+					{
+						MarkProposed(gameState, currentPCid);
+						InvalidateForeignChar(arguments[0]);
+					}
 					break;
 				case MainActions.NPCmarryChild:
 					respType = Marry(arguments[0], arguments[1]).ResponseType;
 					executionSuccess = respType == DisplayMessages.Success || respType == DisplayMessages.CharacterProposalAlready;
 					if (executionSuccess)
-						gameState.myCharsWhoProposedThisSeason.Add(arguments[0], true);
+					{
+						MarkProposed(gameState, arguments[0]);
+						InvalidateForeignChar(arguments[1]);
+					}
 					break;
 				case MainActions.NPCacceptRejectProposal:
-					executionSuccess = AcceptRejectProposal(bool.Parse(arguments[0])).ResponseType == DisplayMessages.Success;
+					ProtoMessage proposalReply = AcceptRejectProposal(gameState.receivedProposalJEntryID, bool.Parse(arguments[0]));
+					executionSuccess = proposalReply.ResponseType == DisplayMessages.Success;
+					if (!executionSuccess)
+						LastActionReason = proposalReply.ResponseType.ToString();
 					if (executionSuccess)
 					{
 						AddAlly(gameState, gameState.receivedProposalFromThisChar.ownerName, out gameState); // The family of my wife naturally becomes an ally if not already
@@ -1141,20 +1400,35 @@ namespace JominiAI
 					break;
 				case MainActions.NPChire:
 					respType = hireNPC(arguments[0], uint.Parse(arguments[1])).ResponseType;
-					executionSuccess = respType == DisplayMessages.CharacterOfferHigh || respType == DisplayMessages.CharacterOfferLow || respType == DisplayMessages.CharacterOfferOk || respType == DisplayMessages.CharacterOfferAlmost;
-                    if (executionSuccess)
-                    {
-						if (respType == DisplayMessages.CharacterOfferHigh || respType == DisplayMessages.CharacterOfferOk) // If Npc accepted the bid
-						{
-							lastOfferToNPCid = null;
-							lastOfferToNPCamount = 0;
-						}
-						else
-						{
-							lastOfferToNPCid = arguments[0];
-							lastOfferToNPCamount = uint.Parse(arguments[1]);
-						}
+					// Only an accepted bid is a success. CharacterOfferLow/Almost/Haggle all mean
+					// the man is still not ours, and counting them as successes wiped the failure
+					// memory, so the same rejected number went back out every pass and the season
+					// was spent haggling with one NPC who never said yes.
+					executionSuccess = respType == DisplayMessages.CharacterOfferHigh
+									|| respType == DisplayMessages.CharacterOfferOk;
+					if (executionSuccess)
+					{
+						lastOfferToNPCid = null;
+						lastOfferToNPCamount = 0;
 					}
+					else
+					{
+						lastOfferToNPCid = arguments[0];
+						lastOfferToNPCamount = uint.Parse(arguments[1]);
+						LastActionReason = respType.ToString();
+						// Turning down a bid is how the engine haggles, not a sign the agent
+						// picked wrongly, so these are counted apart from real refusals.
+						LastActionWasNegotiation = respType == DisplayMessages.CharacterOfferLow
+											   || respType == DisplayMessages.CharacterOfferAlmost
+											   || respType == DisplayMessages.CharacterOfferHaggle;
+						Console.ForegroundColor = ConsoleColor.DarkGray;
+						Console.WriteLine($"  [HIRE] {arguments[0]} turned down {arguments[1]}: {respType}");
+						Console.ResetColor();
+					}
+					// The offer we just made is part of his details, and the next one has to beat
+					// it. Re-read him rather than let the season cache hand back the old figure -
+					// otherwise the bid never rises and we haggle against a stale number forever.
+					InvalidateForeignChar(arguments[0]);
 					break;
 				case MainActions.NPCfire:
 					executionSuccess = fireNPC(arguments[0]).ResponseType == DisplayMessages.Success;
@@ -1199,7 +1473,30 @@ namespace JominiAI
 					executionSuccess = AppointHeir(arguments[0]).ResponseType == DisplayMessages.Success;
 					break;
 				case MainActions.NPCappointBaillif:
-					executionSuccess = AppointBailiff(arguments[0], arguments[1]).ResponseType == DisplayMessages.Success;
+					ProtoMessage bailiffReply = AppointBailiff(arguments[0], arguments[1]);
+					executionSuccess = bailiffReply.ResponseType == DisplayMessages.Success;
+					if (executionSuccess)
+					{
+						// It accepted, so whatever was wrong before is no longer wrong.
+						bailiffRefusalCounts.Remove(arguments[0]);
+					}
+					else
+					{
+						// Drop the fief for the rest of the season and move on to the next one.
+						// The refusal is the fief's, not the candidate's - the same NPC is
+						// accepted elsewhere in the same season - so retrying with a different
+						// NPC just burns the season.
+						LastActionReason = bailiffReply.ResponseType.ToString();
+						bailiffBlockedFiefIDs.Add(arguments[0]);
+						bailiffRefusalCounts.TryGetValue(arguments[0], out int refusals);
+						bailiffRefusalCounts[arguments[0]] = ++refusals;
+						string forHowLong = refusals >= BailiffGiveUpAfter
+							? $"refused {refusals}x - leaving it alone until season {(seasonsPlayed / BailiffRetryEvery + 1) * BailiffRetryEvery}"
+							: "skipping this fief for the season";
+						Console.ForegroundColor = ConsoleColor.DarkYellow;
+						Console.WriteLine($"  [BAILIFF] {arguments[0]} refused {arguments[1]}: {bailiffReply.ResponseType} - {forHowLong}.");
+						Console.ResetColor();
+					}
 					break;
 				case MainActions.NPCremoveBaillif:
 					executionSuccess = RemoveBailiff(arguments[0]).ResponseType == DisplayMessages.Success;
@@ -1287,12 +1584,14 @@ namespace JominiAI
 					break;
 				case MainActions.KidnapCharacter:
 					executionSuccess = Kidnap(arguments[0], arguments[1]) == null;
+					if (executionSuccess) captiveCache.Clear();
 					// TO DO: add ennemy if got detected
 					break;
 				case MainActions.KidnapRansomCaptive:
 					executionSuccess = RansomCaptive(arguments[0]).ResponseType == DisplayMessages.Success;
                     if (executionSuccess)
                     {
+						captiveCache.Clear();
 						if (!gameState.tryGetNotMyPC(arguments[0], out RedProtoPlayerCharacter captiveRansomed))
 							throw new Exception("Shouldn't be null");
 						AddEnemy(gameState, captiveRansomed.charID, out gameState);
@@ -1300,11 +1599,15 @@ namespace JominiAI
 					break;
 				case MainActions.KidnapExecuteCaptive:
 					executionSuccess = ExecuteCaptive(arguments[0]).ResponseType == DisplayMessages.Success;
+					if (executionSuccess) captiveCache.Clear();
 					break;
 				case MainActions.KidnapReleaseCaptive:
 					executionSuccess = ReleaseCaptive(arguments[0]).ResponseType == DisplayMessages.Success;
 					if (executionSuccess)
+					{
+						captiveCache.Clear();
 						charToReleaseIDs.Remove(arguments[0]);
+					}
 					break;
 				case MainActions.KidnapRespondRansom:
 					executionSuccess = RespondRansom(uint.Parse(arguments[0]), bool.Parse(arguments[1])).ResponseType == DisplayMessages.Success;
@@ -1403,10 +1706,20 @@ namespace JominiAI
 			double minRating = Math.Min(Tools.GetLeadershipValue(npcToHire), npcToHire.management);
 
 			// calculate potential salary, based on highest rating
-			if(minRating == 0)
-				return Math.Max(basicSalary, basicSalary * maxRating);
-			else
-				return Math.Max(basicSalary, basicSalary * (maxRating + minRating / 2));
+			double fromRatings = minRating == 0
+				? Math.Max(basicSalary, basicSalary * maxRating)
+				: Math.Max(basicSalary, basicSalary * (maxRating + minRating / 2));
+
+			// A man already drawing a wage will not take less than a raise on it, and the engine
+			// prices him at the HIGHER of his traits and his current pay. Leaving this term out
+			// under-priced everyone already in service, so the bid opened below the floor at
+			// which offers are dismissed out of hand and the haggle never caught up: nineteen
+			// hire attempts in twenty were refused across the long runs.
+			double fromCurrent = npcToHire.salary > 0
+				? npcToHire.salary * 1.05 * 1.11   // the server's own +5% then +11% to the median
+				: 0;
+
+			return Math.Max(fromRatings, fromCurrent);
 		}
 	}
 }

@@ -217,14 +217,16 @@ namespace JominiEngine
                                 }
                                 catch (Exception e)
                                 {
-                                    NetOutgoingMessage errorMessage = server.CreateMessage(
-                                        "Failed to deserialise message. The message may be incorrect, or the decryption may have failed.");
-                                    if (c.alg != null)
+                                    // The client reads every Data message as a length-prefixed ProtoMessage.
+                                    // Replying with raw text here made its deserializer choke with the
+                                    // misleading "Invalid wire-type" protobuf error, so send a proper proto.
+                                    ProtoMessage errorMessage = new ProtoMessage
                                     {
-                                        errorMessage.Encrypt(c.alg);
-                                    }
-                                    server.SendMessage(errorMessage, im.SenderConnection,
-                                        NetDeliveryMethod.ReliableOrdered);
+                                        ActionType = Actions.Update,
+                                        ResponseType = DisplayMessages.Error,
+                                        Message = "Failed to deserialise message. The message may be incorrect, or the decryption may have failed."
+                                    };
+                                    SendViaProto(errorMessage, im.SenderConnection, c.alg);
                                     Globals_Server.logError("Failed to deserialize message for client: " + c.username);
                                 }
                             }
@@ -430,8 +432,21 @@ namespace JominiEngine
             if (client == null)
             {
                 Console.WriteLine($"Client is null. Exiting.\n");
-                NetOutgoingMessage errorMessage =
-                    server.CreateMessage("There was a problem with the connection. Please try re-connecting");
+                // Send a length-prefixed proto rather than raw text so the client's proto
+                // reader can parse it. SendViaProto can't be used here because the connection
+                // isn't in clientConnections (its logging would throw), so serialize inline.
+                ProtoMessage connError = new ProtoMessage
+                {
+                    ActionType = Actions.Update,
+                    ResponseType = DisplayMessages.Error,
+                    Message = "There was a problem with the connection. Please try re-connecting"
+                };
+                NetOutgoingMessage errorMessage = server.CreateMessage();
+                using (MemoryStream errMs = new MemoryStream())
+                {
+                    Serializer.SerializeWithLengthPrefix(errMs, connError, PrefixStyle.Fixed32);
+                    errorMessage.Write(errMs.ToArray());
+                }
                 server.SendMessage(errorMessage, connection, NetDeliveryMethod.ReliableOrdered);
                 string log = "Connection from peer " + connection.Peer.UniqueIdentifier +
                              " not found in client connections. Timestamp: " +
@@ -442,9 +457,17 @@ namespace JominiEngine
             var pc = client.myPlayerCharacter;
             if (pc == null || !pc.isAlive)
             {
-                NetOutgoingMessage msg = server.CreateMessage("You have no valid PlayerCharacter!");
-                server.SendMessage(msg, connection, NetDeliveryMethod.ReliableOrdered);
-                server.FlushSendQueue();
+                // Raw text here reached the client's proto reader as unparseable bytes and
+                // produced the "Invalid wire-type" error at season end (a PC can be briefly
+                // dead between death and heir succession). Reply as a proto tagged with the
+                // requested action so the client's reply loop matches it instead of hanging.
+                ProtoMessage noPc = new ProtoMessage
+                {
+                    ActionType = m.ActionType,
+                    ResponseType = DisplayMessages.ErrorGenericCharacterUnidentified,
+                    Message = "You have no valid PlayerCharacter!"
+                };
+                SendViaProto(noPc, connection, client.alg);
                 Console.WriteLine($"No valid player character. Exiting.\n");
             }
             else

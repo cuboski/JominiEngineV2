@@ -39,6 +39,7 @@ namespace JominiAI
 		public List<RedProtoSiegeDisplay> mySieges;
 		public HashSet<String> myCaptiveIDs;
 		public RedProtoCharacterOverview receivedProposalFromThisChar;
+		public uint receivedProposalJEntryID; // The journal entry to reply to; the server identifies a proposal by this, not by the proposer.
 		public Dictionary<string, bool> myCharsWhoProposedThisSeason;
 		public string myCurrentPCid;
 
@@ -184,23 +185,49 @@ namespace JominiAI
 		}
 
 		/// <summary>
-		///     The only way to get an army fiefID is to find the leader and get his location
+		///     An army's location field is a display string ("Fief, Province, Kingdom"), so the
+		///     fiefID has to come from its leader, who stands with it. A leaderless army has no
+		///     leader to ask, and returning false there deadlocked the war path: appointing a
+		///     leader needs the army's fief, which needed a leader. An army can't march without
+		///     one, so it is still where the PC raised it - fall back to him.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>True if the army's fief could be determined.</returns>
 		public bool tryGetArmyFiefID(string armyID, out string armyFiefID)
 		{
-			if(tryGetArmy(armyID, out RedProtoArmy army))
-				if (!string.IsNullOrWhiteSpace(army.leaderName))
-				{
-					foreach(RedProtoCharacter myCharacter in this.myEmployeeNPCs.Concat(this.myFamilyNPCs).Concat(new RedProtoCharacter[] { this.myPC }))
-						if (army.leaderName.Equals(myCharacter.firstName + " " + myCharacter.familyName))
-						{
-							armyFiefID = myCharacter.location;
-							return true;
-						}
-					throw new Exception("Couldn't find the character '" + army.leaderName + "', it shouldn't happen");
-				}
 			armyFiefID = null;
+			if (!tryGetArmy(armyID, out RedProtoArmy army))
+				return false;
+
+			IEnumerable<RedProtoCharacter> mine = this.myEmployeeNPCs
+				.Concat<RedProtoCharacter>(this.myFamilyNPCs)
+				.Concat(new RedProtoCharacter[] { this.myPC });
+
+			if (!string.IsNullOrWhiteSpace(army.leaderID))
+				foreach (RedProtoCharacter myCharacter in mine)
+					if (army.leaderID.Equals(myCharacter.charID))
+					{
+						armyFiefID = myCharacter.location;
+						return true;
+					}
+
+			// Older servers only sent the leader's display name; match on that as a fallback.
+			if (!string.IsNullOrWhiteSpace(army.leaderName))
+				foreach (RedProtoCharacter myCharacter in mine)
+					if (army.leaderName.Equals(myCharacter.firstName + " " + myCharacter.familyName))
+					{
+						armyFiefID = myCharacter.location;
+						return true;
+					}
+
+			// Leaderless, or led by someone we can't see: assume it stands with the PC. This is
+			// a guess, and if it is wrong the appointment is refused with a location error that
+			// the action log now records, rather than the agent silently doing nothing.
+			if (string.IsNullOrWhiteSpace(army.leaderID) && string.IsNullOrWhiteSpace(army.leaderName))
+			{
+				armyFiefID = this.myPC?.location;
+				return !string.IsNullOrWhiteSpace(armyFiefID);
+			}
+
 			return false;
 		}
 

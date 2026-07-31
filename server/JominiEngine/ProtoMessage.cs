@@ -620,6 +620,12 @@ namespace JominiEngine {
                 this.captor = captor.firstName + " " + captor.familyName;
                 this.location = null;
             }
+            // Let the inheriting class add its own details, exactly as includeSpy does with
+            // onIncludeSpy below. Without this the override never ran, so a PlayerCharacter
+            // went out with no myHeir, myNPCs, playerID or ownedFiefs, and an NPC with no
+            // salary, employer, inEntourage or isHeir - every one of those fields arrived at
+            // the client empty no matter what the game state actually was.
+            onIncludeAll(c);
         }
 
         /// <summary>
@@ -811,7 +817,8 @@ namespace JominiEngine {
             this.salary = npc.salary;
             this.inEntourage = npc.inEntourage;
             this.isHeir = npc.isHeir;
-            includeAll(character);
+            // No includeAll(character) here: includeAll is what calls this method, so calling
+            // it back recurses until the stack gives out. onIncludeSpy never did this.
         }
 
         public override void onIncludeSpy(Character character) {

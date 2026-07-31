@@ -56,15 +56,28 @@ namespace JominiEngine {
 
             Console.WriteLine(path);
 
+            // Which data set to load. Defaults to the base game; set the JOMINI_SCENARIO
+            // environment variable (e.g. "EconomicCrisis" or "DynastyAtRisk") to start the
+            // server on a scenario instead, without swapping any files by hand. The scenario
+            // files live beside the base one as "gameObjects - <name>.csv".
+            string scenario = Environment.GetEnvironmentVariable("JOMINI_SCENARIO");
+            string objectsFileName = string.IsNullOrWhiteSpace(scenario)
+                ? "gameObjects - Copy.csv"
+                : $"gameObjects - {scenario}.csv";
+
             // point towards the game objects and map data
-            var gameObjects = Path.Combine(path, "gameObjects - Copy.csv");
+            var gameObjects = Path.Combine(path, objectsFileName);
             var mapData = Path.Combine(path, "map.csv");
             if (!File.Exists(gameObjects) && !File.Exists(mapData)) {
                 Console.WriteLine("wrong dir");
             }
 
-	    gameObjects = "../../CSVs/gameObjects - Copy.csv";
+	    gameObjects = "../../CSVs/" + objectsFileName;
 	    mapData = "../../CSVs/map.csv";
+
+            Console.WriteLine(string.IsNullOrWhiteSpace(scenario)
+                ? "Loading BASE scenario (gameObjects - Copy.csv)"
+                : $"Loading scenario '{scenario}' ({objectsFileName})");
 
             InitGameObjects("testBucket",gameObjects, mapData,
                 start: 1194, king1: "Char_47", king2: "Char_40", herald1: "Char_1", sysAdmin: null);
@@ -2086,7 +2099,9 @@ namespace JominiEngine {
             Fief fiefFrom = null;
             Fief fiefTo = null;
             if (string.IsNullOrWhiteSpace(fiefFromID)) {
+                // blank source = transfer out of the home fief; still need to resolve the target
                 fiefFrom = client.myPlayerCharacter.GetHomeFief();
+                Globals_Game.fiefMasterList.TryGetValue(fiefToID, out fiefTo);
             } else if (string.IsNullOrWhiteSpace(fiefToID)) {
                 Globals_Game.fiefMasterList.TryGetValue(fiefFromID, out fiefFrom);
                 fiefTo = client.myPlayerCharacter.GetHomeFief();
@@ -2337,10 +2352,72 @@ namespace JominiEngine {
             if (!madeProposal) {
                 return proposalError;
             }
+
+            AutoAnswerIfUnmanaged(bride);
+
             var success = new ProtoMessage();
             success.ResponseType = DisplayMessages.Success;
             success.Message = "Proposal success";
             return success;
+        }
+
+        /// <summary>
+        ///     A proposal is only ever answered by the head of the bride's family, and only a
+        ///     head of family with a client attached can answer one. Every other house in the
+        ///     game therefore left proposals sitting unanswered for good, which put marriage -
+        ///     and with it remarriage and the succession that depends on it - out of reach of
+        ///     anyone playing without a full table of human opponents. Households with nobody
+        ///     at the wheel now answer for themselves, weighing the match the way a lord would:
+        ///     a suitor from a house of equal or greater standing is usually welcome, one from
+        ///     a lesser house usually is not.
+        /// </summary>
+        private static void AutoAnswerIfUnmanaged(Character bride) {
+            PlayerCharacter headOfFamilyBride = bride.GetHeadOfFamily();
+            if (headOfFamilyBride == null) {
+                return;
+            }
+            // Somebody is playing this house: the proposal is theirs to answer.
+            if (!string.IsNullOrWhiteSpace(headOfFamilyBride.playerID)
+                && Globals_Server.Clients.ContainsKey(headOfFamilyBride.playerID)) {
+                return;
+            }
+
+            JournalEntry proposal = null;
+            foreach (KeyValuePair<uint, JournalEntry> entry in Globals_Game.pastEvents.jentries) {
+                if (entry.Value.type != null && entry.Value.type.Equals("proposalMade")
+                    && !entry.Value.replied
+                    && entry.Value.CheckForProposal(headOfFamilyBride)) {
+                    // Keep looking: the newest matching proposal is the one just made.
+                    if (proposal == null || entry.Key > proposal.jEntryID) {
+                        proposal = entry.Value;
+                    }
+                }
+            }
+            if (proposal == null) {
+                return;
+            }
+
+            PlayerCharacter headOfFamilyGroom = null;
+            for (int i = 0; i < proposal.personae.Length; i++) {
+                string[] split = proposal.personae[i].Split('|');
+                if (split.Length > 1 && split[1].Equals("headOfFamilyGroom")
+                    && Globals_Game.pcMasterList.ContainsKey(split[0])) {
+                    headOfFamilyGroom = Globals_Game.pcMasterList[split[0]];
+                    break;
+                }
+            }
+            if (headOfFamilyGroom == null) {
+                return;
+            }
+
+            // Standing of the suitor's house against the bride's, as a percentage chance of
+            // consent. An evenly matched pair sits at 60%; every point of stature either way
+            // moves it by 10, and the outcome is never quite certain in either direction.
+            double statureGap = headOfFamilyGroom.CalculateStature() - headOfFamilyBride.CalculateStature();
+            double chanceOfConsent = Math.Max(10, Math.Min(90, 60 + (statureGap * 10)));
+            bool accept = Utility_Methods.GetRandomDouble(100) <= chanceOfConsent;
+
+            proposal.ReplyToProposal(accept);
         }
 
         public static ProtoMessage AcceptRejectProposal(uint jEntryID, bool accept, Client client) {
@@ -2360,6 +2437,56 @@ namespace JominiEngine {
                 return proposeresult;
             }
             return new ProtoMessage(DisplayMessages.Error);
+        }
+
+        /// <summary>
+        ///     Handles a client asking for the season to roll over. The clock is global, so with
+        ///     more than one player at the table the season may only advance once everybody has
+        ///     finished: otherwise the first client to run out of days drags everyone else into
+        ///     the next season mid-turn, and their remaining actions land in the wrong one.
+        ///
+        ///     The client sends back the last epoch it saw. A client that is behind has had its
+        ///     season rolled by somebody else while it was waiting, so it is told to carry on.
+        ///     With a single player connected this behaves exactly as it always did.
+        /// </summary>
+        /// <param name="clientEpoch">Last seasonEpoch the client saw</param>
+        /// <param name="client">The requesting client</param>
+        /// <returns>Success once the season has moved past the client's epoch, otherwise None</returns>
+        public static ProtoMessage SeasonUpdateBarrier(string clientEpoch, Client client) {
+            uint seenEpoch;
+            uint.TryParse(clientEpoch, out seenEpoch);
+
+            // The season already rolled while this client was waiting on the others.
+            if (seenEpoch < Globals_Game.seasonEpoch) {
+                client.readyForSeasonUpdate = false;
+                return SeasonEpochReply(DisplayMessages.Success);
+            }
+
+            client.readyForSeasonUpdate = true;
+
+            // Only clients still holding a connection count; Server.Disconnect nulls conn but
+            // leaves the Client in the dictionary, and a departed player must not stall the game.
+            var atTable = Globals_Server.Clients.Values.Where(c => c.conn != null).ToList();
+            bool everyoneReady = atTable.Count == 0 || atTable.All(c => c.readyForSeasonUpdate);
+            if (!everyoneReady) {
+                Globals_Server.logEvent("SeasonUpdate: " + client.username + " ready, waiting for "
+                    + string.Join(", ", atTable.Where(c => !c.readyForSeasonUpdate).Select(c => c.username)));
+                return SeasonEpochReply(DisplayMessages.None);
+            }
+
+            Globals_Game.game.SeasonUpdate();
+            Globals_Game.seasonEpoch++;
+            foreach (Client c in atTable) {
+                c.readyForSeasonUpdate = false;
+            }
+            return SeasonEpochReply(DisplayMessages.Success);
+        }
+
+        private static ProtoMessage SeasonEpochReply(DisplayMessages type) {
+            var reply = new ProtoMessage();
+            reply.ResponseType = type;
+            reply.Message = Globals_Game.seasonEpoch.ToString();
+            return reply;
         }
 
         public static ProtoMessage AppointHeir(string charID, Client client) {
@@ -3637,10 +3764,11 @@ namespace JominiEngine {
                     }
                 // Appoint a character as a bailiff to a fief
                 case Actions.AppointBailiff: {
-                        if (msgIn.MessageFields == null || msgIn.MessageFields.Length < 1) {                            
+                        // Guards the [1] it actually reads; "< 1" left an IndexOutOfRange one
+                        // short message away, which would take the listen thread down.
+                        if (msgIn.MessageFields == null || msgIn.MessageFields.Length < 2) {
                             return new ProtoMessage(DisplayMessages.ErrorGenericMessageInvalid);
                         }
-                        Console.WriteLine($"Recieve appoint bailiff: {msgIn.MessageFields.Length} || {msgIn.MessageFields[0]}");
                         return AppointBailiff(msgIn.Message, msgIn.MessageFields[1], _client);
                     }
                 // Remove bailiff from fief
@@ -3780,7 +3908,13 @@ namespace JominiEngine {
                     }
                 // Appoint a new army leader
                 case Actions.AppointLeader: {
-                        if (msgIn.MessageFields == null || msgIn.MessageFields.Length < 1) {
+                        // The character id arrives at MessageFields[1], not [0]. AppointBailiff
+                        // has always read [1] and is accepted on every call; this case was
+                        // "corrected" to [0] in July and from that moment every appointment was
+                        // refused with ErrorGenericMessageInvalid, because [0] is not a charID
+                        // and fails ValidateCharacterID. That single index is what kept the war
+                        // path dark - no leader, so the army never marched.
+                        if (msgIn.MessageFields == null || msgIn.MessageFields.Length < 2) {
                             return new ProtoMessage(DisplayMessages.ErrorGenericMessageInvalid);
                         }
                         return AppointLeader(msgIn.Message, msgIn.MessageFields[1], _client);
@@ -3863,7 +3997,8 @@ namespace JominiEngine {
                     }
                 // Attack an army
                 case Actions.Attack: {
-                        if (msgIn.MessageFields == null || msgIn.MessageFields.Length < 1) {
+                        // Same indexing as AppointLeader above: the target id is at [1].
+                        if (msgIn.MessageFields == null || msgIn.MessageFields.Length < 2) {
                             return new ProtoMessage(DisplayMessages.ErrorGenericMessageInvalid);
                         }
                         return Attack(msgIn.Message, msgIn.MessageFields[1], _client);
@@ -3937,10 +4072,7 @@ namespace JominiEngine {
                         }
                     }
                 case Actions.SeasonUpdate: {
-                        Globals_Game.game.SeasonUpdate();
-                        var updated = new ProtoMessage();
-                        updated.ResponseType = DisplayMessages.Success;
-                        return updated;
+                        return SeasonUpdateBarrier(msgIn.Message, _client);
                     }
                 case Actions.ViewWorldMap: {
                         return ViewWorldMap();

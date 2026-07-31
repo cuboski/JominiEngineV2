@@ -27,6 +27,15 @@ namespace JominiAI
         protected string currentPCid = null; // Contains the current PlayerCharacter ID of the player
         public List<double> waitingForServerTimes = new List<double>();
 
+        /// <summary>The character this account currently controls. Changes when a lord dies and
+        /// his heir succeeds, so a run can tell a succession from a genuine dead end.</summary>
+        public string CurrentPCId => currentPCid;
+
+        /// <summary>Re-ask the server who this account controls. The server rebinds the account
+        /// to the heir when a lord dies, so calling this after a season boundary picks the heir
+        /// up even if no other request has run since.</summary>
+        public void ResyncCurrentPC() => updateCurrentPCid();
+
         /// <summary>
         ///    Log in with an existing account. The available accounts are:
         ///    - "helen" => "potato"
@@ -36,6 +45,12 @@ namespace JominiAI
         ///    username: charID + "_username"
         ///    password: charID + "_password"
         /// </summary>
+        /// <summary>
+        ///     The server this client talks to. Defaults to the LAN box; pass --server to point
+        ///     somewhere else (use 127.0.0.1 when the server runs on this machine).
+        /// </summary>
+        public static string ServerAddress = "10.130.61.5";
+
         public Player(string username, string password)
         {
             tclient = new TextTestClient(); // Create a new client
@@ -44,8 +59,8 @@ namespace JominiAI
 
         private void Login(string username, string password)
         {
-            Console.WriteLine($"[Player] Connecting to server with user '{username}'...");
-            tclient.LogInAndConnect(username, password, "10.130.61.5");
+            Console.WriteLine($"[Player] Connecting to server with user '{username}' at {ServerAddress}...");
+            tclient.LogInAndConnect(username, password, ServerAddress);
 
             DateTime start = DateTime.Now;
             const int timeoutMs = 10000; // 10 second timeout
@@ -73,7 +88,7 @@ namespace JominiAI
                     Console.WriteLine("  1. Windows Firewall blocking dotnet.exe UDP on port 8000");
                     Console.WriteLine("     -> Run 'dotnet run' as Administrator to test");
                     Console.WriteLine("  2. Server not running or wrong IP");
-                    Console.WriteLine("     -> Server IP in Player.cs: 10.130.61.5, Port: 8000");
+                    Console.WriteLine($"     -> Server IP: {ServerAddress}, Port: 8000 (override with --server)");
                     throw new TimeoutException("Could not connect to game server within 10 seconds.");
                 }
             }
@@ -84,9 +99,16 @@ namespace JominiAI
 
         protected void updateCurrentPCid()
         {
-            foreach (ProtoPlayer player in ((ProtoGenericArray<ProtoPlayer>)GetPlayers()).fields) 
-            {
+            // The server rejects every request with a plain error ProtoMessage while the
+            // player has no living PlayerCharacter (e.g. briefly between a death and heir
+            // succession at a season boundary), so GetPlayers may not return the player
+            // array. Guard the cast and keep the previous currentPCid in that case.
+            var players = GetPlayers() as ProtoGenericArray<ProtoPlayer>;
+            if (players?.fields == null)
+                return;
 
+            foreach (ProtoPlayer player in players.fields)
+            {
                 if (player.playerID.Equals(tclient.playerID))
                 {
                     currentPCid = player.pcID; // Update currentPCid
@@ -206,7 +228,9 @@ namespace JominiAI
             {
                 protoRecruit.amount = (uint)amount;
             }
-            protoRecruit.armyID = armyID;
+            // A null army id tells the server to create a new army; an empty string would
+            // fail the lookup, so normalise it to null.
+            protoRecruit.armyID = string.IsNullOrEmpty(armyID) ? null : armyID;
             protoRecruit.isConfirm = true;
             return SendRequestToServer(Actions.RecruitTroops, null, null, protoRecruit);
         }
@@ -229,9 +253,16 @@ namespace JominiAI
             return SendRequestToServer(Actions.ProposeMarriage, groomID, new string[] { brideID });
         }
 
-        public ProtoMessage AcceptRejectProposal(bool AcceptOrReject)
+        /// <summary>
+        ///     Reply to a marriage proposal. The server looks the proposal up by journal entry
+        ///     ID (Message) and reads the answer from MessageFields[1]; sending the PC's charID
+        ///     and a single field made every reply fail to parse, so no proposal was ever
+        ///     answerable.
+        /// </summary>
+        public ProtoMessage AcceptRejectProposal(uint jEntryID, bool AcceptOrReject)
         {
-            return SendRequestToServer(Actions.AcceptRejectProposal, currentPCid, new string[] { Convert.ToString(AcceptOrReject) });
+            return SendRequestToServer(Actions.AcceptRejectProposal, Convert.ToString(jEntryID),
+                new string[] { Convert.ToString(jEntryID), Convert.ToString(AcceptOrReject) });
         }
 
         public ProtoMessage TryForChild()
@@ -617,9 +648,14 @@ namespace JominiAI
         ///     This function will probably only be used for testing purpose as later it will probably be done automatically on the server side.
         /// </summary>
         /// <returns></returns>
-        protected ProtoMessage SeasonUpdate()
+        /// <summary>
+        ///     Tell the server this player has finished the season. The last epoch we saw goes
+        ///     with the request so the server can tell a client that is merely waiting from one
+        ///     that genuinely wants the next season - see Game.SeasonUpdateBarrier.
+        /// </summary>
+        protected ProtoMessage SeasonUpdate(uint knownEpoch)
         {
-            return SendRequestToServer(Actions.SeasonUpdate, null, null);
+            return SendRequestToServer(Actions.SeasonUpdate, knownEpoch.ToString(), null);
         }
 
         /// <summary>

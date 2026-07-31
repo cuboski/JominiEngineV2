@@ -13,6 +13,7 @@ namespace JominiAI
     //   dotnet run -- --agent qlearn --load q.json -> Q-learning, load saved table
     //   dotnet run -- --seasons 20                 -> run 20 seasons (default 5)
     //   dotnet run -- --simulate                   -> FSM dry-run (no server writes)
+    //   dotnet run -- --aggressive                 -> FSM raises an army and starts a war
     class Program
     {
         // StepByStep = true  pauses after every action (debugging / step-through)
@@ -20,7 +21,7 @@ namespace JominiAI
         private const bool StepByStep = false;
         private const int MaxActions = 50;
         private const int DefaultMaxSeasons = 5;
-        private const int PauseMs = 1500; // 1.5 s between actions
+        private const int PauseMs = 100; // delay between actions (was 1500; lowered for faster data runs)
         private const string DefaultQSavePath = "qtable.json";
 
         static void Main(string[] args)
@@ -29,12 +30,20 @@ namespace JominiAI
             bool evaluateMode = args.Contains("--evaluate");  // offline dry-run scenario suite
             bool useQLearning = ArgValue(args, "--agent")?.ToLower() == "qlearn";
             bool exploitMode = args.Contains("--exploit");
+            bool aggressive = args.Contains("--aggressive");  // FSM marches on a neighbour to exercise war
             string loadPath = ArgValue(args, "--load");
             string savePath = ArgValue(args, "--save") ?? DefaultQSavePath;
             string evalLogPath = ArgValue(args, "--eval-log");
             string scenarioLabel = ArgValue(args, "--scenario") ?? "Base";
             int maxSeasons = int.TryParse(ArgValue(args, "--seasons"), out int s) && s > 0
                 ? s : DefaultMaxSeasons;
+
+            // Account to play. Each process must use its own, and each account must map to its
+            // own PlayerCharacter - point two agents at the same PC and they fight over its days.
+            string user = ArgValue(args, "--user") ?? "acc1";
+            string pass = ArgValue(args, "--pass") ?? "pass1";
+            string server = ArgValue(args, "--server");
+            if (server != null) Player.ServerAddress = server;
 
             Banner(useQLearning ? "JominiAI - Q-Learning Agent" : "JominiAI - FSM Agent");
 
@@ -43,7 +52,7 @@ namespace JominiAI
             {
                 if (useQLearning)
                 {
-                    var q = new QLearningAgent("acc1", "pass1");
+                    var q = new QLearningAgent(user, pass);
                     if (loadPath != null) q.Load(loadPath);
                     if (exploitMode) { q.Epsilon = 0f; q.TrainingMode = false; }
                     agent = q;
@@ -51,9 +60,9 @@ namespace JominiAI
                 }
                 else
                 {
-                    var fsm = new FSMAgent("acc1", "pass1");
+                    var fsm = new FSMAgent(user, pass) { Aggressive = aggressive };
                     agent = fsm;
-                    Ok($"Connected. FSM agent | initial state: {fsm.CurrentState}");
+                    Ok($"Connected. FSM agent | initial state: {fsm.CurrentState}{(aggressive ? " | AGGRESSIVE" : "")}");
                 }
             }
             catch (Exception ex) { Error("Connect failed", ex); return; }
@@ -64,6 +73,19 @@ namespace JominiAI
 
             AgentState initial = agent.BuildState(gs);
             PrintState("INITIAL STATE", initial, agent);
+
+            // A freshly started server world begins at year 1194. If it is already past
+            // that, the server has been advanced by earlier runs (reconnecting does NOT
+            // reset the world) - the dynasty may be old or extinct, which makes a run end
+            // early with "Days did not refresh". Warn so the cause is obvious.
+            if (gs.myPC == null || gs.currentYear > 1194)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"  [WARN] Server world is not fresh (year {gs.currentYear}"
+                    + (gs.myPC == null ? ", no living PC" : "") + "). Results may be truncated; "
+                    + "restart the server for a clean run.");
+                Console.ResetColor();
+            }
 
             // Evaluation runner, active when --eval-log is passed
             EvaluationRunner evalRunner = evalLogPath != null
@@ -92,6 +114,13 @@ namespace JominiAI
             for (int season = 1; season <= maxSeasons; season++)
             {
                 Section($"Season {season}/{maxSeasons}: running up to {MaxActions} action passes  [{AgentLabel(agent)}]");
+
+                // Wall clock for the whole season. The per-action timer below covers only the
+                // decision and its request; the state refresh after it, the pause between
+                // passes and the wait on the season update all sit outside that, and together
+                // they dominate. Summing action times therefore understates a season by a wide
+                // margin, so the season is measured directly.
+                var seasonTimer = System.Diagnostics.Stopwatch.StartNew();
 
                 MainActions lastAction = MainActions.None;
                 string[] lastArgs = Array.Empty<string>();
@@ -122,18 +151,26 @@ namespace JominiAI
                     double daysBefore = gs.myPC.days;
                     double treasuryBefore = gs.getHomeFief()?.treasury ?? 0;
                     double totalTreasuryBefore = gs.myFiefs?.Sum(f => (double)f.treasury) ?? 0;
+                    // Real gold, for the money-creation audit only. The treasury figures above
+                    // are spending headroom and legitimately move when spending plans change.
+                    double totalGoldBefore = gs.myFiefs?.Sum(f => (double)f.actualTreasury) ?? 0;
 
                     GameState gsAfter;
                     MainActions executed;
                     string[] executedArgs;
                     bool success, endOfSeason;
 
+                    // Times the whole decide-and-execute cycle, which is what has to fit inside
+                    // the pace a human player sets. It includes the server round-trip, since
+                    // that cost is real for anyone playing the game.
+                    var actionTimer = System.Diagnostics.Stopwatch.StartNew();
                     try
                     {
                         gsAfter = agent.playOneAction(
                             gs, out executed, out executedArgs, out success, out endOfSeason);
                     }
                     catch (Exception ex) { Error("Execution error", ex); break; }
+                    actionTimer.Stop();
 
                     string ok = success ? "ok" : "fail";
                     string eos = endOfSeason ? "  [end of season]" : "";
@@ -152,12 +189,17 @@ namespace JominiAI
                         Action = executed.ToString(),
                         Args = string.Join(",", executedArgs ?? Array.Empty<string>()),
                         Success = success,
+                        Reason = success ? null : agent.LastActionReason,
+                        Negotiation = !success && agent.LastActionWasNegotiation,
+                        ElapsedMs = actionTimer.Elapsed.TotalMilliseconds,
                         DaysBefore = daysBefore,
                         DaysAfter = daysBefore,
                         HomeTreasuryBefore = (int)treasuryBefore,
                         HomeTreasuryAfter = (int)treasuryBefore,
                         TotalTreasuryBefore = totalTreasuryBefore,
                         TotalTreasuryAfter = totalTreasuryBefore,
+                        TotalGoldBefore = totalGoldBefore,
+                        TotalGoldAfter = totalGoldBefore,
                         ThreatLevel = (int)state.Military.Threat,
                     } : null;
 
@@ -206,16 +248,24 @@ namespace JominiAI
 
                     PrintDelta(daysBefore, treasuryBefore, totalTreasuryBefore, gsAfter);
 
-                    // Money sanity check: time did not advance and this was not a transfer,
-                    // yet total treasury jumped a lot. Transfers move gold between fiefs (net
-                    // zero), so a large positive net jump here would mean gold was created.
+                    // Money sanity check: time did not advance and this was not a transfer, yet
+                    // the realm's gold jumped. Transfers move gold between fiefs (net zero), so
+                    // a large positive net jump here would mean gold was minted.
+                    //
+                    // This has to weigh real gold, not the treasury field. The server puts
+                    // GetAvailableTreasury(true) in that field - gold minus family expenses,
+                    // overlord taxes and next season's planned spend - so cutting the spending
+                    // plan raises it without a coin moving. That is exactly what
+                    // FiefAutoAdjustExpenditure does, which is why every one of these warnings
+                    // so far has been a false alarm.
                     double daysUsedNow = daysBefore - (gsAfter.myPC?.days ?? daysBefore);
                     double totalAfterNow = gsAfter.myFiefs?.Sum(f => (double)f.treasury) ?? totalTreasuryBefore;
-                    double netNow = totalAfterNow - totalTreasuryBefore;
+                    double totalGoldAfter = gsAfter.myFiefs?.Sum(f => (double)f.actualTreasury) ?? totalGoldBefore;
+                    double netNow = totalGoldAfter - totalGoldBefore;
                     if (daysUsedNow == 0 && executed != MainActions.FiefTransferFunds && netNow > 50_000)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"  [CHECK] Total treasury rose {netNow:+0} on a zero-day '{executed}'. Verify no gold was created.");
+                        Console.WriteLine($"  [CHECK] Realm gold rose {netNow:+0} on a zero-day '{executed}'. Verify no gold was created.");
                         Console.ResetColor();
                     }
 
@@ -224,6 +274,7 @@ namespace JominiAI
                         rec.DaysAfter          = gsAfter.myPC?.days ?? daysBefore;
                         rec.HomeTreasuryAfter  = (int)(gsAfter.getHomeFief()?.treasury ?? treasuryBefore);
                         rec.TotalTreasuryAfter = totalAfterNow;
+                        rec.TotalGoldAfter     = totalGoldAfter;
                         evalRunner.RecordAction(rec);
                     }
 
@@ -236,8 +287,10 @@ namespace JominiAI
                 if (agent is QLearningAgent qSeason)
                     qSeason.OnSeasonEnd(finalState);
 
-                evalRunner?.RecordSeasonEnd(finalState);
+                seasonTimer.Stop();
+                evalRunner?.RecordSeasonEnd(finalState, seasonTimer.Elapsed.TotalSeconds);
                 PrintState($"END OF SEASON {season}", finalState, agent);
+                PrintDynasty(gs);
 
                 if (season == maxSeasons) break;
 
@@ -254,13 +307,40 @@ namespace JominiAI
                     break;
                 }
 
+                // The lord may have died in the season update just applied. If he had an heir,
+                // the server has already promoted the heir and rebound this account to him, so
+                // resync who we control before fetching state - otherwise we would keep asking
+                // about the dead lord and mistake a normal succession for a dead end.
+                string lordBefore = agent.CurrentPCId;
+                agent.ResyncCurrentPC();
+                string lordAfter = agent.CurrentPCId;
+                if (lordAfter != null && lordAfter != lordBefore)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine($"  [SUCCESSION] {lordBefore} died; {lordAfter} succeeds and the dynasty continues.");
+                    Console.ResetColor();
+                }
+
                 try { gs = agent.ObtainCurrentGSandUpdateAgentLists(gs); }
                 catch (Exception ex) { Error("State refresh failed after season end", ex); break; }
 
-                if (gs.myPC == null || gs.myPC.days < 1)
+                if (gs.myPC == null)
                 {
+                    // No living character for this account, and the resync above found no heir:
+                    // the bloodline has died out. A legitimate game over, not a fault.
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("  Days did not refresh after SeasonUpdate, no further seasons.");
+                    Console.WriteLine($"  Bloodline extinct: {lordBefore} died with no heir to succeed. Ending run.");
+                    Console.ResetColor();
+                    break;
+                }
+                if (gs.myPC.days < 1)
+                {
+                    // We DO have a living lord but the season update left him with no days. That
+                    // is not an expected outcome - flag it as a real anomaly rather than a quiet
+                    // "no further seasons", since it points at a day-allowance bug, not death.
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"  [ANOMALY] Lord {gs.myPC.charID} is alive but has {gs.myPC.days:0.##} days after SeasonUpdate. "
+                        + "Expected a full allowance - this needs investigating (day allocation).");
                     Console.ResetColor();
                     break;
                 }
@@ -459,6 +539,46 @@ namespace JominiAI
             Console.WriteLine($"  Economy   : home={s.Economy.HomeTreasury} | total={s.Economy.TotalTreasury} | deficit={s.Economy.FiefsInDeficit}/{s.Economy.FiefCount} fiefs | bailiff={s.Economy.FiefsWithBailiff}/{s.Economy.FiefCount}");
             Console.WriteLine($"  Military  : {s.Military.Threat} | army={s.Military.MainArmyTroops} troops");
             Console.WriteLine($"  Obs vec   : [{string.Join(", ", s.Metrics.ToObservationVector().Select(v => $"{v:F2}"))}]");
+        }
+
+        /// <summary>
+        ///     Reports the succession picture: whether the lord still has a wife, whether she
+        ///     can conceive, and who is actually in line. Every one of these is a precondition
+        ///     for an heir, and when a run ends heirless the summary alone cannot say which one
+        ///     failed - so print them rather than infer them from the action distribution.
+        /// </summary>
+        private static void PrintDynasty(GameState gs)
+        {
+            if (gs.myPC == null) return;
+
+            var sons = gs.myFamilyNPCs.Where(n => n.isMale && n.isAlive).ToList();
+            string line;
+
+            if (string.IsNullOrWhiteSpace(gs.myPC.spouse))
+            {
+                line = "no wife (widowed or unmarried) : cannot father a child until remarried";
+            }
+            else if (!gs.tryGetCharacter(gs.myPC.spouse, out RedProtoCharacter w))
+            {
+                line = $"wife {gs.myPC.spouse} not in any known list : likely dead but still set on the PC";
+            }
+            else
+            {
+                string blocker =
+                      !w.isAlive                       ? "she is dead"
+                    : w.isPregnant                     ? "already pregnant"
+                    : w.location != gs.myPC.location   ? $"she is at {w.location}, lord at {gs.myPC.location}"
+                    : w.days <= 1                      ? $"she has {w.days:0.#} days left"
+                    : "can try for a child";
+                line = $"wife {w.charID} : {blocker}";
+            }
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"  Dynasty   : {line}");
+            Console.WriteLine($"  Heir      : {(string.IsNullOrWhiteSpace(gs.myPC.myHeirId) ? "none appointed" : gs.myPC.myHeirId)}" +
+                              $" | living sons/male kin: {sons.Count}" +
+                              (sons.Count > 0 ? $" ({string.Join(", ", sons.Take(5).Select(n => $"{n.charID} b.{n.birthYear}"))})" : ""));
+            Console.ResetColor();
         }
 
         private static void PrintDelta(double daysBefore, double treasuryBefore, double totalTreasuryBefore, GameState gsAfter)

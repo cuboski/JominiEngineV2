@@ -113,7 +113,7 @@ namespace JominiAI
             // Update Q from the previous transition and log the reward.
             if (_prevKey != null && TrainingMode)
             {
-                float reward = ComputeReward(_prevState, state, _prevSuccess);
+                float reward = ComputeReward(_prevState, state, _prevSuccess, ActionSpace[_prevActionIdx]);
                 SessionReward += reward;
                 float[] qBefore = GetQValues(_prevKey);
                 float oldQ = qBefore[_prevActionIdx];
@@ -182,7 +182,7 @@ namespace JominiAI
         }
 
         // Reward for the previous transition. All sub-rewards are bounded so nothing runs away.
-        private float ComputeReward(AgentState prev, AgentState curr, bool prevSuccess)
+        private float ComputeReward(AgentState prev, AgentState curr, bool prevSuccess, MainActions prevAction)
         {
             float r = 0f;
 
@@ -194,6 +194,16 @@ namespace JominiAI
             float econDelta = (curr.Economy.TotalTreasury - prev.Economy.TotalTreasury) / 100_000f;
             r += Clamp(econDelta, -1f, 1f);
 
+            // A nominal cost on the zero-day internal transfer. Scoring total wealth already
+            // makes a transfer reward-neutral, but "neutral" plus any exploration noise still
+            // let the agent settle on repeating a free action. Charging a small fixed penalty
+            // makes an internal transfer strictly reward-negative unless it is genuinely
+            // needed, so the reward-hacking equilibrium of the crisis run cannot form: the
+            // only way to come out ahead is to raise realm-wide wealth, which a transfer
+            // never does. This is the action-cost fix argued for in the discussion.
+            if (prevAction == MainActions.FiefTransferFunds)
+                r -= 0.05f;
+
             float bailiffDelta = curr.Metrics.BailiffCoverage - prev.Metrics.BailiffCoverage;
             r += Clamp(bailiffDelta * 5f, -0.5f, 0.5f);
 
@@ -203,8 +213,13 @@ namespace JominiAI
             float milDelta = curr.Metrics.MilitaryStrength - prev.Metrics.MilitaryStrength;
             r += Clamp(milDelta * 0.5f, -0.5f, 0.5f);
 
-            // Heir and spouse feed the dynasty sub-score, so reward gaining them.
+            // Heir and spouse feed the dynasty sub-score, so reward gaining them - and, for the
+            // heir, penalise losing it. Losing the heir only happens when the last son dies with
+            // no spare behind him (otherwise the engine falls back to the spare and HasHeir stays
+            // true), so this penalty is really a reward for keeping a spare, which is the one
+            // thing the agent can actually do about child mortality.
             if (curr.Character.HasHeir && !prev.Character.HasHeir) r += 0.5f;
+            if (!curr.Character.HasHeir && prev.Character.HasHeir) r -= 0.4f;
             if (curr.Character.HasSpouse && !prev.Character.HasSpouse) r += 0.3f;
 
             if (!prevSuccess) r -= 0.15f; // failed action = wasted server round-trip
@@ -268,8 +283,10 @@ namespace JominiAI
                     return new[] { mil.MainArmyID };
 
                 case MainActions.ArmyRecruit:
-                    if (!mil.ArmyCanRecruit) return null;
-                    return new[] { mil.MainArmyID, "25" };
+                    // Recruit into the existing army, or raise one (empty id => server creates it).
+                    if (mil.ArmyCanRecruit) return new[] { mil.MainArmyID, "25" };
+                    if (mil.CanBuildArmy) return new[] { "", "25" };
+                    return null;
 
                 case MainActions.NPCappointBaillif:
                     if (econ.HomeNeedsBailiff && econ.HomeBailiffCandidate != null)
@@ -283,7 +300,7 @@ namespace JominiAI
                     return new[] { dip.FireableEmployeeID };
 
                 case MainActions.NPChire:
-                    if (!dip.HasHirableNPC || dip.EmployeeCount >= 3) return null;
+                    if (!dip.HasHirableNPC || dip.EmployeeCount >= Thresholds.MaxEmployees) return null;
                     return new[] { dip.HirableNPCID, dip.HireOfferAmount.ToString() };
 
                 case MainActions.SiegeStorm:
@@ -317,8 +334,11 @@ namespace JominiAI
                     return new[] { mil.MainArmyID, mil.ArmyLeaderCandidateID };
 
                 case MainActions.NPCtryForChild:
-                    // Only worth it while heirless; produces a son who becomes the heir.
-                    if (!dip.CanTryForChild || chr.HasHeir || dip.HasUnappointedHeir) return null;
+                    // Keep fathering children until there is an heir and a spare, not just one
+                    // son - a single son who dies in childhood ends the succession outright.
+                    // Same rule the FSM uses; self-limiting, since a successful attempt leaves
+                    // the wife pregnant and CanTryForChild false for the ~3 seasons of gestation.
+                    if (!dip.CanTryForChild || dip.LivingSonCount >= 2) return null;
                     return Array.Empty<string>();
 
                 default:

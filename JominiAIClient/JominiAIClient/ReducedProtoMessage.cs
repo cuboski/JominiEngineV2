@@ -36,9 +36,15 @@ namespace JominiAI
         /// </summary>
         //public string leader { get; set; }
         /// <summary>
-        /// Holds army leader ID
+        /// The leader's display name ("firstName familyName"), NOT his charID. Only good for
+        /// printing. Anything that has to decide WHO leads the army must use leaderID.
         /// </summary>
         public string leaderName { get; set; }
+        /// <summary>
+        /// The leader's charID, or empty when the army has no leader. This is the field to
+        /// compare against a character's charID.
+        /// </summary>
+        public string leaderID { get; set; }
         /// <summary>
         /// Holds army owner name
         /// </summary>
@@ -90,6 +96,7 @@ namespace JominiAI
             this.armyID = a.armyID;
             //this.leader = a.leader;
             this.leaderName = a.leader;
+            this.leaderID = a.leaderID;
             //this.owner = a.owner;
             this.location = a.location;
             //this.nationality = a.nationality;
@@ -366,9 +373,13 @@ namespace JominiAI
         /// </summary>
         public uint salary { get; set; }
         /// <summary>
-        /// Holds last wage offer from individual PCs
+        /// Holds last wage offer from individual PCs.
+        /// The server only fills these in (IncludeHire) for an NPC with no family and no
+        /// employer, i.e. one it is actually willing to consider an offer for, so a non-empty
+        /// lastOfferID doubles as "this one really is hirable". lastOfferAmount is our own
+        /// previous offer to him, which the next one has to beat.
         /// </summary>
-        // public string lastOfferID { get; set; }
+        public string lastOfferID { get; set; }
         public uint lastOfferAmount { get; set; }
         /// <summary>
         /// Denotes if in employer's entourage
@@ -387,7 +398,7 @@ namespace JominiAI
             this.isHeir = npc.isHeir;
 
             // IncludeHire
-            //this.lastOfferID = npc.lastOfferID;
+            this.lastOfferID = npc.lastOfferID;
             this.lastOfferAmount = npc.lastOfferAmount;
         }
 
@@ -560,9 +571,20 @@ namespace JominiAI
         /// </summary>
         //public Double bailiffDaysInFief { get; set; }
         /// <summary>
-        /// Holds fief treasury
+        /// Holds fief treasury.
+        /// Careful: the server puts GetAvailableTreasury(true) in this field, not the fief's
+        /// gold. It is what is left after family expenses, overlord taxes and next season's
+        /// planned spending, so it moves whenever spending plans change even though no coin
+        /// does. Use actualTreasury when you mean money.
         /// </summary>
         public int treasury { get; set; }
+        /// <summary>
+        /// Holds the fief's real gold, rebuilt from what the server already sends:
+        /// available = gold - familyExpenses - olordTaxes - fiefExpenses, and keyStatsNext
+        /// carries [10] = fiefExpenses + familyExpenses and [11] = olordTaxes, so the gold is
+        /// treasury + keyStatsNext[10] + keyStatsNext[11].
+        /// </summary>
+        public int actualTreasury { get; set; }
         /// <summary>
         /// Holds overviews of armies present in the fief (armyIDs)
         /// </summary>
@@ -648,6 +670,13 @@ namespace JominiAI
             //this.bailiffDaysInFief = f.bailiffDaysInFief;
 
             this.treasury = f.treasury;
+            // keyStatsNext is only filled when the server ran includeAll on the fief; fall back
+            // to the available treasury rather than inventing a number.
+            if (f.keyStatsNext != null && f.keyStatsNext.Length >= 12)
+                this.actualTreasury = f.treasury
+                    + (int)Math.Round(f.keyStatsNext[10] + f.keyStatsNext[11]);
+            else
+                this.actualTreasury = f.treasury;
         }
 
         public RedProtoFief() : base() { }

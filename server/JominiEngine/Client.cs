@@ -61,6 +61,12 @@ namespace JominiEngine
         /// </summary>
         public int jEntryMax { get; set; }
         /// <summary>
+        /// Holds bool indicating whether this client has finished its season and is waiting for
+        /// the rest of the table. The clock is global, so one client must not be able to roll the
+        /// season on while another still has days to spend - see Game.SeasonUpdate handling.
+        /// </summary>
+        public bool readyForSeasonUpdate = false;
+        /// <summary>
         /// Holds bool indicating whether or not to display popup messages
         /// </summary>
         public bool showMessages = true;

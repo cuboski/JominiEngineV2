@@ -18,9 +18,14 @@ namespace JominiAI
         public uint ArmyTroops { get; set; }
         public int ThreatLevel { get; set; }
         public bool HeirAppointed { get; set; }
+        public string HeirId { get; set; }         // who the heir is this season; a change from one season to the next means the heir was replaced (new son) or lost (heir died)
+        // Wall-clock length of the season, end to end. This is the figure to compare against
+        // how long a human takes over a turn; the per-action timings are only the thinking.
+        public double SeasonSeconds { get; set; }
         public bool PCIsAlive { get; set; }
         public bool PCHasSpouse { get; set; }
         public int FamilyNPCCount { get; set; }
+        public int LivingSonCount { get; set; }    // depth of succession: 0 here while HeirAppointed is true means the heir is the last of the line, so his death ends it
         public int ActionsExecuted { get; set; }
         public int ActionsFailed { get; set; }
         public float CompositeScore { get; set; }
@@ -37,12 +42,29 @@ namespace JominiAI
         public string Action { get; set; }
         public string Args { get; set; }
         public bool Success { get; set; }         // live: server accepted; dry-run: matched oracle
+        // The server's DisplayMessages reason when it refused, or null. Without this a failing
+        // run could only say THAT an action was refused, never why, which is what left the
+        // army-leader fault undiagnosed for so long.
+        public string Reason { get; set; }
+        // A refusal that is a step in a negotiation rather than a rejected decision: the hire
+        // haggle returns "too low"/"almost" until the bid is right. These are counted apart
+        // from real failures so the acceptance rate measures decision quality, not bargaining.
+        public bool Negotiation { get; set; }
+        // Wall-clock time to choose AND execute this action, in milliseconds. This is the
+        // per-action cost that decides whether an agent can keep up with a human player.
+        public double ElapsedMs { get; set; }
         public double DaysBefore { get; set; }
         public double DaysAfter { get; set; }
         public int HomeTreasuryBefore { get; set; }
         public int HomeTreasuryAfter { get; set; }
+        // Spending headroom summed across fiefs (the server's GetAvailableTreasury), which is
+        // what the treasury field carries and what the agent budgets against.
         public double TotalTreasuryBefore { get; set; }
         public double TotalTreasuryAfter { get; set; }
+        // Actual gold summed across fiefs. Only this can answer "was money created?" - headroom
+        // rises whenever a spending plan is cut, with no coin involved.
+        public double TotalGoldBefore { get; set; }
+        public double TotalGoldAfter { get; set; }
         public int ThreatLevel { get; set; }
         public string Scenario { get; set; }      // dry-run rows only
     }
@@ -59,7 +81,25 @@ namespace JominiAI
         public int TotalActions { get; set; }
         public int SuccessfulActions { get; set; }
         public float SuccessRate { get; set; }
+        // Refusals that were negotiation steps (see ActionRecord.Negotiation), and the
+        // acceptance rate with those excluded - the figure that reflects decision quality.
+        public int NegotiationActions { get; set; }
+        public float DecisionSuccessRate { get; set; }
         public int MoneyCreationFlags { get; set; }   // zero-day non-transfer actions that added >50k total
+        // What it costs the agent to decide and issue one action, server round-trip included.
+        public double MeanActionMs { get; set; }
+        public double MedianActionMs { get; set; }
+        public double P95ActionMs { get; set; }
+        // Measured wall clock for a whole season, which is the figure to set against a human
+        // player's turn. It is far larger than the action timings summed, because the state
+        // refresh after each action, the pause between passes and the wait on the season
+        // update all sit outside the decision itself.
+        public double MeanSeasonSeconds { get; set; }
+        // The decision-making share of that season: what the agent itself accounts for.
+        public double MeanDecisionSecondsPerSeason { get; set; }
+        // Why actions were refused, most common first. Turns a bare failure count into a
+        // diagnosis without anyone having to read the raw rows.
+        public Dictionary<string, int> FailureReasons { get; set; } = new();
         public Dictionary<string, int> ActionCounts { get; set; } = new();
     }
 
@@ -121,8 +161,11 @@ namespace JominiAI
                 ArmyTroops = state.Military.MainArmyTroops,
                 ThreatLevel = (int)state.Military.Threat,
                 HeirAppointed = state.Character.HasHeir,
+                HeirId = state.Character.HeirId,
                 PCIsAlive = state.Character.IsAlive,
                 PCHasSpouse = state.Character.HasSpouse,
+                FamilyNPCCount = state.Diplomacy.FamilyMemberCount,
+                LivingSonCount = state.Diplomacy.LivingSonCount,
                 ActionsExecuted = actionsExecuted,
                 ActionsFailed = actionsFailed,
             };
@@ -139,6 +182,7 @@ namespace JominiAI
         private int _season = 0;
         private int _actionsThisSeason = 0;
         private int _failsThisSeason = 0;
+        private readonly List<double> _seasonSeconds = new();
 
         public EvaluationRunner(string agentType, string scenarioName)
         {
@@ -161,12 +205,14 @@ namespace JominiAI
             if (!rec.Success) _failsThisSeason++;
         }
 
-        public void RecordSeasonEnd(AgentState finalState)
+        public void RecordSeasonEnd(AgentState finalState, double seasonSeconds = 0)
         {
             _season++;
             var snap = ScoreComputer.FromAgentState(
                 finalState, _season, _actionsThisSeason, _failsThisSeason);
+            snap.SeasonSeconds = seasonSeconds;
 
+            _seasonSeconds.Add(seasonSeconds);
             _result.Seasons.Add(snap);
             _actionsThisSeason = 0;
             _failsThisSeason = 0;
@@ -188,12 +234,35 @@ namespace JominiAI
             int moneyFlags = _result.Actions.Count(a =>
                 a.DaysBefore == a.DaysAfter
                 && a.Action != nameof(MainActions.FiefTransferFunds)
-                && (a.TotalTreasuryAfter - a.TotalTreasuryBefore) > 50_000);
+                && (a.TotalGoldAfter - a.TotalGoldBefore) > 50_000);
 
             var counts = _result.Actions
                 .GroupBy(a => a.Action)
                 .OrderByDescending(g => g.Count())
                 .ToDictionary(g => g.Key, g => g.Count());
+
+            // Haggling rounds are refusals but not misjudgements, so they are held apart:
+            // TotalActions/SuccessRate stay as they were for continuity, and the decision
+            // rate below is the one that says whether the agent chose well.
+            int negotiation = _result.Actions.Count(a => !a.Success && a.Negotiation);
+            int decisions = total - negotiation;
+
+            var reasons = _result.Actions
+                .Where(a => !a.Success && !string.IsNullOrWhiteSpace(a.Reason))
+                .GroupBy(a => a.Action + ": " + a.Reason)
+                .OrderByDescending(g => g.Count())
+                .ToDictionary(g => g.Key, g => g.Count());
+
+            // Timing is only recorded on live runs, so ignore rows that carry no measurement.
+            var times = _result.Actions.Where(a => a.ElapsedMs > 0)
+                                       .Select(a => a.ElapsedMs)
+                                       .OrderBy(ms => ms)
+                                       .ToList();
+            double Percentile(double p) =>
+                times.Count == 0 ? 0
+                : times[Math.Min(times.Count - 1, Math.Max(0, (int)Math.Ceiling(p * times.Count) - 1))];
+
+            var measured = _seasonSeconds.Where(s => s > 0).ToList();
 
             return new RunSummary
             {
@@ -205,7 +274,16 @@ namespace JominiAI
                 TotalActions = total,
                 SuccessfulActions = ok,
                 SuccessRate = total > 0 ? (float)ok / total : 0f,
+                NegotiationActions = negotiation,
+                DecisionSuccessRate = decisions > 0 ? (float)ok / decisions : 0f,
                 MoneyCreationFlags = moneyFlags,
+                MeanActionMs = times.Count > 0 ? times.Average() : 0,
+                MedianActionMs = Percentile(0.50),
+                P95ActionMs = Percentile(0.95),
+                MeanSeasonSeconds = measured.Count > 0 ? measured.Average() : 0,
+                MeanDecisionSecondsPerSeason = _result.Seasons.Count > 0
+                    ? times.Sum() / 1000.0 / _result.Seasons.Count : 0,
+                FailureReasons = reasons,
                 ActionCounts = counts,
             };
         }
@@ -221,7 +299,21 @@ namespace JominiAI
             Console.WriteLine($"  Dynasty intact: {sum.DynastyIntact}");
             Console.WriteLine($"  Heir appointed: {sum.HeirEverAppointed}");
             Console.WriteLine($"  Actions        : {sum.SuccessfulActions}/{sum.TotalActions} accepted ({sum.SuccessRate:P0})");
+            if (sum.NegotiationActions > 0)
+                Console.WriteLine($"  Of which haggling: {sum.NegotiationActions} (decision rate {sum.DecisionSuccessRate:P0})");
             Console.WriteLine($"  Money-creation flags: {sum.MoneyCreationFlags}");
+            if (sum.MeanActionMs > 0)
+                Console.WriteLine($"  Action time   : mean {sum.MeanActionMs:F0} ms | median {sum.MedianActionMs:F0} ms | p95 {sum.P95ActionMs:F0} ms");
+            if (sum.MeanSeasonSeconds > 0)
+                Console.WriteLine($"  Season time   : {sum.MeanSeasonSeconds:F1} s wall clock, of which {sum.MeanDecisionSecondsPerSeason:F1} s deciding");
+
+            if (sum.FailureReasons.Count > 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("  Why actions were refused:");
+                foreach (var kv in sum.FailureReasons.Take(10))
+                    Console.WriteLine($"    {kv.Key,-52} {kv.Value}");
+            }
 
             if (sum.ActionCounts.Count > 0)
             {

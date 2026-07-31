@@ -17,7 +17,8 @@ namespace JominiAI
                     return new ProtoRecruit
                     {
                         ActionType = Actions.RecruitTroops,
-                        armyID = arguments[0],
+                        // An empty army id means "no army yet" - the server creates one.
+                        armyID = string.IsNullOrEmpty(arguments[0]) ? null : arguments[0],
                         amount = uint.TryParse(arguments[1], out var amt) ? amt : 10u,
                         isConfirm = true
                     };

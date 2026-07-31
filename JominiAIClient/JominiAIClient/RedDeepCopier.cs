@@ -26,6 +26,7 @@ namespace JominiAI
 			deepCopy.barredNationalities = redProtoFief.barredNationalities != null ? (string[])redProtoFief.barredNationalities.Clone() : null;
 			deepCopy.ancestralOwnerId = redProtoFief.ancestralOwnerId;
 			deepCopy.treasury = redProtoFief.treasury;
+			deepCopy.actualTreasury = redProtoFief.actualTreasury;
 			deepCopy.armyIDs = redProtoFief.armyIDs != null ? (String[])redProtoFief.armyIDs.Clone() : null;
 			deepCopy.hasRecruited = redProtoFief.hasRecruited;
 			deepCopy.isPillaged = redProtoFief.isPillaged;
@@ -100,6 +101,8 @@ namespace JominiAI
 			RedProtoNPC deepCopy = (RedProtoNPC)DeepCopyRedProtoCharacter(redProtoNPC);
 			deepCopy.employerId = redProtoNPC.employerId;
 			deepCopy.salary = redProtoNPC.salary;
+			deepCopy.lastOfferID = redProtoNPC.lastOfferID;
+			deepCopy.lastOfferAmount = redProtoNPC.lastOfferAmount;
 			deepCopy.inEntourage = redProtoNPC.inEntourage;
 			deepCopy.isHeir = redProtoNPC.isHeir;
 			return deepCopy;
@@ -129,6 +132,7 @@ namespace JominiAI
 			deepCopy.armyID = protoArmy.armyID;
 			deepCopy.troops = protoArmy.troops != null ? (uint[])protoArmy.troops.Clone() : null;
 			deepCopy.leaderName = protoArmy.leaderName;
+			deepCopy.leaderID = protoArmy.leaderID;
 			deepCopy.ownerName = protoArmy.ownerName;
 			deepCopy.days = protoArmy.days;
 			deepCopy.location = protoArmy.location;

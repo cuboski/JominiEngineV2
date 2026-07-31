@@ -26,9 +26,13 @@ namespace JominiAI
 				{ "Earl", kingVal/32 }, { "Captal", kingVal/64 }, { "Vicomte", kingVal/128 }, { "Baron", kingVal/256 }, { "Seigneur", kingVal/512 },
 				{ "Lord", kingVal/1024 }, { "Vidame", kingVal/2048 }, { "Chatelain", 0 }, };
 
-			uint totalMoney = (uint)currentCharacter.purse;
+			// Accumulate as signed long: purse and treasury are signed and often negative
+			// (a fief in debt). Casting each to uint turned e.g. -600000 into ~4.29 billion,
+			// which manufactured phantom wealth and dominated the score. long also avoids
+			// overflow when summing many fiefs.
+			long totalMoney = currentCharacter.purse;
 			foreach (RedProtoFief myFief in gameState.myFiefs)
-				totalMoney += (uint)myFief.treasury;
+				totalMoney += myFief.treasury;
 
 			uint totalTroops = 0;
 			foreach (RedProtoArmy myArmy in gameState.myArmies)

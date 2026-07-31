@@ -59,14 +59,23 @@ Scenarios/
 **Intent:** Stable peacetime. Baseline for both agents.
 **Changes:** None - exact copies of the default server CSVs.
 **Expected FSM behaviour:**
-- Appoints Roger (Char_363) as heir (IsPlayersHeir = FALSE initially)
-- Tries to have children (Isabel the spouse is at EDV08)
+- Tries for a child each eligible season with his spouse Berenguela (Char_589), who
+  starts co-located at ELN01. This is the ONLY path to an heir here: Richard has no
+  living son or brother, so `NPCappointHeir` has no candidate and does not fire.
+  (Roger/Char_363 is NOT Richard's family - his familyID is Char_1, a different dynasty.)
 - Hires available NPCs (up to 3 employees)
 - Auto-adjusts expenditures if any fief goes into deficit
 - Maintains and recruits army troops
 
+**Note on the heir:** An heir is not appointed in season 1 - the dynasty continues only
+once a son is *born and survives infancy*. Conception is reliable, but ~50% of births
+are daughters and ~34% of newborn sons are stillborn, with a ~3-season gestation, so a
+surviving son appears slowly (roughly one per ~9 seasons on average). Short runs often
+end heirless; long runs usually produce a surviving son unless the lord dies young first.
+
 **Evaluation metrics to watch:**
-- `HeirAppointed` becomes `true` within season 1
+- `HeirAppointed` typically stays `false` (heirs come from surviving sons via
+  primogeniture, not from `NPCappointHeir`); watch for a surviving son over a long run
 - `HomeTreasury` stays above 0
 - `FiefsWithBailiff` equals `FiefCount`
 
@@ -86,7 +95,8 @@ surplus, so the FSM never enters `EconomicCrisis`. Setting all fiefs forces a tr
 - Calls `FiefAutoAdjustExpenditure` on each deficit fief (up to 16 per season before camping)
 - Once expenditures are cut, camps to advance time -> treasury recovers from fief income
 - Does NOT spend on new hires or bailiffs while in crisis
-- Still appoints heir (dynasty is priority 1 even in crisis)
+- Dynasty stays priority 1 even in crisis, but as in Base there is no male relative to
+  appoint, so `NPCappointHeir` does not fire; an heir depends on a surviving son
 
 **Evaluation metrics to watch:**
 - `FiefsInDeficit` drops from 52 to 0 after first FiefAutoAdjust pass
@@ -233,19 +243,3 @@ immediately (season ends cleanly). Committed June 2026. No server restart needed
 **After the fix:** Camp should succeed, days will decrease from 90 each time camp
 runs, and treasury will update from income/expenses. The INITIAL STATE treasury
 showing `-50 000` and FINAL STATE treasury showing a positive value confirms recovery.
-
----
-
-## Known Limitations
-
-- **Movement not implemented:** When `ThreatLevel = EnemyNearby` (enemy in one of my fiefs
-  but not my current fief), the FSM cannot move to engage. It defaults to maintaining/recruiting.
-  This means war scenarios require the enemy to be in the agent's current fief to trigger `AtWar`.
-
-- **Q-learning action space:** The Q-learning agent uses a fixed 10-action space.
-  Heir appointment, marriage, and proposals are not in its action space.
-  Dynasty management is entirely unhandled by the Q-agent - compare this as a weakness.
-
-- **War via CSV:** It is not possible to pre-configure an active war state purely through CSVs.
-  To test war behaviour, either wait for it to occur naturally during a live run, or use the
-  `--simulate` dry-run scenarios (scenarios SCN-10 to SCN-15 in `ScenarioHarness`).

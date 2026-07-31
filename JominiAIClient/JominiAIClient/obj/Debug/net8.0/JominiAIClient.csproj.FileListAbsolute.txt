@@ -3,10 +3,6 @@ C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAICli
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\JominiAIClient.runtimeconfig.json
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\JominiAIClient.dll
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\JominiAIClient.pdb
-C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\Lidgren.Network.dll
-C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\protobuf-net.Core.dll
-C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\protobuf-net.dll
-C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\ProtoMessageClient.dll
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\QuickGraph.dll
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\RiakClient.dll
 C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\QuickGraph.Serialization.dll
@@ -34,3 +30,12 @@ C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiE
 C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\qbuild\JominiAIClient.runtimeconfig.json
 C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\qbuild\JominiAIClient.dll
 C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent\6b09c699-a3b0-4b7e-9150-75630ca19a05\scratchpad\qbuild\JominiAIClient.pdb
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent-JominiAIClient\4fd81652-0251-42fc-b78c-61d541aa32ba\scratchpad\bincheck\Debug\net8.0\JominiAIClient.exe
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent-JominiAIClient\4fd81652-0251-42fc-b78c-61d541aa32ba\scratchpad\bincheck\Debug\net8.0\JominiAIClient.deps.json
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent-JominiAIClient\4fd81652-0251-42fc-b78c-61d541aa32ba\scratchpad\bincheck\Debug\net8.0\JominiAIClient.runtimeconfig.json
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent-JominiAIClient\4fd81652-0251-42fc-b78c-61d541aa32ba\scratchpad\bincheck\Debug\net8.0\JominiAIClient.dll
+C:\Users\Terry\AppData\Local\Temp\claude\C--Users-Terry-Documents-GitHub-JominiEngine-AI-Agent-JominiAIClient\4fd81652-0251-42fc-b78c-61d541aa32ba\scratchpad\bincheck\Debug\net8.0\JominiAIClient.pdb
+C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\Lidgren.Network.dll
+C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\protobuf-net.Core.dll
+C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\protobuf-net.dll
+C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\JominiAIClient\JominiAIClient\bin\Debug\net8.0\ProtoMessageClient.dll

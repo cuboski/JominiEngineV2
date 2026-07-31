@@ -232,6 +232,12 @@ namespace JominiEngine
         /// </summary>
         public static GameClock clock { get; set; }
         /// <summary>
+        /// Counts how many times the season has rolled over. Clients pass back the last value
+        /// they saw, which is how a client waiting on the rest of the table can tell that the
+        /// season it was waiting for has actually happened.
+        /// </summary>
+        public static uint seasonEpoch = 0;
+        /// <summary>
         /// Holds scheduled events
         /// </summary>
         public static Journal scheduledEvents = new Journal();
@@ -1067,6 +1073,19 @@ namespace JominiEngine
         /// Iterates through the scheduledEvents journal, implementing the appropriate actions
         /// </summary>
         /// <returns>List<JournalEntry> containing journal entries to be removed</returns>
+        // Temporary birth-pipeline diagnostic: appends to a log file so the trace can be
+        // read back without fighting the flooded server console. Safe no-op on any IO error.
+        public static void BirthDiag(string msg)
+        {
+            try
+            {
+                System.IO.File.AppendAllText(
+                    @"C:\Users\Terry\Documents\GitHub\JominiEngine_AI_Agent\birthdiag.log",
+                    System.DateTime.Now.ToString("HH:mm:ss.fff") + " " + msg + System.Environment.NewLine);
+            }
+            catch { }
+        }
+
         public static List<JournalEntry> ProcessScheduledEvents()
         {
             List<JournalEntry> forRemoval = new List<JournalEntry>();
@@ -1123,7 +1142,6 @@ namespace JominiEngine
                         {
                             proceed = false;
                         }
-
 
                         if (proceed)
                         {

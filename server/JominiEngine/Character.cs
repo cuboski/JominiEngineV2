@@ -938,16 +938,26 @@ namespace JominiEngine
             // Check if chance of death effected by character traits
             double deathTraitsModifier = this.CalcTraitEffect(Globals_Game.Stats.DEATH);
 
-            // calculate base chance of death
-            // chance = 2.8% (2.5% for women) per health level below 10
+            // Base chance of death, per health level below 10.
+            //
+            // Death is checked once a SEASON, i.e. four times a year. The old 2.8 / 2.5 per
+            // point read like an annual figure but was rolled every season, so it landed four
+            // times too often: a healthy thirty-year-old (health ~9) faced ~4% a season, about
+            // a third of them dead inside a year, and nobody with middling health lived past
+            // their thirties. That is what kept killing the lords' wives before they could bear
+            // an heir and thinning the vassals so fast their fiefs escheated to the crown en
+            // masse. Scaled down so that, compounded across the four seasonal rolls, mortality
+            // matches what a noble who reached adulthood actually faced: a prime adult around
+            // 1-2% a year, climbing past 10% in old age as the age modifier drags health down,
+            // and roughly 2% for a mother at each birth (the isBirth multipliers below).
             Double deathChanceIncrement = 0;
             if (this.isMale)
             {
-                deathChanceIncrement = 2.8;
+                deathChanceIncrement = 0.35;
             }
             else
             {
-                deathChanceIncrement = 2.5;
+                deathChanceIncrement = 0.30;
             }
 
             Double deathChance = (10 - this.CalculateHealth()) * deathChanceIncrement;
@@ -2824,9 +2834,6 @@ namespace JominiEngine
                 // if attempt successful
                 if (true) // (randPercentage <= chanceOfPregnancy) // Changed to 100% for testing
                 {
-                    // set spouse as pregnant
-                    wife.isPregnant = true;
-
                     // schedule birth in clock sheduledEvents
                     uint birthYear = Globals_Game.clock.currentYear;
                     byte birthSeason = Globals_Game.clock.currentSeason;
@@ -2849,6 +2856,10 @@ namespace JominiEngine
                     // check has been added
                     if (Globals_Game.scheduledEvents.jentries.ContainsKey(birth.jEntryID))
                     {
+                        // Only flag the pregnancy once the birth is actually on the schedule.
+                        // Setting it earlier left the wife permanently pregnant whenever the
+                        // birth failed to register, blocking every future TryForChild.
+                        wife.isPregnant = true;
                         success = true;
 
                         // display message of celebration
@@ -2914,8 +2925,15 @@ namespace JominiEngine
             // generate new NPC (baby)
             NonPlayerCharacter weeBairn = Birth.GenerateNewNPC(this, daddy);
 
-            // check for baby being stillborn
-            bool isStillborn = weeBairn.CheckForDeath(true, false, false);
+            // Check for baby being stillborn. CheckForDeath uses AGE-ADJUSTED health, which
+            // for a newborn (age 0) applies a x0.25 modifier; stacked with the x1.5 birth-risk
+            // factor that meant ~34% stillbirth even for a strong bloodline, so surviving heirs
+            // were vanishingly rare. Base survival on the baby's innate maxHealth (the trait it
+            // is actually born with) instead - the same formula, ~10% stillbirth for a healthy
+            // line, while a frail bloodline still loses more.
+            double babyDeathIncrement = weeBairn.isMale ? 2.8 : 2.5;
+            double stillbornChance = (10 - weeBairn.maxHealth) * babyDeathIncrement * 1.5;
+            bool isStillborn = Utility_Methods.GetRandomDouble(100) <= stillbornChance;
 
             if (!isStillborn)
             {
@@ -2933,6 +2951,16 @@ namespace JominiEngine
             {
                 weeBairn.isAlive = false;
             }
+
+            // The pregnancy is over now the child has been delivered, so clear the flag.
+            // Nothing else resets it (only AbortPregnancy and the NPC constructor do), so
+            // without this the mother stayed flagged pregnant forever and every later
+            // TryForChild failed ChecksBeforePregnancyAttempt - a lord could only ever
+            // father one child, which left heirless dynasties dying out.
+            this.isPregnant = false;
+
+            Globals_Game.BirthDiag($"GiveBirth: mother={this.charID} child={weeBairn.charID} " +
+                $"isMale={weeBairn.isMale} stillborn={isStillborn}; mother isPregnant reset to false");
 
             // check for mother dying during childbirth
             bool mummyDied = this.CheckForDeath(true, true, isStillborn);
@@ -5631,11 +5659,15 @@ namespace JominiEngine
             // see how long recuitment attempt will take: generate random int (1-5)
             daysUsed = Globals_Game.myRand.Next(1, 6);
 
+            // Recruitment takes a random 1-5 days, so a character with days left can still be
+            // short of what this attempt needs. This used to set proceed = false and build the
+            // error without returning it: the recruitment block was skipped, the days were
+            // charged anyway, and the success reply at the end was then built from thisArmy,
+            // which is null whenever the call was meant to raise a NEW army. That dereference
+            // threw and took the server's listen thread down with it.
             if (this.days < daysUsed)
             {
-                proceed = false;
-                error = new ProtoMessage();
-                error.ResponseType = DisplayMessages.ErrorGenericPoorOrganisation;
+                return new ProtoMessage(DisplayMessages.ErrorGenericPoorOrganisation);
             }
 
             //TODO move troop calculatioms + confirmation to client
@@ -5657,7 +5689,8 @@ namespace JominiEngine
                     recruitDetails.MessageFields = new string[] { number.ToString(), revisedRecruited.ToString() };
                     recruitDetails.amount = Convert.ToUInt32(revisedRecruited);
                     recruitDetails.cost = revisedRecruited * indivTroopCost;
-                    recruitDetails.armyID = thisArmy.armyID;
+                    // thisArmy is null when recruiting is creating a brand new army
+                    recruitDetails.armyID = thisArmy?.armyID;
                     return recruitDetails;
                 }
 
@@ -5684,7 +5717,7 @@ namespace JominiEngine
                     if (!isConfirm)
                     {
                         ProtoRecruit recruitmentDetails = new ProtoRecruit();
-                        recruitmentDetails.armyID = thisArmy.armyID;
+                        recruitmentDetails.armyID = thisArmy?.armyID;
                         recruitmentDetails.ResponseType = DisplayMessages.CharacterRecruitOk;
                         recruitmentDetails.amount = Convert.ToUInt32(troopsRecruited);
                         recruitmentDetails.cost = troopCost;
@@ -5742,6 +5775,14 @@ namespace JominiEngine
             this.AdjustDays(daysUsed);
 
             {
+                // Reaching here without an army means some earlier branch fell through instead
+                // of returning. Report it rather than dereferencing null: a throw on this thread
+                // is not one request failing, it is the server's listener dying.
+                if (thisArmy == null)
+                {
+                    return new ProtoMessage(DisplayMessages.Error);
+                }
+
                 ProtoRecruit recruitDetails = new ProtoRecruit();
                 recruitDetails.armyID = thisArmy.armyID;
                 recruitDetails.ResponseType = DisplayMessages.Success;

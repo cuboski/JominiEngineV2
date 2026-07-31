@@ -2,6 +2,15 @@
 JominiClient/Library
 JominiClient/Logs
 
+# Build output, caches and temp anywhere in the tree (not just at the root)
+**/[Bb]in/
+**/[Oo]bj/
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Bb]uild/
+**/[Bb]uilds/
+**/[Ll]ogs/
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -11,6 +20,17 @@ JominiClient/Logs
 /[Uu]ser[Ss]ettings/
 /[Mm]emoryCaptures/
 /[Rr]ecordings/
+
+# Local logs and scratch
+*.log
+LogFile.txt
+
+# Local tooling / editor / assistant config (not part of the project)
+.claude/
+.vs/
+CLAUDE.md
+instructions.md
+instructions2.md
 
 # Visual Studio cache directory
 .vs/

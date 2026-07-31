@@ -16,6 +16,7 @@ namespace JominiAI
         public bool IsCaptive { get; init; }
         public bool HasSpouse { get; init; }
         public bool HasHeir { get; init; }
+        public string HeirId { get; init; }       // current heir's charID, or null - lets a run show WHEN the heir changes (a new son appointed vs. the heir dying) rather than just a true/false flag
         public string FamilyID { get; init; }
     }
 
@@ -81,6 +82,11 @@ namespace JominiAI
         public bool ArmyNeedsLeader { get; init; }
         public string ArmyLeaderCandidateID { get; init; }
         public double ArmyLeaderCandidateFit { get; init; }   // the candidate's combat rating
+
+        public bool CanBuildArmy { get; init; }        // no army yet, but the PC can raise one here
+        public bool PCLeadsMainArmy { get; init; }     // PC leads the main army (so it marches with him)
+        public string WarTargetFiefID { get; init; }   // cheapest reachable non-owned fief to besiege
+        public string MarchDirection { get; init; }    // an affordable adjacent direction to march when no enemy fief is known yet
     }
 
     // Family, NPCs, captives and dynastic opportunities.
@@ -94,6 +100,8 @@ namespace JominiAI
         public string HirableNPCID { get; init; }
         public uint HireOfferAmount { get; init; }   // salary * 1.1
         public int EmployeeCount { get; init; }
+        public int FamilyMemberCount { get; init; }   // living family NPCs (sons, brothers, etc.); the dynasty's depth of succession, so a run shows whether a lost heir had a spare behind him
+        public int LivingSonCount { get; init; }       // male family members of the PC's own family - the pool a future heir can come from
 
         public bool HasFirableEmployee { get; init; }
         public string FireableEmployeeID { get; init; }
@@ -161,6 +169,17 @@ namespace JominiAI
 
     public class AgentState
     {
+        // Each rejected wage offer is raised by this much, up to this multiple of our own
+        // salary estimate. The engine only accepts an offer within 10% of what the man is
+        // really worth, and it will not look at one that fails to beat our previous bid.
+        private const double HireRaise = 1.25;
+        private const double MaxHireMultiple = 4.0;
+
+        // The server charges a random 1-5 days for a recruitment attempt and refuses outright
+        // if the character cannot cover the roll, so anything less than 5 days in hand is a
+        // gamble that wastes the action when it loses. Ask only when the whole cost is covered.
+        private const int RecruitMaxDays = 5;
+
         public CharacterContext Character { get; }
         public EconomicContext Economy { get; }
         public MilitaryContext Military { get; }
@@ -188,7 +207,10 @@ namespace JominiAI
             GameState gs,
             HashSet<string> adjustedFiefIDs,
             HashSet<string> entouragedIDs,
-            Func<RedProtoNPC, double> estimateSalary)
+            Func<RedProtoNPC, double> estimateSalary,
+            Dictionary<string, double> travelCosts = null,
+            Dictionary<MoveDirections, double> adjacentCosts = null,
+            HashSet<string> bailiffBlockedFiefIDs = null)
         {
             if (gs.myPC == null)
                 throw new InvalidOperationException("GameState has no player character.");
@@ -207,10 +229,15 @@ namespace JominiAI
                 IsCaptive = !string.IsNullOrWhiteSpace(gs.myPC.captor),
                 HasSpouse = !string.IsNullOrWhiteSpace(gs.myPC.spouse),
                 HasHeir = !string.IsNullOrWhiteSpace(gs.myPC.myHeirId),
+                HeirId = gs.myPC.myHeirId,
                 FamilyID = gs.myPC.familyID,
             };
 
-            int totalTreasury = (int)gs.myFiefs.Sum(f => f.treasury);
+            // Accumulate in long: int Sum() is checked and threw an OverflowException once
+            // the (runaway, see FiefTransferFunds money-creation issue) total passed int.MaxValue.
+            // Clamp back into the int field so state-building never crashes on an inflated total.
+            long treasurySum = gs.myFiefs.Sum(f => (long)f.treasury);
+            int totalTreasury = (int)Math.Clamp(treasurySum, int.MinValue, int.MaxValue);
             int fiefsInDeficit = gs.myFiefs.Count(f => f.treasury < 0);
             int fiefsWithBailiff = gs.myFiefs.Count(f => !string.IsNullOrWhiteSpace(f.bailiffID));
 
@@ -219,19 +246,44 @@ namespace JominiAI
                 .Select(f => f.fiefID)
                 .ToList();
 
-            RedProtoNPC homeCandNpc = string.IsNullOrWhiteSpace(home.bailiffID)
-                ? FindBailiffCandidate(gs, home.fiefID) : null;
+            // A bailiff only has to be a male employee of age - the server imposes no
+            // co-location requirement - so any eligible employee can cover any fief, and one
+            // NPC may hold any number of them.
+            //
+            // Spread the posts evenly instead of always handing them to the best-fitting NPC.
+            // Ranking on fit alone made one man bailiff of nearly every fief in the realm, and
+            // because the server strips a dead character of all his posts at once, his death
+            // wiped out coverage everywhere and the agent then spent whole seasons re-appointing.
+            // Balancing on load means a death costs only that man's share.
+            var bailiffLoad = new Dictionary<string, int>();
+            foreach (var f in gs.myFiefs)
+                if (!string.IsNullOrWhiteSpace(f.bailiffID))
+                    bailiffLoad[f.bailiffID] = bailiffLoad.TryGetValue(f.bailiffID, out int n) ? n + 1 : 1;
+
+            bool BailiffBlocked(string fiefID) =>
+                bailiffBlockedFiefIDs != null && bailiffBlockedFiefIDs.Contains(fiefID);
+
+            RedProtoNPC homeCandNpc = string.IsNullOrWhiteSpace(home.bailiffID) && !BailiffBlocked(home.fiefID)
+                ? FindBailiffCandidate(gs, bailiffLoad) : null;
             string homeCand = homeCandNpc?.charID;
             double homeCandFit = homeCandNpc != null ? RoleFit.Bailiff(homeCandNpc) : 0;
 
+            // Count the home post against the candidate so the next fief this tick doesn't
+            // simply pick the same man again.
+            var otherLoad = new Dictionary<string, int>(bailiffLoad);
+            if (homeCand != null)
+                otherLoad[homeCand] = otherLoad.TryGetValue(homeCand, out int h) ? h + 1 : 1;
+            RedProtoNPC otherCandNpc = FindBailiffCandidate(gs, otherLoad);
+
             string otherFief = null, otherCand = null;
-            foreach (var fief in gs.myFiefs)
-            {
-                if (!string.IsNullOrWhiteSpace(fief.bailiffID) || fief.fiefID == home.fiefID)
-                    continue;
-                RedProtoNPC c = FindBailiffCandidate(gs, fief.fiefID);
-                if (c != null) { otherFief = fief.fiefID; otherCand = c.charID; break; }
-            }
+            if (otherCandNpc != null)
+                foreach (var fief in gs.myFiefs)
+                {
+                    if (!string.IsNullOrWhiteSpace(fief.bailiffID) || fief.fiefID == home.fiefID
+                        || BailiffBlocked(fief.fiefID))
+                        continue;
+                    otherFief = fief.fiefID; otherCand = otherCandNpc.charID; break;
+                }
 
             var surplusFief = gs.myFiefs
                 .Where(f => f.fiefID != home.fiefID && f.treasury > 5_000)
@@ -290,18 +342,51 @@ namespace JominiAI
             var siege = gs.mySieges.FirstOrDefault(s => s.besiegedFiefID == current.fiefID);
 
             bool hasArmy = false; string mainArmyID = null; uint mainArmyTroops = 0;
-            bool armyNeedsMaint = false, armyCanRecruit = false;
+            bool armyNeedsMaint = false, armyCanRecruit = false, pcLeadsMainArmy = false;
             if (gs.tryGetMainArmy(out RedProtoArmy main))
             {
                 hasArmy = true;
                 mainArmyID = main.armyID;
                 mainArmyTroops = Tools.CalculSumUintArray(main.troops);
+                // leaderID, not leaderName: the name field is "firstName familyName" and never
+                // equals a charID, so this test was false even when the PC was already leading.
+                // The aggressive path keyed off it, so the agent re-appointed him every season,
+                // the server refused ("already leading this army"), and the war party never
+                // marched - every appointment in every war run failed on this one comparison.
+                pcLeadsMainArmy = !string.IsNullOrWhiteSpace(main.leaderID)
+                               && main.leaderID == gs.myPC.charID;
                 armyNeedsMaint = !main.isMaintained && home.treasury >= (int)main.maintCost;
                 armyCanRecruit = mainArmyTroops < 50
                               && !current.hasRecruited
                               && current.ownerID == gs.myPC.charID
+                              && gs.myPC.days >= RecruitMaxDays
                               && gs.tryGetArmyFiefID(main.armyID, out string armyFief)
                               && armyFief == current.fiefID;
+            }
+
+            // Raise a first army: no army yet, standing in an owned fief that can still
+            // recruit this season, not under siege, with plenty of gold in the home
+            // treasury so recruitment stays clear of the server's insufficient-funds path.
+            bool canBuildArmy = !hasArmy
+                             && current.ownerID == gs.myPC.charID
+                             && !current.hasRecruited
+                             && string.IsNullOrWhiteSpace(current.siege)
+                             && gs.myPC.days >= RecruitMaxDays
+                             && home.treasury > 50_000;   // enough to cover a first recruit; the old 250k gate meant a war party never formed within a run
+
+            // Cheapest-to-reach fief we know but don't own, within the PC's day budget.
+            // Only used by the aggressive FSM mode to pick something to march on.
+            string warTargetFiefID = null;
+            if (travelCosts != null && gs.notMyFiefs != null)
+            {
+                double bestCost = double.MaxValue;
+                foreach (var f in gs.notMyFiefs)
+                {
+                    if (f == null || string.IsNullOrWhiteSpace(f.fiefID)) continue;
+                    if (!travelCosts.TryGetValue(f.fiefID, out double cost)) continue;
+                    if (cost <= gs.myPC.days && cost < bestCost)
+                    { bestCost = cost; warTargetFiefID = f.fiefID; }
+                }
             }
 
             bool armyHere = hasArmy
@@ -320,7 +405,7 @@ namespace JominiAI
             bool armyNeedsLeader = false;
             string armyLeaderCandID = null;
             double armyLeaderCandFit = 0;
-            if (hasArmy && string.IsNullOrWhiteSpace(main?.leaderName)
+            if (hasArmy && string.IsNullOrWhiteSpace(main?.leaderID)
                 && gs.tryGetArmyFiefID(mainArmyID ?? "", out string armyLeaderFief))
             {
                 RedProtoCharacter leader = gs.myEmployeeNPCs.Concat<RedProtoCharacter>(new[] { gs.myPC })
@@ -334,6 +419,17 @@ namespace JominiAI
                     armyLeaderCandFit = RoleFit.Leader(leader);
                 }
             }
+
+            // When no enemy fief is known yet, pick a single affordable adjacent direction to
+            // march. Directions are tried in enum order (E first), so the war party heads
+            // consistently one way towards a border rather than oscillating on cost.
+            string marchDir = null;
+            if (adjacentCosts != null && adjacentCosts.Count > 0)
+                marchDir = adjacentCosts
+                    .Where(kv => kv.Value <= gs.myPC.days)
+                    .OrderBy(kv => (int)kv.Key)
+                    .Select(kv => kv.Key.ToString())
+                    .FirstOrDefault();
 
             var mil = new MilitaryContext
             {
@@ -354,6 +450,10 @@ namespace JominiAI
                 ArmyNeedsLeader = armyNeedsLeader,
                 ArmyLeaderCandidateID = armyLeaderCandID,
                 ArmyLeaderCandidateFit = armyLeaderCandFit,
+                CanBuildArmy = canBuildArmy,
+                PCLeadsMainArmy = pcLeadsMainArmy,
+                WarTargetFiefID = warTargetFiefID,
+                MarchDirection = marchDir,
             };
 
             bool canTryForChild = false;
@@ -367,14 +467,48 @@ namespace JominiAI
                         || gs.myPC.inKeep == spouse.inKeep);
             }
 
-            // Hirable NPC: male, unattached, adult, in the current fief.
-            var hirableNPC = gs.notMyNPCs.FirstOrDefault(n =>
-                n.isMale && string.IsNullOrWhiteSpace(n.captor)
-                && string.IsNullOrWhiteSpace(n.familyID)
-                && n.birthYear > 0 && (gs.currentYear - n.birthYear) >= 14);
+            // Who we could hire, and what to offer him.
+            //
+            // Haggle rather than repeat one number. Our salary estimate is only a guess - the
+            // server prices a man on his traits, his stature and what he already earns, none of
+            // which we can see - so a first offer is usually turned down as too low. The engine
+            // expects a negotiation and will not look at an offer that fails to beat our last
+            // one, so the bid goes up each time. Without this the agent re-sent the same
+            // rejected number every pass and spent the whole season on one man it never hired.
+            //
+            // Someone we have already bid up past what he looks worth, or past what we can pay,
+            // is skipped so the next candidate gets a turn - picking the first man on the list
+            // and then giving up on him left everyone behind him unhired.
+            RedProtoNPC hirableNPC = null;
             uint hireOffer = 0;
-            if (hirableNPC != null && estimateSalary != null)
-                hireOffer = (uint)Math.Ceiling(estimateSalary(hirableNPC) * 1.1);
+            if (estimateSalary != null)
+                foreach (RedProtoNPC n in gs.notMyNPCs)
+                {
+                    // lastOfferID is only filled in for a man with no family and no employer,
+                    // so it stands in for "the server will entertain an offer for this one".
+                    bool eligible = n.isMale
+                        && string.IsNullOrWhiteSpace(n.captor)
+                        && string.IsNullOrWhiteSpace(n.familyID)
+                        && !string.IsNullOrWhiteSpace(n.lastOfferID)
+                        && n.birthYear > 0 && (gs.currentYear - n.birthYear) >= 14;
+                    if (!eligible) continue;
+
+                    double estimate = estimateSalary(n);
+                    // The engine accepts any offer more than 10% above what it prices the man
+                    // at, and only rolls the dice in the band below that. Opening at 1.1 sat
+                    // exactly on that line, so a first offer went to a coin toss and usually
+                    // lost; opening just clear of it buys the man outright in one action when
+                    // we can afford him, instead of over several seasons of haggling.
+                    double next = n.lastOfferAmount > 0
+                        ? n.lastOfferAmount * HireRaise
+                        : estimate * 1.15;
+                    double ceiling = Math.Min(estimate * MaxHireMultiple, Math.Max(0, home.treasury));
+                    if (next > ceiling) continue;
+
+                    hirableNPC = n;
+                    hireOffer = (uint)Math.Ceiling(next);
+                    break;
+                }
 
             // Firable employee: cheapest one whose salary is below the threshold.
             RedProtoNPC fireable = null;
@@ -463,6 +597,10 @@ namespace JominiAI
                 HirableNPCID = hirableNPC?.charID,
                 HireOfferAmount = hireOffer,
                 EmployeeCount = gs.myEmployeeNPCs.Count,
+                FamilyMemberCount = gs.myFamilyNPCs.Count,
+                LivingSonCount = gs.myFamilyNPCs.Count(n =>
+                    n.isMale && !string.IsNullOrWhiteSpace(n.familyID)
+                    && n.familyID == gs.myPC.familyID),
                 HasFirableEmployee = fireable != null,
                 FireableEmployeeID = fireable?.charID,
                 HasAlliedCaptives = alliedCaptiveID != null,
@@ -480,13 +618,16 @@ namespace JominiAI
             return new AgentState(chr, econ, mil, dip, gs.currentYear);
         }
 
-        private static RedProtoNPC FindBailiffCandidate(GameState gs, string fiefID)
+        // Best eligible employee for a bailiff post: the one holding the fewest fiefs already,
+        // breaking ties on fit. Ordering on fit first would give every post in the realm to the
+        // same man, which is both fragile (see bailiffLoad above) and no better run day to day.
+        private static RedProtoNPC FindBailiffCandidate(GameState gs, Dictionary<string, int> bailiffLoad)
         {
             return gs.myEmployeeNPCs
                 .Where(n => n.isMale && string.IsNullOrWhiteSpace(n.captor)
-                         && (gs.currentYear - n.birthYear) >= 14
-                         && n.location == fiefID)
-                .OrderByDescending(n => RoleFit.Bailiff(n))
+                         && (gs.currentYear - n.birthYear) >= 14)
+                .OrderBy(n => bailiffLoad != null && bailiffLoad.TryGetValue(n.charID, out int held) ? held : 0)
+                .ThenByDescending(n => RoleFit.Bailiff(n))
                 .FirstOrDefault();
         }
     }
