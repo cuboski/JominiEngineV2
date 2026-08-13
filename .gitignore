@@ -25,12 +25,6 @@ JominiClient/Logs
 *.log
 LogFile.txt
 
-# Local tooling / editor / assistant config (not part of the project)
-.claude/
-.vs/
-CLAUDE.md
-instructions.md
-instructions2.md
 
 # Visual Studio cache directory
 .vs/

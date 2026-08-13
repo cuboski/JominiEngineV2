@@ -103,3 +103,26 @@ Imports are being flagged as incorrect in code editor:
 - This problem is due to a disconnect between what Unity believes is imported and what the code editor has access to.
 
 ## Server
+none
+
+
+# Starting the game 
+following the youtube tutorial (easy access commands)
+get all correct IP adresses in the files first
+
+start unity hub and login scene in the project
+launch cassandra on wsl : 
+sudo systemctl status cassandra 
+:q
+cqlsh 
+
+launch wsl 2004 too:
+wsl -d Ubuntu-20.04
+cd
+sudo riak start
+riak ping
+
+THEN go to JominiEngineAIAgent/server and start the sln file. Build the main solution. Then launch .exe from server/jominiengine/bin/debug. 
+Then run the game inside the unity editor and log in.
+can then play the game as intended. 
+For the AI Client, you can just ignore everything related to unity and instead start another command prompt, go to the appropriate folder (JominiAIClient) and use dotnet un (with the options as described)
