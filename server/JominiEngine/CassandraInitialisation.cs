@@ -30,7 +30,7 @@ namespace JominiEngine
             //cSession.CreateKeyspace("CassDatabase", replicationInfo, true);
             //cSession.ChangeKeyspace("CassDatabase");
             Globals_Server.cSession.ChangeKeyspace("CassDatabase");
-            Console.WriteLine("Database alocated");
+            Console.WriteLine("Database allocated");
 
             DatabaseWrite.CASS_WIPE_DATABASE(FRESH_DATABASE);
 
