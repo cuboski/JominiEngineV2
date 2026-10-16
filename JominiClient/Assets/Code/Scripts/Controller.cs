@@ -64,6 +64,7 @@ public class Controller : MonoBehaviour {
     public static string userMessageOnSceneLoad;
     public static SceneName prevScene;
     public static bool viewFiefAssign;
+    public static int lastSeenEpoch;
 
     public static Dictionary<string, string> fiefNames = new Dictionary<string, string>();
     public static Dictionary<string, string> fiefOwners = new Dictionary<string, string>();
@@ -372,8 +373,16 @@ public class Controller : MonoBehaviour {
         ProtoMessage request = new ProtoMessage {
             ActionType = Actions.SeasonUpdate
         };
+        request.Message = lastSeenEpoch.ToString();
         client.net.Send(request);
-        return GetActionReply(Actions.SeasonUpdate, client);
+        ProtoMessage reply = GetActionReply(Actions.SeasonUpdate, client);
+
+        if (reply != null && int.TryParse(reply.Message, out int serverEpoch))
+        {
+            lastSeenEpoch = serverEpoch;
+        }
+
+        return reply;
     }
 
     public static ProtoMessage TravelTo(string charID, string destinationFiefID, TextTestClient client) 
